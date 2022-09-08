@@ -21,5 +21,5 @@ Die Datei *ech-0160.iprf* kann später im Ingest Tool geladen und für das Mappi
 
 ### Testdaten
 
-In diesem Ordner werden die Test-SIPs abgelegt, die zum Ausprobieren der Skripte und des Ingest dienen sollen. Bspw. jenes der KOST: *KOST_SIP_20070923_eCH1.1_GEVER*
+In diesem Ordner werden die Test-SIPs abgelegt, die zum Ausprobieren der Skripte und des Ingest dienen sollen. Bspw. jenes der KOST: *KOST_SIP_20070923_eCH0160_1_1_GEVER*
 
