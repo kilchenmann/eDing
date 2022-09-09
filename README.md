@@ -23,3 +23,6 @@ Die Datei *ech-0160.iprf* kann später im Ingest Tool geladen und für das Mappi
 
 In diesem Ordner werden die Test-SIPs abgelegt, die zum Ausprobieren der Skripte und des Ingest dienen sollen. Bspw. jenes der KOST: *KOST_SIP_20070923_eCH0160_1_1_GEVER*
 
+### Toolbox
+
+Toolbox beinhaltet Werkzeuge, um mit eCH-0160 umgehen zu können und SIPs für den DIMAG Ingest vorzubereiten. Toolbox ist eine Angular Appliaktion, in der wir die einzelnen Werkzeuge als Module entwickeln. In Angular als Library bezeichnet, werden sie in `projects/` abgelegt. Die Idee ist, dass wir diese Werkzeuge später einzeln als NPM Module extrahieren resp. publizieren können, und evt. im DIMAG IPM zu integrieren. Dies erlaubt uns eine gewisse flexibilität und modularität.
