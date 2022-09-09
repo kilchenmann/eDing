@@ -4,7 +4,10 @@ import { Component, OnInit } from '@angular/core';
   selector: 'lib-xsd2ts',
   template: `
     <p>
-      xsd2ts works!
+      Hier entsteht das Modul, das zu Beginn des Ingest-Vorbereitungs-Prozesses genutzt wird.
+      Vorerst nur als Frontend-Ausführung; später soll nur die Funktionalität des Konverters
+      im Quellcode genutzt werden. Es geht darum, dass wir die eCH-0160 XML Struktur, die über
+      xsd Files definiert ist, in Typescript Klassen oder Interfaces konvertieren können.
     </p>
   `,
   styles: [
