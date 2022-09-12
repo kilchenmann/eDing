@@ -21,8 +21,11 @@
   <!-- main navigation -->
   <mat-sidenav #sidenav mode="side" opened>
     <mat-nav-list>
-      <a mat-list-item [routerLink]="'/xsd2ts'"> XSD to TS </a>
-      <a mat-list-item [routerLink]="'/xml2json'"> XML to JSON </a>
+      <a *ngFor="let item of navItems" mat-list-item
+        [routerLink]="item.route"
+        routerLinkActive="active-link">
+          {{ item.label }}
+        </a>
     </mat-nav-list>
     <!-- "close sidenav" button; can be activated later
     <mat-nav-list class="bottom">
