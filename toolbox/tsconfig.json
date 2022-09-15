@@ -24,10 +24,10 @@
     ],
     "paths": {
       "@av-dimag/ingest": [
-        "dist/av-dimag/ingest"
+        "dist/@av-dimag/ingest"
       ],
       "@av-dimag/ingest/*": [
-        "dist/av-dimag/ingest/*"
+        "dist/@av-dimag/ingest/*"
       ]
     }
   },

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ConverterModule } from 'dist/@av-dimag/ingest';
+import { ConverterModule } from '@av-dimag/ingest';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';

@@ -9,7 +9,7 @@
     "test": "ng test",
     "build-lib": "ng b --prod --project @av-dimag/ingest && cp README.md dist/@av-dimag/ingest/",
     "build-lib-dev": "ng b --project @av-dimag/ingest",
-    "build-watchful-lib-dev": "ng b --project @av-dimag/ingest --watch=true",
+    "build-lib-dev-watch": "ng b --project @av-dimag/ingest --watch=true",
     "cxsd": "cxsd"
   },
   "private": true,

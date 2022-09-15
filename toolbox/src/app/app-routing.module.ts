@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { Xml2jsonComponent, Xsd2tsComponent } from 'dist/@av-dimag/ingest';
+import {
+  Xml2jsonComponent,
+  Xsd2tsComponent
+} from '@av-dimag/ingest';
 import { AboutComponent } from './pages/about/about.component';
 import { ErrorComponent } from './pages/error/error.component';
 import { StartComponent } from './pages/start/start.component';
