@@ -103,23 +103,23 @@
         }
       }
     },
-    "xsd2ts": {
+    "@av-dimag/ingest": {
       "projectType": "library",
-      "root": "projects/xsd2ts",
-      "sourceRoot": "projects/xsd2ts/src",
-      "prefix": "lib",
+      "root": "projects/ingest",
+      "sourceRoot": "projects/ingest/src",
+      "prefix": "avd",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "project": "projects/xsd2ts/ng-package.json"
+            "project": "projects/ingest/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/xsd2ts/tsconfig.lib.prod.json"
+              "tsConfig": "projects/ingest/tsconfig.lib.prod.json"
             },
             "development": {
-              "tsConfig": "projects/xsd2ts/tsconfig.lib.json"
+              "tsConfig": "projects/ingest/tsconfig.lib.json"
             }
           },
           "defaultConfiguration": "production"
@@ -127,9 +127,9 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/xsd2ts/src/test.ts",
-            "tsConfig": "projects/xsd2ts/tsconfig.spec.json",
-            "karmaConfig": "projects/xsd2ts/karma.conf.js"
+            "main": "projects/ingest/src/test.ts",
+            "tsConfig": "projects/ingest/tsconfig.spec.json",
+            "karmaConfig": "projects/ingest/karma.conf.js"
           }
         }
       }

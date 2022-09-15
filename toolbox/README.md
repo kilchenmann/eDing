@@ -2,6 +2,41 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.2 and [YARN](https://yarnpkg.com) (instead npm!).
 
+## Prerequisites
+
+[TODO]: node, yarn, @angular/cli
+
+
+## First Steps
+
+Clone this repository:
+
+```shell
+git clone https://gitlab.com/av-dimag/ingest-poc.git
+```
+
+Install the dependencies with:
+
+```shell
+yarn install
+```
+
+Build the library
+
+```shell
+yarn build-lib
+```
+
+[TODO]: build-lib-dev and build-watchful-lib-dev
+
+Run the demo application:
+
+```shell
+ng s
+```
+
+And access http://localhost:4200 in your browser.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.

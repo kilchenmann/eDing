@@ -23,8 +23,11 @@
       "dom"
     ],
     "paths": {
-      "xsd2ts": [
-        "dist/xsd2ts"
+      "@av-dimag/ingest": [
+        "dist/av-dimag/ingest"
+      ],
+      "@av-dimag/ingest/*": [
+        "dist/av-dimag/ingest/*"
       ]
     }
   },
