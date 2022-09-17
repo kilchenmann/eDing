@@ -9,6 +9,10 @@ import { NavItem } from './shared/models/nav-item';
 export class AppComponent {
   navItems: NavItem[] = [
     {
+      label: "Playground",
+      route: "playground"
+    },
+    {
       label: "XSD to TS",
       route: "xsd2ts"
     },

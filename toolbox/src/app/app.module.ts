@@ -10,6 +10,8 @@ import { AboutComponent } from './pages/about/about.component';
 import { ErrorComponent } from './pages/error/error.component';
 import { StartComponent } from './pages/start/start.component';
 import { HeadlineComponent } from './shared/headline/headline.component';
+import { PlaygroundComponent } from './pages/playground/playground.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,14 +19,17 @@ import { HeadlineComponent } from './shared/headline/headline.component';
     ErrorComponent,
     AboutComponent,
     StartComponent,
-    HeadlineComponent
+    HeadlineComponent,
+    PlaygroundComponent
   ],
   imports: [
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
+    ConverterModule,
+    FormsModule,
     MaterialModule,
-    ConverterModule
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
