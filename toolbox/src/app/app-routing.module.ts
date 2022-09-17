@@ -6,6 +6,7 @@ import {
 } from '@av-dimag/ingest';
 import { AboutComponent } from './pages/about/about.component';
 import { ErrorComponent } from './pages/error/error.component';
+import { PlaygroundComponent } from './pages/playground/playground.component';
 import { StartComponent } from './pages/start/start.component';
 
 const routes: Routes = [
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'about',
     component: AboutComponent
+  },
+  {
+    path: 'playground',
+    component: PlaygroundComponent
   },
   // in case of an error
   {

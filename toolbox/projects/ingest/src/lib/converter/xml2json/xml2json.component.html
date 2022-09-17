@@ -1,1 +1,34 @@
-<p>xml2json works!</p>
+<form [formGroup]="form">
+  <button mat-stroked-button
+    (click)="form.reset()">
+    Reset form
+  </button>
+  <button mat-stroked-button
+  (click)="convert()"
+  [disabled]="!form.valid">
+    Convert XML to JSON
+  </button>
+  <br><br>
+  <mat-form-field class="half-width" appearance="fill">
+    <mat-label>xml</mat-label>
+    <textarea matInput
+      [formControlName]="'xml'"
+      placeholder="Hier den XML Inhalt einfügen..."
+      rows="30"
+      cols="80">
+    </textarea>
+  </mat-form-field>
+
+  <!-- <pre class="half-width">
+    {{objs | json}}
+  </pre> -->
+  <mat-form-field class="half-width" appearance="fill">
+    <mat-label>json</mat-label>
+    <textarea matInput
+      [formControlName]="'json'"
+      placeholder="Hier erscheint XML als JSON..."
+      rows="30"
+      cols="80">
+    </textarea>
+  </mat-form-field>
+</form>
