@@ -1,13 +1,25 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgxXml2jsonService } from 'ngx-xml2json';
+import { ErrorMessage } from '../../shared/error-message';
+import { XmlError } from '../../shared/xml-error';
 
 @Component({
   selector: 'avd-xml2json',
   templateUrl: './xml2json.component.html',
-  styleUrls: ['./xml2json.component.css']
+  styleUrls: ['./xml2json.component.scss']
 })
 export class Xml2jsonComponent {
+
+  obj: any | XmlError = {};
+
+  converterError = false;
+
+  error: ErrorMessage = {
+    status: 415,
+    title: 'Medientyp wird nicht unterstützt',
+    text: 'Beim Konvertieren ist ein Fehler aufgetreten. Wahrscheinlich handelt es sich nicht um valides XML.'
+  };
 
   // define form
   form: FormGroup = this.fb.group({
@@ -21,10 +33,21 @@ export class Xml2jsonComponent {
   ) { }
 
   convert() {
+
+    // reset error status
+    this.converterError = false;
+
     const parser = new DOMParser();
     const xml = parser.parseFromString(this.form.value['xml'], 'text/xml');
-    const obj = this.ngxXml2jsonService.xmlToJson(xml);
-    this.form.controls['json'].setValue(JSON.stringify(obj, undefined, 4));
+    this.obj = this.ngxXml2jsonService.xmlToJson(xml);
+
+    if (this.obj.html.body.parsererror) {
+      this.converterError = true;
+      this.error.message = this.obj.html.body.parsererror.div;
+    } else {
+      this.form.controls['json'].setValue(JSON.stringify(this.obj, undefined, 4));
+    }
+
   }
 
 }

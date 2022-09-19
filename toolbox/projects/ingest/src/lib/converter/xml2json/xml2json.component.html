@@ -1,34 +1,33 @@
-<form [formGroup]="form">
-  <button mat-stroked-button
-    (click)="form.reset()">
-    Reset form
-  </button>
-  <button mat-stroked-button
-  (click)="convert()"
-  [disabled]="!form.valid">
-    Convert XML to JSON
-  </button>
-  <br><br>
-  <mat-form-field class="half-width" appearance="fill">
-    <mat-label>xml</mat-label>
-    <textarea matInput
-      [formControlName]="'xml'"
-      placeholder="Hier den XML Inhalt einfügen..."
-      rows="30"
-      cols="80">
-    </textarea>
-  </mat-form-field>
+<form [formGroup]="form" class="form">
 
-  <!-- <pre class="half-width">
-    {{objs | json}}
-  </pre> -->
-  <mat-form-field class="half-width" appearance="fill">
-    <mat-label>json</mat-label>
-    <textarea matInput
-      [formControlName]="'json'"
-      placeholder="Hier erscheint XML als JSON..."
-      rows="30"
-      cols="80">
-    </textarea>
-  </mat-form-field>
+  <div class="form-action">
+    <button mat-stroked-button (click)="form.reset(); converterError=false">
+      Reset form
+    </button>
+    <span class="fill-remaining-space"></span>
+    <button mat-stroked-button (click)="convert()" [disabled]="!form.valid">
+      Convert XML to JSON
+    </button>
+  </div>
+
+  <div class="form-error" *ngIf="converterError">
+    <h3>Error {{error.status}} | {{error.title}}</h3>
+    <p>{{error.text}}</p>
+    <p><strong>Fehlermeldung:</strong> {{error.message}}</p>
+  </div>
+
+  <div class="form-inputs">
+    <mat-form-field class="half-width" appearance="fill">
+      <mat-label>xml</mat-label>
+      <textarea matInput [formControlName]="'xml'" placeholder="Hier den XML Inhalt einfügen..." rows="30" cols="80">
+      </textarea>
+    </mat-form-field>
+    <span class="fill-remaining-space"></span>
+    <mat-form-field class="half-width" appearance="fill">
+      <mat-label>json</mat-label>
+      <textarea matInput [formControlName]="'json'" placeholder="Hier erscheint XML als JSON..." rows="30" cols="80">
+      </textarea>
+    </mat-form-field>
+  </div>
+
 </form>
