@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgxXml2jsonService } from 'ngx-xml2json';
-import { ErrorMessage } from '../../shared/error-message';
-import { XmlError } from '../../shared/xml-error';
+import { ErrorMessage, XmlError } from '../../shared';
+import { Arelda } from '../../shared/xmlns/bar.admin.ch/arelda/arelda';
 
 @Component({
   selector: 'avd-xml2json',
@@ -11,7 +11,7 @@ import { XmlError } from '../../shared/xml-error';
 })
 export class Xml2jsonComponent {
 
-  obj: any | XmlError = {};
+  obj: Arelda | XmlError = {};
 
   converterError = false;
 
@@ -41,12 +41,12 @@ export class Xml2jsonComponent {
     const xml = parser.parseFromString(this.form.value['xml'], 'text/xml');
     this.obj = this.ngxXml2jsonService.xmlToJson(xml);
 
-    if (this.obj.html.body.parsererror) {
-      this.converterError = true;
-      this.error.message = this.obj.html.body.parsererror.div;
-    } else {
-      this.form.controls['json'].setValue(JSON.stringify(this.obj, undefined, 4));
-    }
+    // if (this.obj.html.body.parsererror) {
+    //   this.converterError = true;
+    //   this.error.message = this.obj.html.body.parsererror.div;
+    // } else {
+    // }
+    this.form.controls['json'].setValue(JSON.stringify(this.obj, undefined, 4));
 
   }
 

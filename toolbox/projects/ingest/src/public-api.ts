@@ -3,3 +3,5 @@
  */
 
 export * from './lib/converter/index';
+
+export * from './lib/shared/index';
