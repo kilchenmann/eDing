@@ -41,12 +41,14 @@ export class Xml2jsonComponent {
     const xml = parser.parseFromString(this.form.value['xml'], 'text/xml');
     this.obj = this.ngxXml2jsonService.xmlToJson(xml);
 
-    // if (this.obj.html.body.parsererror) {
-    //   this.converterError = true;
-    //   this.error.message = this.obj.html.body.parsererror.div;
-    // } else {
-    // }
-    this.form.controls['json'].setValue(JSON.stringify(this.obj, undefined, 4));
+    if (this.obj.paket) {
+      this.form.controls['json'].setValue(JSON.stringify(this.obj, undefined, 4));
+    } else {
+        this.obj = this.obj as XmlError;
+        this.converterError = true;
+        this.form.controls['json'].setValue('');
+        this.error.message = this.obj.html.body.parsererror.div;
+    }
 
   }
 
