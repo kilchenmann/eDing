@@ -25,6 +25,7 @@ yarn-error.log
 # Miscellaneous
 .angular/
 .sass-cache/
+.yarn/
 connect.lock
 coverage
 libpeerconnection.log
