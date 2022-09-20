@@ -2,12 +2,17 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.2 and [YARN](https://yarnpkg.com) (instead npm!).
 
-## Prerequisites
-
-[TODO]: node, yarn, @angular/cli
-
-
 ## First Steps
+
+### Prerequisites
+
+To develop or run the application locally, you have to install the following tools first:
+
+* [node](https://nodejs.org/en/) v16.17.0
+* [yarn](https://yarnpkg.com) v3.2.3
+* [@angular/cli](https://cli.angular.io) v14.2.2
+
+### Installation
 
 Clone this repository:
 
@@ -21,13 +26,21 @@ Install the dependencies with:
 yarn install
 ```
 
-Build the library
+### Development server
+
+As we develop library packages, which will be published to npm, you have to build the library before running the application. There are two ways to run the build process in dev mode:
+
+Build the library once:
 
 ```shell
-yarn build-lib
+yarn build-lib-dev
 ```
 
-[TODO]: build-lib-dev and build-watchful-lib-dev
+OR build the library with "watch". This helps to rerun the build process after each change in the library code:
+
+```shell
+yarn build-lib-dev-watch
+```
 
 Run the demo application:
 
@@ -35,25 +48,29 @@ Run the demo application:
 ng s
 ```
 
-And access http://localhost:4200 in your browser.
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Run `ng generate component [component-name]` to generate a new component in the app itself. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+
+Run `ng generate component [component-name] --project @av-dimag/ingest` to generate a new component (or directive, pipe, service etc.) in the library. 
+
+Run `ng generate library @av-dimag/[libray-name]` to generate a new library in the scope of "@av-dimag".
 
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## Running unit tests 
+
+> `Not yet implemented`
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
 ## Running end-to-end tests
+
+> `Not yet implemented`
 
 Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
