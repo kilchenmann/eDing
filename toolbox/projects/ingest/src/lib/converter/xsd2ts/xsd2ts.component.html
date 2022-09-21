@@ -1,13 +1,33 @@
-<p>
-  Hier entsteht das Modul, das zu Beginn des Ingest-Vorbereitungs-Prozesses genutzt wird.
-  Vorerst nur als Frontend-Ausführung; später soll nur die Funktionalität des Konverters
-  im Quellcode genutzt werden. Es geht darum, dass wir die eCH-0160 XML Struktur, die über
-  xsd Files definiert ist, in Typescript Klassen oder Interfaces konvertieren können.
-</p>
+<form [formGroup]="form" class="form">
 
-<form>
-  <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Leave a comment</mat-label>
-    <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
-  </mat-form-field>
+  <div class="form-action">
+    <button mat-stroked-button (click)="form.reset(); converterError=false">
+      Reset form
+    </button>
+    <span class="fill-remaining-space"></span>
+    <button mat-stroked-button (click)="convert()" [disabled]="!form.valid">
+      Convert XSD to TS
+    </button>
+  </div>
+
+  <div class="form-error" *ngIf="converterError">
+    <h3>Error {{error.status}} | {{error.title}}</h3>
+    <p>{{error.text}}</p>
+    <p><strong>Fehlermeldung:</strong> {{error.message}}</p>
+  </div>
+
+  <div class="form-inputs">
+    <mat-form-field class="half-width" appearance="fill">
+      <mat-label>XSD</mat-label>
+      <textarea matInput [formControlName]="'xsd'" placeholder="Hier den XSD Inhalt einfügen..." rows="30" cols="80">
+      </textarea>
+    </mat-form-field>
+    <span class="fill-remaining-space"></span>
+    <mat-form-field class="half-width" appearance="fill">
+      <mat-label>TS Interface</mat-label>
+      <textarea matInput readonly [formControlName]="'tsi'" placeholder="Hier erscheint XSD als TS Interface..." rows="30" cols="80">
+      </textarea>
+    </mat-form-field>
+  </div>
+
 </form>
