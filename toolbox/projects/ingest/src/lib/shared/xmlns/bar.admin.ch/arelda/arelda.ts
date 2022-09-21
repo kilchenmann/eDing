@@ -1,3 +1,4 @@
+import { datei } from "./v4";
 
 export interface Attributes {
   "xmlns:xsi": string;
@@ -7,11 +8,22 @@ export interface Attributes {
   "schemaVersion": string;
 }
 
+export interface Datei {
+  id: string;
+	/** Name und Wert von technischen Eigenschaften der Dateien wie z.B. Felddelemiter. */
+	eigenschaft?: any[];
+	name: string;
+	originalName?: string;
+	pruefalgorithmus: ("MD5" | "SHA-1" | "SHA-256" | "SHA-512");
+	pruefsumme: string;
+}
+
 export interface Ordner {
   "#text": string[];
   "name": string;
   "originalName": string;
-  "ordner": any;
+  "ordner": Ordner[] | Ordner;
+  "datei": Datei[];
 }
 
 export interface Inhaltsverzeichnis {

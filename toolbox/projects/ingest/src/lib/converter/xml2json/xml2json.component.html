@@ -18,16 +18,26 @@
 
   <div class="form-inputs">
     <mat-form-field class="half-width" appearance="fill">
-      <mat-label>xml</mat-label>
+      <mat-label>XML</mat-label>
       <textarea matInput [formControlName]="'xml'" placeholder="Hier den XML Inhalt einfügen..." rows="30" cols="80">
       </textarea>
     </mat-form-field>
     <span class="fill-remaining-space"></span>
     <mat-form-field class="half-width" appearance="fill">
-      <mat-label>json</mat-label>
-      <textarea matInput [formControlName]="'json'" placeholder="Hier erscheint XML als JSON..." rows="30" cols="80">
+      <mat-label>JSON</mat-label>
+      <textarea matInput readonly [formControlName]="'json'" placeholder="Hier erscheint XML als JSON..." rows="30" cols="80">
       </textarea>
     </mat-form-field>
   </div>
 
 </form>
+
+<h3>Das SIP hat folgende Ordner</h3>
+<div *ngIf="ordner.length">
+  <ul *ngFor="let o of ordner">
+    <li>{{o.name}} (orig.: {{o.originalName}})</li>
+    <ul *ngFor="let d of o.datei">
+      <li>{{d.name}} ({{d.originalName}})</li>
+    </ul>
+  </ul>
+</div>
