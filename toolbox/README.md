@@ -50,6 +50,8 @@ ng s
 
 Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
+If you want to run it in an own application window (with electron), you can do so by running `yarn app`.
+
 ## Code scaffolding
 
 Run `ng generate component [component-name]` to generate a new component in the app itself. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
