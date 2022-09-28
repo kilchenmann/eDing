@@ -31,7 +31,7 @@ export interface Inhaltsverzeichnis {
   "ordner": Ordner[];
 }
 
-export interface Attributes2 {
+export interface AttributesType {
   "xsi:type": string;
 }
 
@@ -58,29 +58,38 @@ export interface Provenienz {
   "registratur": string;
 }
 
-export interface Attributes3 {
+export interface AttributesId {
   "id": string;
 }
 
-export interface Attributes4 {
-  "id": string;
+export interface ZusatzDaten {
+  "#text": string[];
+  "merkmal": string;
 }
 
-export interface Attributes5 {
-  "id": string;
+export interface Dossier {
+  "@attributes": AttributesType;
+  "#text": string[];
+  "titel": string;
+  "erscheinungsform": string;
+  "entstehungszeitraum": Entstehungszeitraum;
+  "oeffentlichkeitsstatus": string;
+  "zusatzDaten": ZusatzDaten;
+  "dossier": Dossier[];
+  "dateiRef": string[];
 }
 
 export interface Ordnungssystemposition3 {
-  "@attributes": Attributes5;
+  "@attributes": AttributesId;
   "#text": string[];
   "datenschutz": string;
   "nummer": string;
   "titel": string;
-  "dossier": any;
+  "dossier": Dossier;
 }
 
 export interface Ordnungssystemposition2 {
-  "@attributes": Attributes4;
+  "@attributes": AttributesId;
   "#text": string[];
   "datenschutz": string;
   "nummer": string;
@@ -89,7 +98,7 @@ export interface Ordnungssystemposition2 {
 }
 
 export interface Ordnungssystemposition {
-  "@attributes": Attributes3;
+  "@attributes": AttributesId;
   "#text": string[];
   "datenschutz": string;
   "nummer": string;
@@ -105,7 +114,7 @@ export interface Ordnungssystem {
 }
 
 export interface Ablieferung {
-  "@attributes": Attributes2;
+  "@attributes": AttributesType;
   "#text": string[];
   "ablieferungstyp": string;
   "ablieferndeStelle": string;
