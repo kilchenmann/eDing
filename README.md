@@ -26,3 +26,26 @@ In diesem Ordner werden die Test-SIPs abgelegt, die zum Ausprobieren der Skripte
 ### Toolbox
 
 Toolbox beinhaltet Werkzeuge, um mit eCH-0160 umgehen zu können und SIPs für den DIMAG Ingest vorzubereiten. Toolbox ist eine Angular Appliaktion, in der wir die einzelnen Werkzeuge als Module entwickeln. In Angular als Library bezeichnet, werden sie in `projects/` abgelegt. Die Idee ist, dass wir diese Werkzeuge später einzeln als NPM Module extrahieren resp. publizieren können, und evt. im DIMAG IPM zu integrieren. Dies erlaubt uns eine gewisse flexibilität und modularität.
+
+Die Idee der Tools und des POC:
+
+Das *metadata.xml* beinhaltet eine Bemerkung, die bspw. im PackageHandler pro AIP hinzugefügt wurde:
+
+```xml
+<zusatzDaten>
+    <merkmal name="AIP">3</merkmal>
+</zusatzDaten>
+````
+
+> Diskussion: Die Bemerkung sollte auf der obersten Ebene des AIP stehen und nur einmal vorkommen. In den Beispieldaten *SIP_20220906_Bibliothek-Archiv-Aargau_POC-Test* kommt die Bezeichnung bspw. "AIP = 1" jedoch mehrmals vor. 
+Ein anderes Problem ist die in der Verarbeitung, wenn wir ein JSON aus dem XML lesen. Hier verlieren wir die Information "AIP". Das Ergebnis sieht &mdash; jedenfalls mit dem gewählten XML2JSON tool &mdash; wie folgt aus:
+
+```json
+"zusatzDaten": {
+    "merkmal": "1"
+},
+```
+
+Das AIP kann aus mehreren Ordnern und/oder Dateien bestehen. Primär gibt es die Ordnerebene, die im *metadata.xml* im Element `Dossier` beschrieben wird. Ein Dossier kann jeweils mehrere Dossiers beinhalten. Der erste Pfad lautet `/paket/ablieferung/ordnungssystem/ordnungssystemposition/dossier`. Ich gehe davon aus, dass wir den Dossier-Element-Block in den Ordner des jeweiligen AIPs schreiben.
+
+Ein paar Informationen zu den einzelenen Dateien innerhalb eines Dossiers befinden sich im Elemente-Block `Inhaltsverzeichnis` unter `Ordner`. Auch hier kann ein Ordner wiederum mehrere Ordner beinhalten. Das Auffinden der einzelnen Datei-Information ist aufgrund der Verschachtelung etwas komplexer, sollte aber über die `ID` im `dossier/dateiRef` zu finden sein.
