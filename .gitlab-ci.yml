@@ -4,14 +4,15 @@ image: node:9.4.0
 # And to cache them as well.
 cache:
   paths:
-    - node_modules/
-    - .yarn
+    - toolbox/node_modules/
+    - toolbox/.yarn
 
 # We tell GitLab to install all the packages
 # before running anything.
 # Docker images come with yarn preinstalled
 before_script:  
   - apt-get update -qq && apt-get install
+  - cd toolbox
 
 stages:          # List of stages for jobs, and their order of execution
   - build
