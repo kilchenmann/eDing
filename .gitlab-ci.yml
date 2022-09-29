@@ -21,7 +21,6 @@ Build:       # This job runs in the build stage, which runs first.
   stage: build
   before_script: 
     - cd toolbox
-    - yarn config set cache-folder .yarn
     - yarn install 
   script:
     - yarn build-lib  # build the lib first, because it's needed to build the app
@@ -31,7 +30,6 @@ Unit-test:        # This job runs in the test stage.
   stage: test     # It only starts when the job in the build stage completes successfully.
   before_script: 
     - cd toolbox
-    - yarn config set cache-folder .yarn
     - yarn install --frozen-lockfile
   script:
     - yarn test-ci
@@ -40,7 +38,6 @@ Lint-test:        # This job also runs in the test stage.
   stage: test     # It can run at the same time as unit-test-job (in parallel).
   before_script: 
     - cd toolbox
-    - yarn config set cache-folder .yarn
     - yarn install --frozen-lockfile
   script:
     - yarn lint-ci
