@@ -4,8 +4,8 @@ image: node:16.17.0
 # And to cache them as well.
 cache:
   paths:
-    - toolbox/node_modules/
-    - toolbox/.yarn
+    - node_modules/
+    - .yarn
 
 # We tell GitLab to install all the packages
 # before running anything.
