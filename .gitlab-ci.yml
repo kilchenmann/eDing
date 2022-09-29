@@ -25,21 +25,21 @@ build-job:       # This job runs in the build stage, which runs first.
   stage: build
   script:
     - echo "Compiling the code..."
-    - yarn build
+    - npm run build
     - echo "Compile complete."
 
 unit-test-job:   # This job runs in the test stage.
   stage: test    # It only starts when the job in the build stage completes successfully.
   script:
     - echo "Running unit tests..."
-    - yarn test
+    - npm run test
     - echo "Test complete."
 
 lint-test-job:   # This job also runs in the test stage.
   stage: test    # It can run at the same time as unit-test-job (in parallel).
   script:
     - echo "Linting code..."
-    - yarn lint-ci
+    - npm run lint-ci
     - echo "Lint complete."
 
 # deploy-job:      # This job runs in the deploy stage.
