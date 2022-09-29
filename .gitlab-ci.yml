@@ -19,8 +19,6 @@ stages:          # List of stages for jobs, and their order of execution
 
 Build:       # This job runs in the build stage, which runs first.
   stage: build
-  tags:
-    - node
   before_script: 
     - yarn config set cache-folder .yarn
     - yarn install 
@@ -30,8 +28,6 @@ Build:       # This job runs in the build stage, which runs first.
 
 Unit-test:        # This job runs in the test stage.
   stage: test     # It only starts when the job in the build stage completes successfully.
-  tags:
-    - node
   before_script: 
     - yarn config set cache-folder .yarn
     - yarn install --frozen-lockfile
@@ -40,8 +36,6 @@ Unit-test:        # This job runs in the test stage.
 
 Lint-test:        # This job also runs in the test stage.
   stage: test     # It can run at the same time as unit-test-job (in parallel).
-  tags:
-    - node
   before_script: 
     - yarn config set cache-folder .yarn
     - yarn install --frozen-lockfile
