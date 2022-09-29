@@ -14,24 +14,24 @@ import { PlaygroundComponent } from './pages/playground/playground.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ErrorComponent,
-    AboutComponent,
-    StartComponent,
-    HeadlineComponent,
-    PlaygroundComponent
-  ],
-  imports: [
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    BrowserModule,
-    ConverterModule,
-    FormsModule,
-    MaterialModule,
-    ReactiveFormsModule,
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        ErrorComponent,
+        AboutComponent,
+        StartComponent,
+        HeadlineComponent,
+        PlaygroundComponent
+    ],
+    imports: [
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        BrowserModule,
+        ConverterModule,
+        FormsModule,
+        MaterialModule,
+        ReactiveFormsModule,
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,23 +1,29 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ConverterModule } from '@av-dimag/ingest';
 
 import { PlaygroundComponent } from './playground.component';
 
 describe('PlaygroundComponent', () => {
-  let component: PlaygroundComponent;
-  let fixture: ComponentFixture<PlaygroundComponent>;
+    let component: PlaygroundComponent;
+    let fixture: ComponentFixture<PlaygroundComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ PlaygroundComponent ]
-    })
-    .compileComponents();
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            imports: [
+                ConverterModule
+            ],
+            declarations: [
+                PlaygroundComponent
+            ]
+        })
+            .compileComponents();
 
-    fixture = TestBed.createComponent(PlaygroundComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+        fixture = TestBed.createComponent(PlaygroundComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

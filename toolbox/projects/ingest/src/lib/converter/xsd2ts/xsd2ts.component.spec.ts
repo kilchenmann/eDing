@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { Xsd2tsComponent } from './xsd2ts.component';
 
@@ -8,7 +9,12 @@ describe('Xsd2tsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ Xsd2tsComponent ]
+      imports: [
+        ReactiveFormsModule
+      ],
+      declarations: [
+        Xsd2tsComponent
+      ]
     })
     .compileComponents();
 

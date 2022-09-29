@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { Xml2jsonComponent } from './xml2json.component';
 
@@ -8,7 +9,12 @@ describe('Xml2jsonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ Xml2jsonComponent ]
+      imports: [
+        ReactiveFormsModule
+      ],
+      declarations: [
+        Xml2jsonComponent
+      ]
     })
     .compileComponents();
 
