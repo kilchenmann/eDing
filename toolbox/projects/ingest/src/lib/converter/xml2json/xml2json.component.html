@@ -1,12 +1,12 @@
 <form [formGroup]="form" class="form">
 
   <div class="form-action">
-    <button mat-stroked-button (click)="form.reset(); converterError=false">
-      Reset form
+    <button mat-flat-button color="accent" (click)="convert()" [disabled]="!form.valid">
+      Convert XML to JSON
     </button>
     <span class="fill-remaining-space"></span>
-    <button mat-stroked-button (click)="convert()" [disabled]="!form.valid">
-      Convert XML to JSON
+    <button mat-stroked-button (click)="form.reset(); converterError=false">
+      Reset form
     </button>
   </div>
 

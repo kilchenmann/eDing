@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorMessage } from '../../shared';
 
 @Component({
@@ -26,8 +27,11 @@ export class Xsd2tsComponent {
   });
 
   constructor(
-    private fb: FormBuilder
-  ) { }
+    private fb: FormBuilder,
+    private snackBar: MatSnackBar
+  ) {
+    this._openSnackBar('Die xsd2ts Komponente funktioniert noch nicht!', 'note');
+  }
 
   convert() {
 
@@ -47,6 +51,15 @@ export class Xsd2tsComponent {
     //     this.error.message = this.obj.html.body.parsererror.div;
     // }
 
+  }
+
+  private _openSnackBar(message: string, type: 'success' | 'failed' | 'note' = 'note', action: string = 'x') {
+    this.snackBar.open(message, action, {
+      duration: 5000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      panelClass: type
+    });
   }
 
 }

@@ -3,25 +3,27 @@
 }
 
 .form {
-display: flex;
-flex-direction: column;
-
-.form-action,
-.form-inputs {
-  width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 
-  .half-width {
-    width: calc(50% - 32px);
-    margin: 8px;
+  .form-action,
+  .form-inputs {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+
+    .half-width {
+      width: calc(50% - 32px);
+      margin: 8px;
+    }
+  }
+
+  .form-error {
+    margin: 8px 0;
+    background-color: rgb(255, 166, 166);
+    padding: 16px;
   }
 }
 
-.form-error {
-  margin: 8px 0;
-  background-color: rgb(255, 166, 166);
-  padding: 16px;
-}
-}
+
 

@@ -1,12 +1,16 @@
+<div >
+
+</div>
+
 <form [formGroup]="form" class="form">
 
   <div class="form-action">
-    <button mat-stroked-button (click)="form.reset(); converterError=false">
-      Reset form
+    <button mat-flat-button color="accent" (click)="convert()" [disabled]="!form.valid">
+      Convert XSD to TS
     </button>
     <span class="fill-remaining-space"></span>
-    <button mat-stroked-button (click)="convert()" [disabled]="!form.valid">
-      Convert XSD to TS
+    <button mat-stroked-button (click)="form.reset(); converterError=false">
+      Reset form
     </button>
   </div>
 
