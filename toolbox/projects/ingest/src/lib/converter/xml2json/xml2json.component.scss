@@ -25,3 +25,30 @@
   }
 }
 
+.file-structure-invisible {
+  display: none;
+}
+
+.file-structure ul,
+.file-structure li {
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style-type: none;
+}
+
+/*
+ * This padding sets alignment of the nested nodes.
+ */
+.file-structure .mat-nested-tree-node div[role=group] {
+  padding-left: 40px;
+}
+
+/*
+ * Padding for leaf nodes.
+ * Leaf nodes need to have padding so as to align with other non-leaf nodes
+ * under the same parent.
+ */
+.file-structure div[role=group] > .mat-tree-node {
+  padding-left: 40px;
+}
+

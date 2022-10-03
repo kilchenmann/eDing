@@ -9,13 +9,13 @@ export interface Attributes {
 }
 
 export interface Datei {
-  id: string;
-	/** Name und Wert von technischen Eigenschaften der Dateien wie z.B. Felddelemiter. */
-	eigenschaft?: any[];
-	name: string;
-	originalName?: string;
-	pruefalgorithmus: ("MD5" | "SHA-1" | "SHA-256" | "SHA-512");
-	pruefsumme: string;
+  "#text": string[];
+  "@attributes": AttributesId;
+  "name": string;
+  "originalName"?: string;
+	"pruefalgorithmus": ("MD5" | "SHA-1" | "SHA-256" | "SHA-512");
+	"pruefsumme": string;
+	"eigenschaft"?: any[];
 }
 
 export interface Ordner {

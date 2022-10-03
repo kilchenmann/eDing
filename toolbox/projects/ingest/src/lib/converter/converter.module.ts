@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTreeModule } from '@angular/material/tree';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Xml2jsonComponent } from './xml2json/xml2json.component';
 import { Xsd2tsComponent } from './xsd2ts/xsd2ts.component';
@@ -25,6 +26,7 @@ import { Xsd2tsComponent } from './xsd2ts/xsd2ts.component';
     MatIconModule,
     MatInputModule,
     MatSnackBarModule,
+    MatTreeModule,
     ReactiveFormsModule,
   ],
   exports: [

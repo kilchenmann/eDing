@@ -1,8 +1,10 @@
+import { NestedTreeControl } from '@angular/cdk/tree';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { NgxXml2jsonService } from 'ngx-xml2json';
 import { ErrorMessage, XmlError } from '../../shared';
-import { Arelda, Ordner } from '../../shared/xmlns/bar.admin.ch/arelda/arelda';
+import { Arelda, Datei, Ordner } from '../../shared/xmlns/bar.admin.ch/arelda/arelda';
 
 @Component({
   selector: 'avd-xml2json',
@@ -13,7 +15,11 @@ export class Xml2jsonComponent {
 
   obj: Arelda | XmlError = {};
 
-  ordner: Ordner[] = [];
+  // ordner: Ordner[] = [];
+
+  // data preparation for folder structure in tree view
+  treeControl = new NestedTreeControl<Ordner>(node => node.ordner as Ordner[]);
+  dataSource = new MatTreeNestedDataSource<Ordner>();
 
   converterError = false;
 
@@ -47,14 +53,14 @@ export class Xml2jsonComponent {
     if (this.obj.paket) {
       this.form.controls['json'].setValue(JSON.stringify(this.obj, undefined, 4));
 
-        this.obj.paket.inhaltsverzeichnis.ordner.forEach( ordner => {
-          if (ordner.name === 'content') {
-            console.log(ordner);
-            let checkOrdner = ordner.ordner as Ordner;
+        this.obj.paket.inhaltsverzeichnis.ordner.forEach( sip => {
+          if (sip.name === 'content') {
+            console.log(sip);
+            let checkOrdner = sip.ordner as Ordner;
             if (checkOrdner.name) {
-              this.ordner = checkOrdner.ordner as Ordner[];
+              this.dataSource.data = checkOrdner.ordner as Ordner[];
             } else {
-              this.ordner = ordner.ordner as Ordner[];
+              this.dataSource.data = sip.ordner as Ordner[];
             }
 
             // this.ordner = ordner.ordner as Ordner[];
@@ -83,5 +89,9 @@ export class Xml2jsonComponent {
     }
 
   }
+
+  hasChild = (_: number, node: Ordner) => !!node.ordner && ((node.ordner as Ordner[]).length > 0 || (node.ordner as Ordner).ordner as Ordner);
+
+  hasFile = (_: number, node: Ordner) => !!node.datei && ((node.datei as Datei[]).length > 0);
 
 }
