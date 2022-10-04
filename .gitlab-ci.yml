@@ -5,6 +5,7 @@ image: node:16.17.0
 cache:
   paths:
     - node_modules/
+    - .yarn-cache/
     - .yarn
 
 # We tell GitLab to install all the packages
@@ -21,8 +22,14 @@ Build:       # This job runs in the build stage, which runs first.
   stage: build
   before_script: 
     - cd toolbox
-    - yarn install 
+  cache:
+    - key:
+        files:
+          - yarn.lock
+      paths:
+        - .yarn-cache/
   script:
+    - yarn install --cache-folder .yarn-cache
     - yarn build-lib  # build the lib first, because it's needed to build the app
     - yarn build-app  # build app
 
@@ -30,15 +37,22 @@ Unit-test:        # This job runs in the test stage.
   stage: test     # It only starts when the job in the build stage completes successfully.
   before_script: 
     - cd toolbox
-    - yarn install --frozen-lockfile
   script:
+    - echo 'yarn-offline-mirror ".yarn-cache/"' >> .yarnrc
+    - echo 'yarn-offline-mirror-pruning true' >> .yarnrc
+    - yarn install --frozen-lockfile--no-progress
     - yarn test-ci
+  cache:
+    key:
+      files:
+        - yarn.lock
+    paths:
+      - .yarn-cache/
 
 Lint-test:        # This job also runs in the test stage.
   stage: test     # It can run at the same time as unit-test-job (in parallel).
   before_script: 
     - cd toolbox
-    - yarn install --frozen-lockfile
   script:
     - yarn lint-ci
 
