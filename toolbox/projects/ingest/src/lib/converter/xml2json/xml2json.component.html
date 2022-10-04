@@ -38,26 +38,57 @@
     [dataSource]="dataSource"
     [treeControl]="treeControl">
       <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
-        {{node.name}}
+        {{node.name[0]._text}}
     </mat-tree-node>
     <!-- This is the tree node template for expandable nodes -->
-    <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild || hasFile">
+    <mat-nested-tree-node *matTreeNodeDef="let node; when: (hasChild)">
         <div class="mat-tree-node">
           <button mat-icon-button matTreeNodeToggle
-                  [attr.aria-label]="'Toggle ' + node.name">
+                  [attr.aria-label]="'Toggle ' + node.name[0]._text">
             <mat-icon class="mat-icon-rtl-mirror">
               {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
             </mat-icon>
           </button>
-          {{node.name}}
+          {{node.name[0]._text}}
         </div>
         <!-- There is inline padding applied to this div using styles.
             This padding value depends on the mat-icon-button width.  -->
         <div [class.file-structure-invisible]="!treeControl.isExpanded(node)"
             role="group">
           <ng-container matTreeNodeOutlet></ng-container>
+          <div class="mat-tree-node-file" *ngIf="node.datei && node.datei.length">
+            <div *ngFor="let datei of node.datei">
+              <button mat-icon-button>
+                <mat-icon fontIcon="description"></mat-icon>
+              </button>
+              <span>{{datei.name[0]._text}}</span>
+            </div>
+          </div>
       </div>
     </mat-nested-tree-node>
+    <!-- <mat-nested-tree-node *matTreeNodeDef="let file; when: hasFile">
+      hat file
+    </mat-nested-tree-node> -->
+    <!--
+      <!-- <div class="mat-tree-node">
+        <button mat-icon-button matTreeNodeToggle
+                [attr.aria-label]="'Toggle ' + node.file.datei.name[0]._text">
+          <mat-icon class="mat-icon-rtl-mirror">
+            {{treeControl.isExpanded(file) ? 'expand_more' : 'chevron_right'}}
+          </mat-icon>
+        </button>
+        {{file.datei.name[0]._text}}
+      </div>
+      <!-- There is inline padding applied to this div using styles.
+          This padding value depends on the mat-icon-button width.  --
+      <div [class.file-structure-invisible]="!treeControl.isExpanded(file)"
+          role="group">
+        <ng-container matTreeNodeOutlet></ng-container>
+      </div>
+    </mat-nested-tree-node>
+  -->
+
+
   </mat-tree>
 
 <!--

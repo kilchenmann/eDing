@@ -22,7 +22,7 @@ export interface Ordner {
   "#text": string[];
   "name": string;
   "originalName": string;
-  "ordner": Ordner[] | Ordner;
+  "ordner": Ordner[];
   "datei": Datei[];
 }
 
