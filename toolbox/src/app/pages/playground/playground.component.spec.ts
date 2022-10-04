@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ConverterModule } from '@av-dimag/ingest';
+import { HeadlineComponent } from 'src/app/shared/headline/headline.component';
 
 import { PlaygroundComponent } from './playground.component';
 
@@ -13,7 +14,8 @@ describe('PlaygroundComponent', () => {
                 ConverterModule
             ],
             declarations: [
-                PlaygroundComponent
+                PlaygroundComponent,
+                HeadlineComponent
             ]
         })
             .compileComponents();

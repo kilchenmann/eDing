@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HeadlineComponent } from 'src/app/shared/headline/headline.component';
 
 import { ErrorComponent } from './error.component';
 
@@ -8,7 +9,10 @@ describe('ErrorComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [ ErrorComponent ]
+            declarations: [
+              ErrorComponent,
+              HeadlineComponent
+            ]
         })
             .compileComponents();
 

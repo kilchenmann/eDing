@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NgxXml2jsonService } from 'ngx-xml2json';
 
 @Component({
     selector: 'app-playground',
@@ -19,31 +18,12 @@ export class PlaygroundComponent implements OnInit {
     // xml = new FormControl('');
 
     constructor(
-        private fb: FormBuilder,
-        private ngxXml2jsonService: NgxXml2jsonService
+        private fb: FormBuilder
     ) { }
 
     ngOnInit(): void {
 
 
-    }
-
-    convert() {
-        const parser = new DOMParser();
-        // console.warn('Your order has been submitted', this.form.value['xml']);
-        // console.log(this.form.get('xml').value);
-        const xml = parser.parseFromString(this.form.value['xml'], 'text/xml');
-        const obj = this.ngxXml2jsonService.xmlToJson(xml);
-        this._iterate(obj);
-        // object.keys(obj).forEach(function(key){
-        //   console.log('has key', key)
-        //   // if (obj[key] === value) {
-        //   //   delete myjsonobj[key];
-        //   // }
-        // });
-        this.objs = obj;
-        this.form.controls['json'].setValue(JSON.stringify(obj, undefined, 4));
-    // console.log(this.objs);
     }
 
     private _iterate(obj: any, path = []) {

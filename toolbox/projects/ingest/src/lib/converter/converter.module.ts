@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -20,14 +20,13 @@ import { Xsd2tsComponent } from './xsd2ts/xsd2ts.component';
   imports: [
     BrowserAnimationsModule,
     CommonModule,
-    FormsModule,
     MatButtonModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
     MatSnackBarModule,
     MatTreeModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     Xsd2tsComponent,
