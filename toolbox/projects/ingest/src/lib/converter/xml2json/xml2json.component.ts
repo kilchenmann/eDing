@@ -4,13 +4,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { ErrorMessage, Ordner, SIP, XmlError } from '../../shared';
 
-
-// OpenSeadragon does not export itself as ES6/ECMA2015 module,
-// it is loaded globally in scripts tag of angular-cli.json,
+// xmlToJSON does not export itself as ES6/ECMA2015 module,
+// it is loaded globally in scripts tag of angular.json,
 // we still need to declare the namespace to make TypeScript compiler happy.
 declare let xmlToJSON: any;
-
-// declare function xml2json(xml: any, tab?: string): any;
 
 @Component({
   selector: 'avd-xml2json',
@@ -20,8 +17,6 @@ declare let xmlToJSON: any;
 export class Xml2jsonComponent {
 
   obj: SIP = {};
-
-  // ordner: Ordner[] = [];
 
   // data preparation for folder structure in tree view
   treeControl = new NestedTreeControl<Ordner>(node => node.ordner);
@@ -45,8 +40,6 @@ export class Xml2jsonComponent {
     childrenAsArray: true 	// force children into arrays
   };
 
-
-
   converterError = false;
 
   error: ErrorMessage = {
@@ -65,52 +58,28 @@ export class Xml2jsonComponent {
     private fb: FormBuilder
   ) { }
 
+  // convert action
   convert() {
 
     // reset error status
     this.converterError = false;
 
-    // const parser = new DOMParser();
-    // const xml = parser.parseFromString(this.form.value['xml'], 'text/xml');
-    // this.obj = this.ngxXml2jsonService.xmlToJson(xml);
+    // parse xml and return json
     this.obj = xmlToJSON.parseString(this.form.value['xml'], this.xmlOptions);
 
-    console.log(this.obj)
-
-
     if ((this.obj).paket) {
+      // display json in the second textarea
       this.form.controls['json'].setValue(JSON.stringify(this.obj, undefined, 4));
 
         this.obj.paket[0].inhaltsverzeichnis[0].ordner.forEach( content => {
+          // display folder structure of content
           if (content.name[0]._text === 'content') {
             this.dataSource.data = content.ordner;
-            console.log(content);
-            // let checkOrdner = sip.ordner as Ordner;
-            // if (checkOrdner.name) {
-            //   this.dataSource.data = checkOrdner.ordner as Ordner[];
-            // } else {
-            //   this.dataSource.data = sip.ordner as Ordner[];
-            // }
-
-            // this.ordner = ordner.ordner as Ordner[];
           }
         });
-      // } else {
-      //   this.obj.paket.inhaltsverzeichnis.ordner['ordner'].forEach( (ordner: Ordner) => {
-      //     console.log(ordner.name)
-      //     if (ordner.name === 'content') {
-      //       this.ordner = ordner.ordner;
-      //       ordner.ordner.forEach( (o: Ordner) => {
-
-      //         console.log(o);
-      //       });
-      //     }
-      //   });
-      // }
-
-
 
     } else {
+      // in case of an error: display the error message
         const objError = this.obj as XmlError;
         this.converterError = true;
         this.form.controls['json'].setValue('');
@@ -120,6 +89,7 @@ export class Xml2jsonComponent {
 
   }
 
+  // check, if a node has child nodes
   hasChild = (_: number, node: Ordner) => (!!node.ordner && node.ordner.length > 0) || (!!node.datei && node.datei.length > 0);
 
 }

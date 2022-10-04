@@ -1,3 +1,16 @@
+
+export interface TextString {
+  "_text": string;
+}
+
+export interface TextNumber {
+  "_text": number;
+}
+
+export interface TextBoolean {
+  "_text": boolean;
+}
+
 export interface ValueString {
   "_value": string;
 }
@@ -32,18 +45,6 @@ export interface Inhaltsverzeichnis {
 export interface Datum {
     "ca"?: TextBoolean[];
     "datum": TextString[];
-}
-
-export interface TextString {
-    "_text": string;
-}
-
-export interface TextNumber {
-    "_text": number;
-}
-
-export interface TextBoolean {
-    "_text": boolean;
 }
 
 export interface Provenienz {
