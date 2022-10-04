@@ -10,8 +10,8 @@ describe('StartComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [
-              StartComponent,
-              HeadlineComponent
+                StartComponent,
+                HeadlineComponent
             ]
         })
             .compileComponents();

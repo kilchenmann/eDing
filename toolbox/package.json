@@ -9,14 +9,17 @@
     "build-app": "ng build",
     "build-app-dev": "ng build --configuration development",
     "build-app-dev-watch": "ng build --configuration development --watch=true",
+    "test": "ng test",
     "test-ci": "ng test --watch=false --browsers=ChromeHeadless",
-    "test-local": "ng test",
+    "test-lib": "ng t --project @av-dimag/ingest",
+    "test-lib-ci": "ng t --watch=false --browsers=ChromeHeadless --project @av-dimag/ingest",
+
     "build-lib": "ng b --configuration production --project @av-dimag/ingest && cp README.md dist/@av-dimag/ingest/",
     "build-lib-dev": "ng b --configuration development --project @av-dimag/ingest",
     "build-lib-dev-watch": "ng b --configuration development --project @av-dimag/ingest --watch=true",
     "cxsd": "cxsd",
-    "lint-ci": "eslint --color -c .eslintrc.js --ext .ts ./src/app",
-    "lint-local": "eslint --color --fix -c .eslintrc.js --ext .ts ./src/app"
+    "lint": "eslint --color --fix -c .eslintrc.js --ext .ts ./src/app",
+    "lint-ci": "eslint --color -c .eslintrc.js --ext .ts ./src/app"
   },
   "private": true,
   "dependencies": {
