@@ -77,7 +77,7 @@ export interface Dokument {
     "klassifizierungskategorie": TextString[];
     "oeffentlichkeitsstatus": TextString[];
     "dateiRef": TextString[];
-    "datenschutz": TextBoolean[];
+    "datenschutz"?: TextBoolean[];
 }
 
 export interface Aktivitaet {
@@ -106,6 +106,7 @@ export interface Dossier {
     "abschlussdatum": Datum[];
     "dokument": Dokument[];
     "vorgang": Vorgang[];
+    "dateiRef"?: TextString[];
 }
 
 export interface Ordnungssystemposition {
@@ -147,5 +148,5 @@ export interface Paket {
 }
 
 export interface SIP {
-    "paket"?: Paket[];
+    "paket": Paket[];
 }

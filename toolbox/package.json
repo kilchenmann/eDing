@@ -13,7 +13,6 @@
     "test-ci": "ng test --watch=false --browsers=ChromeHeadless",
     "test-lib": "ng t --project @av-dimag/ingest",
     "test-lib-ci": "ng t --watch=false --browsers=ChromeHeadless --project @av-dimag/ingest",
-
     "build-lib": "ng b --configuration production --project @av-dimag/ingest && cp README.md dist/@av-dimag/ingest/",
     "build-lib-dev": "ng b --configuration development --project @av-dimag/ingest",
     "build-lib-dev-watch": "ng b --configuration development --project @av-dimag/ingest --watch=true",
