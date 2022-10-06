@@ -2,6 +2,31 @@
     flex: 1 1 auto;
 }
 
+.half-width {
+  width: calc(50% - 32px);
+  margin: 8px;
+}
+
+.withSeparator {
+  border-bottom: 1px solid gray;
+  padding: 4px 0 12px 0;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+
+  .mat-tree {
+    width: 100%;
+  }
+
+  .tree,
+  .info {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
 .form {
   display: flex;
   flex-direction: column;
@@ -11,11 +36,6 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-
-    .half-width {
-      width: calc(50% - 32px);
-      margin: 8px;
-    }
   }
 
   .form-error {
