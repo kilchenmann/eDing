@@ -112,44 +112,7 @@ export class Xml2jsonComponent {
     this.dos = undefined;
     this.dok = undefined;
 
-
-    // console.log('get file metadata:', dateiRef);
-    // find specific "dokument" by dateiRef in "Dossier"
-    // paket[0] > ablieferung[0] > ordnungssystem[0] > ordnungssystemposition[?]
-    //
-
     this._findOsp(this.obj.paket[0].ablieferung[0].ordnungssystem[0].ordnungssystemposition, dateiRef);
-    // this.obj.paket[0].ablieferung[0].ordnungssystem[0].ordnungssystemposition.forEach(
-    //   (osp: Ordnungssystemposition) => {
-
-
-
-
-
-
-        // console.log('Ordnungssystemposition', osp);
-
-        // const index = this._findInDossier(osp, dateiRef);
-        // if (osp.dossier && osp.dossier.length > 0) {
-        //   osp.dossier.forEach(
-        //     (dos: Dossier) => {
-        //       console.log('Dossier', dos);
-        //       if (dos.dokument && dos.dokument.length > 0) {
-        //         const index = dos.dokument.findIndex(d => d.dateiRef.forEach(df => df._text === dateiRef));
-        //         console.log('we found a file reference:', index);
-        //       }
-        //     }
-        //   )
-        // }
-      // }
-    // );
-
-    // this.obj.paket[0].ablieferung[0].ordnungssystem[0].ordnungssystemposition.find((obj) => {
-    //   return obj.id === 2;
-    // });
-
-
-
 
   }
 

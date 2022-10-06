@@ -9,6 +9,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { StringifyValuePipe } from '../shared';
 import { Xml2jsonComponent } from './xml2json/xml2json.component';
 import { Xsd2tsComponent } from './xsd2ts/xsd2ts.component';
 
@@ -16,7 +17,8 @@ import { Xsd2tsComponent } from './xsd2ts/xsd2ts.component';
 @NgModule({
   declarations: [
     Xsd2tsComponent,
-    Xml2jsonComponent
+    Xml2jsonComponent,
+    StringifyValuePipe
   ],
   imports: [
     BrowserAnimationsModule,

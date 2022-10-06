@@ -599,6 +599,7 @@
 								<erscheinungsform>digital</erscheinungsform>
 								<dokumenttyp>PDF-Dokument</dokumenttyp>
 								<registrierdatum>
+									<ca>true</ca>
 									<datum>2007-04-25</datum>
 								</registrierdatum>
 								<klassifizierungskategorie>nicht klassifiziert</klassifizierungskategorie>

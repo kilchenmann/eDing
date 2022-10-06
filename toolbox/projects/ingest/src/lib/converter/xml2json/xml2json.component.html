@@ -77,18 +77,19 @@
   <div class="half-width info">
     <div *ngIf="dok">
       <h4>Die Datei ist im Dokument referenziert</h4>
-      <ul>
-        <li>_attrid: {{dok._attrid._value}}</li>
-        <li>titel: {{dok.titel[0]._text}}</li>
-        <li>autor: {{dok.autor[0]._text}}</li>
-        <li>erscheinungsform: {{dok.erscheinungsform[0]._text}}</li>
-        <li>dokumenttyp: {{dok.dokumenttyp[0]._text}}</li>
-        <li>registrierdatum: {{dok.registrierdatum[0].datum}}</li>
-        <li>klassifizierungskategorie: {{dok.klassifizierungskategorie[0]._text}}</li>
-        <li>oeffentlichkeitsstatus: {{dok.oeffentlichkeitsstatus[0]._text}}</li>
-        <li>dateiRef: {{dok.dateiRef[0]._text}}</li>
-        <li *ngIf="dok.datenschutz">datenschutz: {{dok.datenschutz[0]._text}}</li>
-      </ul>
+      <p *ngFor="let item of dok | keyvalue; let last = last;" [class.withSeparator]="!last">
+        <strong>{{item.key}}</strong><br>
+        <span [innerHtml]="item.value | stringifyValue"></span>
+      </p>
+    </div>
+
+
+    <div *ngIf="dos">
+      <h4>Die Datei ist im Dossier referenziert</h4>
+      <p *ngFor="let item of dos | keyvalue; let last = last;" [class.withSeparator]="!last">
+        <strong>{{item.key}}</strong><br>
+        <span [innerHtml]="item.value | stringifyValue"></span>
+      </p>
     </div>
   </div>
 
