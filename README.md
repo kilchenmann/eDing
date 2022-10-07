@@ -1,6 +1,6 @@
 # Ingest: Proof of Concept
 
-Dies ist das Repository für den Proof of Concept betreffend eCH-0160-Vorbereitung im DIMAG Ingest. 
+Dies ist das Repository für den Proof of Concept betreffend eCH-0160-Vorbereitung im DIMAG Ingest.
 
 ## Struktur
 
@@ -8,7 +8,7 @@ Primär handelt es sich bei diesem Repository um ein temporäres Sammelsurium vo
 
 ### Mapping
 
-Im Ingest Tool gibt es den *Quellelement Editor* für die Vorbereitung der Datenfelder im Mapping-Prozess. Eine manuelle Eingabe der vielen Elemente aus der eCH-0160-XML-Struktur kann relativ mühsam werden. Deshalb gibt es hier ein Bash-Skript, das die eCH-0160-Strukur als CSV (*ech-0160.csv*) in das DIMAG-Ingest-Tool-Quellelement-Profil (*ech-0160.iprf*) umwandelt. 
+Im Ingest Tool gibt es den *Quellelement Editor* für die Vorbereitung der Datenfelder im Mapping-Prozess. Eine manuelle Eingabe der vielen Elemente aus der eCH-0160-XML-Struktur kann relativ mühsam werden. Deshalb gibt es hier ein Bash-Skript, das die eCH-0160-Strukur als CSV (*ech-0160.csv*) in das DIMAG-Ingest-Tool-Quellelement-Profil (*ech-0160.iprf*) umwandelt.
 
 Das Script benötigt die CSV-Datei als Input `-i` und den Pfad der IPRF-Datei für den Output `-o`. Der Befehl sieht an unserem Beispiel wie folgt aus:
 

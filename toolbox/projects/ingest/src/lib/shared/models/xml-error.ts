@@ -1,30 +1,30 @@
 export interface Value {
-  _value: string;
+    '_value': string;
 }
 
 export interface Text {
-  _text: string;
+    '_text': string;
 }
 
 export interface Div {
-  _attrstyle: Value;
-  _text: string;
+    '_attrstyle': Value;
+    '_text': string;
 }
 
 export interface Parsererror {
-  _attrstyle: Value;
-  h3: Text[];
-  div: Div[];
+    '_attrstyle': Value;
+    'h3': Text[];
+    'div': Div[];
 }
 
 export interface Body {
-  parsererror: Parsererror[];
+    'parsererror': Parsererror[];
 }
 
 export interface Html {
-  body: Body[];
+    'body': Body[];
 }
 
 export interface XmlError {
-  html: Html[];
+    'html': Html[];
 }
