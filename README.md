@@ -18,12 +18,13 @@ Das Script benötigt die CSV-Datei als Input `-i` und den Pfad der IPRF-Datei f�
 
 Die Datei *ech-0160.iprf* kann später im Ingest Tool geladen und für das Mapping direkt genutzt werden.
 
-
 ### Testdaten
 
 In diesem Ordner werden die Test-SIPs abgelegt, die zum Ausprobieren der Skripte und des Ingest dienen sollen. Bspw. jenes der KOST: *SIP_20070923_KOST_eCH0160_1_1_GEVER* oder ein komplexeres Paket des Kantons Aargau: *SIP_20220906_Bibliothek-Archiv-Aargau_POC-Test*
 
 ### Toolbox
+
+Die Toolbox als App und Angular Library hat ein eigenes [technisches README](toolbox/README.md).
 
 Toolbox beinhaltet Werkzeuge, um mit eCH-0160 umgehen zu können und SIPs für den DIMAG Ingest vorzubereiten. Toolbox ist eine Angular Appliaktion, in der wir die einzelnen Werkzeuge als Module entwickeln. In Angular als Library bezeichnet, werden sie in `projects/` abgelegt. Die Idee ist, dass wir diese Werkzeuge später einzeln als NPM Module extrahieren resp. publizieren können, und evt. im DIMAG IPM zu integrieren. Dies erlaubt uns eine gewisse flexibilität und modularität.
 
@@ -37,14 +38,7 @@ Das *metadata.xml* beinhaltet eine Bemerkung, die bspw. im PackageHandler pro AI
 </zusatzDaten>
 ````
 
-> Diskussion: Die Bemerkung sollte auf der obersten Ebene des AIP stehen und nur einmal vorkommen. In den Beispieldaten *SIP_20220906_Bibliothek-Archiv-Aargau_POC-Test* kommt die Bezeichnung bspw. "AIP = 1" jedoch mehrmals vor. 
-Ein anderes Problem ist die in der Verarbeitung, wenn wir ein JSON aus dem XML lesen. Hier verlieren wir die Information "AIP". Das Ergebnis sieht &mdash; jedenfalls mit dem gewählten XML2JSON tool &mdash; wie folgt aus:
-
-```json
-"zusatzDaten": {
-    "merkmal": "1"
-},
-```
+> Diskussion: Die Bemerkung sollte auf der obersten Ebene des AIP stehen und nur einmal vorkommen. In den Beispieldaten *SIP_20220906_Bibliothek-Archiv-Aargau_POC-Test* kommt die Bezeichnung bspw. "AIP = 1" jedoch mehrmals vor.
 
 Das AIP kann aus mehreren Ordnern und/oder Dateien bestehen. Primär gibt es die Ordnerebene, die im *metadata.xml* im Element `Dossier` beschrieben wird. Ein Dossier kann jeweils mehrere Dossiers beinhalten. Der erste Pfad lautet `/paket/ablieferung/ordnungssystem/ordnungssystemposition/dossier`. Ich gehe davon aus, dass wir den Dossier-Element-Block in den Ordner des jeweiligen AIPs schreiben.
 
