@@ -92,7 +92,7 @@ export class StringifyValuePipe implements PipeTransform {
           break;
 
         default:
-          return '<i>Warning! This type is not yet supported</i><br>' + JSON.stringify(value[0]);
+          return '<i class="warning">Warning! This object type is not yet supported: </i>' + JSON.stringify(value[0]);
           break;
       }
 
