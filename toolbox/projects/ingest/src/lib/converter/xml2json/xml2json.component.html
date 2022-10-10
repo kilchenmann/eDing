@@ -95,36 +95,45 @@
   </mat-tab>
   <!-- ablieferung -->
   <mat-tab label="Ablieferung" [disabled]="!sip.paket.length">
+    <div class="ablieferung" *ngIf="sip.paket.length">
+      <!-- <h4>Ablieferung</h4> -->
+      <p *ngFor="let item of sip.paket[0].ablieferung[0] | keyvalue; let last = last;" [class.withSeparator]="!last">
+        <strong>{{item.key}}</strong><br>
+        <span *ngIf="item.key !== 'provenienz'" [innerHtml]="item.value | stringifyValue"></span>
+        <span *ngIf="item.key === 'provenienz'">
 
+        </span>
+      </p>
+    </div>
   </mat-tab>
   <!-- header metadata -->
   <mat-tab label="Header" [disabled]="!sip.paket.length">
     <div class="header" *ngIf="sip.paket.length">
         <!-- <h4>XML header meta</h4> -->
-          <p class="withSeparator">
-            <strong>Paket Typ</strong><br>
-            <span [innerHtml]="sip.paket[0].paketTyp | stringifyValue"></span>
-          </p>
-          <p class="withSeparator">
-            <strong>Typ</strong><br>
-            <span [innerHtml]="sip.paket[0]._attrtype | stringifyValue"></span>
-          </p>
-          <p class="withSeparator">
-            <strong>Schema Location</strong><br>
-            <span [innerHtml]="sip.paket[0]._attrschemaLocation | stringifyValue"></span>
-          </p>
-          <p class="withSeparator">
-            <strong>Schema Version</strong><br>
-            <span [innerHtml]="sip.paket[0]._attrschemaVersion | stringifyValue"></span>
-          </p>
-          <p class="withSeparator">
-            <strong>XML Nameserver</strong><br>
-            <span [innerHtml]="sip.paket[0]._attrxmlns | stringifyValue"></span>
-          </p>
-          <p class="withSeparator">
-            <strong>XML Naemserver XSI</strong><br>
-            <span [innerHtml]="sip.paket[0]['_attrxmlns:xsi'] | stringifyValue"></span>
-          </p>
+        <p class="withSeparator">
+          <strong>Paket Typ</strong><br>
+          <span [innerHtml]="sip.paket[0].paketTyp | stringifyValue"></span>
+        </p>
+        <p class="withSeparator">
+          <strong>Typ</strong><br>
+          <span [innerHtml]="sip.paket[0]._attrtype | stringifyValue"></span>
+        </p>
+        <p class="withSeparator">
+          <strong>Schema Location</strong><br>
+          <span [innerHtml]="sip.paket[0]._attrschemaLocation | stringifyValue"></span>
+        </p>
+        <p class="withSeparator">
+          <strong>Schema Version</strong><br>
+          <span [innerHtml]="sip.paket[0]._attrschemaVersion | stringifyValue"></span>
+        </p>
+        <p class="withSeparator">
+          <strong>XML Nameserver</strong><br>
+          <span [innerHtml]="sip.paket[0]._attrxmlns | stringifyValue"></span>
+        </p>
+        <p>
+          <strong>XML Naemserver XSI</strong><br>
+          <span [innerHtml]="sip.paket[0]['_attrxmlns:xsi'] | stringifyValue"></span>
+        </p>
       </div>
   </mat-tab>
 </mat-tab-group>

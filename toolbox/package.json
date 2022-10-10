@@ -18,7 +18,8 @@
     "build-lib-dev-watch": "ng b --configuration development --project @av-dimag/ingest --watch=true",
     "cxsd": "cxsd",
     "lint": "eslint --color --fix -c .eslintrc.js --ext .ts ./src/app",
-    "lint-ci": "eslint --color -c .eslintrc.js --ext .ts ./src/app"
+    "lint-ci": "eslint --color -c .eslintrc.js --ext .ts ./src/app",
+    "prep-testdata": "./prepare-testdata.sh"
   },
   "private": true,
   "dependencies": {
