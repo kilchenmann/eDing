@@ -1,7 +1,12 @@
 // @import '../../../assets/styles/main.scss';
 
 .fill-remaining-space {
-    flex: 1 1 auto;
+  flex: 1 1 auto;
+}
+
+.keep-size {
+  max-height: 48px;
+  margin: 8px;
 }
 
 .half-width {
@@ -74,7 +79,6 @@
  * Leaf nodes need to have padding so as to align with other non-leaf nodes
  * under the same parent.
  */
-.file-structure div[role=group] > .mat-tree-node {
+.file-structure div[role=group]>.mat-tree-node {
   padding-left: 40px;
 }
-

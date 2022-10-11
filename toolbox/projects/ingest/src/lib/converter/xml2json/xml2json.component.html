@@ -1,11 +1,21 @@
 <form [formGroup]="form" class="form">
 
   <div class="form-action">
-    <button mat-flat-button color="accent" (click)="convert()" [disabled]="!form.valid">
+    <mat-form-field appearance="fill" class="half-width">
+      <mat-label>Select Testdata</mat-label>
+      <mat-select [formControlName]="'testdata'" name="food" (selectionChange)="getTestdata($event.value)">
+        <mat-option>--</mat-option>
+        <mat-option *ngFor="let td of testdata" [value]="td">
+          {{td}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <span class="fill-remaining-space"></span>
+    <button mat-flat-button color="accent" (click)="convert()" [disabled]="!form.valid" class="keep-size">
       Convert XML to JSON
     </button>
-    <span class="fill-remaining-space"></span>
-    <button mat-stroked-button (click)="form.reset(); converterError=false">
+    <!-- <span class="fill-remaining-space"></span> -->
+    <button mat-stroked-button (click)="form.reset(); converterError=false" class="keep-size">
       Reset form
     </button>
   </div>
@@ -35,7 +45,7 @@
 
 <mat-tab-group animationDuration="0ms">
   <!-- inhaltsverzeichnis -->
-  <mat-tab label="Inhaltsverzeichnis" [disabled]="!sip.paket.length">
+  <mat-tab label="Inhaltsverzeichnis" [disabled]="!sip.paket || !sip.paket.length">
     <div class="content">
       <!-- file structure on the left hand side -->
       <div class="half-width tree">
@@ -94,8 +104,8 @@
     </div>
   </mat-tab>
   <!-- ablieferung -->
-  <mat-tab label="Ablieferung" [disabled]="!sip.paket.length">
-    <div class="ablieferung" *ngIf="sip.paket.length">
+  <mat-tab label="Ablieferung" [disabled]="!sip.paket || !sip.paket.length">
+    <div class="ablieferung" *ngIf="sip.paket && sip.paket.length">
       <!-- <h4>Ablieferung</h4> -->
       <p *ngFor="let item of sip.paket[0].ablieferung[0] | keyvalue; let last = last;" [class.withSeparator]="!last">
         <strong>{{item.key}}</strong><br>
@@ -107,8 +117,8 @@
     </div>
   </mat-tab>
   <!-- header metadata -->
-  <mat-tab label="Header" [disabled]="!sip.paket.length">
-    <div class="header" *ngIf="sip.paket.length">
+  <mat-tab label="Header" [disabled]="!sip.paket || !sip.paket.length">
+    <div class="header" *ngIf="sip.paket && sip.paket.length">
         <!-- <h4>XML header meta</h4> -->
         <p class="withSeparator">
           <strong>Paket Typ</strong><br>

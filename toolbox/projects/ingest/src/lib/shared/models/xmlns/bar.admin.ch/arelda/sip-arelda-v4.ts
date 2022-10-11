@@ -1,3 +1,4 @@
+import { Html } from '../../../xml-error';
 
 export interface TextString {
     '_text': string;
@@ -150,4 +151,5 @@ export interface Paket {
 
 export interface SIP {
     'paket': Paket[];
+    'html'?: Html[];    // just a little error handler hack
 }

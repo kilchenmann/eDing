@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -29,6 +30,7 @@ import { Xsd2tsComponent } from './xsd2ts/xsd2ts.component';
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
+        MatSelectModule,
         MatSnackBarModule,
         MatTabsModule,
         MatTreeModule,

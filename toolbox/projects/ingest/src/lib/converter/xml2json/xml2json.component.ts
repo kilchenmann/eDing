@@ -1,4 +1,5 @@
 import { NestedTreeControl } from '@angular/cdk/tree';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
@@ -8,8 +9,24 @@ import {
     ErrorMessage,
     Ordner,
     Ordnungssystemposition,
-    SIP
+    SIP,
+    XmlError
 } from '../../shared';
+
+// import { readFile, writeFile, readFileSync } from 'fs';
+
+import * as fs from 'fs';
+// import * as path from 'path';
+
+// const fs = require('file-system');
+// eslint-disable-next-line @typescript-eslint/naming-convention
+// const __dirname = path.resolve();
+// declare let require: any;
+// const fs = require('fs');
+
+// import { fileURLToPath } from 'url';
+// import { dirname } from 'path';
+
 
 
 // xmlToJSON does not export itself as ES6/ECMA2015 module,
@@ -23,6 +40,14 @@ declare let xmlToJSON: any;
     styleUrls: ['./xml2json.component.scss']
 })
 export class Xml2jsonComponent {
+
+    // load test data
+    testdata = [
+        'SIP_20070923_KOST_eCH0160_1_1_GEVER',
+        'SIP_20220906_Bibliothek-Archiv-Aargau_POC-Test'
+    ];
+
+    fileContent = '';
 
     sip: SIP = {
         paket: []
@@ -64,6 +89,7 @@ export class Xml2jsonComponent {
 
     // define form
     form: FormGroup = this.fb.group({
+        testdata: [''],
         xml: ['', Validators.required],
         json: ['']
     });
@@ -99,8 +125,8 @@ export class Xml2jsonComponent {
             // const objError = xmlToJSON.parseString(this.form.value['xml'], this.xmlOptions) as XmlError;
             this.converterError = true;
             this.form.controls['json'].setValue('');
-            // this.error.message = objError.html[0].body[0].parsererror[0].h3[0]._text + ' ' +
-            // objError.html[0].body[0].parsererror[0].div[0]._text;
+            this.error.message = (this.sip.html ? this.sip.html[0].body[0].parsererror[0].h3[0]._text + ' ' +
+            this.sip.html[0].body[0].parsererror[0].div[0]._text : 'no error message');
         }
 
     }
@@ -120,6 +146,72 @@ export class Xml2jsonComponent {
 
         this._findOsp(this.sip.paket[0].ablieferung[0].ordnungssystem[0].ordnungssystemposition, dateiRef);
 
+    }
+
+    async getTestdata(name: string) {
+        console.log(name);
+
+
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        // const __filename = fileURLToPath(import.meta.url);
+
+
+        if (name) {
+            // grab test data from shared/testdata/[name].xml
+            const tdxml = name;
+
+            // // const content = await
+            // readFile(`../../shared/testdata/${name}.xml`).subscribe(
+            //     (data: any) => {
+            //         console.log(data);
+
+            //     },
+            //     (error: any) => {
+            //         console.error(error);
+            //     }
+            // )
+
+            // console.log(content);
+
+            // fs.readFile(path.join(__dirname, `${name}.xml`), 'utf8', (error, data) => {
+            //     // ...
+            //     if (error) {
+            //         throw error;
+            //     };
+            //     console.log(data);
+            // });
+
+            // fs.readFile(`${name}.xml`, 'utf8', (error, data) => {
+
+            // });
+
+            // try {
+            //     const data = fs.readFileSync('gaga.xml', 'utf8');
+            //     console.log(data);
+            // } catch (err) {
+            //     console.error(err);
+            // }
+
+            const file = `../../shared/testdata/${name}.xml`;
+            const fileReader: FileReader = new FileReader();
+            const self = this;
+            fileReader.onloadend = function(x) {
+                // self.fileContent = fileReader.result;
+                console.log('fileReader:',  fileReader.result);
+            };
+            // fileReader.readAsText(file);
+
+            // and set value in first textarea = "xml"
+            this.form.controls['xml'].setValue(JSON.stringify(tdxml, undefined, 4));
+            // fs.readFileSync(`../../shared/testdata/${name}.xml`, { encoding: 'utf-8' });
+            // and convert directly
+            // this.convert();
+
+        } else {
+            // reset form
+            this.form.reset();
+            this.form.controls['xml'].setValue('');
+        }
     }
 
     /**
