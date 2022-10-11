@@ -20,7 +20,9 @@ Die Datei *ech-0160.iprf* kann später im Ingest Tool geladen und für das Mappi
 
 ### Testdaten
 
-In diesem Ordner werden die Test-SIPs abgelegt, die zum Ausprobieren der Skripte und des Ingest dienen sollen. Bspw. jenes der KOST: *SIP_20070923_KOST_eCH0160_1_1_GEVER* oder ein komplexeres Paket des Kantons Aargau: *SIP_20220906_Bibliothek-Archiv-Aargau_POC-Test*
+In diesem Ordner werden die Test-SIPs und AIPs abgelegt. Diese dienen zum Ausprobieren der Skripte und des Ingests. Bspw. jenes der KOST: *SIP_20070923_KOST_eCH0160_1_1_GEVER* oder ein komplexeres Paket des Kantons Aargau: *SIP_20220906_Bibliothek-Archiv-Aargau_POC-Test*
+
+Das *AIP_20070923_KOST_eCH0160_1_1_GEVER* beinhaltet drei AIPs, die aus dem oben genannten SIP (vorerst manuell) erstellt wurde. Es ist ein einfaches, in der Struktur flaches Beispiel. Jeder Ordner entspricht einem AIP mit den einzelnen Dokumenten und dem zusätzlichen *metadata.xml*. Das XML sollte dem eCH-0160 Standard entsprechen und wird später vom Script in der Toolbox erstellt. Darin befinden sich die Informationen aus der vorherigen SIP-Ebene (Ablieferung und allgemeines zum Paket) und zu den einzelnen Dokumenten oder Dossiers (sofern vorhanden).
 
 ### Toolbox
 
