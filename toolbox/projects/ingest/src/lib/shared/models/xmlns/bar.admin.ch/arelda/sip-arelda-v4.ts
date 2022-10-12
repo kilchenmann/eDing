@@ -24,6 +24,10 @@ export interface HashFunktion {
     '_text': 'MD5' | 'SHA-1' | 'SHA-256' | 'SHA-512';
 }
 
+export interface PaketTyp {
+    '_text': 'SIP' | 'AIP' | 'DIP';
+}
+
 export interface Datei {
     '_attrid': ValueString;
     'name': TextString[];
@@ -144,7 +148,7 @@ export interface Paket {
     '_attrschemaLocation': ValueString;
     '_attrtype': ValueString;
     '_attrschemaVersion': ValueNumber;
-    'paketTyp': TextString[];
+    'paketTyp': PaketTyp;
     'inhaltsverzeichnis': Inhaltsverzeichnis[];
     'ablieferung': Ablieferung[];
 }
