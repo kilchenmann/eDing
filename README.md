@@ -38,7 +38,7 @@ Das *metadata.xml* beinhaltet eine Bemerkung, die bspw. im PackageHandler pro AI
 <zusatzDaten>
     <merkmal name="AIP">3</merkmal>
 </zusatzDaten>
-````
+```
 
 > Diskussion: Die Bemerkung sollte auf der obersten Ebene des AIP stehen und nur einmal vorkommen. In den Beispieldaten *SIP_20220906_Bibliothek-Archiv-Aargau_POC-Test* kommt die Bezeichnung bspw. "AIP = 1" jedoch mehrmals vor.
 
