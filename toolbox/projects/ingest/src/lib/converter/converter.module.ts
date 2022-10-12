@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,8 +16,6 @@ import { StringifyValuePipe } from '../shared';
 import { Xml2jsonComponent } from './xml2json/xml2json.component';
 import { Xsd2tsComponent } from './xsd2ts/xsd2ts.component';
 
-
-
 @NgModule({
     declarations: [
         Xsd2tsComponent,
@@ -26,6 +25,7 @@ import { Xsd2tsComponent } from './xsd2ts/xsd2ts.component';
     imports: [
         BrowserAnimationsModule,
         CommonModule,
+        HttpClientModule,
         MatButtonModule,
         MatFormFieldModule,
         MatIconModule,

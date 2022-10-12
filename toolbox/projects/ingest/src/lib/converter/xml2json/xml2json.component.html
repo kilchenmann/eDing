@@ -46,7 +46,7 @@
 <mat-tab-group animationDuration="0ms">
   <!-- inhaltsverzeichnis -->
   <mat-tab label="Inhaltsverzeichnis" [disabled]="!sip.paket || !sip.paket.length">
-    <div class="content">
+    <div class="content" *ngIf="sip.paket && sip.paket.length">
       <!-- file structure on the left hand side -->
       <div class="half-width tree">
         <mat-tree class="file-structure" *ngIf="dataSource.data.length" [dataSource]="dataSource"

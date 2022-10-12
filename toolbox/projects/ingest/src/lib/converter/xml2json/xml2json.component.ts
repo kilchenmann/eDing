@@ -95,7 +95,8 @@ export class Xml2jsonComponent {
     });
 
     constructor(
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private http: HttpClient
     ) { }
 
     // convert action
@@ -148,69 +149,27 @@ export class Xml2jsonComponent {
 
     }
 
-    async getTestdata(name: string) {
-        console.log(name);
-
-
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        // const __filename = fileURLToPath(import.meta.url);
-
+    getTestdata(name: string) {
 
         if (name) {
             // grab test data from shared/testdata/[name].xml
             const tdxml = name;
 
-            // // const content = await
-            // readFile(`../../shared/testdata/${name}.xml`).subscribe(
-            //     (data: any) => {
-            //         console.log(data);
-
-            //     },
-            //     (error: any) => {
-            //         console.error(error);
-            //     }
-            // )
-
-            // console.log(content);
-
-            // fs.readFile(path.join(__dirname, `${name}.xml`), 'utf8', (error, data) => {
-            //     // ...
-            //     if (error) {
-            //         throw error;
-            //     };
-            //     console.log(data);
-            // });
-
-            // fs.readFile(`${name}.xml`, 'utf8', (error, data) => {
-
-            // });
-
-            // try {
-            //     const data = fs.readFileSync('gaga.xml', 'utf8');
-            //     console.log(data);
-            // } catch (err) {
-            //     console.error(err);
-            // }
-
-            const file = `../../shared/testdata/${name}.xml`;
-            const fileReader: FileReader = new FileReader();
-            const self = this;
-            fileReader.onloadend = function(x) {
-                // self.fileContent = fileReader.result;
-                console.log('fileReader:',  fileReader.result);
-            };
-            // fileReader.readAsText(file);
-
-            // and set value in first textarea = "xml"
-            this.form.controls['xml'].setValue(JSON.stringify(tdxml, undefined, 4));
-            // fs.readFileSync(`../../shared/testdata/${name}.xml`, { encoding: 'utf-8' });
-            // and convert directly
-            // this.convert();
+            this.http.get(`/assets/testdata/${name}.xml`, { responseType:  'text' }).subscribe(data => {
+                // console.log(data);
+                // and set value in first textarea = "xml"
+                this.form.controls['xml'].setValue(data);
+                // and convert directly
+                this.convert();
+            });
 
         } else {
             // reset form
             this.form.reset();
             this.form.controls['xml'].setValue('');
+            this.sip = {
+                paket: []
+            };
         }
     }
 

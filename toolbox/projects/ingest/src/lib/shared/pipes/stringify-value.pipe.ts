@@ -21,102 +21,110 @@ export class StringifyValuePipe implements PipeTransform {
     transform(value: any): string {
         let stringified = '';
 
-        // which kind of value do we have?
-        if (Array.isArray(value)) {
-            switch (true) {
-                case this._instanceOfTS(value[0]):
-                    // instance of TextString
-                    let t = 0;
-                    for (const val of <TextString[]>value) {
-                        const delimiter = (t > 0 ? '<br>' : '');
-                        stringified += delimiter + val._text;
-                        t++;
-                    }
-                    return stringified;
-                    break;
-
-                case this._instanceOfTN(value[0]):
-                    // instance of TextNumber
-                    let i = 0;
-                    for (const val of <TextNumber[]>value) {
-                        const delimiter = (i > 0 ? '<br>' : '');
-                        stringified += delimiter + val._text;
-                        i++;
-                    }
-                    return stringified;
-                    break;
-
-                case this._instanceOfTB(value[0]):
-                    // instance of TextBoolean
-                    // wir gehen davon aus, dass der boolsche Wert nur einmal vorkommt,
-                    // auch wenn der Wert als Array zurückkommt. Deshalb wird lediglich
-                    // der erste Wert zurückgegeben.
-                    return (value[0]._text === 'true' ? 'ja' : 'nein');
-                    break;
-
-                case this._instanceOfZD(value[0]):
-                    // instance of ZusatzDaten
-                    let z = 0;
-                    for (const val of <ZusatzDaten[]>value) {
-                        const delimiter = (z > 0 ? '</br>' : '');
-                        for (const m of <Merkmal[]>val.merkmal) {
-                            stringified += delimiter + m._attrname._value + ' ' + m._text;
-                        }
-                        z++;
-                    }
-                    return stringified;
-                    break;
-
-
-                case this._instanceOfDM(value[0]):
-                    // instance of Datum
-                    let d = 0;
-                    for (const val of <Datum[]>value) {
-                        const delimiter = (d > 0 ? '</br>' : '');
-                        stringified += delimiter + this._setDate(val);
-                        d++;
-                    }
-                    return stringified;
-                    break;
-
-
-                case this._instanceOfZR(value[0]):
-                    // instance of Zeitraum
-                    let p = 0;
-                    for (const val of <Zeitraum[]>value) {
-                        const delimiter = (p > 0 ? '</br>' : '');
-                        stringified += delimiter + this._setDate(val.von[0]) + ' - ' + this._setDate(val.bis[0]);
-                        p++;
-                    }
-                    return stringified;
-                    break;
-
-                default:
-                    return '<i class="warning">Warning! This object type is not yet supported: </i>' + JSON.stringify(value[0]);
-                    break;
-            }
-
+        if (value === undefined) {
+            return '<i class="warning">Warning! This value is undefined or the element does not exist.</i>' + JSON.stringify(value);
         } else {
-            switch (true) {
-                case (this._instanceOfVS(value)):
-                    // console.log('instance of ValueString', value);
-                    return value._value;
-                    break;
+            // which kind of value do we have?
+            // switch in case of an array
+            if (Array.isArray(value)) {
+                switch (true) {
+                    case this._instanceOfTS(value[0]):
+                        // instance of TextString
+                        let t = 0;
+                        for (const val of <TextString[]>value) {
+                            const delimiter = (t > 0 ? '<br>' : '');
+                            stringified += delimiter + val._text;
+                            t++;
+                        }
+                        return stringified;
+                        break;
 
-                case (this._instanceOfVN(value)):
-                    // console.log('instance of ValueNumber', value);
-                    return JSON.stringify(value._value);
-                    break;
+                    case this._instanceOfTN(value[0]):
+                        // instance of TextNumber
+                        let i = 0;
+                        for (const val of <TextNumber[]>value) {
+                            const delimiter = (i > 0 ? '<br>' : '');
+                            stringified += delimiter + val._text;
+                            i++;
+                        }
+                        return stringified;
+                        break;
+
+                    case this._instanceOfTB(value[0]):
+                        // instance of TextBoolean
+                        // wir gehen davon aus, dass der boolsche Wert nur einmal vorkommt,
+                        // auch wenn der Wert als Array zurückkommt. Deshalb wird lediglich
+                        // der erste Wert zurückgegeben.
+                        return (value[0]._text === 'true' ? 'ja' : 'nein');
+                        break;
+
+                    case this._instanceOfZD(value[0]):
+                        // instance of ZusatzDaten
+                        let z = 0;
+                        for (const val of <ZusatzDaten[]>value) {
+                            const delimiter = (z > 0 ? '</br>' : '');
+                            for (const m of <Merkmal[]>val.merkmal) {
+                                stringified += delimiter + m._attrname._value + ' ' + m._text;
+                            }
+                            z++;
+                        }
+                        return stringified;
+                        break;
+
+
+                    case this._instanceOfDM(value[0]):
+                        // instance of Datum
+                        let d = 0;
+                        for (const val of <Datum[]>value) {
+                            const delimiter = (d > 0 ? '</br>' : '');
+                            stringified += delimiter + this._setDate(val);
+                            d++;
+                        }
+                        return stringified;
+                        break;
+
+
+                    case this._instanceOfZR(value[0]):
+                        // instance of Zeitraum
+                        let p = 0;
+                        for (const val of <Zeitraum[]>value) {
+                            const delimiter = (p > 0 ? '</br>' : '');
+                            stringified += delimiter + this._setDate(val.von[0]) + ' - ' + this._setDate(val.bis[0]);
+                            p++;
+                        }
+                        return stringified;
+                        break;
+
+                    default:
+                        return '<i class="warning">Warning! This object type is not yet supported: </i>' + JSON.stringify(value[0]);
+                        break;
+                }
+
+            } else {
+                // switch in case of an object
+                switch (true) {
+                    case (this._instanceOfVS(value)):
+                        // console.log('instance of ValueString', value);
+                        return (value._value ? value._value : 'undefined');
+                        break;
+
+                    case (this._instanceOfVN(value)):
+                        // console.log('instance of ValueNumber', value);
+                        return JSON.stringify(value._value);
+                        break;
+
+                    default:
+                        return '<i class="warning">Warning! This object type is not yet supported: </i>' + JSON.stringify(value);
+                }
             }
         }
 
-        return stringified;
+        // return stringified;
     }
 
 
     private _parseDate(val: string): string {
         // the format could be: 2022-11-31 OR 2022-11 OR 2022
-
         const m = val.toString().split('-');
 
         let date = '';

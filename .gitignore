@@ -36,6 +36,3 @@ typings
 .DS_Store
 Thumbs.db
 ~$*
-
-# Ignore copied testdata
-toolbox/projects/ingest/src/lib/shared/testdata/*.xml
