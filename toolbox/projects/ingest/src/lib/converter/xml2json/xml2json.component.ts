@@ -1,5 +1,5 @@
 import { NestedTreeControl } from '@angular/cdk/tree';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
@@ -9,24 +9,8 @@ import {
     ErrorMessage,
     Ordner,
     Ordnungssystemposition,
-    SIP,
-    XmlError
+    SIP
 } from '../../shared';
-
-// import { readFile, writeFile, readFileSync } from 'fs';
-
-import * as fs from 'fs';
-// import * as path from 'path';
-
-// const fs = require('file-system');
-// eslint-disable-next-line @typescript-eslint/naming-convention
-// const __dirname = path.resolve();
-// declare let require: any;
-// const fs = require('fs');
-
-// import { fileURLToPath } from 'url';
-// import { dirname } from 'path';
-
 
 
 // xmlToJSON does not export itself as ES6/ECMA2015 module,
