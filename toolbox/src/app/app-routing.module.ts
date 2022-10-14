@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {
+    Json2xmlComponent,
     Xml2jsonComponent,
     Xsd2tsComponent
 } from '@av-dimag/ingest';
@@ -22,6 +23,10 @@ const routes: Routes = [
     {
         path: 'xml2json',
         component: Xml2jsonComponent
+    },
+    {
+        path: 'json2xml',
+        component: Json2xmlComponent
     },
     // main pages
     {

@@ -2,6 +2,6 @@
  * Public API Surface of ingest
  */
 
-export * from './lib/converter/index';
+export * from './lib/converter/';
 
-export * from './lib/shared/index';
+export * from './lib/shared/';

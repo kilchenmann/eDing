@@ -15,12 +15,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StringifyValuePipe } from '../shared';
 import { Xml2jsonComponent } from './xml2json/xml2json.component';
 import { Xsd2tsComponent } from './xsd2ts/xsd2ts.component';
+import { Json2xmlComponent } from './json2xml/json2xml.component';
 
 @NgModule({
     declarations: [
         Xsd2tsComponent,
         Xml2jsonComponent,
-        StringifyValuePipe
+        StringifyValuePipe,
+        Json2xmlComponent
     ],
     imports: [
         BrowserAnimationsModule,
@@ -39,7 +41,8 @@ import { Xsd2tsComponent } from './xsd2ts/xsd2ts.component';
     ],
     exports: [
         Xsd2tsComponent,
-        Xml2jsonComponent
+        Xml2jsonComponent,
+        Json2xmlComponent
     ]
 })
 

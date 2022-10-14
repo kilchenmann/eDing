@@ -19,6 +19,10 @@ export class AppComponent {
         {
             label: 'XML to JSON',
             route: 'xml2json'
+        },
+        {
+            label: 'JSON to XML',
+            route: 'json2xml'
         }
     ];
 }

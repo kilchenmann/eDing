@@ -100,8 +100,8 @@ export class Xml2jsonComponent {
 
             this.sip.paket[0].inhaltsverzeichnis[0].ordner.forEach(content => {
                 // display folder structure of content
-                if (content.name[0]._text === 'content') {
-                    this.dataSource.data = content.ordner;
+                if (content.name[0]._text !== 'header') {
+                    this.dataSource.data = ( content.ordner ? content.ordner : this.sip.paket[0].inhaltsverzeichnis[0].ordner);
                 }
             });
 
