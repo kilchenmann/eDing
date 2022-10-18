@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <paket xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://bar.admin.ch/arelda/v4" xsi:schemaLocation="http://bar.admin.ch/arelda/v4 xsd/arelda.xsd" xsi:type="paketAIP" schemaVersion="4.1">
 	<paketTyp>AIP</paketTyp>
+	<nameSIP>SIP_20070923_KOST_eCH0160_1_1_GEVER<nameSIP>
+	<version>1</version>
 	<inhaltsverzeichnis>
 		<ordner>
 			<name>22.06.12</name>
@@ -43,7 +45,7 @@
 			</datei>
 		</ordner>
 	</inhaltsverzeichnis>
-	<ablieferung xsi:type="ablieferungGeverSIP">
+	<ablieferung xsi:type="ablieferungGeverAIP">
 		<ablieferungstyp>GEVER</ablieferungstyp>
 		<ablieferndeStelle>Staatskanzlei des Kantons St.Gallen</ablieferndeStelle>
 		<entstehungszeitraum>
