@@ -92,7 +92,7 @@ export class Xml2jsonComponent {
         // parse xml and return json
         this.sip = xmlToJSON.parseString(this.form.value['xml'], this.xmlOptions);
 
-        console.log(this.sip);
+        console.log('sip json', this.sip);
 
         if (this.sip.paket && this.sip.paket.length) {
             // display json in the second textarea

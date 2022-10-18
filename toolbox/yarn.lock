@@ -2524,6 +2524,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/jsontoxml@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "@types/jsontoxml@npm:1.0.3"
+  checksum: f6e038f729452ddeadc71bb7b9b832810ebebc4914a0dceb4423a10f7895f0aedccd65179a563052e190b6852a2fe743b64ae4b0918dba03f301717edb3eacd6
+  languageName: node
+  linkType: hard
+
 "@types/keyv@npm:^3.1.1":
   version: 3.1.4
   resolution: "@types/keyv@npm:3.1.4"
@@ -7370,6 +7377,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"js2xmlparser@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "js2xmlparser@npm:5.0.0"
+  dependencies:
+    xmlcreate: ^2.0.4
+  checksum: 1304b65f97482e6fd565437597ae43c7ebc75bb5c5a268ec1439ada1ef5b3d30034226bfc02e6668aecb3521e5dc64ef4ba387e08f102597a500838fad550dc3
+  languageName: node
+  linkType: hard
+
 "jsbn@npm:~0.1.0":
   version: 0.1.1
   resolution: "jsbn@npm:0.1.1"
@@ -7451,6 +7467,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"json-xml-parse@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "json-xml-parse@npm:1.2.1"
+  checksum: 6c5bd217f1aeb09660c0a1db1b527f3fcbd06c1df08b8cafcf64635ac7f7b7d2239628be7ccc59aabb868a7353efacec8d0fe7f9218c0b3a4061752a835cc40e
+  languageName: node
+  linkType: hard
+
 "json5@npm:^1.0.1":
   version: 1.0.1
   resolution: "json5@npm:1.0.1"
@@ -7508,6 +7531,13 @@ __metadata:
   version: 5.0.1
   resolution: "jsonpointer@npm:5.0.1"
   checksum: 0b40f712900ad0c846681ea2db23b6684b9d5eedf55807b4708c656f5894b63507d0e28ae10aa1bddbea551241035afe62b6df0800fc94c2e2806a7f3adecd7c
+  languageName: node
+  linkType: hard
+
+"jsontoxml@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "jsontoxml@npm:1.0.1"
+  checksum: ec6e38d876fb071f34212f6266205c0492d19e43943eea5f0a3574e497dbb0a4760a7aede254ea048bf77a4654ea85af97d71ede410abbf57c5cfdaa0757b9c0
   languageName: node
   linkType: hard
 
@@ -11165,6 +11195,7 @@ __metadata:
     "@angular/router": ^14.2.0
     "@types/jasmine": ~4.0.0
     "@types/jest": ^29.1.0
+    "@types/jsontoxml": ^1.0.3
     "@types/node": ^18.7.18
     "@typescript-eslint/eslint-plugin": ^5.38.1
     "@typescript-eslint/parser": ^5.38.1
@@ -11174,6 +11205,9 @@ __metadata:
     eslint-plugin-import: ^2.26.0
     eslint-plugin-jsdoc: ^39.3.6
     jasmine-core: ~4.3.0
+    js2xmlparser: ^5.0.0
+    json-xml-parse: ^1.2.1
+    jsontoxml: ^1.0.1
     karma: ~6.4.0
     karma-chrome-launcher: ~3.1.0
     karma-coverage: ~2.2.0
@@ -11805,6 +11839,13 @@ __metadata:
     utf-8-validate:
       optional: true
   checksum: c869296ccb45f218ac6d32f8f614cd85b50a21fd434caf11646008eef92173be53490810c5c23aea31bc527902261fbfd7b062197eea341b26128d4be56a85e4
+  languageName: node
+  linkType: hard
+
+"xmlcreate@npm:^2.0.4":
+  version: 2.0.4
+  resolution: "xmlcreate@npm:2.0.4"
+  checksum: b8dd52668b9aea77cd1408fa85538c14bb8dcc98b4e7bb51e76696c9c115d59eba7240298d0c4fd2caf8f1a8e283ab4e5c7b9a6bcfcf23a8b48f5068b677b748
   languageName: node
   linkType: hard
 
