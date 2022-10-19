@@ -73,207 +73,209 @@
 		<ordnungssystem>
 			<generation>AP Räte</generation>
 			<name>Räte - Aktenplan Kantonsrat und Regierung</name>
+			<!-- Bei der Ordnungssystemposition wurde die Hierarchie aufgehoben
+			und die Struktur vereinfacht -->
 			<ordnungssystemposition id="_OrRkkDfnEeKLm53bgNs7IQ">
 				<nummer>8</nummer>
 				<titel>Finanzen, Regalien, Unternehmungen, Feuerschutz</titel>
-				<ordnungssystemposition id="_VpBZ0DfnEeKLm53bgNs7IQ">
-					<nummer>83</nummer>
-					<titel>Finanzhaushalt des Staates</titel>
-					<ordnungssystemposition id="_cuUBgDfnEeKLm53bgNs7IQ">
-						<nummer>833</nummer>
-						<titel>Finanzausgleich</titel>
-						<dossier id="_f3jqYDfnEeKLm53bgNs7IQ">
-							<titel>Gesetz über die Umsetzung der Neugestaltung des Finanzausgleichs und der Aufgabenteilung zwischen Bund und Kantonen</titel>
-							<erscheinungsform>digital</erscheinungsform>
-							<federfuehrendeOrganisationseinheit>Finanzdepartement</federfuehrendeOrganisationseinheit>
-							<entstehungszeitraum>
-								<von>
-									<datum>2007-02-07</datum>
-								</von>
-								<bis>
-									<datum>2007-09-23</datum>
-								</bis>
-							</entstehungszeitraum>
-							<datenschutz>false</datenschutz>
-							<aktenzeichen>22.07.01</aktenzeichen>
-							<eroeffnungsdatum>
-								<datum>2007-02-07</datum>
-							</eroeffnungsdatum>
-							<abschlussdatum>
-								<datum>2007-09-23</datum>
-							</abschlussdatum>
-							<vorgang>
-								<titel>Geschäft eröffnen</titel>
-								<aktivitaet order="1">
-									<vorschreibung>KRGE 1 KR-Geschäft anmelden</vorschreibung>
-									<abschlussdatum>2007-02-08</abschlussdatum>
-								</aktivitaet>
-								<aktivitaet order="2">
-									<vorschreibung>KRGE 2 Sitzung der Regierung (Nulllesung)</vorschreibung>
-									<abschlussdatum>2007-02-13</abschlussdatum>
-								</aktivitaet>
-								<aktivitaet order="3">
-									<vorschreibung>KRGE 3 Nachbereitung der Regierungssitzung</vorschreibung>
-									<abschlussdatum>2007-02-14</abschlussdatum>
-								</aktivitaet>
-								<aktivitaet order="9">
-									<vorschreibung>KRGE 9 Botschaft und Entwurf ausfertigen</vorschreibung>
-									<abschlussdatum>2007-02-15</abschlussdatum>
-								</aktivitaet>
-								<aktivitaet order="10">
-									<vorschreibung>KRGE 10 Session des Kantonsrates (Kommissionsbestellung)</vorschreibung>
-									<abschlussdatum>2007-02-26</abschlussdatum>
-								</aktivitaet>
-								<aktivitaet order="11">
-									<vorschreibung>KRGE 11 Nachbereitung Kommissionsbestellung</vorschreibung>
-									<abschlussdatum>2007-02-26</abschlussdatum>
-								</aktivitaet>
-								<aktivitaet order="12">
-									<vorschreibung>KRGE 12 Vorbereitung der Sitzung der vorberatenden Kommission</vorschreibung>
-									<abschlussdatum>2007-02-27</abschlussdatum>
-								</aktivitaet>
-								<aktivitaet order="13">
-									<vorschreibung>KRGE 13 Sitzung der vorberatenden Kommission (erste Lesung)</vorschreibung>
-									<abschlussdatum>2007-03-16</abschlussdatum>
-								</aktivitaet>
-								<aktivitaet order="14">
-									<vorschreibung>KRGE 14 Nachbereitung der Sitzung der vorberatenden Kommission (erste Lesung)</vorschreibung>
-									<abschlussdatum>2007-03-16</abschlussdatum>
-								</aktivitaet>
-								<aktivitaet order="15">
-									<vorschreibung>KRGE 15 KR-Geschäft anmelden</vorschreibung>
-									<abschlussdatum>2007-03-16</abschlussdatum>
-								</aktivitaet>
-								<aktivitaet order="16">
-									<vorschreibung>KRGE 16 Sitzung der Regierung (Antrag)</vorschreibung>
-									<abschlussdatum>2007-03-20</abschlussdatum>
-								</aktivitaet>
-								<aktivitaet order="17">
-									<vorschreibung>KRGE 17 Anträge ausfertigen (chamois und rosa)</vorschreibung>
-									<abschlussdatum>2007-03-22</abschlussdatum>
-								</aktivitaet>
-								<aktivitaet order="18">
-									<vorschreibung>KRGE 18 Session des Kantonsrates (erste Lesung / Gesamtabstimmung)</vorschreibung>
-									<abschlussdatum>2007-05-04</abschlussdatum>
-								</aktivitaet>
-								<aktivitaet order="19">
-									<vorschreibung>KRGE 19 Anträge ausfertigen (grau)</vorschreibung>
-									<abschlussdatum>2007-05-04</abschlussdatum>
-								</aktivitaet>
-								<aktivitaet order="20">
-									<vorschreibung>KRGE 20 Ergebnis erster Lesung ausfertigen </vorschreibung>
-									<abschlussdatum>2007-05-04</abschlussdatum>
-								</aktivitaet>
-								<aktivitaet order="26">
-									<vorschreibung>KRGE 26 Session des Kantonsrates (zweite Lesung / Schlussabstimmung / Gesamtabstimmung)</vorschreibung>
-								</aktivitaet>
-								<aktivitaet order="27">
-									<vorschreibung>KRGE 27 Anträge ausfertigen (grau und grün)</vorschreibung>
-								</aktivitaet>
-								<aktivitaet order="28">
-									<vorschreibung>KRGE 28 Sitzung der Regierung (Vollzugsbeschluss)</vorschreibung>
-								</aktivitaet>
-								<aktivitaet order="29">
-									<vorschreibung>KRGE 29 Veröffentlichung der Referendumsvorlage</vorschreibung>
-								</aktivitaet>
-								<aktivitaet order="30">
-									<vorschreibung>KRGE 30 Regierungsgeschäft vorbereiten</vorschreibung>
-								</aktivitaet>
-								<aktivitaet order="31">
-									<vorschreibung>KRGE 31 Sitzung der Regierung (ReVoBe)</vorschreibung>
-								</aktivitaet>
-								<aktivitaet order="32">
-									<vorschreibung>KRGE 32 In der Gesetzessammlung veröffentlichen</vorschreibung>
-								</aktivitaet>
-							</vorgang>
-							<dokument id="_FqL1wDhvEeKLm53bgNs7IQ">
-								<titel>Botschaft und Entwurf der Regierung vom 13. Februar 2007</titel>
-								<autor>Regierungsrat</autor>
-								<erscheinungsform>digital</erscheinungsform>
-								<dokumenttyp>PDF-Dokument</dokumenttyp>
-								<registrierdatum>
-									<datum>2007-02-15</datum>
-								</registrierdatum>
-								<klassifizierungskategorie>nicht klassifiziert</klassifizierungskategorie>
-								<datenschutz>false</datenschutz>
-								<oeffentlichkeitsstatus>öffentlich</oeffentlichkeitsstatus>
-								<dateiRef>_Q8qN1jfmEeKLm53bgNs7IQ</dateiRef>
-							</dokument>
-							<dokument id="_GnzUkDhvEeKLm53bgNs7IQ">
-								<titel>Aktuelle Mitgliederliste</titel>
-								<autor>Sekretariat</autor>
-								<erscheinungsform>digital</erscheinungsform>
-								<dokumenttyp>PDF-Dokument</dokumenttyp>
-								<registrierdatum>
-									<datum>2007-02-20</datum>
-								</registrierdatum>
-								<klassifizierungskategorie>nicht klassifiziert</klassifizierungskategorie>
-								<oeffentlichkeitsstatus>öffentlich</oeffentlichkeitsstatus>
-								<dateiRef>_Q76m-TfmEeKLm53bgNs7IQ</dateiRef>
-							</dokument>
-							<dokument id="_H_hVcDhvEeKLm53bgNs7IQ">
-								<titel>Anträge der vorberatenden Kommission vom 12. März 2007</titel>
-								<autor>Kommission</autor>
-								<erscheinungsform>digital</erscheinungsform>
-								<dokumenttyp>PDF-Dokument</dokumenttyp>
-								<registrierdatum>
-									<datum>2007-03-22</datum>
-								</registrierdatum>
-								<klassifizierungskategorie>nicht klassifiziert</klassifizierungskategorie>
-								<oeffentlichkeitsstatus>öffentlich</oeffentlichkeitsstatus>
-								<dateiRef>_Q_CzcDfmEeKLm53bgNs7IQ</dateiRef>
-							</dokument>
-							<dokument id="_H_hVcThvEeKLm53bgNs7IQ">
-								<titel>Ergebnis der 1. Lesung des Kantonsrates vom 24. April 2007</titel>
-								<erscheinungsform>digital</erscheinungsform>
-								<dokumenttyp>PDF-Dokument</dokumenttyp>
-								<registrierdatum>
-									<datum>2007-05-04</datum>
-								</registrierdatum>
-								<klassifizierungskategorie>nicht klassifiziert</klassifizierungskategorie>
-								<oeffentlichkeitsstatus>öffentlich</oeffentlichkeitsstatus>
-								<dateiRef>_Q7nsADfmEeKLm53bgNs7IQ</dateiRef>
-							</dokument>
-							<dokument id="_H_hVcjhvEeKLm53bgNs7IQ">
-								<titel>Antrag SP-Fraktion zu Art. 36ter vom 23. April 2007</titel>
-								<autor>SP-Fraktion</autor>
-								<erscheinungsform>digital</erscheinungsform>
-								<dokumenttyp>PDF-Dokument</dokumenttyp>
-								<registrierdatum>
-									<datum>2007-04-25</datum>
-								</registrierdatum>
-								<klassifizierungskategorie>nicht klassifiziert</klassifizierungskategorie>
-								<oeffentlichkeitsstatus>öffentlich</oeffentlichkeitsstatus>
-								<dateiRef>_Q9svqTfmEeKLm53bgNs7IQ</dateiRef>
-							</dokument>
-							<dokument id="_H_hVczhvEeKLm53bgNs7IQ">
-								<titel>Antrag Denoth-St.Gallen vom 23. April 2007</titel>
-								<autor>Denoth</autor>
-								<erscheinungsform>digital</erscheinungsform>
-								<dokumenttyp>PDF-Dokument</dokumenttyp>
-								<registrierdatum>
-									<ca>true</ca>
-									<datum>2007-04-25</datum>
-								</registrierdatum>
-								<klassifizierungskategorie>nicht klassifiziert</klassifizierungskategorie>
-								<oeffentlichkeitsstatus>öffentlich</oeffentlichkeitsstatus>
-								<dateiRef>_Q8XS4DfmEeKLm53bgNs7IQ</dateiRef>
-							</dokument>
-							<dokument id="_j59AADhvEeKLm53bgNs7IQ">
-								<titel>Antrag Frei-Diepoldsau zu Art. 36ter vom 23. April 2007</titel>
-								<autor>Frei</autor>
-								<erscheinungsform>digital</erscheinungsform>
-								<dokumenttyp>PDF-Dokument</dokumenttyp>
-								<registrierdatum>
-									<datum>2007-04-25</datum>
-								</registrierdatum>
-								<klassifizierungskategorie>nicht klassifiziert</klassifizierungskategorie>
-								<oeffentlichkeitsstatus>öffentlich</oeffentlichkeitsstatus>
-								<dateiRef>_Q-TMmTfmEeKLm53bgNs7IQ</dateiRef>
-							</dokument>
-						</dossier>
-					</ordnungssystemposition>
-				</ordnungssystemposition>
+			</ordnungssystemposition>
+			<ordnungssystemposition id="_VpBZ0DfnEeKLm53bgNs7IQ">
+				<nummer>83</nummer>
+				<titel>Finanzhaushalt des Staates</titel>
+			</ordnungssystemposition>
+			<ordnungssystemposition id="_cuUBgDfnEeKLm53bgNs7IQ">
+				<nummer>833</nummer>
+				<titel>Finanzausgleich</titel>
+				<dossier id="_f3jqYDfnEeKLm53bgNs7IQ">
+					<titel>Gesetz über die Umsetzung der Neugestaltung des Finanzausgleichs und der Aufgabenteilung zwischen Bund und Kantonen</titel>
+					<erscheinungsform>digital</erscheinungsform>
+					<federfuehrendeOrganisationseinheit>Finanzdepartement</federfuehrendeOrganisationseinheit>
+					<entstehungszeitraum>
+						<von>
+							<datum>2007-02-07</datum>
+						</von>
+						<bis>
+							<datum>2007-09-23</datum>
+						</bis>
+					</entstehungszeitraum>
+					<datenschutz>false</datenschutz>
+					<aktenzeichen>22.07.01</aktenzeichen>
+					<eroeffnungsdatum>
+						<datum>2007-02-07</datum>
+					</eroeffnungsdatum>
+					<abschlussdatum>
+						<datum>2007-09-23</datum>
+					</abschlussdatum>
+					<vorgang>
+						<titel>Geschäft eröffnen</titel>
+						<aktivitaet order="1">
+							<vorschreibung>KRGE 1 KR-Geschäft anmelden</vorschreibung>
+							<abschlussdatum>2007-02-08</abschlussdatum>
+						</aktivitaet>
+						<aktivitaet order="2">
+							<vorschreibung>KRGE 2 Sitzung der Regierung (Nulllesung)</vorschreibung>
+							<abschlussdatum>2007-02-13</abschlussdatum>
+						</aktivitaet>
+						<aktivitaet order="3">
+							<vorschreibung>KRGE 3 Nachbereitung der Regierungssitzung</vorschreibung>
+							<abschlussdatum>2007-02-14</abschlussdatum>
+						</aktivitaet>
+						<aktivitaet order="9">
+							<vorschreibung>KRGE 9 Botschaft und Entwurf ausfertigen</vorschreibung>
+							<abschlussdatum>2007-02-15</abschlussdatum>
+						</aktivitaet>
+						<aktivitaet order="10">
+							<vorschreibung>KRGE 10 Session des Kantonsrates (Kommissionsbestellung)</vorschreibung>
+							<abschlussdatum>2007-02-26</abschlussdatum>
+						</aktivitaet>
+						<aktivitaet order="11">
+							<vorschreibung>KRGE 11 Nachbereitung Kommissionsbestellung</vorschreibung>
+							<abschlussdatum>2007-02-26</abschlussdatum>
+						</aktivitaet>
+						<aktivitaet order="12">
+							<vorschreibung>KRGE 12 Vorbereitung der Sitzung der vorberatenden Kommission</vorschreibung>
+							<abschlussdatum>2007-02-27</abschlussdatum>
+						</aktivitaet>
+						<aktivitaet order="13">
+							<vorschreibung>KRGE 13 Sitzung der vorberatenden Kommission (erste Lesung)</vorschreibung>
+							<abschlussdatum>2007-03-16</abschlussdatum>
+						</aktivitaet>
+						<aktivitaet order="14">
+							<vorschreibung>KRGE 14 Nachbereitung der Sitzung der vorberatenden Kommission (erste Lesung)</vorschreibung>
+							<abschlussdatum>2007-03-16</abschlussdatum>
+						</aktivitaet>
+						<aktivitaet order="15">
+							<vorschreibung>KRGE 15 KR-Geschäft anmelden</vorschreibung>
+							<abschlussdatum>2007-03-16</abschlussdatum>
+						</aktivitaet>
+						<aktivitaet order="16">
+							<vorschreibung>KRGE 16 Sitzung der Regierung (Antrag)</vorschreibung>
+							<abschlussdatum>2007-03-20</abschlussdatum>
+						</aktivitaet>
+						<aktivitaet order="17">
+							<vorschreibung>KRGE 17 Anträge ausfertigen (chamois und rosa)</vorschreibung>
+							<abschlussdatum>2007-03-22</abschlussdatum>
+						</aktivitaet>
+						<aktivitaet order="18">
+							<vorschreibung>KRGE 18 Session des Kantonsrates (erste Lesung / Gesamtabstimmung)</vorschreibung>
+							<abschlussdatum>2007-05-04</abschlussdatum>
+						</aktivitaet>
+						<aktivitaet order="19">
+							<vorschreibung>KRGE 19 Anträge ausfertigen (grau)</vorschreibung>
+							<abschlussdatum>2007-05-04</abschlussdatum>
+						</aktivitaet>
+						<aktivitaet order="20">
+							<vorschreibung>KRGE 20 Ergebnis erster Lesung ausfertigen </vorschreibung>
+							<abschlussdatum>2007-05-04</abschlussdatum>
+						</aktivitaet>
+						<aktivitaet order="26">
+							<vorschreibung>KRGE 26 Session des Kantonsrates (zweite Lesung / Schlussabstimmung / Gesamtabstimmung)</vorschreibung>
+						</aktivitaet>
+						<aktivitaet order="27">
+							<vorschreibung>KRGE 27 Anträge ausfertigen (grau und grün)</vorschreibung>
+						</aktivitaet>
+						<aktivitaet order="28">
+							<vorschreibung>KRGE 28 Sitzung der Regierung (Vollzugsbeschluss)</vorschreibung>
+						</aktivitaet>
+						<aktivitaet order="29">
+							<vorschreibung>KRGE 29 Veröffentlichung der Referendumsvorlage</vorschreibung>
+						</aktivitaet>
+						<aktivitaet order="30">
+							<vorschreibung>KRGE 30 Regierungsgeschäft vorbereiten</vorschreibung>
+						</aktivitaet>
+						<aktivitaet order="31">
+							<vorschreibung>KRGE 31 Sitzung der Regierung (ReVoBe)</vorschreibung>
+						</aktivitaet>
+						<aktivitaet order="32">
+							<vorschreibung>KRGE 32 In der Gesetzessammlung veröffentlichen</vorschreibung>
+						</aktivitaet>
+					</vorgang>
+					<dokument id="_FqL1wDhvEeKLm53bgNs7IQ">
+						<titel>Botschaft und Entwurf der Regierung vom 13. Februar 2007</titel>
+						<autor>Regierungsrat</autor>
+						<erscheinungsform>digital</erscheinungsform>
+						<dokumenttyp>PDF-Dokument</dokumenttyp>
+						<registrierdatum>
+							<datum>2007-02-15</datum>
+						</registrierdatum>
+						<klassifizierungskategorie>nicht klassifiziert</klassifizierungskategorie>
+						<datenschutz>false</datenschutz>
+						<oeffentlichkeitsstatus>öffentlich</oeffentlichkeitsstatus>
+						<dateiRef>_Q8qN1jfmEeKLm53bgNs7IQ</dateiRef>
+					</dokument>
+					<dokument id="_GnzUkDhvEeKLm53bgNs7IQ">
+						<titel>Aktuelle Mitgliederliste</titel>
+						<autor>Sekretariat</autor>
+						<erscheinungsform>digital</erscheinungsform>
+						<dokumenttyp>PDF-Dokument</dokumenttyp>
+						<registrierdatum>
+							<datum>2007-02-20</datum>
+						</registrierdatum>
+						<klassifizierungskategorie>nicht klassifiziert</klassifizierungskategorie>
+						<oeffentlichkeitsstatus>öffentlich</oeffentlichkeitsstatus>
+						<dateiRef>_Q76m-TfmEeKLm53bgNs7IQ</dateiRef>
+					</dokument>
+					<dokument id="_H_hVcDhvEeKLm53bgNs7IQ">
+						<titel>Anträge der vorberatenden Kommission vom 12. März 2007</titel>
+						<autor>Kommission</autor>
+						<erscheinungsform>digital</erscheinungsform>
+						<dokumenttyp>PDF-Dokument</dokumenttyp>
+						<registrierdatum>
+							<datum>2007-03-22</datum>
+						</registrierdatum>
+						<klassifizierungskategorie>nicht klassifiziert</klassifizierungskategorie>
+						<oeffentlichkeitsstatus>öffentlich</oeffentlichkeitsstatus>
+						<dateiRef>_Q_CzcDfmEeKLm53bgNs7IQ</dateiRef>
+					</dokument>
+					<dokument id="_H_hVcThvEeKLm53bgNs7IQ">
+						<titel>Ergebnis der 1. Lesung des Kantonsrates vom 24. April 2007</titel>
+						<erscheinungsform>digital</erscheinungsform>
+						<dokumenttyp>PDF-Dokument</dokumenttyp>
+						<registrierdatum>
+							<datum>2007-05-04</datum>
+						</registrierdatum>
+						<klassifizierungskategorie>nicht klassifiziert</klassifizierungskategorie>
+						<oeffentlichkeitsstatus>öffentlich</oeffentlichkeitsstatus>
+						<dateiRef>_Q7nsADfmEeKLm53bgNs7IQ</dateiRef>
+					</dokument>
+					<dokument id="_H_hVcjhvEeKLm53bgNs7IQ">
+						<titel>Antrag SP-Fraktion zu Art. 36ter vom 23. April 2007</titel>
+						<autor>SP-Fraktion</autor>
+						<erscheinungsform>digital</erscheinungsform>
+						<dokumenttyp>PDF-Dokument</dokumenttyp>
+						<registrierdatum>
+							<datum>2007-04-25</datum>
+						</registrierdatum>
+						<klassifizierungskategorie>nicht klassifiziert</klassifizierungskategorie>
+						<oeffentlichkeitsstatus>öffentlich</oeffentlichkeitsstatus>
+						<dateiRef>_Q9svqTfmEeKLm53bgNs7IQ</dateiRef>
+					</dokument>
+					<dokument id="_H_hVczhvEeKLm53bgNs7IQ">
+						<titel>Antrag Denoth-St.Gallen vom 23. April 2007</titel>
+						<autor>Denoth</autor>
+						<erscheinungsform>digital</erscheinungsform>
+						<dokumenttyp>PDF-Dokument</dokumenttyp>
+						<registrierdatum>
+							<ca>true</ca>
+							<datum>2007-04-25</datum>
+						</registrierdatum>
+						<klassifizierungskategorie>nicht klassifiziert</klassifizierungskategorie>
+						<oeffentlichkeitsstatus>öffentlich</oeffentlichkeitsstatus>
+						<dateiRef>_Q8XS4DfmEeKLm53bgNs7IQ</dateiRef>
+					</dokument>
+					<dokument id="_j59AADhvEeKLm53bgNs7IQ">
+						<titel>Antrag Frei-Diepoldsau zu Art. 36ter vom 23. April 2007</titel>
+						<autor>Frei</autor>
+						<erscheinungsform>digital</erscheinungsform>
+						<dokumenttyp>PDF-Dokument</dokumenttyp>
+						<registrierdatum>
+							<datum>2007-04-25</datum>
+						</registrierdatum>
+						<klassifizierungskategorie>nicht klassifiziert</klassifizierungskategorie>
+						<oeffentlichkeitsstatus>öffentlich</oeffentlichkeitsstatus>
+						<dateiRef>_Q-TMmTfmEeKLm53bgNs7IQ</dateiRef>
+					</dokument>
+				</dossier>
 			</ordnungssystemposition>
 		</ordnungssystem>
 	</ablieferung>
