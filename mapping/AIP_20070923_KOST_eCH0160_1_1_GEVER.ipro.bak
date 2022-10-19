@@ -1,0 +1,926 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<project lastsavedate="2022-10-19T16:27:13.351+02:00" nextid="0" widgetcounter="137">
+    <name value="AIP_20070923_KOST_eCH0160_1_1_GEVER"/>
+    <type value="DIMAG"/>
+    <inputfile value="M:\Code\ingest-poc\mapping\AIP_20070923_KOST_eCH0160_1_1_GEVER.iprf"/>
+    <components/>
+    <widgets/>
+    <connections/>
+    <afisdescription>
+        <afisPrefix>
+            <prefix></prefix>
+            <title></title>
+            <maxVE>0</maxVE>
+            <maxMinuteDelete>0</maxMinuteDelete>
+        </afisPrefix>
+        <forms>
+            <form>
+                <formId>DIMAG_F</formId>
+                <type>F</type>
+                <label>DIMAG F</label>
+                <fields>
+                    <field>
+                        <xmltag>aenderungs-datum</xmltag>
+                        <name>Geändert am</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Datum und Uhrzeit der letzten Änderung in DIMAG</hint>
+                    </field>
+                    <field>
+                        <xmltag>aenderungs-datum-datei</xmltag>
+                        <name>Letzte Dateiänderung (abg. Stelle)</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Datum der letzten Änderung laut Dateisystem der abgebenden Stelle.</hint>
+                    </field>
+                    <field>
+                        <xmltag>aid</xmltag>
+                        <name>Archival ID (AID)</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Eindeutige Identifikationsnummer des Objekts. </hint>
+                    </field>
+                    <field>
+                        <xmltag>alternate-id</xmltag>
+                        <name>Alternate ID</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Hier kann ein weiterer Identifier hinterlegt werden.</hint>
+                    </field>
+                    <field>
+                        <xmltag>anzahl-datensaetze</xmltag>
+                        <name>Anzahl Datensätze (Zeilen)</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Anzahl der Datensätze/Zeilen/Records (bei Tabellen, ohne Spaltenkopf).</hint>
+                        <regexpr>/[^0-9]/</regexpr>
+                    </field>
+                    <field>
+                        <xmltag>anzahl-felder</xmltag>
+                        <name>Anzahl Felder (Spalten)</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Anzahl der Felder/Spalten/Variablen (bei Tabellen).</hint>
+                        <regexpr>/[^0-9]/</regexpr>
+                    </field>
+                    <field>
+                        <xmltag>beschreibung-inhalt</xmltag>
+                        <name>Beschreibung</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Ausführliche Beschreibung des Inhalts (z.B. Enthält/Darin-Vermerke, Altsignaturen, ...)</hint>
+                    </field>
+                    <field>
+                        <xmltag>datei-format</xmltag>
+                        <name>MIME-Type (jhove)</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options>
+                            <option>txt|text/plain</option>
+                            <option>text/csv</option>
+                            <option>application/pdf</option>
+                            <option>application/msword</option>
+                            <option>text/xml</option>
+                            <option>image/tiff</option>
+                            <option>image/gif</option>
+                            <option>image/jpeg</option>
+                        </options>
+                        <hint>Formatname (MIME-Nomenklatur), identifiziert mit JHOVE</hint>
+                    </field>
+                    <field>
+                        <xmltag>datei-groesse-in-byte</xmltag>
+                        <name>Dateigröße in Bytes</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Größe der Datei in Bytes</hint>
+                    </field>
+                    <field>
+                        <xmltag>dateiname</xmltag>
+                        <name>Ursprünglicher Dateiname</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>true</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Dateiname (ohne Pfad) vor dem Einstellen in DIMAG</hint>
+                    </field>
+                    <field>
+                        <xmltag>daten-format</xmltag>
+                        <name>Zeichenformat (jhove)</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options>
+                            <option>ASCII</option>
+                            <option>EBCDIC</option>
+                            <option>UTF-8</option>
+                            <option>Latin-1</option>
+                        </options>
+                        <hint>Zeichenformat für Textdateien, identifiziert mit JHOVE.</hint>
+                    </field>
+                    <field>
+                        <xmltag>ersteller</xmltag>
+                        <name>Angelegt von</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Benutzername des Erstellers in DIMAG</hint>
+                    </field>
+                    <field>
+                        <xmltag>erstellungs-datum</xmltag>
+                        <name>Angelegt am</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Datum und Uhrzeit der Erstellung in DIMAG</hint>
+                    </field>
+                    <field>
+                        <xmltag>filepath</xmltag>
+                        <name>Relativer Dateipfad</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Dateipfad (ohne Dateiname), relativ zum Quellverzeichnis des Übernahmepakets, vor dem Einstellen in DIMAG</hint>
+                    </field>
+                    <field>
+                        <xmltag>format-version</xmltag>
+                        <name>Format-Version (jhove)</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Bezeichnung der Version des Dateiformates, identifiziert mit JHOVE.</hint>
+                    </field>
+                    <field>
+                        <xmltag>geaendert-durch</xmltag>
+                        <name>Geändert von</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Benutzername der letzten Änderung in DIMAG</hint>
+                    </field>
+                    <field>
+                        <xmltag>jhoveformat</xmltag>
+                        <name>Format (jhove)</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Formatname, identifiziert mit JHOVE</hint>
+                    </field>
+                    <field>
+                        <xmltag>kompression</xmltag>
+                        <name>Kompression (jhove)</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Kompressionsalgorithmus (bei Bilddaten), identifiziert mit JHOVE.</hint>
+                    </field>
+                    <field>
+                        <xmltag>md5</xmltag>
+                        <name>MD5-Wert der Datei</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Prüfsumme (MD5-Algorithmus)</hint>
+                    </field>
+                    <field>
+                        <xmltag>metadaten-version</xmltag>
+                        <name>XML-Version</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Stand des für die Anlage des Objekts verwendeten XML-Schemas</hint>
+                    </field>
+                    <field>
+                        <xmltag>pid</xmltag>
+                        <name>Parent ID (PID)</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>AID des darüberliegenden Objekts.</hint>
+                    </field>
+                    <field>
+                        <xmltag>pronom-classification</xmltag>
+                        <name>Pronom-Klassifikation</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Grad der Zuverlässigkeit der Pronom-Einstufung: positive | tentative.</hint>
+                    </field>
+                    <field>
+                        <xmltag>pronom-mime</xmltag>
+                        <name>MIME-Type (Pronom)</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Formatname (MIME-Nomenklatur), identifiziert mit PRONOM/Droid. Ohne Klammern, wenn eindeutig identifiziert. Mehrere Einträge möglich.</hint>
+                    </field>
+                    <field>
+                        <xmltag>pronom-signature</xmltag>
+                        <name>Pronom-Signature</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Name des zur Charakterisierung verwendeten Signature-Files von PRONOM</hint>
+                    </field>
+                    <field>
+                        <xmltag>puid</xmltag>
+                        <name>Pronom Persistent ID</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Formatkennung (PUID), identifiziert mit PRONOM/Droid. Ohne Klammern, wenn eindeutig identifiziert. Mehrere Einträge möglich.</hint>
+                    </field>
+                    <field>
+                        <xmltag>puidformat</xmltag>
+                        <name>Format (Pronom)</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Formatname, identifiziert mit PRONOM/Droid. Ohne Klammern, wenn eindeutig identifiziert. Mehrere Einträge möglich.</hint>
+                    </field>
+                    <field>
+                        <xmltag>quirks</xmltag>
+                        <name>Eigenheiten</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Inhaltliche oder technische Unzulänglichkeiten, die auf Eigenschaften der Ausgangsobjekte zurückgehen. (englisch: Quirks)</hint>
+                    </field>
+                    <field>
+                        <xmltag>scandatum</xmltag>
+                        <name>Scandatum</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Zeitangabe, wann der Scan erfolgte (bei Bilddaten).</hint>
+                    </field>
+                    <field>
+                        <xmltag>signatur</xmltag>
+                        <name>Signatur</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Aktuelle Archivsignatur (dynamisch aus „Signaturanteil“ der übergeordneten und des aktuellen Elements gebildet).</hint>
+                    </field>
+                    <field>
+                        <xmltag>status-code</xmltag>
+                        <name>Statuscode</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options>
+                            <option>10</option>
+                            <option>20</option>
+                            <option>30</option>
+                            <option>40</option>
+                            <option>50</option>
+                        </options>
+                        <hint>Zustand des Objekts</hint>
+                    </field>
+                    <field>
+                        <xmltag>titel</xmltag>
+                        <name>Titel</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>true</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Bezeichnung des Inhalts. Bei Repräsentationsobjekten die Erscheinungsform des Inhalts. Das Titelfeld ist für Objekte des Typs F, D und X nicht verpflichtend, Default ist der Dateiname.</hint>
+                    </field>
+                    <field>
+                        <xmltag>typ</xmltag>
+                        <name>Objekttyp</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Art des Objekts (Struktur, Informationsobjekt, Repräsentation, Datei)</hint>
+                    </field>
+                </fields>
+            </form>
+            <form>
+                <formId>DIMAG_R</formId>
+                <type>R</type>
+                <label>DIMAG R</label>
+                <fields>
+                    <field>
+                        <xmltag>aenderungs-datum</xmltag>
+                        <name>Geändert am</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Datum und Uhrzeit der letzten Änderung in DIMAG</hint>
+                    </field>
+                    <field>
+                        <xmltag>aid</xmltag>
+                        <name>Archival ID (AID)</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Eindeutige Identifikationsnummer des Objekts. </hint>
+                    </field>
+                    <field>
+                        <xmltag>aid-inventar-liste</xmltag>
+                        <name>Inventar Liste</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Liste der aIDs aller hierarchisch untergeordneten Elemente</hint>
+                    </field>
+                    <field>
+                        <xmltag>alternate-id</xmltag>
+                        <name>Alternate ID</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Hier kann ein weiterer Identifier hinterlegt werden.</hint>
+                    </field>
+                    <field>
+                        <xmltag>basis-repraesentation</xmltag>
+                        <name>Basis-Repräsentation</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Signaturbestandteil der Repräsentation, die Basis für diese Repräsentation war.</hint>
+                    </field>
+                    <field>
+                        <xmltag>beschreibung-inhalt</xmltag>
+                        <name>Beschreibung</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Ausführliche Beschreibung des Inhalts (z.B. Enthält/Darin-Vermerke, Altsignaturen, ...)</hint>
+                    </field>
+                    <field>
+                        <xmltag>erhaltung-aus-archivsicht</xmltag>
+                        <name>Erhaltungswürdigkeit aus Archivsicht</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Dient dazu, nicht erhaltungswürdige Repräsentationen zu kennzeichnen, da als grundsätzliche Annahme gilt, dass die jeweils aktuellste Repräsentation zu erhalten ist.</hint>
+                    </field>
+                    <field>
+                        <xmltag>ersteller</xmltag>
+                        <name>Angelegt von</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Benutzername des Erstellers in DIMAG</hint>
+                    </field>
+                    <field>
+                        <xmltag>erstellungs-datum</xmltag>
+                        <name>Angelegt am</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Datum und Uhrzeit der Erstellung in DIMAG</hint>
+                    </field>
+                    <field>
+                        <xmltag>geaendert-durch</xmltag>
+                        <name>Geändert von</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Benutzername der letzten Änderung in DIMAG</hint>
+                    </field>
+                    <field>
+                        <xmltag>hardware-umgebung</xmltag>
+                        <name>Hardware-Umgebung</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Hardware, mit der diese Repräsentation erzeugt wurde</hint>
+                    </field>
+                    <field>
+                        <xmltag>installations-erfordernisse</xmltag>
+                        <name>Installations-Erfordernisse</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Notwendige Installationen von Software zur Nutzung des Archivale</hint>
+                    </field>
+                    <field>
+                        <xmltag>metadaten-version</xmltag>
+                        <name>XML-Version</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Stand des für die Anlage des Objekts verwendeten XML-Schemas</hint>
+                    </field>
+                    <field>
+                        <xmltag>orderby</xmltag>
+                        <name>Ordnungsmerkmal</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Übernahme eines Sortiermerkmals aus dem AFIS. Ermöglicht die gleiche Darstellungsreihenfolge wie im AFIS.</hint>
+                    </field>
+                    <field>
+                        <xmltag>pid</xmltag>
+                        <name>Parent ID (PID)</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>AID des darüberliegenden Objekts.</hint>
+                    </field>
+                    <field>
+                        <xmltag>quirks</xmltag>
+                        <name>Eigenheiten</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Inhaltliche oder technische Unzulänglichkeiten, die auf Eigenschaften der Ausgangsobjekte zurückgehen. (englisch: Quirks)</hint>
+                    </field>
+                    <field>
+                        <xmltag>signatur</xmltag>
+                        <name>Signatur</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Aktuelle Archivsignatur (dynamisch aus „Signaturanteil“ der übergeordneten und des aktuellen Elements gebildet).</hint>
+                    </field>
+                    <field>
+                        <xmltag>signatur-anteil</xmltag>
+                        <name>Signaturanteil</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Anteil des aktuellen Elements an der Archivsignatur.</hint>
+                    </field>
+                    <field>
+                        <xmltag>software-umgebung</xmltag>
+                        <name>Software-Umgebung</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Software, mit der diese Repräsentation erzeugt wurde</hint>
+                    </field>
+                    <field>
+                        <xmltag>status-code</xmltag>
+                        <name>Statuscode</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options>
+                            <option>10</option>
+                            <option>20</option>
+                            <option>30</option>
+                            <option>40</option>
+                            <option>50</option>
+                        </options>
+                        <hint>Zustand des Objekts</hint>
+                    </field>
+                    <field>
+                        <xmltag>struktur</xmltag>
+                        <name>Aufbau der Repräsentation</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Angabe der Bestandteile und der funktionalen Zusammenhänge einer Repräsentation</hint>
+                    </field>
+                    <field>
+                        <xmltag>titel</xmltag>
+                        <name>Titel</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>true</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Bezeichnung des Inhalts. Bei Repräsentationsobjekten die Erscheinungsform des Inhalts. Das Titelfeld ist für Objekte des Typs F, D und X nicht verpflichtend, Default ist der Dateiname.</hint>
+                    </field>
+                    <field>
+                        <xmltag>typ</xmltag>
+                        <name>Objekttyp</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Art des Objekts (Struktur, Informationsobjekt, Repräsentation, Datei)</hint>
+                    </field>
+                </fields>
+            </form>
+            <form>
+                <formId>DIMAG_O</formId>
+                <type>O</type>
+                <label>DIMAG IO</label>
+                <fields>
+                    <field>
+                        <xmltag>abgebende-stelle</xmltag>
+                        <name>Abgebende Stelle</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Stelle, von der die Unterlagen übernommen wurden (sofern abweichend von Provenienz).</hint>
+                    </field>
+                    <field>
+                        <xmltag>abweichend-dokumentierter-zeitraum</xmltag>
+                        <name>abweichend dokumentierter Zeitraum</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Zeitraum, der in dem Informationsobjekt abgebildet wird.</hint>
+                    </field>
+                    <field>
+                        <xmltag>aenderungs-datum</xmltag>
+                        <name>Geändert am</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Datum und Uhrzeit der letzten Änderung in DIMAG</hint>
+                    </field>
+                    <field>
+                        <xmltag>aid</xmltag>
+                        <name>Archival ID (AID)</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Eindeutige Identifikationsnummer des Objekts. </hint>
+                    </field>
+                    <field>
+                        <xmltag>aid-inventar-liste</xmltag>
+                        <name>Inventar Liste</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Liste der aIDs aller hierarchisch untergeordneten Elemente</hint>
+                    </field>
+                    <field>
+                        <xmltag>aid-inventar-liste-manuell</xmltag>
+                        <name>Referenzen DIMAG-intern</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Händisch erstellte Liste von semikolongetrennten AIDs von zu Erhaltungszwecken verknüpften Objekten in der DIMAG-Installation.</hint>
+                    </field>
+                    <field>
+                        <xmltag>aid-protokoll</xmltag>
+                        <name>Protokoll ID</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>AID des Protokollobjekts (obsolet)</hint>
+                    </field>
+                    <field>
+                        <xmltag>alternate-id</xmltag>
+                        <name>Alternate ID</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Hier kann ein weiterer Identifier hinterlegt werden.</hint>
+                    </field>
+                    <field>
+                        <xmltag>archivalien-typ</xmltag>
+                        <name>Archivaliengattung</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Zur Zuordnung von Verzeichnungsmodellen bzw. Erschließungsmasken bei der Weitergabe aus DIMAG an ein angebundenes AFIS.</hint>
+                        <defaultvalue>Sachakte</defaultvalue>
+                        <regexpr>Sachakte;Amtsbuch;Prüfungsarbeit;Fallakte (allgemein);Steuerakte;Strafprozessakte;Zivilprozessakte;Patientenakte;Häftlingsakte;Urkunde;Karte/Plan;Bild/Foto;Plakat</regexpr>
+                    </field>
+                    <field>
+                        <xmltag>benutzungs-hinweise</xmltag>
+                        <name>Benutzungshinweise</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Hinweise zu Einschränkungen bei der Nutzung nach Archivrecht</hint>
+                    </field>
+                    <field>
+                        <xmltag>beschreibung-inhalt</xmltag>
+                        <name>Beschreibung</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Ausführliche Beschreibung des Inhalts (z.B. Enthält/Darin-Vermerke, Altsignaturen, ...)</hint>
+                    </field>
+                    <field>
+                        <xmltag>entstehungs-zeitraum</xmltag>
+                        <name>Entstehungszeitraum</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>true</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Zeitraum, in dem das Informationsobjekt bei der Ursprungsstelle entstanden ist.</hint>
+                    </field>
+                    <field>
+                        <xmltag>ersteller</xmltag>
+                        <name>Angelegt von</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Benutzername des Erstellers in DIMAG</hint>
+                    </field>
+                    <field>
+                        <xmltag>erstellungs-datum</xmltag>
+                        <name>Angelegt am</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Datum und Uhrzeit der Erstellung in DIMAG</hint>
+                    </field>
+                    <field>
+                        <xmltag>geaendert-durch</xmltag>
+                        <name>Geändert von</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Benutzername der letzten Änderung in DIMAG</hint>
+                    </field>
+                    <field>
+                        <xmltag>metadaten-version</xmltag>
+                        <name>XML-Version</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Stand des für die Anlage des Objekts verwendeten XML-Schemas</hint>
+                    </field>
+                    <field>
+                        <xmltag>orderby</xmltag>
+                        <name>Ordnungsmerkmal</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Übernahme eines Sortiermerkmals aus dem AFIS. Ermöglicht die gleiche Darstellungsreihenfolge wie im AFIS.</hint>
+                    </field>
+                    <field>
+                        <xmltag>pid</xmltag>
+                        <name>Parent ID (PID)</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>AID des darüberliegenden Objekts.</hint>
+                    </field>
+                    <field>
+                        <xmltag>provenienz</xmltag>
+                        <name>Provenienz</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Stelle, an der die Unterlagen überwiegend entstanden sind.</hint>
+                    </field>
+                    <field>
+                        <xmltag>quirks</xmltag>
+                        <name>Eigenheiten</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Inhaltliche oder technische Unzulänglichkeiten, die auf Eigenschaften der Ausgangsobjekte zurückgehen. (englisch: Quirks)</hint>
+                    </field>
+                    <field>
+                        <xmltag>rechte</xmltag>
+                        <name>Rechte</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Hinweise zu weiteren rechtlichen Einschränkungen</hint>
+                    </field>
+                    <field>
+                        <xmltag>referenz-liste-extern</xmltag>
+                        <name>Referenzen DIMAG-extern</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Externe, möglichst eindeutige Referenzen auf zu Erhaltungszwecken verknüpfte Informationen.</hint>
+                    </field>
+                    <field>
+                        <xmltag>signatur</xmltag>
+                        <name>Signatur</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Aktuelle Archivsignatur (dynamisch aus „Signaturanteil“ der übergeordneten und des aktuellen Elements gebildet).</hint>
+                    </field>
+                    <field>
+                        <xmltag>signatur-anteil</xmltag>
+                        <name>Signaturanteil</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Anteil des aktuellen Elements an der Archivsignatur.</hint>
+                    </field>
+                    <field>
+                        <xmltag>signifikante-eigenschaften</xmltag>
+                        <name>Signifikante Eigenschaften</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Eigenschaften, die auch nach Migrationen oder Konversionen oder in Emulatorumgebungen erhalten bleiben sollten.</hint>
+                    </field>
+                    <field>
+                        <xmltag>sperrfrist</xmltag>
+                        <name>Sperrfrist</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Vermerke zur Sperrfrist, z.B. das Jahr, in dem die Sperrfrist endet.</hint>
+                    </field>
+                    <field>
+                        <xmltag>status-code</xmltag>
+                        <name>Statuscode</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options>
+                            <option>10</option>
+                            <option>20</option>
+                            <option>30</option>
+                            <option>40</option>
+                            <option>50</option>
+                        </options>
+                        <hint>Zustand des Objekts</hint>
+                    </field>
+                    <field>
+                        <xmltag>titel</xmltag>
+                        <name>Titel</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>true</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Bezeichnung des Inhalts. Bei Repräsentationsobjekten die Erscheinungsform des Inhalts. Das Titelfeld ist für Objekte des Typs F, D und X nicht verpflichtend, Default ist der Dateiname.</hint>
+                    </field>
+                    <field>
+                        <xmltag>typ</xmltag>
+                        <name>Objekttyp</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Art des Objekts (Struktur, Informationsobjekt, Repräsentation, Datei)</hint>
+                    </field>
+                    <field>
+                        <xmltag>uebernahme</xmltag>
+                        <name>Übernahme</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Zeitpunkt, Beteiligte und Umstände der Übernahme. Abgedeckt durch die Bestandsaufnahme, wenn IngestList verwendet wurde.</hint>
+                    </field>
+                </fields>
+            </form>
+        </forms>
+    </afisdescription>
+</project>
