@@ -5,7 +5,7 @@
 }
 
 .keep-size {
-  max-height: 48px;
+  max-height: 36px;
   margin: 8px;
 }
 
@@ -31,10 +31,17 @@
     width: 100%;
   }
 
-  .tree,
-  .info {
+  .tree {
     display: flex;
     flex-direction: row;
+  }
+
+  h4 {
+    font-weight: 700;
+  }
+
+  .file.active {
+    background: rgba(0,0,0,0.16);
   }
 }
 
@@ -81,4 +88,8 @@
  */
 .file-structure div[role=group]>.mat-tree-node {
   padding-left: 40px;
+}
+
+.hidden {
+  display: none !important;
 }

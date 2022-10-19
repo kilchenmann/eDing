@@ -9,6 +9,7 @@ import {
     ErrorMessage,
     Ordner,
     Ordnungssystemposition,
+    Provenienz,
     SIP
 } from '../../shared';
 
@@ -40,6 +41,12 @@ export class Xml2jsonComponent {
     dok: Dokument | undefined;
 
     dos: Dossier | undefined;
+
+    provenienz: Provenienz | undefined;
+
+    fileName = '';
+
+    hideForm = true;
 
     // data preparation for folder structure in tree view
     treeControl = new NestedTreeControl<Ordner>(node => node.ordner);
@@ -105,6 +112,8 @@ export class Xml2jsonComponent {
                 }
             });
 
+            this.provenienz = this.sip.paket[0].ablieferung[0].provenienz[0];
+
         } else {
             // in case of an error: display the error message
             // const objError = xmlToJSON.parseString(this.form.value['xml'], this.xmlOptions) as XmlError;
@@ -129,10 +138,16 @@ export class Xml2jsonComponent {
         this.dos = undefined;
         this.dok = undefined;
 
+        // start on "ordnungssystemposition" to find dokument or dossier by "datei referenz"
         this._findOsp(this.sip.paket[0].ablieferung[0].ordnungssystem[0].ordnungssystemposition, dateiRef);
+        console.log('ordnungssystem', this.sip.paket[0].ablieferung[0].ordnungssystem[0].name[0]._text);
 
     }
 
+    /**
+     * get xml testdata by folder name, defined in list above
+     * @param name
+     */
     getTestdata(name: string) {
 
         if (name) {
@@ -172,6 +187,7 @@ export class Xml2jsonComponent {
                 if (osp.dossier && osp.dossier.length > 0) {
                     // console.log('search in DOSSIER ...');
                     this._findDos(osp.dossier, dateiRef);
+                    console.log('ordnungssystemposition', osp.titel[0]._text);
                 }
             }
         );
@@ -210,7 +226,6 @@ export class Xml2jsonComponent {
                 if (dok.dateiRef && dok.dateiRef.length) {
                     const index = dok.dateiRef.findIndex(ref => ref._text === dateiRef);
                     if (index > -1) {
-                        console.log('found ref in DOKUMENT', dok);
                         this.dok = dok;
                         return;
                     }

@@ -151,6 +151,8 @@ export interface Paket {
     'paketTyp': PaketTyp;
     'inhaltsverzeichnis': Inhaltsverzeichnis[];
     'ablieferung': Ablieferung[];
+    'nameSIP'?: TextString;
+    'version'?: TextString;
 }
 
 export interface SIP {

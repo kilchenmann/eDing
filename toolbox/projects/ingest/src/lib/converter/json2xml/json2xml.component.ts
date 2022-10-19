@@ -2,7 +2,10 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ErrorMessage, SIP } from '../../shared';
 
-import * as JsonToXML from 'jsontoxml';
+
+// import * as js2xml from 'js2xmlparser';
+
+// import * as jsontoxml from 'jsontoxml';
 // import { Options, Parser } from './json-xml-parser';
 // import { Parser } from 'json-xml-parse/src/index.js'
 
@@ -95,9 +98,9 @@ export class Json2xmlComponent {
         this.converterError = false;
 
         // parse xml and return json
-        this.aip = JsonToXML(this.form.value['json']);
+        // this.aip = js2xml.parse('paket', this.form.value['json']);
 
-        console.log('aip xml', this.aip);
+        // console.log('aip xml', this.aip);
 
 
 

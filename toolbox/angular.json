@@ -31,8 +31,7 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "node_modules/xmltojson/lib/xmlToJSON.min.js",
-              "node_modules/jsontoxml/jsontoxml.js"
+              "node_modules/xmltojson/lib/xmlToJSON.min.js"
             ]
           },
           "configurations": {

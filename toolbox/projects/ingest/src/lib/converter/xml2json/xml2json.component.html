@@ -11,12 +11,17 @@
       </mat-select>
     </mat-form-field>
     <span class="fill-remaining-space"></span>
-    <button mat-flat-button color="accent" (click)="convert()" [disabled]="!form.valid" class="keep-size">
-      Convert XML to JSON
-    </button>
-    <!-- <span class="fill-remaining-space"></span> -->
-    <button mat-stroked-button (click)="form.reset(); converterError=false" class="keep-size">
-      Reset form
+    <span *ngIf="!hideForm">
+      <button mat-flat-button color="accent" (click)="convert()" [disabled]="!form.valid" class="keep-size">
+        Convert XML to JSON
+      </button>
+      <!-- <span class="fill-remaining-space"></span> -->
+      <button mat-stroked-button (click)="form.reset(); converterError=false" class="keep-size">
+        Reset form
+      </button>
+    </span>
+    <button mat-stroked-button (click)="hideForm = !hideForm" class="keep-size">
+      {{ hideForm ? "Show" : "Hide" }} form
     </button>
   </div>
 
@@ -26,7 +31,7 @@
     <p><strong>Fehlermeldung:</strong> {{error.message}}</p>
   </div>
 
-  <div class="form-inputs">
+  <div class="form-inputs" [class.hidden]="hideForm">
     <mat-form-field class="half-width" appearance="fill">
       <mat-label>XML</mat-label>
       <textarea matInput [formControlName]="'xml'" placeholder="Hier den XML Inhalt einfügen..." rows="30" cols="80">
@@ -70,12 +75,13 @@
               <ng-container matTreeNodeOutlet></ng-container>
               <div class="mat-tree-node-file" *ngIf="node.datei && node.datei.length">
                 <div *ngFor="let datei of node.datei">
-                  <button mat-icon-button (click)="getFileMeta(datei._attrid._value)">
+                  <button mat-button (click)="getFileMeta(datei._attrid._value); fileName = datei.name[0]._text"
+                    class="file" [class.active]="fileName === datei.name[0]._text">
                     <!-- [matTooltip]="datei._attrid._value"
                     matTooltipPosition="above" -->
                     <mat-icon fontIcon="description"></mat-icon>
+                    <span>{{datei.name[0]._text}}</span>
                   </button>
-                  <span>{{datei.name[0]._text}}</span>
                 </div>
               </div>
             </div>
@@ -85,21 +91,24 @@
 
       <!-- file or dossier info on the right hand side -->
       <div class="half-width info">
+        <h4 class="mat-subheading-1" *ngIf="dok || dos">
+          Die Datei "{{ fileName }}" ist im
+          {{ dok ? "Dokument" : "Dossier"}} referenziert
+        </h4>
         <div *ngIf="dok">
-          <h4>Die Datei ist im Dokument referenziert</h4>
           <p *ngFor="let item of dok | keyvalue; let last = last;" [class.withSeparator]="!last">
             <strong>{{item.key}}</strong><br>
             <span [innerHtml]="item.value | stringifyValue"></span>
           </p>
         </div>
-
         <div *ngIf="dos">
-          <h4>Die Datei ist im Dossier referenziert</h4>
           <p *ngFor="let item of dos | keyvalue; let last = last;" [class.withSeparator]="!last">
             <strong>{{item.key}}</strong><br>
             <span [innerHtml]="item.value | stringifyValue"></span>
           </p>
         </div>
+
+        <!-- todo: display ordnungssystem und ordnungssystemposition -->
       </div>
     </div>
   </mat-tab>
@@ -107,13 +116,25 @@
   <mat-tab label="Ablieferung" [disabled]="!sip.paket || !sip.paket.length">
     <div class="ablieferung" *ngIf="sip.paket && sip.paket.length">
       <!-- <h4>Ablieferung</h4> -->
-      <p *ngFor="let item of sip.paket[0].ablieferung[0] | keyvalue; let last = last;" [class.withSeparator]="!last">
-        <strong>{{item.key}}</strong><br>
-        <span *ngIf="item.key !== 'provenienz'" [innerHtml]="item.value | stringifyValue"></span>
-        <span *ngIf="item.key === 'provenienz'">
+      <div *ngFor="let item of sip.paket[0].ablieferung[0] | keyvalue; let last = last;">
+        <div [ngSwitch]="item.key">
+          <div *ngSwitchCase="'ordnungssystem'">
+            <!-- do nothing -->
+          </div>
+          <div *ngSwitchCase="'provenienz'" [class.withSeparator]="!last">
+            <strong>{{item.key}}</strong><br>
+            <span *ngFor="let prov of provenienz | keyvalue">
+              &middot; <strong>{{prov.key}}</strong>:
+              <span [innerHtml]="prov.value | stringifyValue"></span><br>
+            </span>
+          </div>
+          <div *ngSwitchDefault [class.withSeparator]="!last">
+            <strong>{{item.key}}</strong><br>
+            <span [innerHtml]="item.value | stringifyValue"></span>
+          </div>
+        </div>
 
-        </span>
-      </p>
+      </div>
     </div>
   </mat-tab>
   <!-- header metadata -->
