@@ -116,10 +116,10 @@ do
         
         type="element"
 
-        if [ "$level" == "per_file" ] || [ "$level" == "per_aip" ]; then
-            type="metadata"
-            val=$name
-        fi
+        # if [ "$level" == "per_file" ] || [ "$level" == "per_aip" ]; then
+        #     type="metadata"
+        #     val=$name
+        # fi
         
         # xml element per project
         echo -e "\t<inputelement>" >> $FILE
@@ -141,23 +141,28 @@ do
         # <filterend>.xml</filterend>
 
         # OR additional in case of metadata per project, per aip or per file:
-        if [ "$level" == "per_file" ]; then
-            echo -e "\t\t<assocValues>" >> $FILE
-            echo -e "\t\t\t<elements/>" >> $FILE
-            echo -e "\t\t</assocValues>" >> $FILE
+        if [ "$level" == "per_file" ] || [ "$level" == "per_aip" ]; then
+            echo -e "\t\t<filterbegin>metadata</filterbegin>" >> $FILE
+            echo -e "\t\t<filtercontains>dossier</filtercontains>" >> $FILE
+            echo -e "\t\t<filterend>.xml</filterend>" >> $FILE
+            
+            
+            # echo -e "\t\t<assocValues>" >> $FILE
+            # echo -e "\t\t\t<elements/>" >> $FILE
+            # echo -e "\t\t</assocValues>" >> $FILE
         fi
 
         # OR additional in case of metadata per aip:
-        if [ "$level" == "per_aip" ]; then
-            echo -e "\t\t<assocValues>" >> $FILE
-            echo -e "\t\t\t<elements>" >> $FILE
-            echo -e "\t\t\t\t<entry>" >> $FILE
-            echo -e "\t\t\t\t\t<key>pathslice</key>" >> $FILE
-            echo -e "\t\t\t\t\t<value>1</value>" >> $FILE
-            echo -e "\t\t\t\t</entry>" >> $FILE
-            echo -e "\t\t\t</elements>" >> $FILE
-            echo -e "\t\t</assocValues>" >> $FILE
-        fi
+        # if [ "$level" == "per_aip" ]; then
+        #     echo -e "\t\t<assocValues>" >> $FILE
+        #     echo -e "\t\t\t<elements>" >> $FILE
+        #     echo -e "\t\t\t\t<entry>" >> $FILE
+        #     echo -e "\t\t\t\t\t<key>pathslice</key>" >> $FILE
+        #     echo -e "\t\t\t\t\t<value>1</value>" >> $FILE
+        #     echo -e "\t\t\t\t</entry>" >> $FILE
+        #     echo -e "\t\t\t</elements>" >> $FILE
+        #     echo -e "\t\t</assocValues>" >> $FILE
+        # fi
 
         echo -e "\t</inputelement>" >> $FILE
     
@@ -165,6 +170,12 @@ do
 
     ((id=id+1))
 done
+
+# todo: at the end add the two additional elements file and folder to get name of it
+
+
+
+
 
 echo '</input>' >> $FILE
 

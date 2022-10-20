@@ -23,7 +23,7 @@ yarn-error.log
 .vscode
 
 # Miscellaneous
-.bak
+*.bak
 .angular/
 .sass-cache/
 .yarn/
