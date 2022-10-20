@@ -100,7 +100,7 @@ Parent Path;Parent Node;Name;Addition;Label;Path;Level;;;
 ;dossier;schutzfristenkategorie;;Dossier: Schutzfristenkategorie;/dossier;per_aip;;;
 ;dossier;schutzfrist;;Dossier: Schutzfrist;/dossier;per_aip;;;
 ;dossier;schutzfristenBegruendung;;Dossier: Schutzfristen Begründung;/dossier;per_aip;;;
-;dossier;dossier;;Dossier: Dossier;/dossier;per_aip;;;
+;dossier;dossier;;Dossier: Dossier;/dossier;parent_only;;;
 ;dossier;dokument;;Dossier: Dokument;/dossier;parent_only;;;
 ;dossier;archivischeNotiz;;Dossier: Archivische Notiz;/dossier;per_aip;;;
 /dossier;dokument;titel;;Dokument: Titel;/dossier/dokument;per_file;;;
