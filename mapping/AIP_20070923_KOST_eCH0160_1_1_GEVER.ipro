@@ -1,20 +1,55 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<project lastsavedate="2022-10-20T15:46:46.816+02:00" nextid="10" widgetcounter="119">
+<project lastsavedate="2022-10-21T15:53:38.116+02:00" nextid="35" widgetcounter="141">
     <name value="AIP_20070923_KOST_eCH0160_1_1_GEVER"/>
     <type value="DIMAG"/>
     <inputfile value="M:\Code\ingest-poc\mapping\AIP_20070923_KOST_eCH0160_1_1_GEVER.iprf"/>
     <components>
-        <outputelement id="10" name="abgebende-stelle" description="Abgebende Stelle" beanname="abgebendeStelle" outputlevel="O" required="false" technical="false"/>
-        <outputelement id="70" name="entstehungs-zeitraum" description="Entstehungszeitraum" beanname="entstehungsZeitraum" outputlevel="O" required="true" technical="false"/>
-        <outputelement id="610" name="titel" description="Titel" beanname="titel" outputlevel="R" required="true" technical="false"/>
-        <mappingelementconcat id="8"/>
-        <outputelement id="840" name="ersteller" description="Angelegt von" beanname="ersteller" outputlevel="F" required="false" technical="false"/>
-        <outputelement id="40" name="archivalien-typ" description="Archivaliengattung" beanname="archivalienTyp" outputlevel="O" required="true" technical="false"/>
-        <outputelement id="170" name="titel" description="Titel" beanname="titel" outputlevel="O" required="true" technical="false"/>
-        <outputelement id="890" name="titel" description="Titel" beanname="titel" outputlevel="F" required="true" technical="false"/>
-        <mappingelementconstant id="9">
-            <constant value="Autor: "/>
+        <mappingelementconcat id="32"/>
+        <mappingelementconstant id="27">
+            <constant value="&#10;"/>
         </mappingelementconstant>
+        <mappingelementconstant id="33">
+            <constant value="Öffentlichkeitsstatus: "/>
+        </mappingelementconstant>
+        <outputelement id="840" name="ersteller" description="Angelegt von" beanname="ersteller" outputlevel="F" required="false" technical="false"/>
+        <mappingelementconstant id="5">
+            <constant value=" - "/>
+        </mappingelementconstant>
+        <mappingelementconstant id="34">
+            <constant value="Sonstige Bestimmungen: "/>
+        </mappingelementconstant>
+        <mappingelementconcat id="17"/>
+        <mappingelementconcat id="13"/>
+        <mappingelementconcat id="21"/>
+        <mappingelementconcat id="4"/>
+        <mappingelementconcat id="22"/>
+        <outputelement id="100" name="provenienz" description="Provenienz" beanname="provenienz" outputlevel="O" required="false" technical="false"/>
+        <mappingelementconcat id="19"/>
+        <mappingelementconcat id="18"/>
+        <outputelement id="170" name="titel" description="Titel" beanname="titel" outputlevel="O" required="true" technical="false"/>
+        <mappingelementlogic id="9" operation="v1is" v1is="true">
+            <name></name>
+        </mappingelementlogic>
+        <mappingelementconstant id="14">
+            <constant value=" : "/>
+        </mappingelementconstant>
+        <outputelement id="70" name="entstehungs-zeitraum" description="Entstehungszeitraum" beanname="entstehungsZeitraum" outputlevel="O" required="true" technical="false"/>
+        <mappingelementconcat id="15"/>
+        <mappingelementconcat id="16"/>
+        <mappingelementconcat id="30"/>
+        <mappingelementconcat id="31"/>
+        <mappingelementconcat id="28"/>
+        <outputelement id="40" name="archivalien-typ" description="Archivaliengattung" beanname="archivalienTyp" outputlevel="O" required="true" technical="false"/>
+        <mappingelementconcat id="20"/>
+        <mappingelementconcat id="11"/>
+        <outputelement id="610" name="titel" description="Titel" beanname="titel" outputlevel="R" required="true" technical="false"/>
+        <outputelement id="890" name="titel" description="Titel" beanname="titel" outputlevel="F" required="true" technical="false"/>
+        <mappingelementconcat id="8"/>
+        <mappingelementconcat id="26"/>
+        <mappingelementconstant id="10">
+            <constant value="ca. "/>
+        </mappingelementconstant>
+        <outputelement id="830" name="beschreibung-inhalt" description="Beschreibung / Inhalt" beanname="beschreibungInhalt" outputlevel="F" required="false" technical="false"/>
     </components>
     <widgets>
         <MappingWidget id="1" width="128" height="17" x="10" y="50" linked="false" name="Paket: Schema Version">
@@ -82,20 +117,26 @@
             <linkedSources/>
             <linkedTargets/>
         </MappingWidget>
-        <MappingWidget id="14" width="245" height="17" x="10" y="700" linked="false" name="Ablieferung: Entstehungszeitraum von/datum">
+        <MappingWidget id="14" width="245" height="17" x="11" y="750" linked="false" name="Ablieferung: Entstehungszeitraum von/datum">
             <component type="inputelement" id="14"/>
             <linkedSources/>
-            <linkedTargets/>
+            <linkedTargets>
+                <MappingWidget id="115" width="62" height="17" x="610" y="750" linked="true" name="Verknüpfen"/>
+            </linkedTargets>
         </MappingWidget>
-        <MappingWidget id="15" width="243" height="17" x="10" y="750" linked="false" name="Ablieferung: Entstehungszeitraum bis/datum">
+        <MappingWidget id="15" width="243" height="17" x="11" y="800" linked="false" name="Ablieferung: Entstehungszeitraum bis/datum">
             <component type="inputelement" id="15"/>
             <linkedSources/>
-            <linkedTargets/>
+            <linkedTargets>
+                <MappingWidget id="111" width="62" height="17" x="466" y="800" linked="true" name="Verknüpfen"/>
+            </linkedTargets>
         </MappingWidget>
-        <MappingWidget id="16" width="201" height="17" x="10" y="800" linked="false" name="Ablieferung: Entstehungszeitraum ca">
+        <MappingWidget id="16" width="201" height="17" x="12" y="701" linked="false" name="Ablieferung: Entstehungszeitraum ca">
             <component type="inputelement" id="16"/>
             <linkedSources/>
-            <linkedTargets/>
+            <linkedTargets>
+                <MappingWidget id="116" width="122" height="17" x="369" y="653" linked="true" name="Logische Operationen"/>
+            </linkedTargets>
         </MappingWidget>
         <MappingWidget id="17" width="240" height="17" x="10" y="850" linked="false" name="Ablieferung: Referenz Bewertungsentscheid">
             <component type="inputelement" id="17"/>
@@ -135,27 +176,37 @@
         <MappingWidget id="24" width="174" height="17" x="10" y="1200" linked="false" name="Provenienz: Aktenbildner Name ">
             <component type="inputelement" id="24"/>
             <linkedSources/>
-            <linkedTargets/>
+            <linkedTargets>
+                <MappingWidget id="120" width="62" height="17" x="429" y="1200" linked="true" name="Verknüpfen"/>
+            </linkedTargets>
         </MappingWidget>
         <MappingWidget id="25" width="144" height="17" x="10" y="1250" linked="false" name="Provenienz: System Name">
             <component type="inputelement" id="25"/>
             <linkedSources/>
-            <linkedTargets/>
+            <linkedTargets>
+                <MappingWidget id="122" width="62" height="17" x="429" y="1253" linked="true" name="Verknüpfen"/>
+            </linkedTargets>
         </MappingWidget>
         <MappingWidget id="26" width="187" height="17" x="10" y="1300" linked="false" name="Provenienz: System Beschreibung">
             <component type="inputelement" id="26"/>
             <linkedSources/>
-            <linkedTargets/>
+            <linkedTargets>
+                <MappingWidget id="123" width="62" height="17" x="429" y="1300" linked="true" name="Verknüpfen"/>
+            </linkedTargets>
         </MappingWidget>
         <MappingWidget id="27" width="127" height="17" x="10" y="1350" linked="false" name="Provenienz: Registratur">
             <component type="inputelement" id="27"/>
             <linkedSources/>
-            <linkedTargets/>
+            <linkedTargets>
+                <MappingWidget id="124" width="62" height="17" x="429" y="1350" linked="true" name="Verknüpfen"/>
+            </linkedTargets>
         </MappingWidget>
         <MappingWidget id="28" width="175" height="17" x="10" y="1400" linked="false" name="Provenienz: Verwandte Systeme">
             <component type="inputelement" id="28"/>
             <linkedSources/>
-            <linkedTargets/>
+            <linkedTargets>
+                <MappingWidget id="125" width="62" height="17" x="429" y="1400" linked="true" name="Verknüpfen"/>
+            </linkedTargets>
         </MappingWidget>
         <MappingWidget id="29" width="279" height="17" x="10" y="1450" linked="false" name="Provenienz: Archivierungsmodus Löschvorschriften">
             <component type="inputelement" id="29"/>
@@ -345,9 +396,7 @@
         <MappingWidget id="66" width="73" height="17" x="10" y="3300" linked="false" name="Dossier: Titel">
             <component type="inputelement" id="66"/>
             <linkedSources/>
-            <linkedTargets>
-                <MappingWidget id="107" width="43" height="17" x="944" y="3300" linked="true" name="R: Titel*"/>
-            </linkedTargets>
+            <linkedTargets/>
         </MappingWidget>
         <MappingWidget id="67" width="80" height="17" x="10" y="3350" linked="false" name="Dossier: Inhalt">
             <component type="inputelement" id="67"/>
@@ -367,9 +416,7 @@
         <MappingWidget id="70" width="249" height="17" x="10" y="3500" linked="false" name="Dossier: Federführende Organisationseinheit">
             <component type="inputelement" id="70"/>
             <linkedSources/>
-            <linkedTargets>
-                <MappingWidget id="111" width="112" height="17" x="578" y="3500" linked="true" name="O: Abgebende Stelle"/>
-            </linkedTargets>
+            <linkedTargets/>
         </MappingWidget>
         <MappingWidget id="71" width="227" height="17" x="10" y="3550" linked="false" name="Dossier: Entstehungszeitraum von/datum">
             <component type="inputelement" id="71"/>
@@ -446,176 +493,416 @@
             <linkedSources/>
             <linkedTargets/>
         </MappingWidget>
-        <MappingWidget id="87" width="142" height="17" x="10" y="4350" linked="false" name="Dossier: Archivische Notiz">
+        <MappingWidget id="86" width="86" height="17" x="10" y="4300" linked="false" name="Dokument: Titel">
+            <component type="inputelement" id="86"/>
+            <linkedSources/>
+            <linkedTargets>
+                <MappingWidget id="106" width="41" height="17" x="823" y="4300" linked="true" name="F: Titel*"/>
+            </linkedTargets>
+        </MappingWidget>
+        <MappingWidget id="87" width="91" height="17" x="10" y="4350" linked="false" name="Dokument: Autor">
             <component type="inputelement" id="87"/>
+            <linkedSources/>
+            <linkedTargets>
+                <MappingWidget id="107" width="83" height="17" x="823" y="4350" linked="true" name="F: Angelegt von"/>
+            </linkedTargets>
+        </MappingWidget>
+        <MappingWidget id="88" width="165" height="17" x="10" y="4400" linked="false" name="Dokument: Erscheinungsform">
+            <component type="inputelement" id="88"/>
             <linkedSources/>
             <linkedTargets/>
         </MappingWidget>
-        <MappingWidget id="88" width="86" height="17" x="10" y="4400" linked="false" name="Dokument: Titel">
-            <component type="inputelement" id="88"/>
-            <linkedSources/>
-            <linkedTargets>
-                <MappingWidget id="108" width="41" height="17" x="649" y="4400" linked="true" name="F: Titel*"/>
-            </linkedTargets>
-        </MappingWidget>
-        <MappingWidget id="89" width="91" height="17" x="10" y="4450" linked="false" name="Dokument: Autor">
+        <MappingWidget id="89" width="135" height="17" x="10" y="4450" linked="false" name="Dokument: Dokumenttyp">
             <component type="inputelement" id="89"/>
             <linkedSources/>
             <linkedTargets/>
         </MappingWidget>
-        <MappingWidget id="90" width="165" height="17" x="10" y="4500" linked="false" name="Dokument: Erscheinungsform">
+        <MappingWidget id="90" width="152" height="17" x="10" y="4500" linked="false" name="Dokument: Registrierdatum">
             <component type="inputelement" id="90"/>
             <linkedSources/>
             <linkedTargets/>
         </MappingWidget>
-        <MappingWidget id="91" width="135" height="17" x="10" y="4550" linked="false" name="Dokument: Dokumenttyp">
+        <MappingWidget id="91" width="180" height="17" x="10" y="4550" linked="false" name="Dokument: Entstehungszeitraum">
             <component type="inputelement" id="91"/>
             <linkedSources/>
             <linkedTargets/>
         </MappingWidget>
-        <MappingWidget id="92" width="152" height="17" x="10" y="4600" linked="false" name="Dokument: Registrierdatum">
+        <MappingWidget id="92" width="202" height="17" x="10" y="4600" linked="false" name="Dokument: Klassifizierungskategorie">
             <component type="inputelement" id="92"/>
             <linkedSources/>
             <linkedTargets/>
         </MappingWidget>
-        <MappingWidget id="93" width="180" height="17" x="10" y="4650" linked="false" name="Dokument: Entstehungszeitraum">
+        <MappingWidget id="93" width="131" height="17" x="10" y="4650" linked="false" name="Dokument: Datenschutz">
             <component type="inputelement" id="93"/>
             <linkedSources/>
             <linkedTargets/>
         </MappingWidget>
-        <MappingWidget id="94" width="202" height="17" x="10" y="4700" linked="false" name="Dokument: Klassifizierungskategorie">
+        <MappingWidget id="94" width="174" height="17" x="10" y="4700" linked="false" name="Dokument: Öffentlichkeitsstatus">
             <component type="inputelement" id="94"/>
             <linkedSources/>
-            <linkedTargets/>
+            <linkedTargets>
+                <MappingWidget id="133" width="62" height="17" x="447" y="4700" linked="true" name="Verknüpfen"/>
+            </linkedTargets>
         </MappingWidget>
-        <MappingWidget id="95" width="131" height="17" x="10" y="4750" linked="false" name="Dokument: Datenschutz">
+        <MappingWidget id="95" width="245" height="17" x="10" y="4750" linked="false" name="Dokument: Öffentlichkeitsstatus Begründung">
             <component type="inputelement" id="95"/>
             <linkedSources/>
             <linkedTargets/>
         </MappingWidget>
-        <MappingWidget id="96" width="174" height="17" x="10" y="4800" linked="false" name="Dokument: Öffentlichkeitsstatus">
+        <MappingWidget id="96" width="200" height="17" x="10" y="4800" linked="false" name="Dokument: Sonstige Bestimmungen">
             <component type="inputelement" id="96"/>
             <linkedSources/>
-            <linkedTargets/>
+            <linkedTargets>
+                <MappingWidget id="137" width="62" height="17" x="501" y="4800" linked="true" name="Verknüpfen"/>
+            </linkedTargets>
         </MappingWidget>
-        <MappingWidget id="97" width="245" height="17" x="10" y="4850" linked="false" name="Dokument: Öffentlichkeitsstatus Begründung">
+        <MappingWidget id="97" width="127" height="17" x="10" y="4850" linked="false" name="Dokument: Bemerkung">
             <component type="inputelement" id="97"/>
             <linkedSources/>
             <linkedTargets/>
         </MappingWidget>
-        <MappingWidget id="98" width="200" height="17" x="10" y="4900" linked="false" name="Dokument: Sonstige Bestimmungen">
+        <MappingWidget id="98" width="135" height="17" x="10" y="4900" linked="false" name="Dokument: Zusatz Daten">
             <component type="inputelement" id="98"/>
             <linkedSources/>
             <linkedTargets/>
         </MappingWidget>
-        <MappingWidget id="99" width="127" height="17" x="10" y="4950" linked="false" name="Dokument: Bemerkung">
+        <MappingWidget id="99" width="114" height="17" x="10" y="4950" linked="false" name="Dokument: Datei Ref">
             <component type="inputelement" id="99"/>
             <linkedSources/>
             <linkedTargets/>
         </MappingWidget>
-        <MappingWidget id="100" width="135" height="17" x="10" y="5000" linked="false" name="Dokument: Zusatz Daten">
+        <MappingWidget id="100" width="170" height="17" x="10" y="5000" linked="false" name="File: Filenamewithoutextension">
             <component type="inputelement" id="100"/>
             <linkedSources/>
             <linkedTargets/>
         </MappingWidget>
-        <MappingWidget id="101" width="114" height="17" x="14" y="5049" linked="false" name="Dokument: Datei Ref">
+        <MappingWidget id="101" width="77" height="17" x="10" y="5050" linked="false" name="File: Pathslice">
             <component type="inputelement" id="101"/>
             <linkedSources/>
             <linkedTargets/>
         </MappingWidget>
-        <MappingWidget id="102" width="170" height="17" x="12" y="5097" linked="false" name="File: Filenamewithoutextension">
-            <component type="inputelement" id="102"/>
-            <linkedSources/>
-            <linkedTargets/>
-        </MappingWidget>
-        <MappingWidget id="103" width="105" height="17" x="10" y="5150" linked="false" name="Directory: Pathslice">
-            <component type="inputelement" id="103"/>
-            <linkedSources/>
-            <linkedTargets/>
-        </MappingWidget>
-        <MappingWidget id="104" width="120" height="17" x="923" y="60" linked="false" name="O: Archivaliengattung*">
+        <MappingWidget id="102" width="120" height="17" x="384" y="50" linked="false" name="O: Archivaliengattung*">
             <component type="outputelement" id="40"/>
             <linkedSources/>
             <linkedTargets/>
         </MappingWidget>
-        <MappingWidget id="105" width="137" height="17" x="923" y="110" linked="false" name="O: Entstehungszeitraum*">
+        <MappingWidget id="103" width="137" height="17" x="823" y="653" linked="true" name="O: Entstehungszeitraum*">
             <component type="outputelement" id="70"/>
-            <linkedSources/>
+            <linkedSources>
+                <MappingWidget id="118" width="62" height="17" x="610" y="653" linked="true" name="Verknüpfen"/>
+            </linkedSources>
             <linkedTargets/>
         </MappingWidget>
-        <MappingWidget id="106" width="43" height="17" x="923" y="160" linked="false" name="O: Titel*">
+        <MappingWidget id="104" width="43" height="17" x="384" y="150" linked="false" name="O: Titel*">
             <component type="outputelement" id="170"/>
             <linkedSources/>
             <linkedTargets/>
         </MappingWidget>
-        <MappingWidget id="107" width="43" height="17" x="944" y="3300" linked="true" name="R: Titel*">
+        <MappingWidget id="105" width="43" height="17" x="384" y="200" linked="false" name="R: Titel*">
             <component type="outputelement" id="610"/>
-            <linkedSources>
-                <MappingWidget id="66" width="73" height="17" x="10" y="3300" linked="false" name="Dossier: Titel"/>
-            </linkedSources>
+            <linkedSources/>
             <linkedTargets/>
         </MappingWidget>
-        <MappingWidget id="108" width="41" height="17" x="649" y="4400" linked="true" name="F: Titel*">
+        <MappingWidget id="106" width="41" height="17" x="823" y="4300" linked="true" name="F: Titel*">
             <component type="outputelement" id="890"/>
             <linkedSources>
-                <MappingWidget id="88" width="86" height="17" x="10" y="4400" linked="false" name="Dokument: Titel"/>
+                <MappingWidget id="86" width="86" height="17" x="10" y="4300" linked="false" name="Dokument: Titel"/>
             </linkedSources>
             <linkedTargets/>
         </MappingWidget>
-        <MappingWidget id="110" width="83" height="17" x="758" y="4513" linked="true" name="F: Angelegt von">
+        <MappingWidget id="107" width="83" height="17" x="823" y="4350" linked="true" name="F: Angelegt von">
             <component type="outputelement" id="840"/>
             <linkedSources>
-                <MappingWidget id="118" width="62" height="17" x="603" y="4513" linked="true" name="Verknüpfen"/>
+                <MappingWidget id="87" width="91" height="17" x="10" y="4350" linked="false" name="Dokument: Autor"/>
             </linkedSources>
             <linkedTargets/>
         </MappingWidget>
-        <MappingWidget id="111" width="112" height="17" x="578" y="3500" linked="true" name="O: Abgebende Stelle">
-            <component type="outputelement" id="10"/>
+        <MappingWidget id="111" width="62" height="17" x="466" y="800" linked="true" name="Verknüpfen">
+            <component type="mappingelementconcat" id="4"/>
             <linkedSources>
-                <MappingWidget id="70" width="249" height="17" x="10" y="3500" linked="false" name="Dossier: Federführende Organisationseinheit"/>
+                <MappingWidget id="112" width="24" height="17" x="401" y="766" linked="false" name="K:  - "/>
+                <MappingWidget id="15" width="243" height="17" x="11" y="800" linked="false" name="Ablieferung: Entstehungszeitraum bis/datum"/>
             </linkedSources>
-            <linkedTargets/>
-        </MappingWidget>
-        <MappingWidget id="115" width="107" height="17" x="426" y="4510" linked="false" name="Autor über DateiRef">
-            <component type="inputelement" id="119"/>
-            <linkedSources/>
             <linkedTargets>
-                <MappingWidget id="118" width="62" height="17" x="603" y="4513" linked="true" name="Verknüpfen"/>
+                <MappingWidget id="115" width="62" height="17" x="610" y="750" linked="true" name="Verknüpfen"/>
             </linkedTargets>
         </MappingWidget>
-        <MappingWidget id="118" width="62" height="17" x="603" y="4513" linked="true" name="Verknüpfen">
+        <MappingWidget id="112" width="24" height="17" x="401" y="766" linked="false" name="K:  - ">
+            <component type="mappingconstant" id="5"/>
+            <linkedSources/>
+            <linkedTargets>
+                <MappingWidget id="111" width="62" height="17" x="466" y="800" linked="true" name="Verknüpfen"/>
+            </linkedTargets>
+        </MappingWidget>
+        <MappingWidget id="115" width="62" height="17" x="610" y="750" linked="true" name="Verknüpfen">
             <component type="mappingelementconcat" id="8"/>
             <linkedSources>
-                <MappingWidget id="119" width="48" height="17" x="421" y="4453" linked="false" name="K: Autor: "/>
-                <MappingWidget id="115" width="107" height="17" x="426" y="4510" linked="false" name="Autor über DateiRef"/>
+                <MappingWidget id="14" width="245" height="17" x="11" y="750" linked="false" name="Ablieferung: Entstehungszeitraum von/datum"/>
+                <MappingWidget id="111" width="62" height="17" x="466" y="800" linked="true" name="Verknüpfen"/>
             </linkedSources>
             <linkedTargets>
-                <MappingWidget id="110" width="83" height="17" x="758" y="4513" linked="true" name="F: Angelegt von"/>
+                <MappingWidget id="118" width="62" height="17" x="610" y="653" linked="true" name="Verknüpfen"/>
             </linkedTargets>
         </MappingWidget>
-        <MappingWidget id="119" width="48" height="17" x="421" y="4453" linked="false" name="K: Autor: ">
-            <component type="mappingconstant" id="9"/>
+        <MappingWidget id="116" width="122" height="17" x="369" y="653" linked="true" name="Logische Operationen">
+            <component type="mappingelementlogic" id="9"/>
+            <linkedSources>
+                <MappingWidget id="16" width="201" height="17" x="12" y="701" linked="false" name="Ablieferung: Entstehungszeitraum ca"/>
+                <MappingWidget id="117" width="33" height="17" x="309" y="716" linked="false" name="K: ca. "/>
+            </linkedSources>
+            <linkedTargets>
+                <MappingWidget id="118" width="62" height="17" x="610" y="653" linked="true" name="Verknüpfen"/>
+            </linkedTargets>
+        </MappingWidget>
+        <MappingWidget id="117" width="33" height="17" x="309" y="716" linked="false" name="K: ca. ">
+            <component type="mappingconstant" id="10"/>
             <linkedSources/>
             <linkedTargets>
-                <MappingWidget id="118" width="62" height="17" x="603" y="4513" linked="true" name="Verknüpfen"/>
+                <MappingWidget id="116" width="122" height="17" x="369" y="653" linked="true" name="Logische Operationen"/>
+            </linkedTargets>
+        </MappingWidget>
+        <MappingWidget id="118" width="62" height="17" x="610" y="653" linked="true" name="Verknüpfen">
+            <component type="mappingelementconcat" id="11"/>
+            <linkedSources>
+                <MappingWidget id="116" width="122" height="17" x="369" y="653" linked="true" name="Logische Operationen"/>
+                <MappingWidget id="115" width="62" height="17" x="610" y="750" linked="true" name="Verknüpfen"/>
+            </linkedSources>
+            <linkedTargets>
+                <MappingWidget id="103" width="137" height="17" x="823" y="653" linked="true" name="O: Entstehungszeitraum*"/>
+            </linkedTargets>
+        </MappingWidget>
+        <MappingWidget id="119" width="75" height="17" x="1067" y="1400" linked="true" name="O: Provenienz">
+            <component type="outputelement" id="100"/>
+            <linkedSources>
+                <MappingWidget id="129" width="62" height="17" x="849" y="1400" linked="true" name="Verknüpfen"/>
+            </linkedSources>
+            <linkedTargets/>
+        </MappingWidget>
+        <MappingWidget id="120" width="62" height="17" x="429" y="1200" linked="true" name="Verknüpfen">
+            <component type="mappingelementconcat" id="13"/>
+            <linkedSources>
+                <MappingWidget id="24" width="174" height="17" x="10" y="1200" linked="false" name="Provenienz: Aktenbildner Name "/>
+                <MappingWidget id="121" width="23" height="17" x="303" y="1134" linked="false" name="K:  : "/>
+            </linkedSources>
+            <linkedTargets>
+                <MappingWidget id="126" width="62" height="17" x="538" y="1253" linked="true" name="Verknüpfen"/>
+            </linkedTargets>
+        </MappingWidget>
+        <MappingWidget id="121" width="23" height="17" x="303" y="1134" linked="false" name="K:  : ">
+            <component type="mappingconstant" id="14"/>
+            <linkedSources/>
+            <linkedTargets>
+                <MappingWidget id="120" width="62" height="17" x="429" y="1200" linked="true" name="Verknüpfen"/>
+                <MappingWidget id="122" width="62" height="17" x="429" y="1253" linked="true" name="Verknüpfen"/>
+                <MappingWidget id="123" width="62" height="17" x="429" y="1300" linked="true" name="Verknüpfen"/>
+                <MappingWidget id="124" width="62" height="17" x="429" y="1350" linked="true" name="Verknüpfen"/>
+                <MappingWidget id="125" width="62" height="17" x="429" y="1400" linked="true" name="Verknüpfen"/>
+            </linkedTargets>
+        </MappingWidget>
+        <MappingWidget id="122" width="62" height="17" x="429" y="1253" linked="true" name="Verknüpfen">
+            <component type="mappingelementconcat" id="15"/>
+            <linkedSources>
+                <MappingWidget id="25" width="144" height="17" x="10" y="1250" linked="false" name="Provenienz: System Name"/>
+                <MappingWidget id="121" width="23" height="17" x="303" y="1134" linked="false" name="K:  : "/>
+            </linkedSources>
+            <linkedTargets>
+                <MappingWidget id="126" width="62" height="17" x="538" y="1253" linked="true" name="Verknüpfen"/>
+            </linkedTargets>
+        </MappingWidget>
+        <MappingWidget id="123" width="62" height="17" x="429" y="1300" linked="true" name="Verknüpfen">
+            <component type="mappingelementconcat" id="16"/>
+            <linkedSources>
+                <MappingWidget id="26" width="187" height="17" x="10" y="1300" linked="false" name="Provenienz: System Beschreibung"/>
+                <MappingWidget id="121" width="23" height="17" x="303" y="1134" linked="false" name="K:  : "/>
+            </linkedSources>
+            <linkedTargets>
+                <MappingWidget id="127" width="62" height="17" x="642" y="1300" linked="true" name="Verknüpfen"/>
+            </linkedTargets>
+        </MappingWidget>
+        <MappingWidget id="124" width="62" height="17" x="429" y="1350" linked="true" name="Verknüpfen">
+            <component type="mappingelementconcat" id="17"/>
+            <linkedSources>
+                <MappingWidget id="27" width="127" height="17" x="10" y="1350" linked="false" name="Provenienz: Registratur"/>
+                <MappingWidget id="121" width="23" height="17" x="303" y="1134" linked="false" name="K:  : "/>
+            </linkedSources>
+            <linkedTargets>
+                <MappingWidget id="128" width="62" height="17" x="746" y="1350" linked="true" name="Verknüpfen"/>
+            </linkedTargets>
+        </MappingWidget>
+        <MappingWidget id="125" width="62" height="17" x="429" y="1400" linked="true" name="Verknüpfen">
+            <component type="mappingelementconcat" id="18"/>
+            <linkedSources>
+                <MappingWidget id="28" width="175" height="17" x="10" y="1400" linked="false" name="Provenienz: Verwandte Systeme"/>
+                <MappingWidget id="121" width="23" height="17" x="303" y="1134" linked="false" name="K:  : "/>
+            </linkedSources>
+            <linkedTargets>
+                <MappingWidget id="129" width="62" height="17" x="849" y="1400" linked="true" name="Verknüpfen"/>
+            </linkedTargets>
+        </MappingWidget>
+        <MappingWidget id="126" width="62" height="17" x="538" y="1253" linked="true" name="Verknüpfen">
+            <component type="mappingelementconcat" id="19"/>
+            <linkedSources>
+                <MappingWidget id="120" width="62" height="17" x="429" y="1200" linked="true" name="Verknüpfen"/>
+                <MappingWidget id="122" width="62" height="17" x="429" y="1253" linked="true" name="Verknüpfen"/>
+            </linkedSources>
+            <linkedTargets>
+                <MappingWidget id="127" width="62" height="17" x="642" y="1300" linked="true" name="Verknüpfen"/>
+            </linkedTargets>
+        </MappingWidget>
+        <MappingWidget id="127" width="62" height="17" x="642" y="1300" linked="true" name="Verknüpfen">
+            <component type="mappingelementconcat" id="20"/>
+            <linkedSources>
+                <MappingWidget id="126" width="62" height="17" x="538" y="1253" linked="true" name="Verknüpfen"/>
+                <MappingWidget id="123" width="62" height="17" x="429" y="1300" linked="true" name="Verknüpfen"/>
+            </linkedSources>
+            <linkedTargets>
+                <MappingWidget id="128" width="62" height="17" x="746" y="1350" linked="true" name="Verknüpfen"/>
+            </linkedTargets>
+        </MappingWidget>
+        <MappingWidget id="128" width="62" height="17" x="746" y="1350" linked="true" name="Verknüpfen">
+            <component type="mappingelementconcat" id="21"/>
+            <linkedSources>
+                <MappingWidget id="127" width="62" height="17" x="642" y="1300" linked="true" name="Verknüpfen"/>
+                <MappingWidget id="124" width="62" height="17" x="429" y="1350" linked="true" name="Verknüpfen"/>
+            </linkedSources>
+            <linkedTargets>
+                <MappingWidget id="129" width="62" height="17" x="849" y="1400" linked="true" name="Verknüpfen"/>
+            </linkedTargets>
+        </MappingWidget>
+        <MappingWidget id="129" width="62" height="17" x="849" y="1400" linked="true" name="Verknüpfen">
+            <component type="mappingelementconcat" id="22"/>
+            <linkedSources>
+                <MappingWidget id="128" width="62" height="17" x="746" y="1350" linked="true" name="Verknüpfen"/>
+                <MappingWidget id="125" width="62" height="17" x="429" y="1400" linked="true" name="Verknüpfen"/>
+            </linkedSources>
+            <linkedTargets>
+                <MappingWidget id="119" width="75" height="17" x="1067" y="1400" linked="true" name="O: Provenienz"/>
+            </linkedTargets>
+        </MappingWidget>
+        <MappingWidget id="131" width="129" height="17" x="948" y="4750" linked="true" name="F: Beschreibung / Inhalt">
+            <component type="outputelement" id="830"/>
+            <linkedSources>
+                <MappingWidget id="139" width="62" height="17" x="794" y="4750" linked="true" name="Verknüpfen"/>
+            </linkedSources>
+            <linkedTargets/>
+        </MappingWidget>
+        <MappingWidget id="133" width="62" height="17" x="447" y="4700" linked="true" name="Verknüpfen">
+            <component type="mappingelementconcat" id="26"/>
+            <linkedSources>
+                <MappingWidget id="140" width="131" height="17" x="291" y="4634" linked="false" name="K: Öffentlichkeitsstatus: "/>
+                <MappingWidget id="94" width="174" height="17" x="10" y="4700" linked="false" name="Dokument: Öffentlichkeitsstatus"/>
+            </linkedSources>
+            <linkedTargets>
+                <MappingWidget id="135" width="62" height="17" x="663" y="4700" linked="true" name="Verknüpfen"/>
+            </linkedTargets>
+        </MappingWidget>
+        <MappingWidget id="134" width="14" height="17" x="573" y="4650" linked="false" name="K: &#10;">
+            <component type="mappingconstant" id="27"/>
+            <linkedSources/>
+            <linkedTargets>
+                <MappingWidget id="135" width="62" height="17" x="663" y="4700" linked="true" name="Verknüpfen"/>
+                <MappingWidget id="138" width="62" height="17" x="663" y="4800" linked="true" name="Verknüpfen"/>
+            </linkedTargets>
+        </MappingWidget>
+        <MappingWidget id="135" width="62" height="17" x="663" y="4700" linked="true" name="Verknüpfen">
+            <component type="mappingelementconcat" id="28"/>
+            <linkedSources>
+                <MappingWidget id="133" width="62" height="17" x="447" y="4700" linked="true" name="Verknüpfen"/>
+                <MappingWidget id="134" width="14" height="17" x="573" y="4650" linked="false" name="K: &#10;"/>
+            </linkedSources>
+            <linkedTargets>
+                <MappingWidget id="139" width="62" height="17" x="794" y="4750" linked="true" name="Verknüpfen"/>
+            </linkedTargets>
+        </MappingWidget>
+        <MappingWidget id="137" width="62" height="17" x="501" y="4800" linked="true" name="Verknüpfen">
+            <component type="mappingelementconcat" id="30"/>
+            <linkedSources>
+                <MappingWidget id="141" width="157" height="17" x="291" y="4753" linked="false" name="K: Sonstige Bestimmungen: "/>
+                <MappingWidget id="96" width="200" height="17" x="10" y="4800" linked="false" name="Dokument: Sonstige Bestimmungen"/>
+            </linkedSources>
+            <linkedTargets>
+                <MappingWidget id="138" width="62" height="17" x="663" y="4800" linked="true" name="Verknüpfen"/>
+            </linkedTargets>
+        </MappingWidget>
+        <MappingWidget id="138" width="62" height="17" x="663" y="4800" linked="true" name="Verknüpfen">
+            <component type="mappingelementconcat" id="31"/>
+            <linkedSources>
+                <MappingWidget id="137" width="62" height="17" x="501" y="4800" linked="true" name="Verknüpfen"/>
+                <MappingWidget id="134" width="14" height="17" x="573" y="4650" linked="false" name="K: &#10;"/>
+            </linkedSources>
+            <linkedTargets>
+                <MappingWidget id="139" width="62" height="17" x="794" y="4750" linked="true" name="Verknüpfen"/>
+            </linkedTargets>
+        </MappingWidget>
+        <MappingWidget id="139" width="62" height="17" x="794" y="4750" linked="true" name="Verknüpfen">
+            <component type="mappingelementconcat" id="32"/>
+            <linkedSources>
+                <MappingWidget id="135" width="62" height="17" x="663" y="4700" linked="true" name="Verknüpfen"/>
+                <MappingWidget id="138" width="62" height="17" x="663" y="4800" linked="true" name="Verknüpfen"/>
+            </linkedSources>
+            <linkedTargets>
+                <MappingWidget id="131" width="129" height="17" x="948" y="4750" linked="true" name="F: Beschreibung / Inhalt"/>
+            </linkedTargets>
+        </MappingWidget>
+        <MappingWidget id="140" width="131" height="17" x="291" y="4634" linked="false" name="K: Öffentlichkeitsstatus: ">
+            <component type="mappingconstant" id="33"/>
+            <linkedSources/>
+            <linkedTargets>
+                <MappingWidget id="133" width="62" height="17" x="447" y="4700" linked="true" name="Verknüpfen"/>
+            </linkedTargets>
+        </MappingWidget>
+        <MappingWidget id="141" width="157" height="17" x="291" y="4753" linked="false" name="K: Sonstige Bestimmungen: ">
+            <component type="mappingconstant" id="34"/>
+            <linkedSources/>
+            <linkedTargets>
+                <MappingWidget id="137" width="62" height="17" x="501" y="4800" linked="true" name="Verknüpfen"/>
             </linkedTargets>
         </MappingWidget>
     </widgets>
     <connections>
-        <MappingConnectionWidget priority="1" sourceID="66" targetID="107"/>
-        <MappingConnectionWidget priority="1" sourceID="88" targetID="108"/>
-        <MappingConnectionWidget priority="1" sourceID="70" targetID="111"/>
-        <MappingConnectionWidget priority="1" sourceID="119" targetID="118"/>
+        <MappingConnectionWidget priority="1" sourceID="87" targetID="107"/>
+        <MappingConnectionWidget priority="1" sourceID="86" targetID="106"/>
+        <MappingConnectionWidget priority="1" sourceID="112" targetID="111"/>
+        <MappingConnectionWidget priority="2" sourceID="15" targetID="111"/>
+        <MappingConnectionWidget priority="1" sourceID="14" targetID="115"/>
+        <MappingConnectionWidget priority="2" sourceID="111" targetID="115"/>
+        <MappingConnectionWidget priority="1" sourceID="16" targetID="116"/>
+        <MappingConnectionWidget priority="2" sourceID="117" targetID="116"/>
+        <MappingConnectionWidget priority="1" sourceID="116" targetID="118"/>
         <MappingConnectionWidget priority="2" sourceID="115" targetID="118"/>
-        <MappingConnectionWidget priority="1" sourceID="118" targetID="110"/>
+        <MappingConnectionWidget priority="1" sourceID="118" targetID="103"/>
+        <MappingConnectionWidget priority="1" sourceID="24" targetID="120"/>
+        <MappingConnectionWidget priority="2" sourceID="121" targetID="120"/>
+        <MappingConnectionWidget priority="1" sourceID="25" targetID="122"/>
+        <MappingConnectionWidget priority="2" sourceID="121" targetID="122"/>
+        <MappingConnectionWidget priority="1" sourceID="26" targetID="123"/>
+        <MappingConnectionWidget priority="2" sourceID="121" targetID="123"/>
+        <MappingConnectionWidget priority="1" sourceID="27" targetID="124"/>
+        <MappingConnectionWidget priority="2" sourceID="121" targetID="124"/>
+        <MappingConnectionWidget priority="1" sourceID="28" targetID="125"/>
+        <MappingConnectionWidget priority="2" sourceID="121" targetID="125"/>
+        <MappingConnectionWidget priority="1" sourceID="120" targetID="126"/>
+        <MappingConnectionWidget priority="2" sourceID="122" targetID="126"/>
+        <MappingConnectionWidget priority="1" sourceID="126" targetID="127"/>
+        <MappingConnectionWidget priority="2" sourceID="123" targetID="127"/>
+        <MappingConnectionWidget priority="1" sourceID="127" targetID="128"/>
+        <MappingConnectionWidget priority="2" sourceID="124" targetID="128"/>
+        <MappingConnectionWidget priority="1" sourceID="128" targetID="129"/>
+        <MappingConnectionWidget priority="2" sourceID="125" targetID="129"/>
+        <MappingConnectionWidget priority="1" sourceID="129" targetID="119"/>
+        <MappingConnectionWidget priority="2" sourceID="94" targetID="133"/>
+        <MappingConnectionWidget priority="1" sourceID="133" targetID="135"/>
+        <MappingConnectionWidget priority="2" sourceID="134" targetID="135"/>
+        <MappingConnectionWidget priority="2" sourceID="96" targetID="137"/>
+        <MappingConnectionWidget priority="1" sourceID="137" targetID="138"/>
+        <MappingConnectionWidget priority="2" sourceID="134" targetID="138"/>
+        <MappingConnectionWidget priority="1" sourceID="135" targetID="139"/>
+        <MappingConnectionWidget priority="2" sourceID="138" targetID="139"/>
+        <MappingConnectionWidget priority="1" sourceID="139" targetID="131"/>
+        <MappingConnectionWidget priority="1" sourceID="140" targetID="133"/>
+        <MappingConnectionWidget priority="1" sourceID="141" targetID="137"/>
     </connections>
     <afisdescription>
-        <afisPrefix>
-            <prefix></prefix>
-            <title></title>
-            <maxVE>0</maxVE>
-            <maxMinuteDelete>0</maxMinuteDelete>
-        </afisPrefix>
         <forms>
             <form>
                 <formId>DIMAG_R</formId>

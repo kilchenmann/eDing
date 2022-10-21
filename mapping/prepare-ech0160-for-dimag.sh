@@ -86,7 +86,7 @@ exec < $in
 read header
 # echo $header
 
-while IFS=";" read -r parentPath parentNode name addition label path level CRLF
+while IFS=";" read -r parentPath parentNode name addition label path xmlType level CRLF
 do
     # progress indicator
     percent=$((100/$(($lc/$id))))
@@ -114,55 +114,73 @@ do
         # generate uuid
         uuid=$(printf "%04x%04x-%04x-%04x-%04x-%04x%04x%04x\n" $RANDOM $RANDOM $RANDOM $(($RANDOM & 0x0fff | 0x4000)) $(($RANDOM & 0x3fff | 0x8000)) $RANDOM $RANDOM $RANDOM)
         
-        type="element"
+        # check path root: paket or dossier
+        xmlPrefix="metadata"
+        xmlSuffix=$(echo "$path" | cut -d "/" -f2)
 
-        # if [ "$level" == "per_file" ] || [ "$level" == "per_aip" ]; then
-        #     type="metadata"
-        #     val=$name
-        # fi
+        # type="element"
+
+        if [ "$xmlType" == "metadata" ]; then
+            val=$name
+        fi
         
         # xml element per project
         echo -e "\t<inputelement>" >> $FILE
         echo -e "\t\t<id>$id</id>" >> $FILE
         echo -e "\t\t<uuid>$uuid</uuid>" >> $FILE
-        echo -e "\t\t<type>$type</type>" >> $FILE
+        echo -e "\t\t<type>$xmlType</type>" >> $FILE
         echo -e "\t\t<name>$label</name>" >> $FILE
         echo -e "\t\t<value>$val</value>" >> $FILE
         echo -e "\t\t<list/>" >> $FILE
         echo -e "\t\t<description></description>" >> $FILE
         echo -e "\t\t<visible>true</visible>" >> $FILE
-        echo -e "\t\t<fullpath>$SIPMETA</fullpath>" >> $FILE
+        echo -e "\t\t<fullpath></fullpath>" >> $FILE
         echo -e "\t\t<executionlevel>$level</executionlevel>" >> $FILE
         echo -e "\t\t<encoding>UTF-8</encoding>" >> $FILE
+        echo -e "\t\t<filterbegin>$xmlPrefix</filterbegin>" >> $FILE
+        echo -e "\t\t<filtercontains>$xmlSuffix</filtercontains>" >> $FILE
+        echo -e "\t\t<filterend>.xml</filterend>" >> $FILE
 
-        # additional in case of xml element per aip or per file:
-        # <filterbegin>metadata</filterbegin>
-        # <filtercontains></filtercontains>
-        # <filterend>.xml</filterend>
-
-        # OR additional in case of metadata per project, per aip or per file:
-        if [ "$level" == "per_file" ] || [ "$level" == "per_aip" ]; then
-            echo -e "\t\t<filterbegin>metadata</filterbegin>" >> $FILE
-            echo -e "\t\t<filtercontains>dossier</filtercontains>" >> $FILE
-            echo -e "\t\t<filterend>.xml</filterend>" >> $FILE
-            
-            
-            # echo -e "\t\t<assocValues>" >> $FILE
-            # echo -e "\t\t\t<elements/>" >> $FILE
-            # echo -e "\t\t</assocValues>" >> $FILE
+        # in case of xml type reference, the inputelement needs additional elements
+        if [ "$xmlType" == "reference" ]; then
+            echo -e "\t\t<assocValues>" >> $FILE
+            echo -e "\t\t\t<elements>" >> $FILE
+            echo -e "\t\t\t\t<entry>" >> $FILE
+            echo -e "\t\t\t\t\t<key>xmlreferenceout</key>" >> $FILE
+            echo -e "\t\t\t\t\t<value>../$name</value>" >> $FILE
+            echo -e "\t\t\t\t</entry>" >> $FILE        
+            echo -e "\t\t\t\t<entry>" >> $FILE
+            echo -e "\t\t\t\t\t<key>xmlreferencesource</key>" >> $FILE
+            echo -e "\t\t\t\t\t<value>/dossier/dokument/dateiRef</value>" >> $FILE
+            echo -e "\t\t\t\t</entry>" >> $FILE        
+            echo -e "\t\t\t\t<entry>" >> $FILE
+            echo -e "\t\t\t\t\t<key>xmlreferencecustompath</key>" >> $FILE
+            echo -e "\t\t\t\t\t<value>false</value>" >> $FILE
+            echo -e "\t\t\t\t</entry>" >> $FILE
+            echo -e "\t\t\t</elements>" >> $FILE
+            echo -e "\t\t</assocValues>" >> $FILE
         fi
+        
+        if [ "$xmlType" == "metadata" ]; then
 
-        # OR additional in case of metadata per aip:
-        # if [ "$level" == "per_aip" ]; then
-        #     echo -e "\t\t<assocValues>" >> $FILE
-        #     echo -e "\t\t\t<elements>" >> $FILE
-        #     echo -e "\t\t\t\t<entry>" >> $FILE
-        #     echo -e "\t\t\t\t\t<key>pathslice</key>" >> $FILE
-        #     echo -e "\t\t\t\t\t<value>1</value>" >> $FILE
-        #     echo -e "\t\t\t\t</entry>" >> $FILE
-        #     echo -e "\t\t\t</elements>" >> $FILE
-        #     echo -e "\t\t</assocValues>" >> $FILE
-        # fi
+            if [ "$level" == "per_file" ]; then
+                echo -e "\t\t<assocValues>" >> $FILE
+                echo -e "\t\t\t<elements/>" >> $FILE
+                echo -e "\t\t</assocValues>" >> $FILE
+            fi
+            
+            if [ "$level" == "per_aip" ]; then
+                echo -e "\t\t<assocValues>" >> $FILE
+                echo -e "\t\t\t<elements>" >> $FILE
+                echo -e "\t\t\t\t<entry>" >> $FILE
+                echo -e "\t\t\t\t\t<key>$name</key>" >> $FILE
+                echo -e "\t\t\t\t\t<value>1</value>" >> $FILE
+                echo -e "\t\t\t\t</entry>" >> $FILE
+                echo -e "\t\t\t</elements>" >> $FILE
+                echo -e "\t\t</assocValues>" >> $FILE
+            fi
+            
+        fi
 
         echo -e "\t</inputelement>" >> $FILE
     
@@ -170,11 +188,6 @@ do
 
     ((id=id+1))
 done
-
-# todo: at the end add the two additional elements file and folder to get name of it
-
-
-
 
 
 echo '</input>' >> $FILE

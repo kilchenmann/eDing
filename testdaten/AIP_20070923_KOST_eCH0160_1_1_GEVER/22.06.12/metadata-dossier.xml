@@ -21,7 +21,7 @@
 	<abschlussdatum>
 		<datum>2007-07-31</datum>
 	</abschlussdatum>
-	<dokument id="{69D68D97-D16F-4F62-88C8-6E03CD945C3F}">
+	<dokument id="_-7MuIDfSEeKbAdCGaeR48Q">
 		<titel>Botschaft und Entwurf der Regierung vom 12. Dezember 2006</titel>
 		<autor>Regierungsrat</autor>
 		<erscheinungsform>digital</erscheinungsform>
@@ -31,9 +31,9 @@
 		</registrierdatum>
 		<klassifizierungskategorie>nicht klassifiziert</klassifizierungskategorie>
 		<oeffentlichkeitsstatus>öffentlich</oeffentlichkeitsstatus>
-		<dateiRef>{69D68D97-D16F-4F62-88C8-6E03CD945C3F}</dateiRef>
+		<dateiRef>{69D68D97-D16F-4F62-88C8-6E03CD945C3F}.pdf</dateiRef>
 	</dokument>
-	<dokument id="{F30B1CF5-2948-4F23-98DA-BDDBE76E357B}">
+	<dokument id="_RUc9YDfTEeKbAdCGaeR48Q">
 		<titel>Aktuelle Mitgliederliste</titel>
 		<autor>Sekretariat</autor>
 		<erscheinungsform>digital</erscheinungsform>
@@ -44,7 +44,7 @@
 		<klassifizierungskategorie>nicht klassifiziert</klassifizierungskategorie>
 		<datenschutz>false</datenschutz>
 		<oeffentlichkeitsstatus>öffentlich</oeffentlichkeitsstatus>
-		<dateiRef>{F30B1CF5-2948-4F23-98DA-BDDBE76E357B}</dateiRef>
+		<dateiRef>{F30B1CF5-2948-4F23-98DA-BDDBE76E357B}.pdf</dateiRef>
 	</dokument>
 	<dokument id="_Rx8xsDfTEeKbAdCGaeR48Q">
 		<titel>Anträge der vorberatenden Kommission vom 14. März 2007</titel>
@@ -56,7 +56,7 @@
 		</registrierdatum>
 		<klassifizierungskategorie>nicht klassifiziert</klassifizierungskategorie>
 		<oeffentlichkeitsstatus>öffentlich</oeffentlichkeitsstatus>
-		<dateiRef>{3AD4D0BA-933C-48E5-A897-41A79638DFF8}</dateiRef>
+		<dateiRef>{3AD4D0BA-933C-48E5-A897-41A79638DFF8}.pdf</dateiRef>
 	</dokument>
 	<dokument id="_x1b8UDfTEeKbAdCGaeR48Q">
 		<titel>Antrag Hobi-Neu St.Johann zu Art. 20 vom 23. April 2007</titel>
@@ -68,7 +68,7 @@
 		</registrierdatum>
 		<klassifizierungskategorie>nicht klassifiziert</klassifizierungskategorie>
 		<oeffentlichkeitsstatus>öffentlich</oeffentlichkeitsstatus>
-		<dateiRef>{46E5084F-407D-4582-8BEE-1D69FC0FC8E5}</dateiRef>
+		<dateiRef>{46E5084F-407D-4582-8BEE-1D69FC0FC8E5}.pdf</dateiRef>
 	</dokument>
 	<dokument id="_SXCbwDfTEeKbAdCGaeR48Q">
 		<titel>Antrag SVP-Fraktion zu Art. 19bis vom 23. April 2007</titel>
@@ -80,7 +80,7 @@
 		</registrierdatum>
 		<klassifizierungskategorie>nicht klassifiziert</klassifizierungskategorie>
 		<oeffentlichkeitsstatus>öffentlich</oeffentlichkeitsstatus>
-		<dateiRef>{C5B95F35-01E2-4A7E-A1EF-6D6F19301F86}</dateiRef>
+		<dateiRef>{C5B95F35-01E2-4A7E-A1EF-6D6F19301F86}.pdf</dateiRef>
 	</dokument>
 	<dokument id="_7JBAgDfTEeKbAdCGaeR48Q">
 		<titel>Antrag SVP-Fraktion zu Art. 20 vom 23. April 2007</titel>
@@ -92,7 +92,7 @@
 		</registrierdatum>
 		<klassifizierungskategorie>nicht klassifiziert</klassifizierungskategorie>
 		<oeffentlichkeitsstatus>öffentlich</oeffentlichkeitsstatus>
-		<dateiRef>{BFB43607-D7F2-4E60-AA50-BB67041229B4}</dateiRef>
+		<dateiRef>{BFB43607-D7F2-4E60-AA50-BB67041229B4}.pdf</dateiRef>
 	</dokument>
 </dossier>
 <!--Generated Manually by AV DIMAG-->
