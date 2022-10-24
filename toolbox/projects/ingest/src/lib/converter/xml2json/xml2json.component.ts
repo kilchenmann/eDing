@@ -172,6 +172,10 @@ export class Xml2jsonComponent {
         }
     }
 
+    exportAip() {
+        console.log('export data');
+    }
+
     /**
      * geht durch die "ordnungssystemposition"-Hierarchie
      * @param ordnungssystemposition

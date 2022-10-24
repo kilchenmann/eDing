@@ -68,6 +68,10 @@
                 </mat-icon>
               </button>
               {{node.name[0]._text}}
+              <span class="fill-remaining-space"></span>
+              <button mat-button class="export" (click)="exportAip()">
+                Export als AIP
+              </button>
             </div>
             <!-- There is an inline padding applied to this div using styles.
           This padding value depends on the mat-icon-button width.  -->
