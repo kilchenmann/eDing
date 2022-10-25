@@ -31,3 +31,7 @@ Die Problematik der verschachtelten Informationen betreffend Ordnungsystempositi
 
 Es geht nun darum, dass das Ingest Tool die (manuell) erstellten AIP Metadaten ([metadata-dossier.xml](../testdaten/AIP_20070923_KOST_eCH0160_1_1_GEVER/22.06.12/metadata-dossier.xml) & [metadata-paket.xml](../testdaten/AIP_20070923_KOST_eCH0160_1_1_GEVER/22.06.12/metadata-paket.xml)) verarbeiten kann. Dazu fehlen aber noch die zusätzlichen Felder im IPRF.
 
+### 25.10.2022
+
+![Mapping](../docs/images/ingest_tool_mapping_AIP_20070923_KOST_eCH0160_1_1_GEVER.png)
+![Mapping Vorschau](../docs/images/ingest_tool_mapping_vorschau_AIP_20070923_KOST_eCH0160_1_1_GEVER.png)
