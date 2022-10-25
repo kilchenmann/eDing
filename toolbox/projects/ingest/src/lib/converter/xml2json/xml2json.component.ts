@@ -202,7 +202,12 @@ export class Xml2jsonComponent {
 
                         // todo: check type
 
-                        ele.innerHTML = this._getValue(value);
+                        if(key === 'dateiRef') {
+                            ele.innerHTML = dat.originalName[0]._text;
+                        } else {
+                            ele.innerHTML = this._getValue(value);
+                        }
+
                         // console.log(index, this.dok?.titel)
                         // console.log(key, value);
                         dokument.appendChild(ele);
