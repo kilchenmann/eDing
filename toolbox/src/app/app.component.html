@@ -8,8 +8,8 @@
     <h1 [routerLink]="'/'" class="main-title link">Toolbox für eCH-0160 Ingest Prozess</h1>
     <span class="fill-remaining-space"></span>
     <div>
-      <a mat-button [routerLink]="'/about'"> Über </a>
-      <a mat-button [routerLink]="'/help'"> Hilfe </a>
+      <a mat-button [routerLink]="'/info'"> Info </a>
+      <!-- <a mat-button [routerLink]="'/help'"> Hilfe </a> -->
     </div>
   </mat-toolbar-row>
 
@@ -19,7 +19,7 @@
 <mat-sidenav-container>
 
   <!-- main navigation -->
-  <mat-sidenav #sidenav mode="side" opened>
+  <mat-sidenav #sidenav mode="side" opened="false">
     <mat-nav-list>
       <a *ngFor="let item of navItems" mat-list-item
         [routerLink]="item.route"

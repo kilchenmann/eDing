@@ -13,7 +13,7 @@ import { StartComponent } from './pages/start/start.component';
 const routes: Routes = [
     {
         path: '',
-        component: StartComponent
+        component: Xml2jsonComponent
     },
     // modules
     {
@@ -30,7 +30,7 @@ const routes: Routes = [
     },
     // main pages
     {
-        path: 'about',
+        path: 'info',
         component: AboutComponent
     },
     {
