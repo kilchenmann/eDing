@@ -69,7 +69,8 @@
               </button>
               {{node.name[0]._text}}
               <span class="fill-remaining-space"></span>
-              <button mat-button class="export" (click)="exportAip()">
+              <button mat-stroked-button class="export" (click)="exportAip(node)">
+                <mat-icon class="prefix">east</mat-icon>
                 Export als AIP
               </button>
             </div>

@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import {
+    Datei,
     Dokument,
     Dossier,
     ErrorMessage,
@@ -140,7 +141,7 @@ export class Xml2jsonComponent {
 
         // start on "ordnungssystemposition" to find dokument or dossier by "datei referenz"
         this._findOsp(this.sip.paket[0].ablieferung[0].ordnungssystem[0].ordnungssystemposition, dateiRef);
-        console.log('ordnungssystem', this.sip.paket[0].ablieferung[0].ordnungssystem[0].name[0]._text);
+        // console.log('ordnungssystem', this.sip.paket[0].ablieferung[0].ordnungssystem[0].name[0]._text);
 
     }
 
@@ -172,8 +173,49 @@ export class Xml2jsonComponent {
         }
     }
 
-    exportAip() {
-        console.log('export data');
+    exportAip(node: Ordner) {
+        console.log('export aip', node);
+        // create metadata-paket.xml
+
+        const xmlDos = document.implementation.createDocument('', '', null);
+        const dossier = xmlDos.createElement('dossier');
+
+        // create metadata-dossier.xml
+        node.datei?.forEach(
+            (dat: Datei) => {
+                this.getFileMeta(dat._attrid._value);
+
+                if (this.dok) {
+                    const dokument = xmlDos.createElement('dokument');
+                    const titel = xmlDos.createElement('titel');
+                    titel.innerHTML = this.dok.titel[0]._text;
+                    dokument.appendChild(titel);
+
+                    const autor = xmlDos.createElement('autor');
+                    autor.innerHTML = this.dok.autor[0]._text;
+                    dokument.appendChild(autor);
+
+                    const ef = xmlDos.createElement('erscheinungsform');
+                    ef.innerHTML = this.dok.erscheinungsform[0]._text;
+                    dokument.appendChild(ef);
+
+
+                    dossier.appendChild(dokument);
+                }
+
+            }
+        );
+
+
+
+        xmlDos.appendChild(dossier);
+
+        console.log(xmlDos);
+
+
+
+
+
     }
 
     /**
@@ -191,7 +233,7 @@ export class Xml2jsonComponent {
                 if (osp.dossier && osp.dossier.length > 0) {
                     // console.log('search in DOSSIER ...');
                     this._findDos(osp.dossier, dateiRef);
-                    console.log('ordnungssystemposition', osp.titel[0]._text);
+                    // console.log('ordnungssystemposition', osp.titel[0]._text);
                 }
             }
         );
