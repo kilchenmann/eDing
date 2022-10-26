@@ -118,7 +118,7 @@ export class Xml2jsonComponent {
             this.sip.paket[0].inhaltsverzeichnis[0].ordner.forEach(content => {
                 // display folder structure of content
                 if (content.name[0]._text !== 'header') {
-                    this.dataSource.data = ( content.ordner ? content.ordner : this.sip.paket[0].inhaltsverzeichnis[0].ordner);
+                    this.dataSource.data = (content.ordner ? content.ordner : this.sip.paket[0].inhaltsverzeichnis[0].ordner);
                 }
             });
 
@@ -130,7 +130,7 @@ export class Xml2jsonComponent {
             this.converterError = true;
             this.form.controls['json'].setValue('');
             this.error.message = (this.sip.html ? this.sip.html[0].body[0].parsererror[0].h3[0]._text + ' ' +
-            this.sip.html[0].body[0].parsererror[0].div[0]._text : 'no error message');
+                this.sip.html[0].body[0].parsererror[0].div[0]._text : 'no error message');
         }
 
     }
@@ -164,7 +164,7 @@ export class Xml2jsonComponent {
             // grab test data from shared/testdata/[name].xml
             const tdxml = name;
 
-            this.http.get(`/assets/testdata/${name}.xml`, { responseType:  'text' }).subscribe(data => {
+            this.http.get(`/assets/testdata/${name}.xml`, { responseType: 'text' }).subscribe(data => {
                 // console.log(data);
                 // and set value in first textarea = "xml"
                 this.form.controls['xml'].setValue(data);
@@ -187,7 +187,16 @@ export class Xml2jsonComponent {
         // create metadata-paket.xml
 
         const xmlDos = document.implementation.createDocument('', '', null);
+        // const xmlHead = xmlDos.createElement('?xml');
+        // xmlHead.setAttribute('version', '1.0');
+        // xmlHead.setAttribute('encoding', 'UTF-8');
+        // xmlDos.appendChild(xmlHead);
         const dossier = xmlDos.createElement('dossier');
+        dossier.setAttribute('xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance');
+        dossier.setAttribute('xmlns', 'http://bar.admin.ch/arelda/v4');
+        dossier.setAttribute('xsi:schemaLocation', 'http://bar.admin.ch/arelda/v4 xsd/dossier.xsd');
+        dossier.setAttribute('xsi:type', 'paketAIP');
+        dossier.setAttribute('schemaVersion', '4.1');
 
         // create metadata-dossier.xml
         node.datei?.forEach(
@@ -198,48 +207,196 @@ export class Xml2jsonComponent {
                     const dokument = xmlDos.createElement('dokument');
 
                     Object.entries(this.dok).forEach(([key, value], index) => {
-                        const ele = xmlDos.createElement(key);
 
-                        // todo: check type
+                        // check if key is of attribute type
+                        const attr = key.split('_attr');
+                        if (attr.length > 1) {
+                            // switch in case of an object
+                            switch (true) {
+                                case (this._instanceOfVS(value)):
+                                    // console.log('instance of ValueString', value);
+                                    dokument.setAttribute(attr[1], value._value);
+                                    break;
 
-                        if(key === 'dateiRef') {
-                            ele.innerHTML = dat.originalName[0]._text;
+                                case (this._instanceOfVN(value)):
+                                    // console.log('instance of ValueNumber', value);
+                                    dokument.setAttribute(attr[1], JSON.stringify(value._value));
+                                    break;
+
+                                default:
+                                    console.error('Was not able to get type of this object: ', JSON.stringify(value));
+                            }
                         } else {
-                            ele.innerHTML = this._getValue(value);
+
+                            const ele = xmlDos.createElement(key);
+
+                            // todo: check type
+
+                            if (key === 'dateiRef') {
+                                // use filename as datei reference instead of original dateiRef name.
+                                // because in the ingest tool, we know the filename only
+                                ele.innerHTML = dat.originalName[0]._text;
+                            } else {
+
+                                let stringified = '';
+
+                                if (value === undefined) {
+                                    ele.innerHTML = 'Warning! This value is undefined or the element does not exist: ' + JSON.stringify(value);
+                                } else {
+                                    // which kind of value do we have?
+                                    // switch in case of an array
+                                    if (Array.isArray(value)) {
+                                        switch (true) {
+                                            case this._instanceOfTS(value[0]):
+                                                // instance of TextString
+                                                let t = 0;
+                                                for (const val of <TextString[]>value) {
+                                                    const delimiter = (t > 0 ? '<br>' : '');
+                                                    stringified += delimiter + val._text;
+                                                    t++;
+                                                }
+                                                ele.innerHTML = stringified;
+                                                break;
+
+                                            case this._instanceOfTN(value[0]):
+                                                // instance of TextNumber
+                                                let i = 0;
+                                                for (const val of <TextNumber[]>value) {
+                                                    const delimiter = (i > 0 ? '<br>' : '');
+                                                    stringified += delimiter + val._text;
+                                                    i++;
+                                                }
+                                                ele.innerHTML = stringified;
+                                                break;
+
+                                            case this._instanceOfTB(value[0]):
+                                                // instance of TextBoolean
+                                                // wir gehen davon aus, dass der boolsche Wert nur einmal vorkommt,
+                                                // auch wenn der Wert als Array zurückkommt. Deshalb wird lediglich
+                                                // der erste Wert zurückgegeben.
+                                                ele.innerHTML = (value[0]._text === true ? 'true' : 'false');
+                                                break;
+
+                                            case this._instanceOfZD(value[0]):
+                                                // instance of ZusatzDaten
+                                                let z = 0;
+                                                for (const val of <ZusatzDaten[]>value) {
+                                                    const delimiter = (z > 0 ? '</br>' : '');
+                                                    for (const m of <Merkmal[]>val.merkmal) {
+                                                        stringified += delimiter + m._attrname._value + ' ' + m._text;
+                                                    }
+                                                    z++;
+                                                }
+                                                ele.innerHTML = stringified;
+                                                break;
+
+
+                                            case this._instanceOfDM(value[0]):
+                                                // instance of Datum
+                                                let d = 0;
+                                                for (const val of <Datum[]>value) {
+
+                                                    if (val.ca && val.ca[d]._text === true) {
+                                                        const ca = xmlDos.createElement('ca');
+                                                        ca.innerHTML = 'true';
+                                                        ele.appendChild(ca);
+                                                    }
+                                                    const datum = xmlDos.createElement('datum');
+                                                    datum.innerHTML = val.datum[d]._text;
+                                                    ele.appendChild(datum);
+
+                                                    d++;
+                                                }
+
+                                                break;
+
+
+                                            case this._instanceOfZR(value[0]):
+                                                // instance of Zeitraum
+                                                let p = 0;
+                                                for (const val of <Zeitraum[]>value) {
+
+                                                    const von = xmlDos.createElement('von');
+                                                    if (val.von[0].ca && val.von[0].ca[0]._text === true) {
+                                                        const ca = xmlDos.createElement('ca');
+                                                        ca.innerHTML = 'true';
+                                                        von.appendChild(ca);
+                                                    }
+
+                                                    const datumVon = xmlDos.createElement('datum');
+                                                    datumVon.innerHTML = val.von[0].datum[0]._text;
+                                                    von.appendChild(datumVon);
+                                                    ele.appendChild(von);
+
+                                                    const bis = xmlDos.createElement('bis');
+                                                    if (val.bis[0].ca && val.bis[0].ca[0]._text === true) {
+                                                        const ca = xmlDos.createElement('ca');
+                                                        ca.innerHTML = 'true';
+                                                        bis.appendChild(ca);
+                                                    }
+
+                                                    const datumBis = xmlDos.createElement('datum');
+                                                    datumBis.innerHTML = val.bis[0].datum[0]._text;
+                                                    bis.appendChild(datumBis);
+                                                    ele.appendChild(bis);
+
+                                                    p++;
+                                                }
+                                                break;
+
+                                            default:
+                                                ele.innerHTML = 'Warning! This object type is not yet supported: ' + JSON.stringify(value);
+                                                break;
+                                        }
+
+                                    } else {
+                                        // switch in case of an object
+                                        switch (true) {
+                                            case (this._instanceOfVS(value)):
+                                                // console.log('instance of ValueString', value);
+                                                ele.innerHTML = (value._value ? value._value : 'undefined');
+                                                break;
+
+                                            case (this._instanceOfVN(value)):
+                                                // console.log('instance of ValueNumber', value);
+                                                ele.innerHTML = JSON.stringify(value._value);
+                                                break;
+
+                                            default:
+                                                ele.innerHTML = 'Warning! This object type is not yet supported: ' + JSON.stringify(value);
+                                        }
+                                    }
+                                }
+                            }
+
+                            // console.log(index, this.dok?.titel)
+                            // console.log(key, value);
+                            dokument.appendChild(ele);
                         }
-
-                        // console.log(index, this.dok?.titel)
-                        // console.log(key, value);
-                        dokument.appendChild(ele);
                     });
-
-
-                    // const titel = xmlDos.createElement('titel');
-                    // titel.innerHTML = this.dok.titel[0]._text;
-                    // dokument.appendChild(titel);
-
-                    // const autor = xmlDos.createElement('autor');
-                    // autor.innerHTML = this.dok.autor[0]._text;
-                    // dokument.appendChild(autor);
-
-                    // const ef = xmlDos.createElement('erscheinungsform');
-                    // ef.innerHTML = this.dok.erscheinungsform[0]._text;
-                    // dokument.appendChild(ef);
-
-
                     dossier.appendChild(dokument);
                 }
-
             }
         );
 
-
-
         xmlDos.appendChild(dossier);
+
+        const comment = xmlDos.createComment(` ${new Date().toLocaleString('de-CH')} | Generated automatically by AV DIMAG (CH) Ingest Preparation App `);
+        xmlDos.appendChild(comment);
+
 
         console.log(xmlDos);
 
 
+        const a = document.createElement('a');
+
+        const serializer = new XMLSerializer();
+        const xmlString = `<?xml version="1.0" encoding="UTF-8"?> ${serializer.serializeToString(xmlDos)}`;
+
+        const file = new Blob([xmlString], { type: 'application/xml' });
+        a.href = URL.createObjectURL(file);
+        a.download = 'metadata-dossier.xml';
+        a.click();
 
 
 
@@ -307,109 +464,6 @@ export class Xml2jsonComponent {
         );
     }
 
-    private _getValue(value: any): string {
-        let stringified = '';
-
-        if (value === undefined) {
-            return '<i class="warning">Warning! This value is undefined or the element does not exist.</i>' + JSON.stringify(value);
-        } else {
-            // which kind of value do we have?
-            // switch in case of an array
-            if (Array.isArray(value)) {
-                switch (true) {
-                    case this._instanceOfTS(value[0]):
-                        // instance of TextString
-                        let t = 0;
-                        for (const val of <TextString[]>value) {
-                            const delimiter = (t > 0 ? '<br>' : '');
-                            stringified += delimiter + val._text;
-                            t++;
-                        }
-                        return stringified;
-                        break;
-
-                    case this._instanceOfTN(value[0]):
-                        // instance of TextNumber
-                        let i = 0;
-                        for (const val of <TextNumber[]>value) {
-                            const delimiter = (i > 0 ? '<br>' : '');
-                            stringified += delimiter + val._text;
-                            i++;
-                        }
-                        return stringified;
-                        break;
-
-                    case this._instanceOfTB(value[0]):
-                        // instance of TextBoolean
-                        // wir gehen davon aus, dass der boolsche Wert nur einmal vorkommt,
-                        // auch wenn der Wert als Array zurückkommt. Deshalb wird lediglich
-                        // der erste Wert zurückgegeben.
-                        return (value[0]._text === 'true' ? 'ja' : 'nein');
-                        break;
-
-                    case this._instanceOfZD(value[0]):
-                        // instance of ZusatzDaten
-                        let z = 0;
-                        for (const val of <ZusatzDaten[]>value) {
-                            const delimiter = (z > 0 ? '</br>' : '');
-                            for (const m of <Merkmal[]>val.merkmal) {
-                                stringified += delimiter + m._attrname._value + ' ' + m._text;
-                            }
-                            z++;
-                        }
-                        return stringified;
-                        break;
-
-
-                    case this._instanceOfDM(value[0]):
-                        // instance of Datum
-                        let d = 0;
-                        for (const val of <Datum[]>value) {
-                            const delimiter = (d > 0 ? '</br>' : '');
-                            stringified += delimiter + this._setDate(val);
-                            d++;
-                        }
-                        return stringified;
-                        break;
-
-
-                    case this._instanceOfZR(value[0]):
-                        // instance of Zeitraum
-                        let p = 0;
-                        for (const val of <Zeitraum[]>value) {
-                            const delimiter = (p > 0 ? '</br>' : '');
-                            stringified += delimiter + this._setDate(val.von[0]) + ' - ' + this._setDate(val.bis[0]);
-                            p++;
-                        }
-                        return stringified;
-                        break;
-
-                    default:
-                        return '<i class="warning">Warning! This object type is not yet supported: </i>' + JSON.stringify(value[0]);
-                        break;
-                }
-
-            } else {
-                // switch in case of an object
-                switch (true) {
-                    case (this._instanceOfVS(value)):
-                        // console.log('instance of ValueString', value);
-                        return (value._value ? value._value : 'undefined');
-                        break;
-
-                    case (this._instanceOfVN(value)):
-                        // console.log('instance of ValueNumber', value);
-                        return JSON.stringify(value._value);
-                        break;
-
-                    default:
-                        return '<i class="warning">Warning! This object type is not yet supported: </i>' + JSON.stringify(value);
-                }
-            }
-        }
-
-
-    }
 
     private _parseDate(val: string): string {
         // the format could be: 2022-11-31 OR 2022-11 OR 2022
@@ -427,11 +481,6 @@ export class Xml2jsonComponent {
 
         return date;
 
-    }
-
-    private _setDate(date: Datum): string {
-        const ca = ((date.ca && date.ca[0]._text === true) ? 'ca. ' : '');
-        return ca + this._parseDate(date.datum[0]._text);
     }
 
     // which type do we have? Solution from
