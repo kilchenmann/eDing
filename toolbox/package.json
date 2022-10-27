@@ -6,6 +6,7 @@
     "ng": "ng",
     "start": "ng serve",
     "app": "ng build && electron .",
+    "app-dev": "yarn build-app-dev && electron .",
     "build-app": "ng build",
     "build-app-dev": "ng build --configuration development",
     "build-app-dev-watch": "ng build --configuration development --watch=true",

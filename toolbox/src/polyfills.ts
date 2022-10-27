@@ -42,6 +42,12 @@
  *
  */
 
+ declare global {
+    interface Window {
+        fs: any;
+    }
+}
+
 /***************************************************************************************************
  * Zone JS is required by default for Angular itself.
  */

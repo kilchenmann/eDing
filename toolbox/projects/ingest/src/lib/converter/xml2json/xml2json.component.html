@@ -69,7 +69,7 @@
               </button>
               {{node.name[0]._text}}
               <span class="fill-remaining-space"></span>
-              <button mat-stroked-button class="export" (click)="exportAip(node)">
+              <button mat-stroked-button class="export" (click)="exportAip(node); fileName = ''; displayDokDetails = false">
                 <mat-icon class="prefix">east</mat-icon>
                 Export als AIP
               </button>
@@ -80,7 +80,7 @@
               <ng-container matTreeNodeOutlet></ng-container>
               <div class="mat-tree-node-file" *ngIf="node.datei && node.datei.length">
                 <div *ngFor="let datei of node.datei">
-                  <button mat-button (click)="getFileMeta(datei._attrid._value); fileName = datei.name[0]._text"
+                  <button mat-button (click)="getFileMeta(datei._attrid._value); fileName = datei.name[0]._text; displayDokDetails = true"
                     class="file" [class.active]="fileName === datei.name[0]._text">
                     <!-- [matTooltip]="datei._attrid._value"
                     matTooltipPosition="above" -->
@@ -95,7 +95,7 @@
       </div>
 
       <!-- file or dossier info on the right hand side -->
-      <div class="half-width info">
+      <div class="half-width info" *ngIf="displayDokDetails">
         <h4 class="mat-subheading-1" *ngIf="dok || dos">
           Die Datei "{{ fileName }}" ist im
           {{ dok ? "Dokument" : "Dossier"}} referenziert
