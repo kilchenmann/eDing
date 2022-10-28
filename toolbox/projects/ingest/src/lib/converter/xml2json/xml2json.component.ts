@@ -20,7 +20,8 @@ import {
     ValueNumber,
     ValueString,
     Zeitraum,
-    ZusatzDaten
+    ZusatzDaten,
+    Ordnungssystem
 } from '../../shared';
 
 
@@ -66,20 +67,20 @@ export class Xml2jsonComponent {
 
     // xml options
     xmlOptions = {
-        mergeCDATA: false,	// extract cdata and merge with text nodes
-        grokAttr: true,		// convert truthy attributes to boolean, etc
-        grokText: true,		// convert truthy text/attr to boolean, etc
-        normalize: true,	// collapse multiple spaces to single space
-        xmlns: false, 		// include namespaces as attributes in output
-        namespaceKey: '_ns', 	// tag name for namespace objects
-        textKey: '_text', 	// tag name for text nodes
-        valueKey: '_value', 	// tag name for attribute values
-        attrKey: '_attr', 	// tag for attr groups
-        cdataKey: '_cdata',	// tag for cdata nodes (ignored if mergeCDATA is true)
-        attrsAsObject: false, 	// if false, key is used as prefix to name, set prefix to '' to merge children and attrs.
-        stripAttrPrefix: true, 	// remove namespace prefixes from attributes
-        stripElemPrefix: true, 	// for elements of same name in diff namespaces, you can enable namespaces and access the nskey property
-        childrenAsArray: true 	// force children into arrays
+        mergeCDATA: false,      // extract cdata and merge with text nodes
+        grokAttr: true,         // convert truthy attributes to boolean, etc
+        grokText: true,         // convert truthy text/attr to boolean, etc
+        normalize: true,        // collapse multiple spaces to single space
+        xmlns: false,           // include namespaces as attributes in output
+        namespaceKey: '_ns',    // tag name for namespace objects
+        textKey: '_text',       // tag name for text nodes
+        valueKey: '_value',     // tag name for attribute values
+        attrKey: '_attr',       // tag for attr groups
+        cdataKey: '_cdata',     // tag for cdata nodes (ignored if mergeCDATA is true)
+        attrsAsObject: false,   // if false, key is used as prefix to name, set prefix to '' to merge children and attrs.
+        stripAttrPrefix: true,  // remove namespace prefixes from attributes
+        stripElemPrefix: true,  // for elements of same name in diff namespaces, you can enable namespaces and access the nskey property
+        childrenAsArray: true   // force children into arrays
     };
 
     converterError = false;
@@ -187,19 +188,66 @@ export class Xml2jsonComponent {
     exportAip(node: Ordner) {
         this.displayDokDetails = false;
         console.log('export aip', node);
-        // create metadata-paket.xml
-
+        // create metadata.xml
         const xmlDos = document.implementation.createDocument('', '', null);
-        // const xmlHead = xmlDos.createElement('?xml');
-        // xmlHead.setAttribute('version', '1.0');
-        // xmlHead.setAttribute('encoding', 'UTF-8');
-        // xmlDos.appendChild(xmlHead);
+        const paket = xmlDos.createElement('paket');
+        paket.setAttribute('xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance');
+        paket.setAttribute('xmlns', 'http://bar.admin.ch/arelda/v4');
+        paket.setAttribute('xsi:schemaLocation', 'http://bar.admin.ch/arelda/v4 xsd/arelda.xsd');
+        paket.setAttribute('xsi:type', 'paketAIP');
+        paket.setAttribute('schemaVersion', '4.1');
+
+        // header
+        const paketTyp = xmlDos.createElement('paketTyp');
+        paketTyp.innerHTML = 'AIP';
+        paket.appendChild(paketTyp);
+
+        const nameSIP = xmlDos.createElement('nameSIP');
+        // todo: WARNING! Hardcoded, but we do not have this information yet
+        nameSIP.innerHTML = 'SIP_20070923_KOST_eCH0160_1_1_GEVER';
+        paket.appendChild(nameSIP);
+
+        const version = xmlDos.createElement('version');
+        version.innerHTML = '0.1';
+        paket.appendChild(version);
+
+        // inhaltsverzeichnis
+        const inhaltsverzeichnis = xmlDos.createElement('inhaltsverzeichnis');
+
+        const ordner = xmlDos.createElement('ordner');
+
+        const name = xmlDos.createElement('name');
+        name.innerHTML = node.name[0]._text;
+        ordner.appendChild(name);
+
+        const originalName = xmlDos.createElement('originalName');
+        originalName.innerHTML = node.originalName[0]._text;
+        ordner.appendChild(originalName);
+
+
+        node.datei?.forEach(
+            (dat: Datei) => {
+                const datei = this._createEle('datei', dat);
+                ordner.appendChild(datei);
+            }
+        );
+
+        inhaltsverzeichnis.appendChild(ordner);
+        paket.appendChild(inhaltsverzeichnis);
+
+        // ablieferung
+
+        const ablieferung = this._createEle('ablieferung', this.sip.paket[0].ablieferung[0]);
+
+        // ordnungssystem und ordnungssystemposition (vorerst nur) mit dossier
+        const ordnungssystem = xmlDos.createElement('ordnungssystem');
+        const ordnungssystemposition = xmlDos.createElement('ordnungssystemposition');
         const dossier = xmlDos.createElement('dossier');
-        dossier.setAttribute('xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance');
-        dossier.setAttribute('xmlns', 'http://bar.admin.ch/arelda/v4');
-        dossier.setAttribute('xsi:schemaLocation', 'http://bar.admin.ch/arelda/v4 xsd/dossier.xsd');
-        dossier.setAttribute('xsi:type', 'paketAIP');
-        dossier.setAttribute('schemaVersion', '4.1');
+        // dossier.setAttribute('xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance');
+        // dossier.setAttribute('xmlns', 'http://bar.admin.ch/arelda/v4');
+        // dossier.setAttribute('xsi:schemaLocation', 'http://bar.admin.ch/arelda/v4 xsd/dossier.xsd');
+        // dossier.setAttribute('xsi:type', 'paketAIP');
+        // dossier.setAttribute('schemaVersion', '4.1');
 
         // create metadata-dossier.xml
         node.datei?.forEach(
@@ -207,182 +255,24 @@ export class Xml2jsonComponent {
                 this.getFileMeta(dat._attrid._value);
 
                 if (this.dok) {
-                    const dokument = xmlDos.createElement('dokument');
-
-                    Object.entries(this.dok).forEach(([key, value], index) => {
-
-                        // check if key is of attribute type
-                        const attr = key.split('_attr');
-                        if (attr.length > 1) {
-                            // switch in case of an object
-                            switch (true) {
-                                case (this._instanceOfVS(value)):
-                                    // console.log('instance of ValueString', value);
-                                    dokument.setAttribute(attr[1], value._value);
-                                    break;
-
-                                case (this._instanceOfVN(value)):
-                                    // console.log('instance of ValueNumber', value);
-                                    dokument.setAttribute(attr[1], JSON.stringify(value._value));
-                                    break;
-
-                                default:
-                                    console.error('Was not able to get type of this object: ', JSON.stringify(value));
-                            }
-                        } else {
-
-                            const ele = xmlDos.createElement(key);
-
-                            // todo: check type
-
-                            if (key === 'dateiRef') {
-                                // use filename as datei reference instead of original dateiRef name.
-                                // because in the ingest tool, we know the filename only
-                                ele.innerHTML = dat.originalName[0]._text;
-                            } else {
-
-                                let stringified = '';
-
-                                if (value === undefined) {
-                                    ele.innerHTML = 'Warning! This value is undefined or the element does not exist: ' + JSON.stringify(value);
-                                } else {
-                                    // which kind of value do we have?
-                                    // switch in case of an array
-                                    if (Array.isArray(value)) {
-                                        switch (true) {
-                                            case this._instanceOfTS(value[0]):
-                                                // instance of TextString
-                                                let t = 0;
-                                                for (const val of <TextString[]>value) {
-                                                    const delimiter = (t > 0 ? '<br>' : '');
-                                                    stringified += delimiter + val._text;
-                                                    t++;
-                                                }
-                                                ele.innerHTML = stringified;
-                                                break;
-
-                                            case this._instanceOfTN(value[0]):
-                                                // instance of TextNumber
-                                                let i = 0;
-                                                for (const val of <TextNumber[]>value) {
-                                                    const delimiter = (i > 0 ? '<br>' : '');
-                                                    stringified += delimiter + val._text;
-                                                    i++;
-                                                }
-                                                ele.innerHTML = stringified;
-                                                break;
-
-                                            case this._instanceOfTB(value[0]):
-                                                // instance of TextBoolean
-                                                // wir gehen davon aus, dass der boolsche Wert nur einmal vorkommt,
-                                                // auch wenn der Wert als Array zurückkommt. Deshalb wird lediglich
-                                                // der erste Wert zurückgegeben.
-                                                ele.innerHTML = (value[0]._text === true ? 'true' : 'false');
-                                                break;
-
-                                            case this._instanceOfZD(value[0]):
-                                                // instance of ZusatzDaten
-                                                let z = 0;
-                                                for (const val of <ZusatzDaten[]>value) {
-                                                    const delimiter = (z > 0 ? '</br>' : '');
-                                                    for (const m of <Merkmal[]>val.merkmal) {
-                                                        stringified += delimiter + m._attrname._value + ' ' + m._text;
-                                                    }
-                                                    z++;
-                                                }
-                                                ele.innerHTML = stringified;
-                                                break;
-
-
-                                            case this._instanceOfDM(value[0]):
-                                                // instance of Datum
-                                                let d = 0;
-                                                for (const val of <Datum[]>value) {
-
-                                                    if (val.ca && val.ca[d]._text === true) {
-                                                        const ca = xmlDos.createElement('ca');
-                                                        ca.innerHTML = 'true';
-                                                        ele.appendChild(ca);
-                                                    }
-                                                    const datum = xmlDos.createElement('datum');
-                                                    datum.innerHTML = val.datum[d]._text;
-                                                    ele.appendChild(datum);
-
-                                                    d++;
-                                                }
-
-                                                break;
-
-
-                                            case this._instanceOfZR(value[0]):
-                                                // instance of Zeitraum
-                                                let p = 0;
-                                                for (const val of <Zeitraum[]>value) {
-
-                                                    const von = xmlDos.createElement('von');
-                                                    if (val.von[0].ca && val.von[0].ca[0]._text === true) {
-                                                        const ca = xmlDos.createElement('ca');
-                                                        ca.innerHTML = 'true';
-                                                        von.appendChild(ca);
-                                                    }
-
-                                                    const datumVon = xmlDos.createElement('datum');
-                                                    datumVon.innerHTML = val.von[0].datum[0]._text;
-                                                    von.appendChild(datumVon);
-                                                    ele.appendChild(von);
-
-                                                    const bis = xmlDos.createElement('bis');
-                                                    if (val.bis[0].ca && val.bis[0].ca[0]._text === true) {
-                                                        const ca = xmlDos.createElement('ca');
-                                                        ca.innerHTML = 'true';
-                                                        bis.appendChild(ca);
-                                                    }
-
-                                                    const datumBis = xmlDos.createElement('datum');
-                                                    datumBis.innerHTML = val.bis[0].datum[0]._text;
-                                                    bis.appendChild(datumBis);
-                                                    ele.appendChild(bis);
-
-                                                    p++;
-                                                }
-                                                break;
-
-                                            default:
-                                                ele.innerHTML = 'Warning! This object type is not yet supported: ' + JSON.stringify(value);
-                                                break;
-                                        }
-
-                                    } else {
-                                        // switch in case of an object
-                                        switch (true) {
-                                            case (this._instanceOfVS(value)):
-                                                // console.log('instance of ValueString', value);
-                                                ele.innerHTML = (value._value ? value._value : 'undefined');
-                                                break;
-
-                                            case (this._instanceOfVN(value)):
-                                                // console.log('instance of ValueNumber', value);
-                                                ele.innerHTML = JSON.stringify(value._value);
-                                                break;
-
-                                            default:
-                                                ele.innerHTML = 'Warning! This object type is not yet supported: ' + JSON.stringify(value);
-                                        }
-                                    }
-                                }
-                            }
-
-                            // console.log(index, this.dok?.titel)
-                            // console.log(key, value);
-                            dokument.appendChild(ele);
-                        }
-                    });
+                    const dokument = this._createEle('dokument', this.dok, dat.originalName[0]._text);
                     dossier.appendChild(dokument);
                 }
             }
         );
 
-        xmlDos.appendChild(dossier);
+        ordnungssystemposition.appendChild(dossier);
+        ordnungssystem.appendChild(ordnungssystemposition);
+        ablieferung.appendChild(ordnungssystem);
+
+        // const ablieferung = xmlDos.createElement('ablieferung');
+        // ablieferung.setAttribute('xsi:type', this.sip.paket[0].ablieferung[0]._attrtype._value);
+        paket.appendChild(ablieferung);
+
+
+        // dossier
+
+        xmlDos.appendChild(paket);
 
         const comment = xmlDos.createComment(` ${new Date().toLocaleString('de-CH')} | Automatically generated by AV DIMAG (CH) Ingest Preparation Module `);
         xmlDos.appendChild(comment);
@@ -399,7 +289,7 @@ export class Xml2jsonComponent {
 
         const file = new Blob([xmlString], { type: 'application/xml' });
         a.href = URL.createObjectURL(file);
-        a.download = 'metadata-dossier.xml';
+        a.download = 'metadata.xml';
         a.click();
 
 
@@ -469,6 +359,201 @@ export class Xml2jsonComponent {
     }
 
 
+    private _createEle(root: string, data: Object, file?: string): HTMLElement {
+        const xml = document.implementation.createDocument('', '', null);
+
+        const rootEle = xml.createElement(root);
+        Object.entries(data).forEach(([key, value], index) => {
+            // check if key is of attribute type
+            const attr = key.split('_attr');
+            if (attr.length > 1) {
+                // switch in case of an object
+                switch (true) {
+                    case (this._instanceOfVS(value)):
+                        // console.log('instance of ValueString', value);
+                        rootEle.setAttribute(attr[1], value._value);
+                        break;
+
+                    case (this._instanceOfVN(value)):
+                        // console.log('instance of ValueNumber', value);
+                        rootEle.setAttribute(attr[1], JSON.stringify(value._value));
+                        break;
+
+                    default:
+                        console.error('Was not able to get type of this object: ', JSON.stringify(value));
+                }
+            } else {
+
+                let ele = xml.createElement(key);
+
+                // todo: check type
+
+                if (key === 'dateiRef' && file) {
+                    // use filename as datei reference instead of original dateiRef name.
+                    // because in the ingest tool, we know the filename only
+                    ele.innerHTML = file;
+                } else {
+
+                    let stringified = '';
+
+                    if (value === undefined) {
+                        ele.innerHTML = 'Warning! This value is undefined or the element does not exist: ' + JSON.stringify(value);
+                    } else {
+                        // which kind of value do we have?
+                        // switch in case of an array
+                        if (Array.isArray(value)) {
+                            switch (true) {
+                                case this._instanceOfTS(value[0]):
+                                    // instance of TextString
+                                    let t = 0;
+                                    for (const val of <TextString[]>value) {
+                                        const delimiter = (t > 0 ? '<br>' : '');
+                                        stringified += delimiter + val._text;
+                                        t++;
+                                    }
+                                    ele.innerHTML = stringified;
+                                    break;
+
+                                case this._instanceOfTN(value[0]):
+                                    // instance of TextNumber
+                                    let i = 0;
+                                    for (const val of <TextNumber[]>value) {
+                                        const delimiter = (i > 0 ? '<br>' : '');
+                                        stringified += delimiter + val._text;
+                                        i++;
+                                    }
+                                    ele.innerHTML = stringified;
+                                    break;
+
+                                case this._instanceOfTB(value[0]):
+                                    // instance of TextBoolean
+                                    // wir gehen davon aus, dass der boolsche Wert nur einmal vorkommt,
+                                    // auch wenn der Wert als Array zurückkommt. Deshalb wird lediglich
+                                    // der erste Wert zurückgegeben.
+                                    ele.innerHTML = (value[0]._text === true ? 'true' : 'false');
+                                    break;
+
+                                case this._instanceOfZD(value[0]):
+                                    // instance of ZusatzDaten
+                                    let z = 0;
+                                    for (const val of <ZusatzDaten[]>value) {
+                                        const delimiter = (z > 0 ? '</br>' : '');
+                                        for (const m of <Merkmal[]>val.merkmal) {
+                                            stringified += delimiter + m._attrname._value + ' ' + m._text;
+                                        }
+                                        z++;
+                                    }
+                                    ele.innerHTML = stringified;
+                                    break;
+
+
+                                case this._instanceOfDM(value[0]):
+                                    // instance of Datum
+                                    let d = 0;
+                                    for (const val of <Datum[]>value) {
+
+                                        if (val.ca && val.ca[d]._text === true) {
+                                            const ca = xml.createElement('ca');
+                                            ca.innerHTML = 'true';
+                                            ele.appendChild(ca);
+                                        }
+                                        const datum = xml.createElement('datum');
+                                        datum.innerHTML = val.datum[d]._text;
+                                        ele.appendChild(datum);
+
+                                        d++;
+                                    }
+
+                                    break;
+
+
+                                case this._instanceOfZR(value[0]):
+                                    // instance of Zeitraum
+                                    let p = 0;
+                                    for (const val of <Zeitraum[]>value) {
+
+                                        const von = xml.createElement('von');
+                                        if (val.von[0].ca && val.von[0].ca[0]._text === true) {
+                                            const ca = xml.createElement('ca');
+                                            ca.innerHTML = 'true';
+                                            von.appendChild(ca);
+                                        }
+
+                                        const datumVon = xml.createElement('datum');
+                                        datumVon.innerHTML = val.von[0].datum[0]._text;
+                                        von.appendChild(datumVon);
+                                        ele.appendChild(von);
+
+                                        const bis = xml.createElement('bis');
+                                        if (val.bis[0].ca && val.bis[0].ca[0]._text === true) {
+                                            const ca = xml.createElement('ca');
+                                            ca.innerHTML = 'true';
+                                            bis.appendChild(ca);
+                                        }
+
+                                        const datumBis = xml.createElement('datum');
+                                        datumBis.innerHTML = val.bis[0].datum[0]._text;
+                                        bis.appendChild(datumBis);
+                                        ele.appendChild(bis);
+
+                                        p++;
+                                    }
+                                    break;
+
+                                case this._instanceOfPR(value[0]):
+                                    // instance of Provenienz
+                                    ele = this._createEle('provenienz', value[0]);
+                                    break;
+
+                                case this._instanceOfOS(value[0]):
+                                    // instance of Ordnungssystem
+                                    // skip!!!
+                                    // ele = this._createEle('ordnungssystem', value[0]);
+                                    break;
+
+                                case this._instanceOfOSP(value[0]):
+                                    // instance of Ordnungssystemposition
+                                    // skip!!!
+                                    // value.forEach(osp => {
+                                    //     console.log(osp)
+                                    // });
+                                    // ele = this._createEle('ordnungssystem', value[0]);
+                                    break;
+
+                                default:
+                                    ele.innerHTML = 'Warning! This object type (array) is not yet supported: ' + JSON.stringify(value);
+                                    break;
+                            }
+
+                        } else {
+                            // switch in case of an object
+                            switch (true) {
+                                case (this._instanceOfVS(value)):
+                                    // console.log('instance of ValueString', value);
+                                    ele.innerHTML = (value._value ? value._value : 'undefined');
+                                    break;
+
+                                case (this._instanceOfVN(value)):
+                                    // console.log('instance of ValueNumber', value);
+                                    ele.innerHTML = JSON.stringify(value._value);
+                                    break;
+
+                                default:
+                                    ele.innerHTML = 'Warning! This object type (object) is not yet supported: ' + JSON.stringify(value);
+                            }
+                        }
+                    }
+                }
+
+                // console.log(index, this.dok?.titel)
+                // console.log(key, value);
+                rootEle.appendChild(ele);
+            }
+        });
+        return rootEle;
+    }
+
+
     private _parseDate(val: string): string {
         // the format could be: 2022-11-31 OR 2022-11 OR 2022
         const m = val.toString().split('-');
@@ -519,6 +604,18 @@ export class Xml2jsonComponent {
 
     private _instanceOfZD(object: any): object is ZusatzDaten {
         return 'merkmal' in object;
+    }
+
+    private _instanceOfPR(object: any): object is Provenienz {
+        return 'aktenbildnerName' in object || 'registratur' in object;
+    }
+
+    private _instanceOfOS(object: any): object is Ordnungssystem {
+        return 'ordnungssystemposition' in object && 'generation' in object;
+    }
+
+    private _instanceOfOSP(object: any): object is Ordnungssystemposition {
+        return 'dossier' in object || 'nummer' in object;
     }
 
 }
