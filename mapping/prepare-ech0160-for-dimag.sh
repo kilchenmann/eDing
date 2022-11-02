@@ -116,7 +116,8 @@ do
         
         # check path root: paket or dossier
         xmlPrefix="metadata"
-        xmlSuffix=$(echo "$path" | cut -d "/" -f2)
+        xmlSuffix=""
+        # $(echo "$path" | cut -d "/" -f2)
 
         # type="element"
 
@@ -151,7 +152,7 @@ do
             echo -e "\t\t\t\t</entry>" >> $FILE        
             echo -e "\t\t\t\t<entry>" >> $FILE
             echo -e "\t\t\t\t\t<key>xmlreferencesource</key>" >> $FILE
-            echo -e "\t\t\t\t\t<value>/dossier/dokument/dateiRef</value>" >> $FILE
+            echo -e "\t\t\t\t\t<value>/paket/ablieferung/ordnungssystem/ordnungssystemposition/dossier/dokument/dateiRef</value>" >> $FILE
             echo -e "\t\t\t\t</entry>" >> $FILE        
             echo -e "\t\t\t\t<entry>" >> $FILE
             echo -e "\t\t\t\t\t<key>xmlreferencecustompath</key>" >> $FILE
