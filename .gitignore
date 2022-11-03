@@ -37,3 +37,7 @@ typings
 .DS_Store
 Thumbs.db
 ~$*
+
+# Ingest
+mapping/Logs
+mapping/Test

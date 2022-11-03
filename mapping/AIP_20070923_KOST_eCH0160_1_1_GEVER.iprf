@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<input lastsavedate="2022-11-02T14:03:41.660+01:00" nextid="121" version="1">
+<input lastsavedate="2022-11-03T10:44:41.449+01:00" nextid="121" version="1">
     <inputelement>
         <id>1</id>
         <uuid>122f698c-0e80-4a59-9c92-30e52d953a47</uuid>
@@ -1379,7 +1379,7 @@
             <elements>
                 <entry>
                     <key>xmlreferenceout</key>
-                    <value>../registrierdatum</value>
+                    <value>../registrierdatum/datum</value>
                 </entry>
                 <entry>
                     <key>xmlreferencesource</key>

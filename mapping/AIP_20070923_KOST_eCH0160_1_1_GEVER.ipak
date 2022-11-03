@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <folderpackaging recursiv="true" level="1">
-  <includedfilters>
-    <filter pattern="*.pdf" />
-  </includedfilters>
-  <excludedfilters>
-    <filter pattern="metadata.xml" />
-    <filter pattern="metadata-dossier.xml" />
-    <filter pattern="metadata-paket.xml" />
-  </excludedfilters>
+  <includedfilters />
+  <excludedfilters />
 </folderpackaging>
 
