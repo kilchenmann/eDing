@@ -100,13 +100,13 @@
           Die Datei "{{ fileName }}" ist im
           {{ dok ? "Dokument" : "Dossier"}} referenziert
         </h4>
-        <div *ngIf="dok">
+        <div *ngIf="dok && dos">
           <p *ngFor="let item of dok | keyvalue; let last = last;" [class.withSeparator]="!last">
             <strong>{{item.key}}</strong><br>
             <span [innerHtml]="item.value | stringifyValue"></span>
           </p>
         </div>
-        <div *ngIf="dos">
+        <div *ngIf="dos && !dok">
           <p *ngFor="let item of dos | keyvalue; let last = last;" [class.withSeparator]="!last">
             <strong>{{item.key}}</strong><br>
             <span [innerHtml]="item.value | stringifyValue"></span>
