@@ -13,8 +13,8 @@ pages:
     - npm install
     - npm run build-lib
     - npm run build-app
-    - mkdir -p public
-    - mv dist/toolbox/* public/
+    - mkdir -p ../public
+    - mv dist/toolbox/* ../public/
   artifacts:
     paths:
       # The folder that contains the files to be exposed at the Page URL
