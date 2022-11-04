@@ -8,11 +8,7 @@ import {
     Datum,
     Dokument,
     Dossier,
-    ErrorMessage,
-    Ordner,
-    Ordnungssystemposition,
-    Merkmal,
-    Provenienz,
+    ErrorMessage, Merkmal, Ordner, Ordnungssystem, Ordnungssystemposition, Provenienz,
     SIP,
     TextBoolean,
     TextNumber,
@@ -20,8 +16,7 @@ import {
     ValueNumber,
     ValueString,
     Zeitraum,
-    ZusatzDaten,
-    Ordnungssystem
+    ZusatzDaten
 } from '../../shared';
 
 
@@ -167,7 +162,9 @@ export class Xml2jsonComponent {
             // grab test data from shared/testdata/[name].xml
             const tdxml = name;
 
-            this.http.get(`/assets/testdata/${name}.xml`, { responseType: 'text' }).subscribe(data => {
+            const url = 'https://av-dimag.gitlab.io/ingest-poc';
+
+            this.http.get(`${url}/assets/testdata/${name}.xml`, { responseType: 'text' }).subscribe(data => {
                 // console.log(data);
                 // and set value in first textarea = "xml"
                 this.form.controls['xml'].setValue(data);
