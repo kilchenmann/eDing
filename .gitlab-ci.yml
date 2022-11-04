@@ -6,13 +6,13 @@ before_script:
 pages:
   cache:
     paths:
-    - node_modules/
+    - toolbox/node_modules/
   stage: deploy
   script:
     - cd toolbox
     - npm install
     - npm run build-lib
-    - npm run build-app
+    - npm run build-page
     - mkdir -p ../public
     - mv dist/toolbox/* ../public/
   artifacts:

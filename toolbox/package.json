@@ -10,6 +10,7 @@
     "build-app": "ng build",
     "build-app-dev": "ng build --configuration development",
     "build-app-dev-watch": "ng build --configuration development --watch=true",
+    "build-page": "ng build --base-href /ingest-poc/",
     "test": "ng test",
     "test-ci": "ng test --watch=false --browsers=ChromeHeadless",
     "test-lib": "ng t --project @av-dimag/ingest",
