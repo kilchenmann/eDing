@@ -1,0 +1,25 @@
+# The Docker image that will be used to build your app
+image: node:16.17.0
+# Functions that should be executed before the build script is run
+before_script:
+  - npm install -g @angular/cli@6.2.1
+pages:
+  cache:
+    paths:
+    - node_modules/
+  stage: deploy
+  script:
+    - cd toolbox
+    - npm install
+    - npm run build-lib
+    - npm run build-app
+    - mkdir -p public
+    - mv dist/toolbox/* public/
+  artifacts:
+    paths:
+      # The folder that contains the files to be exposed at the Page URL
+      - public
+  rules:
+    # This ensures that only pushes to the default branch will trigger
+    # a pages deploy
+    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
