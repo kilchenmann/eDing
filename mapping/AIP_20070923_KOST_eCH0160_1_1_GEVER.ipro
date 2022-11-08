@@ -1,122 +1,108 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<project lastsavedate="2022-11-07T13:53:08.437+01:00" nextid="107" widgetcounter="213">
+<project lastsavedate="2022-11-08T11:54:46.202+01:00" nextid="107" widgetcounter="213">
     <name value="AIP_20070923_KOST_eCH0160_1_1_GEVER"/>
     <type value="DIMAG"/>
     <inputfile value="M:\Code\ingest-poc\mapping\AIP_20070923_KOST_eCH0160_1_1_GEVER.iprf"/>
     <components>
-        <mappingelementlogic id="65" operation="ifVal1NotEmptyUseVal2" v1is="">
-            <name>Wert_1 ? Wert_2</name>
-        </mappingelementlogic>
-        <mappingelementconstant id="81">
-            <constant value="testCH-2175"/>
-        </mappingelementconstant>
-        <mappingelementconcat id="103"/>
-        <mappingelementconcat id="75"/>
-        <mappingelementconcat id="8"/>
         <outputelement id="70" name="entstehungs-zeitraum" description="Entstehungszeitraum" beanname="entstehungsZeitraum" outputlevel="O" required="true" technical="false"/>
-        <mappingelementconcat id="79"/>
-        <mappingelementconcat id="78"/>
-        <mappingelementlogic id="53" operation="ifVal1NotEmptyUseVal2" v1is="">
-            <name>Wert_1 ? Wert_2</name>
-        </mappingelementlogic>
-        <mappingelementconcat id="17"/>
-        <outputelement id="170" name="titel" description="Titel" beanname="titel" outputlevel="O" required="true" technical="false"/>
-        <mappingelementlogic id="56" operation="ifVal1NotEmptyUseVal2" v1is="">
-            <name>Wert_1 ? Wert_2</name>
-        </mappingelementlogic>
-        <outputelement id="840" name="ersteller" description="Angelegt von" beanname="ersteller" outputlevel="F" required="false" technical="false"/>
-        <outputelement id="890" name="titel" description="Titel" beanname="titel" outputlevel="F" required="true" technical="false"/>
-        <outputelement id="870" name="scandatum" description="Scandatum" beanname="scandatum" outputlevel="F" required="false" technical="false"/>
-        <mappingelementconcat id="18"/>
-        <mappingelementconstant id="97">
-            <constant value=": "/>
-        </mappingelementconstant>
-        <mappingelementlogic id="89" operation="v1is" v1is="833">
-            <name>Finde Signatur 833</name>
-        </mappingelementlogic>
-        <mappingelementconcat id="68"/>
-        <mappingelementconcat id="67"/>
-        <mappingelementconcat id="22"/>
-        <mappingelementconstant id="101">
-            <constant value=" ("/>
-        </mappingelementconstant>
-        <mappingelementconcat id="100"/>
-        <mappingelementconstant id="102">
-            <constant value=")"/>
-        </mappingelementconstant>
-        <mappingelementlogic id="55" operation="ifVal1NotEmptyUseVal2" v1is="">
-            <name>Wert_1 ? Wert_2</name>
-        </mappingelementlogic>
-        <mappingelementlogic id="59" operation="ifVal1NotEmptyUseVal2" v1is="">
-            <name>Wert_1 ? Wert_2</name>
-        </mappingelementlogic>
-        <mappingelementconstant id="76">
-            <constant value=": "/>
-        </mappingelementconstant>
-        <mappingelementconstant id="40">
-            <constant value=" / "/>
-        </mappingelementconstant>
-        <mappingelementconcat id="104"/>
-        <mappingelementconcat id="62"/>
-        <mappingelementconcat id="60"/>
+        <outputelement id="610" name="titel" description="Titel" beanname="titel" outputlevel="R" required="true" technical="false"/>
         <mappingelementconstant id="5">
             <constant value=" - "/>
         </mappingelementconstant>
-        <mappingelementconcat id="4"/>
-        <mappingelementconcat id="19"/>
-        <mappingelementconcat id="77"/>
-        <mappingelementconcat id="21"/>
-        <mappingelementconcat id="42"/>
-        <mappingelementconcat id="54"/>
-        <mappingelementlogic id="58" operation="ifVal1NotEmptyUseVal2" v1is="">
-            <name>Wert_1 ? Wert_2</name>
-        </mappingelementlogic>
-        <mappingelementconcat id="74"/>
-        <outputelement id="860" name="quirks" description="Eigenheiten" beanname="quirks" outputlevel="F" required="false" technical="false"/>
-        <outputelement id="110" name="quirks" description="Eigenheiten" beanname="quirks" outputlevel="O" required="false" technical="false"/>
-        <mappingelementconcat id="20"/>
-        <outputelement id="160" name="sperrfrist" description="Sperrfrist" beanname="sperrfrist" outputlevel="O" required="false" technical="false"/>
-        <mappingelementconcat id="98"/>
-        <mappingelementconstant id="10">
-            <constant value="ca. "/>
-        </mappingelementconstant>
-        <outputelement id="560" name="pid" description="Parent ID (PID)" beanname="pid" outputlevel="R" required="false" technical="false"/>
-        <outputelement id="610" name="titel" description="Titel" beanname="titel" outputlevel="R" required="true" technical="false"/>
-        <mappingelementconcat id="43"/>
-        <mappingelementlogic id="9" operation="v1is" v1is="true">
-            <name>Wert_1 ? 'ca' : ''</name>
-        </mappingelementlogic>
-        <outputelement id="100" name="provenienz" description="Provenienz" beanname="provenienz" outputlevel="O" required="false" technical="false"/>
-        <mappingelementconcat id="16"/>
         <mappingelementlogic id="90" operation="v1is" v1is="210">
             <name>Finde Signatur 210</name>
         </mappingelementlogic>
+        <mappingelementconcat id="77"/>
+        <mappingelementconcat id="54"/>
+        <mappingelementconcat id="67"/>
+        <outputelement id="40" name="archivalien-typ" description="Archivaliengattung" beanname="archivalienTyp" outputlevel="O" required="true" technical="false"/>
         <mappingelementconstant id="52">
             <constant value=" : "/>
         </mappingelementconstant>
-        <mappingelementconcat id="69"/>
-        <mappingelementconstant id="73">
-            <constant value=" &#10;"/>
-        </mappingelementconstant>
-        <mappingelementlogic id="66" operation="ifVal1NotEmptyUseVal2" v1is="">
+        <outputelement id="100" name="provenienz" description="Provenienz" beanname="provenienz" outputlevel="O" required="false" technical="false"/>
+        <mappingelementlogic id="59" operation="ifVal1NotEmptyUseVal2" v1is="">
             <name>Wert_1 ? Wert_2</name>
         </mappingelementlogic>
-        <mappingelementconcat id="99"/>
-        <mappingelementlogic id="93" operation="replaceempty" v1is="210">
-            <name>Wert_1 ? Wert_1 : Wert_2</name>
+        <mappingelementlogic id="37" operation="ifVal1NotEmptyUseVal2" v1is="">
+            <name>Wert_1 ? Wert_2</name>
         </mappingelementlogic>
-        <mappingelementconcat id="11"/>
-        <outputelement id="40" name="archivalien-typ" description="Archivaliengattung" beanname="archivalienTyp" outputlevel="O" required="true" technical="false"/>
-        <outputelement id="10" name="abgebende-stelle" description="Abgebende Stelle" beanname="abgebendeStelle" outputlevel="O" required="false" technical="false"/>
+        <mappingelementconcat id="68"/>
         <mappingelementconstant id="88">
             <constant value="testCH-2180"/>
         </mappingelementconstant>
+        <mappingelementlogic id="93" operation="replaceempty" v1is="210">
+            <name>Wert_1 ? Wert_1 : Wert_2</name>
+        </mappingelementlogic>
+        <outputelement id="170" name="titel" description="Titel" beanname="titel" outputlevel="O" required="true" technical="false"/>
+        <outputelement id="840" name="ersteller" description="Angelegt von" beanname="ersteller" outputlevel="F" required="false" technical="false"/>
+        <mappingelementlogic id="53" operation="ifVal1NotEmptyUseVal2" v1is="">
+            <name>Wert_1 ? Wert_2</name>
+        </mappingelementlogic>
+        <mappingelementlogic id="56" operation="ifVal1NotEmptyUseVal2" v1is="">
+            <name>Wert_1 ? Wert_2</name>
+        </mappingelementlogic>
+        <mappingelementconstant id="10">
+            <constant value="ca. "/>
+        </mappingelementconstant>
+        <mappingelementconcat id="18"/>
+        <outputelement id="890" name="titel" description="Titel" beanname="titel" outputlevel="F" required="true" technical="false"/>
+        <mappingelementconcat id="79"/>
+        <mappingelementconcat id="62"/>
+        <mappingelementconcat id="42"/>
         <mappingelementlogic id="64" operation="ifVal1NotEmptyUseVal2" v1is="">
             <name>Wert_1 ? Wert_2</name>
         </mappingelementlogic>
-        <mappingelementconcat id="61"/>
+        <mappingelementconcat id="21"/>
+        <mappingelementconstant id="40">
+            <constant value=" / "/>
+        </mappingelementconstant>
+        <mappingelementconcat id="4"/>
+        <mappingelementconstant id="73">
+            <constant value=" &#10;"/>
+        </mappingelementconstant>
+        <mappingelementconcat id="17"/>
+        <mappingelementconstant id="81">
+            <constant value="testCH-2175"/>
+        </mappingelementconstant>
+        <mappingelementconcat id="74"/>
+        <mappingelementconcat id="43"/>
+        <outputelement id="160" name="sperrfrist" description="Sperrfrist" beanname="sperrfrist" outputlevel="O" required="false" technical="false"/>
         <mappingelementconcat id="63"/>
-        <mappingelementlogic id="37" operation="ifVal1NotEmptyUseVal2" v1is="">
+        <outputelement id="110" name="quirks" description="Eigenheiten" beanname="quirks" outputlevel="O" required="false" technical="false"/>
+        <mappingelementconcat id="61"/>
+        <mappingelementconcat id="78"/>
+        <mappingelementconcat id="75"/>
+        <mappingelementconcat id="11"/>
+        <mappingelementconstant id="76">
+            <constant value=": "/>
+        </mappingelementconstant>
+        <mappingelementconcat id="19"/>
+        <mappingelementconcat id="8"/>
+        <mappingelementlogic id="55" operation="ifVal1NotEmptyUseVal2" v1is="">
+            <name>Wert_1 ? Wert_2</name>
+        </mappingelementlogic>
+        <mappingelementconcat id="69"/>
+        <outputelement id="870" name="scandatum" description="Scandatum" beanname="scandatum" outputlevel="F" required="false" technical="false"/>
+        <mappingelementlogic id="65" operation="ifVal1NotEmptyUseVal2" v1is="">
+            <name>Wert_1 ? Wert_2</name>
+        </mappingelementlogic>
+        <mappingelementconcat id="60"/>
+        <mappingelementconcat id="20"/>
+        <outputelement id="860" name="quirks" description="Eigenheiten" beanname="quirks" outputlevel="F" required="false" technical="false"/>
+        <mappingelementlogic id="9" operation="v1is" v1is="true">
+            <name>Wert_1 ? 'ca' : ''</name>
+        </mappingelementlogic>
+        <mappingelementconcat id="16"/>
+        <mappingelementlogic id="89" operation="v1is" v1is="833">
+            <name>Finde Signatur 833</name>
+        </mappingelementlogic>
+        <outputelement id="10" name="abgebende-stelle" description="Abgebende Stelle" beanname="abgebendeStelle" outputlevel="O" required="false" technical="false"/>
+        <mappingelementconcat id="22"/>
+        <outputelement id="560" name="pid" description="Parent ID (PID)" beanname="pid" outputlevel="R" required="false" technical="false"/>
+        <mappingelementlogic id="66" operation="ifVal1NotEmptyUseVal2" v1is="">
+            <name>Wert_1 ? Wert_2</name>
+        </mappingelementlogic>
+        <mappingelementlogic id="58" operation="ifVal1NotEmptyUseVal2" v1is="">
             <name>Wert_1 ? Wert_2</name>
         </mappingelementlogic>
     </components>
@@ -389,15 +375,12 @@
             <linkedTargets>
                 <MappingWidget id="196" width="126" height="17" x="362" y="2246" linked="true" name="LO: Finde Signatur 833"/>
                 <MappingWidget id="197" width="126" height="17" x="362" y="2334" linked="true" name="LO: Finde Signatur 210"/>
-                <MappingWidget id="205" width="62" height="17" x="184" y="2395" linked="true" name="Verknüpfen"/>
             </linkedTargets>
         </MappingWidget>
-        <MappingWidget id="46" width="168" height="17" x="57" y="2459" linked="false" name="Ordnungssystemposition: Titel">
+        <MappingWidget id="46" width="168" height="17" x="1367" y="1585" linked="false" name="Ordnungssystemposition: Titel">
             <component type="inputelement" id="46"/>
             <linkedSources/>
-            <linkedTargets>
-                <MappingWidget id="206" width="62" height="17" x="357" y="2395" linked="true" name="Verknüpfen"/>
-            </linkedTargets>
+            <linkedTargets/>
         </MappingWidget>
         <MappingWidget id="47" width="344" height="17" x="1369" y="1663" linked="false" name="Ordnungssystemposition: Federführende Organisationseinheit">
             <component type="inputelement" id="47"/>
@@ -1217,74 +1200,6 @@
                 <MappingWidget id="213" width="97" height="17" x="868" y="2289" linked="true" name="R: Parent ID (PID)"/>
             </linkedTargets>
         </MappingWidget>
-        <MappingWidget id="204" width="20" height="17" x="56" y="2395" linked="false" name="K: : ">
-            <component type="mappingconstant" id="97"/>
-            <linkedSources/>
-            <linkedTargets>
-                <MappingWidget id="205" width="62" height="17" x="184" y="2395" linked="true" name="Verknüpfen"/>
-            </linkedTargets>
-        </MappingWidget>
-        <MappingWidget id="205" width="62" height="17" x="184" y="2395" linked="true" name="Verknüpfen">
-            <component type="mappingelementconcat" id="98"/>
-            <linkedSources>
-                <MappingWidget id="45" width="194" height="17" x="61" y="2289" linked="false" name="Ordnungssystemposition: Nummer"/>
-                <MappingWidget id="204" width="20" height="17" x="56" y="2395" linked="false" name="K: : "/>
-            </linkedSources>
-            <linkedTargets>
-                <MappingWidget id="206" width="62" height="17" x="357" y="2395" linked="true" name="Verknüpfen"/>
-            </linkedTargets>
-        </MappingWidget>
-        <MappingWidget id="206" width="62" height="17" x="357" y="2395" linked="true" name="Verknüpfen">
-            <component type="mappingelementconcat" id="99"/>
-            <linkedSources>
-                <MappingWidget id="205" width="62" height="17" x="184" y="2395" linked="true" name="Verknüpfen"/>
-                <MappingWidget id="46" width="168" height="17" x="57" y="2459" linked="false" name="Ordnungssystemposition: Titel"/>
-            </linkedSources>
-            <linkedTargets>
-                <MappingWidget id="211" width="62" height="17" x="587" y="2395" linked="true" name="Verknüpfen"/>
-            </linkedTargets>
-        </MappingWidget>
-        <MappingWidget id="207" width="62" height="17" x="352" y="2458" linked="true" name="Verknüpfen">
-            <component type="mappingelementconcat" id="100"/>
-            <linkedSources>
-                <MappingWidget id="208" width="21" height="17" x="403" y="2538" linked="false" name="K:  ("/>
-            </linkedSources>
-            <linkedTargets>
-                <MappingWidget id="210" width="62" height="17" x="587" y="2458" linked="true" name="Verknüpfen"/>
-            </linkedTargets>
-        </MappingWidget>
-        <MappingWidget id="208" width="21" height="17" x="403" y="2538" linked="false" name="K:  (">
-            <component type="mappingconstant" id="101"/>
-            <linkedSources/>
-            <linkedTargets>
-                <MappingWidget id="207" width="62" height="17" x="352" y="2458" linked="true" name="Verknüpfen"/>
-            </linkedTargets>
-        </MappingWidget>
-        <MappingWidget id="209" width="18" height="17" x="553" y="2538" linked="false" name="K: )">
-            <component type="mappingconstant" id="102"/>
-            <linkedSources/>
-            <linkedTargets>
-                <MappingWidget id="210" width="62" height="17" x="587" y="2458" linked="true" name="Verknüpfen"/>
-            </linkedTargets>
-        </MappingWidget>
-        <MappingWidget id="210" width="62" height="17" x="587" y="2458" linked="true" name="Verknüpfen">
-            <component type="mappingelementconcat" id="103"/>
-            <linkedSources>
-                <MappingWidget id="207" width="62" height="17" x="352" y="2458" linked="true" name="Verknüpfen"/>
-                <MappingWidget id="209" width="18" height="17" x="553" y="2538" linked="false" name="K: )"/>
-            </linkedSources>
-            <linkedTargets>
-                <MappingWidget id="211" width="62" height="17" x="587" y="2395" linked="true" name="Verknüpfen"/>
-            </linkedTargets>
-        </MappingWidget>
-        <MappingWidget id="211" width="62" height="17" x="587" y="2395" linked="true" name="Verknüpfen">
-            <component type="mappingelementconcat" id="104"/>
-            <linkedSources>
-                <MappingWidget id="206" width="62" height="17" x="357" y="2395" linked="true" name="Verknüpfen"/>
-                <MappingWidget id="210" width="62" height="17" x="587" y="2458" linked="true" name="Verknüpfen"/>
-            </linkedSources>
-            <linkedTargets/>
-        </MappingWidget>
         <MappingWidget id="213" width="97" height="17" x="868" y="2289" linked="true" name="R: Parent ID (PID)">
             <component type="outputelement" id="560"/>
             <linkedSources>
@@ -1380,15 +1295,6 @@
         <MappingConnectionWidget priority="2" sourceID="188" targetID="197"/>
         <MappingConnectionWidget priority="1" sourceID="196" targetID="200"/>
         <MappingConnectionWidget priority="2" sourceID="197" targetID="200"/>
-        <MappingConnectionWidget priority="1" sourceID="45" targetID="205"/>
-        <MappingConnectionWidget priority="2" sourceID="204" targetID="205"/>
-        <MappingConnectionWidget priority="1" sourceID="205" targetID="206"/>
-        <MappingConnectionWidget priority="2" sourceID="46" targetID="206"/>
-        <MappingConnectionWidget priority="1" sourceID="208" targetID="207"/>
-        <MappingConnectionWidget priority="2" sourceID="209" targetID="210"/>
-        <MappingConnectionWidget priority="1" sourceID="207" targetID="210"/>
-        <MappingConnectionWidget priority="1" sourceID="206" targetID="211"/>
-        <MappingConnectionWidget priority="2" sourceID="210" targetID="211"/>
         <MappingConnectionWidget priority="1" sourceID="200" targetID="213"/>
         <MappingConnectionWidget priority="1" sourceID="101" targetID="105"/>
         <MappingConnectionWidget priority="1" sourceID="2" targetID="104"/>
@@ -1401,249 +1307,6 @@
             <maxMinuteDelete>0</maxMinuteDelete>
         </afisPrefix>
         <forms>
-            <form>
-                <formId>DIMAG_R</formId>
-                <type>R</type>
-                <label>DIMAG R</label>
-                <fields>
-                    <field>
-                        <xmltag>aenderungs-datum</xmltag>
-                        <name>Geändert am</name>
-                        <maxoccurs>1</maxoccurs>
-                        <required>false</required>
-                        <maxlength>0</maxlength>
-                        <readOnly>false</readOnly>
-                        <options/>
-                        <hint>Datum und Uhrzeit der letzten Änderung in DIMAG</hint>
-                    </field>
-                    <field>
-                        <xmltag>aid</xmltag>
-                        <name>Archival ID (AID)</name>
-                        <maxoccurs>1</maxoccurs>
-                        <required>false</required>
-                        <maxlength>0</maxlength>
-                        <readOnly>false</readOnly>
-                        <options/>
-                        <hint>Eindeutige Identifikationsnummer des Objekts. </hint>
-                    </field>
-                    <field>
-                        <xmltag>aid-inventar-liste</xmltag>
-                        <name>Inventar Liste</name>
-                        <maxoccurs>1</maxoccurs>
-                        <required>false</required>
-                        <maxlength>0</maxlength>
-                        <readOnly>false</readOnly>
-                        <options/>
-                        <hint>Liste der aIDs aller hierarchisch untergeordneten Elemente</hint>
-                    </field>
-                    <field>
-                        <xmltag>alternate-id</xmltag>
-                        <name>Alternate ID</name>
-                        <maxoccurs>1</maxoccurs>
-                        <required>false</required>
-                        <maxlength>0</maxlength>
-                        <readOnly>false</readOnly>
-                        <options/>
-                        <hint>Hier kann ein weiterer Identifier hinterlegt werden.</hint>
-                    </field>
-                    <field>
-                        <xmltag>basis-repraesentation</xmltag>
-                        <name>Basis-Repräsentation</name>
-                        <maxoccurs>1</maxoccurs>
-                        <required>false</required>
-                        <maxlength>0</maxlength>
-                        <readOnly>false</readOnly>
-                        <options/>
-                        <hint>Signaturbestandteil der Repräsentation, die Basis für diese Repräsentation war.</hint>
-                    </field>
-                    <field>
-                        <xmltag>beschreibung-inhalt</xmltag>
-                        <name>Beschreibung</name>
-                        <maxoccurs>1</maxoccurs>
-                        <required>false</required>
-                        <maxlength>0</maxlength>
-                        <readOnly>false</readOnly>
-                        <options/>
-                        <hint>Ausführliche Beschreibung des Inhalts (z.B. Enthält/Darin-Vermerke, Altsignaturen, ...)</hint>
-                    </field>
-                    <field>
-                        <xmltag>erhaltung-aus-archivsicht</xmltag>
-                        <name>Erhaltungswürdigkeit aus Archivsicht</name>
-                        <maxoccurs>1</maxoccurs>
-                        <required>false</required>
-                        <maxlength>0</maxlength>
-                        <readOnly>false</readOnly>
-                        <options/>
-                        <hint>Dient dazu, nicht erhaltungswürdige Repräsentationen zu kennzeichnen, da als grundsätzliche Annahme gilt, dass die jeweils aktuellste Repräsentation zu erhalten ist.</hint>
-                    </field>
-                    <field>
-                        <xmltag>ersteller</xmltag>
-                        <name>Angelegt von</name>
-                        <maxoccurs>1</maxoccurs>
-                        <required>false</required>
-                        <maxlength>0</maxlength>
-                        <readOnly>false</readOnly>
-                        <options/>
-                        <hint>Benutzername des Erstellers in DIMAG</hint>
-                    </field>
-                    <field>
-                        <xmltag>erstellungs-datum</xmltag>
-                        <name>Angelegt am</name>
-                        <maxoccurs>1</maxoccurs>
-                        <required>false</required>
-                        <maxlength>0</maxlength>
-                        <readOnly>false</readOnly>
-                        <options/>
-                        <hint>Datum und Uhrzeit der Erstellung in DIMAG</hint>
-                    </field>
-                    <field>
-                        <xmltag>geaendert-durch</xmltag>
-                        <name>Geändert von</name>
-                        <maxoccurs>1</maxoccurs>
-                        <required>false</required>
-                        <maxlength>0</maxlength>
-                        <readOnly>false</readOnly>
-                        <options/>
-                        <hint>Benutzername der letzten Änderung in DIMAG</hint>
-                    </field>
-                    <field>
-                        <xmltag>hardware-umgebung</xmltag>
-                        <name>Hardware-Umgebung</name>
-                        <maxoccurs>1</maxoccurs>
-                        <required>false</required>
-                        <maxlength>0</maxlength>
-                        <readOnly>false</readOnly>
-                        <options/>
-                        <hint>Hardware, mit der diese Repräsentation erzeugt wurde</hint>
-                    </field>
-                    <field>
-                        <xmltag>installations-erfordernisse</xmltag>
-                        <name>Installations-Erfordernisse</name>
-                        <maxoccurs>1</maxoccurs>
-                        <required>false</required>
-                        <maxlength>0</maxlength>
-                        <readOnly>false</readOnly>
-                        <options/>
-                        <hint>Notwendige Installationen von Software zur Nutzung des Archivale</hint>
-                    </field>
-                    <field>
-                        <xmltag>metadaten-version</xmltag>
-                        <name>XML-Version</name>
-                        <maxoccurs>1</maxoccurs>
-                        <required>false</required>
-                        <maxlength>0</maxlength>
-                        <readOnly>false</readOnly>
-                        <options/>
-                        <hint>Stand des für die Anlage des Objekts verwendeten XML-Schemas</hint>
-                    </field>
-                    <field>
-                        <xmltag>orderby</xmltag>
-                        <name>Ordnungsmerkmal</name>
-                        <maxoccurs>1</maxoccurs>
-                        <required>false</required>
-                        <maxlength>0</maxlength>
-                        <readOnly>false</readOnly>
-                        <options/>
-                        <hint>Übernahme eines Sortiermerkmals aus dem AFIS. Ermöglicht die gleiche Darstellungsreihenfolge wie im AFIS.</hint>
-                    </field>
-                    <field>
-                        <xmltag>pid</xmltag>
-                        <name>Parent ID (PID)</name>
-                        <maxoccurs>1</maxoccurs>
-                        <required>false</required>
-                        <maxlength>0</maxlength>
-                        <readOnly>false</readOnly>
-                        <options/>
-                        <hint>AID des darüberliegenden Objekts.</hint>
-                    </field>
-                    <field>
-                        <xmltag>quirks</xmltag>
-                        <name>Eigenheiten</name>
-                        <maxoccurs>1</maxoccurs>
-                        <required>false</required>
-                        <maxlength>0</maxlength>
-                        <readOnly>false</readOnly>
-                        <options/>
-                        <hint>Inhaltliche oder technische Unzulänglichkeiten, die auf Eigenschaften der Ausgangsobjekte zurückgehen. (englisch: Quirks)</hint>
-                    </field>
-                    <field>
-                        <xmltag>signatur</xmltag>
-                        <name>Signatur</name>
-                        <maxoccurs>1</maxoccurs>
-                        <required>false</required>
-                        <maxlength>0</maxlength>
-                        <readOnly>false</readOnly>
-                        <options/>
-                        <hint>Aktuelle Archivsignatur (dynamisch aus „Signaturanteil“ der übergeordneten und des aktuellen Elements gebildet).</hint>
-                    </field>
-                    <field>
-                        <xmltag>signatur-anteil</xmltag>
-                        <name>Signaturanteil</name>
-                        <maxoccurs>1</maxoccurs>
-                        <required>false</required>
-                        <maxlength>0</maxlength>
-                        <readOnly>false</readOnly>
-                        <options/>
-                        <hint>Anteil des aktuellen Elements an der Archivsignatur.</hint>
-                    </field>
-                    <field>
-                        <xmltag>software-umgebung</xmltag>
-                        <name>Software-Umgebung</name>
-                        <maxoccurs>1</maxoccurs>
-                        <required>false</required>
-                        <maxlength>0</maxlength>
-                        <readOnly>false</readOnly>
-                        <options/>
-                        <hint>Software, mit der diese Repräsentation erzeugt wurde</hint>
-                    </field>
-                    <field>
-                        <xmltag>status-code</xmltag>
-                        <name>Statuscode</name>
-                        <maxoccurs>1</maxoccurs>
-                        <required>false</required>
-                        <maxlength>0</maxlength>
-                        <readOnly>false</readOnly>
-                        <options>
-                            <option>10</option>
-                            <option>20</option>
-                            <option>30</option>
-                            <option>40</option>
-                            <option>50</option>
-                        </options>
-                        <hint>Zustand des Objekts</hint>
-                    </field>
-                    <field>
-                        <xmltag>struktur</xmltag>
-                        <name>Aufbau der Repräsentation</name>
-                        <maxoccurs>1</maxoccurs>
-                        <required>false</required>
-                        <maxlength>0</maxlength>
-                        <readOnly>false</readOnly>
-                        <options/>
-                        <hint>Angabe der Bestandteile und der funktionalen Zusammenhänge einer Repräsentation</hint>
-                    </field>
-                    <field>
-                        <xmltag>titel</xmltag>
-                        <name>Titel</name>
-                        <maxoccurs>1</maxoccurs>
-                        <required>true</required>
-                        <maxlength>0</maxlength>
-                        <readOnly>false</readOnly>
-                        <options/>
-                        <hint>Bezeichnung des Inhalts. Bei Repräsentationsobjekten die Erscheinungsform des Inhalts. Das Titelfeld ist für Objekte des Typs F, D und X nicht verpflichtend, Default ist der Dateiname.</hint>
-                    </field>
-                    <field>
-                        <xmltag>typ</xmltag>
-                        <name>Objekttyp</name>
-                        <maxoccurs>1</maxoccurs>
-                        <required>false</required>
-                        <maxlength>0</maxlength>
-                        <readOnly>false</readOnly>
-                        <options/>
-                        <hint>Art des Objekts (Struktur, Informationsobjekt, Repräsentation, Datei)</hint>
-                    </field>
-                </fields>
-            </form>
             <form>
                 <formId>DIMAG_F</formId>
                 <type>F</type>
@@ -2305,6 +1968,249 @@
                         <readOnly>false</readOnly>
                         <options/>
                         <hint>Zeitpunkt, Beteiligte und Umstände der Übernahme. Abgedeckt durch die Bestandsaufnahme, wenn IngestList verwendet wurde.</hint>
+                    </field>
+                </fields>
+            </form>
+            <form>
+                <formId>DIMAG_R</formId>
+                <type>R</type>
+                <label>DIMAG R</label>
+                <fields>
+                    <field>
+                        <xmltag>aenderungs-datum</xmltag>
+                        <name>Geändert am</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Datum und Uhrzeit der letzten Änderung in DIMAG</hint>
+                    </field>
+                    <field>
+                        <xmltag>aid</xmltag>
+                        <name>Archival ID (AID)</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Eindeutige Identifikationsnummer des Objekts. </hint>
+                    </field>
+                    <field>
+                        <xmltag>aid-inventar-liste</xmltag>
+                        <name>Inventar Liste</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Liste der aIDs aller hierarchisch untergeordneten Elemente</hint>
+                    </field>
+                    <field>
+                        <xmltag>alternate-id</xmltag>
+                        <name>Alternate ID</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Hier kann ein weiterer Identifier hinterlegt werden.</hint>
+                    </field>
+                    <field>
+                        <xmltag>basis-repraesentation</xmltag>
+                        <name>Basis-Repräsentation</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Signaturbestandteil der Repräsentation, die Basis für diese Repräsentation war.</hint>
+                    </field>
+                    <field>
+                        <xmltag>beschreibung-inhalt</xmltag>
+                        <name>Beschreibung</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Ausführliche Beschreibung des Inhalts (z.B. Enthält/Darin-Vermerke, Altsignaturen, ...)</hint>
+                    </field>
+                    <field>
+                        <xmltag>erhaltung-aus-archivsicht</xmltag>
+                        <name>Erhaltungswürdigkeit aus Archivsicht</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Dient dazu, nicht erhaltungswürdige Repräsentationen zu kennzeichnen, da als grundsätzliche Annahme gilt, dass die jeweils aktuellste Repräsentation zu erhalten ist.</hint>
+                    </field>
+                    <field>
+                        <xmltag>ersteller</xmltag>
+                        <name>Angelegt von</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Benutzername des Erstellers in DIMAG</hint>
+                    </field>
+                    <field>
+                        <xmltag>erstellungs-datum</xmltag>
+                        <name>Angelegt am</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Datum und Uhrzeit der Erstellung in DIMAG</hint>
+                    </field>
+                    <field>
+                        <xmltag>geaendert-durch</xmltag>
+                        <name>Geändert von</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Benutzername der letzten Änderung in DIMAG</hint>
+                    </field>
+                    <field>
+                        <xmltag>hardware-umgebung</xmltag>
+                        <name>Hardware-Umgebung</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Hardware, mit der diese Repräsentation erzeugt wurde</hint>
+                    </field>
+                    <field>
+                        <xmltag>installations-erfordernisse</xmltag>
+                        <name>Installations-Erfordernisse</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Notwendige Installationen von Software zur Nutzung des Archivale</hint>
+                    </field>
+                    <field>
+                        <xmltag>metadaten-version</xmltag>
+                        <name>XML-Version</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Stand des für die Anlage des Objekts verwendeten XML-Schemas</hint>
+                    </field>
+                    <field>
+                        <xmltag>orderby</xmltag>
+                        <name>Ordnungsmerkmal</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Übernahme eines Sortiermerkmals aus dem AFIS. Ermöglicht die gleiche Darstellungsreihenfolge wie im AFIS.</hint>
+                    </field>
+                    <field>
+                        <xmltag>pid</xmltag>
+                        <name>Parent ID (PID)</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>AID des darüberliegenden Objekts.</hint>
+                    </field>
+                    <field>
+                        <xmltag>quirks</xmltag>
+                        <name>Eigenheiten</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Inhaltliche oder technische Unzulänglichkeiten, die auf Eigenschaften der Ausgangsobjekte zurückgehen. (englisch: Quirks)</hint>
+                    </field>
+                    <field>
+                        <xmltag>signatur</xmltag>
+                        <name>Signatur</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Aktuelle Archivsignatur (dynamisch aus „Signaturanteil“ der übergeordneten und des aktuellen Elements gebildet).</hint>
+                    </field>
+                    <field>
+                        <xmltag>signatur-anteil</xmltag>
+                        <name>Signaturanteil</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Anteil des aktuellen Elements an der Archivsignatur.</hint>
+                    </field>
+                    <field>
+                        <xmltag>software-umgebung</xmltag>
+                        <name>Software-Umgebung</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Software, mit der diese Repräsentation erzeugt wurde</hint>
+                    </field>
+                    <field>
+                        <xmltag>status-code</xmltag>
+                        <name>Statuscode</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options>
+                            <option>10</option>
+                            <option>20</option>
+                            <option>30</option>
+                            <option>40</option>
+                            <option>50</option>
+                        </options>
+                        <hint>Zustand des Objekts</hint>
+                    </field>
+                    <field>
+                        <xmltag>struktur</xmltag>
+                        <name>Aufbau der Repräsentation</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Angabe der Bestandteile und der funktionalen Zusammenhänge einer Repräsentation</hint>
+                    </field>
+                    <field>
+                        <xmltag>titel</xmltag>
+                        <name>Titel</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>true</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Bezeichnung des Inhalts. Bei Repräsentationsobjekten die Erscheinungsform des Inhalts. Das Titelfeld ist für Objekte des Typs F, D und X nicht verpflichtend, Default ist der Dateiname.</hint>
+                    </field>
+                    <field>
+                        <xmltag>typ</xmltag>
+                        <name>Objekttyp</name>
+                        <maxoccurs>1</maxoccurs>
+                        <required>false</required>
+                        <maxlength>0</maxlength>
+                        <readOnly>false</readOnly>
+                        <options/>
+                        <hint>Art des Objekts (Struktur, Informationsobjekt, Repräsentation, Datei)</hint>
                     </field>
                 </fields>
             </form>
