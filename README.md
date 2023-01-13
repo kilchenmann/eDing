@@ -45,3 +45,5 @@ Das *metadata.xml* beinhaltet eine Bemerkung, die bspw. im PackageHandler pro AI
 Das AIP kann aus mehreren Ordnern und/oder Dateien bestehen. Primär gibt es die Ordnerebene, die im *metadata.xml* im Element `Dossier` beschrieben wird. Ein Dossier kann jeweils mehrere Dossiers beinhalten. Der erste Pfad lautet `/paket/ablieferung/ordnungssystem/ordnungssystemposition/dossier`. Ich gehe davon aus, dass wir den Dossier-Element-Block in den Ordner des jeweiligen AIPs schreiben.
 
 Ein paar Informationen zu den einzelenen Dateien innerhalb eines Dossiers befinden sich im Elemente-Block `Inhaltsverzeichnis` unter `Ordner`. Auch hier kann ein Ordner wiederum mehrere Ordner beinhalten. Das Auffinden der einzelnen Datei-Information ist aufgrund der Verschachtelung etwas komplexer, sollte aber über die `ID` im `dossier/dateiRef` zu finden sein.
+
+Bump
