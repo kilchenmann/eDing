@@ -1,3 +1,7 @@
+# eDing
+
+eDing steht für **e**CH-0160 **D**IMAG **Ing**est.
+
 # Ingest: Proof of Concept
 
 Dies ist das Repository für den Proof of Concept betreffend eCH-0160-Vorbereitung im DIMAG Ingest.
