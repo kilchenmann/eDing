@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<folderpackaging recursiv="true" level="1">
-  <includedfilters />
-  <excludedfilters>
-    <filter pattern="*.xsd" />
-  </excludedfilters>
-</folderpackaging>
-

@@ -1,0 +1,64 @@
+name: CI
+env:
+  node-version: 16.17.0
+
+on:
+  push:
+  release:
+    types: [published]
+
+jobs:
+  unit-tests:
+    name: Run unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Set up Node.js ${{ env.NV }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NV }}
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Run the lib tests
+        run: yarn test:lib-ci
+      - name: Build the lib
+        run: yarn build:lib
+      - name: Run the app tests
+        run: yarn test:app-ci
+
+  lint:
+    name: Run lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Set up Node.js ${{ env.NV }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NV }}
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Run the script
+        run: yarn lint:ci
+
+  build-deploy:
+    name: Build lib and app
+    needs: [
+      unit-tests,
+      lint
+    ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Set up Node.js ${{ env.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.node-version }}
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Build the lib
+        run: yarn build:lib
+      - name: Build the app
+        run: yarn build:app

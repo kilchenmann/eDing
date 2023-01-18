@@ -1,53 +1,81 @@
-# eDing
+# Toolbox App and Angular Library
 
-eDing steht für **e**CH-0160 **D**IMAG **Ing**est.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.2 and [YARN](https://yarnpkg.com) (instead npm!).
 
-# Ingest: Proof of Concept
+## First Steps
 
-Dies ist das Repository für den Proof of Concept betreffend eCH-0160-Vorbereitung im DIMAG Ingest.
+### Prerequisites
 
-## Struktur
+To develop or run the application locally, you have to install the following tools first:
 
-Primär handelt es sich bei diesem Repository um ein temporäres Sammelsurium von Skripten, Konzept-Notizen und allfälligen Testdaten. Sobald wir ein Konzept erarbeitet haben und uns über die Funktionalität einer entsprechenden App oder eines IPM-Moduls einig sind, wird ein neues Repository eröffnet. Damit sich jeder in diesem Sammelsurium zurecht findet, folgt eine Auflistung inkl. Beschreibung der beinhaltenden Ordner:
+* [node](https://nodejs.org/en/) v16.17.0
+* [yarn](https://yarnpkg.com) v3.2.3
+* [@angular/cli](https://cli.angular.io) v14.2.2
 
-### Mapping
+### Installation
 
-Im Ingest Tool gibt es den *Quellelement Editor* für die Vorbereitung der Datenfelder im Mapping-Prozess. Eine manuelle Eingabe der vielen Elemente aus der eCH-0160-XML-Struktur kann relativ mühsam werden. Deshalb gibt es hier ein Bash-Skript, das die eCH-0160-Strukur als CSV (*ech-0160.csv*) in das DIMAG-Ingest-Tool-Quellelement-Profil (*ech-0160.iprf*) umwandelt.
-
-Das Script benötigt die CSV-Datei als Input `-i` und den Pfad der IPRF-Datei für den Output `-o`. Der Befehl sieht an unserem Beispiel wie folgt aus:
+Clone this repository:
 
 ```shell
-./prepare-ech0160-for-dimag.sh -i ech-0160.csv -o ech-0160.iprf
+git clone https://gitlab.com/av-dimag/ingest-poc.git
 ```
 
-Die Datei *ech-0160.iprf* kann später im Ingest Tool geladen und für das Mapping direkt genutzt werden.
+Install the dependencies with:
 
-### Testdaten
-
-In diesem Ordner werden die Test-SIPs und AIPs abgelegt. Diese dienen zum Ausprobieren der Skripte und des Ingests. Bspw. jenes der KOST: *SIP_20070923_KOST_eCH0160_1_1_GEVER* oder ein komplexeres Paket des Kantons Aargau: *SIP_20220906_Bibliothek-Archiv-Aargau_POC-Test*
-
-Das *AIP_20070923_KOST_eCH0160_1_1_GEVER* beinhaltet drei AIPs, die aus dem oben genannten SIP (vorerst manuell) erstellt wurde. Es ist ein einfaches, in der Struktur flaches Beispiel. Jeder Ordner entspricht einem AIP mit den einzelnen Dokumenten und dem zusätzlichen *metadata.xml*. Das XML sollte dem eCH-0160 Standard entsprechen und wird später vom Script in der Toolbox erstellt. Darin befinden sich die Informationen aus der vorherigen SIP-Ebene (Ablieferung und allgemeines zum Paket) und zu den einzelnen Dokumenten oder Dossiers (sofern vorhanden).
-
-### Toolbox
-
-Die Toolbox als App und Angular Library hat ein eigenes [technisches README](toolbox/README.md).
-
-Toolbox beinhaltet Werkzeuge, um mit eCH-0160 umgehen zu können und SIPs für den DIMAG Ingest vorzubereiten. Toolbox ist eine Angular Appliaktion, in der wir die einzelnen Werkzeuge als Module entwickeln. In Angular als Library bezeichnet, werden sie in `projects/` abgelegt. Die Idee ist, dass wir diese Werkzeuge später einzeln als NPM Module extrahieren resp. publizieren können, und evt. im DIMAG IPM zu integrieren. Dies erlaubt uns eine gewisse flexibilität und modularität.
-
-Die Idee der Tools und des POC:
-
-Das *metadata.xml* beinhaltet eine Bemerkung, die bspw. im PackageHandler pro AIP hinzugefügt wurde:
-
-```xml
-<zusatzDaten>
-    <merkmal name="AIP">3</merkmal>
-</zusatzDaten>
+```shell
+yarn install
 ```
 
-> Diskussion: Die Bemerkung sollte auf der obersten Ebene des AIP stehen und nur einmal vorkommen. In den Beispieldaten *SIP_20220906_Bibliothek-Archiv-Aargau_POC-Test* kommt die Bezeichnung bspw. "AIP = 1" jedoch mehrmals vor.
+### Development server
 
-Das AIP kann aus mehreren Ordnern und/oder Dateien bestehen. Primär gibt es die Ordnerebene, die im *metadata.xml* im Element `Dossier` beschrieben wird. Ein Dossier kann jeweils mehrere Dossiers beinhalten. Der erste Pfad lautet `/paket/ablieferung/ordnungssystem/ordnungssystemposition/dossier`. Ich gehe davon aus, dass wir den Dossier-Element-Block in den Ordner des jeweiligen AIPs schreiben.
+As we develop library packages, which will be published to npm, you have to build the library before running the application. There are two ways to run the build process in dev mode:
 
-Ein paar Informationen zu den einzelenen Dateien innerhalb eines Dossiers befinden sich im Elemente-Block `Inhaltsverzeichnis` unter `Ordner`. Auch hier kann ein Ordner wiederum mehrere Ordner beinhalten. Das Auffinden der einzelnen Datei-Information ist aufgrund der Verschachtelung etwas komplexer, sollte aber über die `ID` im `dossier/dateiRef` zu finden sein.
+Build the library once:
 
-Bump
+```shell
+yarn build-lib-dev
+```
+
+OR build the library with "watch". This helps to rerun the build process after each change in the library code:
+
+```shell
+yarn build-lib-dev-watch
+```
+
+Run the demo application:
+
+```shell
+ng s
+```
+
+Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+
+If you want to run it in an own application window (with electron), you can do so by running `yarn app`.
+
+## Code scaffolding
+
+Run `ng generate component [path][component-name]` to generate a new component in the app itself. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+
+Run `ng generate component [path][component-name] --project @av-dimag/ingest` to generate a new component (or directive, pipe, service etc.) in the library.
+
+Run `ng generate library @av-dimag/[libray-name]` to generate a new library in the scope of "@av-dimag".
+
+## Build
+
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+
+## Running unit tests
+
+> `Not yet implemented`
+
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Running end-to-end tests
+
+> `Not yet implemented`
+
+Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
