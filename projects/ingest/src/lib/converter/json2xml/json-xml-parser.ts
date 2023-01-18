@@ -44,7 +44,7 @@ export class Parser {
 
     toXml(data: object, options: Options): string {
         if (!isObj(data)) {
-            console.log('data is not a javascript object');
+            // console.log('data is not a javascript object');
             return this.xmlStr;
         }
         this.json = data || {};

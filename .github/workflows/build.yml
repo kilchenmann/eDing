@@ -8,9 +8,28 @@ on:
     types: [published]
 
 jobs:
+  lint:
+    name: Run lint
+    runs-on: ubuntu-latest
+    if: github.ref != 'refs/heads/main'
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Set up Node.js ${{ env.NV }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NV }}
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Run the script
+        run: |
+          yarn lint:app-ci
+          yarn lint:lib-ci
+
   unit-tests:
     name: Run unit tests
     runs-on: ubuntu-latest
+    if: github.ref != 'refs/heads/main'
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
@@ -27,27 +46,13 @@ jobs:
       - name: Run the app tests
         run: yarn test:app-ci
 
-  lint:
-    name: Run lint
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v3
-      - name: Set up Node.js ${{ env.NV }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ env.NV }}
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
-      - name: Run the script
-        run: yarn lint:ci
-
   build-lib-and-app:
     name: Build lib and app
     needs: [
       unit-tests,
       lint
     ]
+    if: github.ref != 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source

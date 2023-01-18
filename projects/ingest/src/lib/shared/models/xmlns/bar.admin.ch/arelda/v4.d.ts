@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import * as Primitive from '../../xml-primitives';
 
 // source files:
@@ -42,7 +43,7 @@ interface _ablieferung extends BaseType {
     zusatzDaten?: zusatzDaten;
 }
 export interface ablieferung extends _ablieferung { constructor: new () => ablieferung }
-export var ablieferung: new () => ablieferung;
+export let ablieferung: new () => ablieferung;
 
 interface _ablieferungAIP extends _ablieferung {
     ablieferungsnummer: string;
@@ -53,56 +54,56 @@ interface _ablieferungAIP extends _ablieferung {
     schutzfristenkategorie?: string;
 }
 export interface ablieferungAIP extends _ablieferungAIP { constructor: new () => ablieferungAIP }
-export var ablieferungAIP: new () => ablieferungAIP;
+export let ablieferungAIP: new () => ablieferungAIP;
 
 interface _ablieferungDIP extends _ablieferung {
     ablieferungsnummer: string;
     archivischeNotiz?: archivischeNotiz[];
 }
 export interface ablieferungDIP extends _ablieferungDIP { constructor: new () => ablieferungDIP }
-export var ablieferungDIP: new () => ablieferungDIP;
+export let ablieferungDIP: new () => ablieferungDIP;
 
 interface _ablieferungFilesAIP extends _ablieferungAIP {
     ordnungssystem: ordnungssystemFilesAIP;
     provenienz: provenienzFilesAIP;
 }
 export interface ablieferungFilesAIP extends _ablieferungFilesAIP { constructor: new () => ablieferungFilesAIP }
-export var ablieferungFilesAIP: new () => ablieferungFilesAIP;
+export let ablieferungFilesAIP: new () => ablieferungFilesAIP;
 
 interface _ablieferungFilesDIP extends _ablieferungDIP {
     ordnungssystem: ordnungssystemFilesDIP;
     provenienz: provenienzFilesDIP;
 }
 export interface ablieferungFilesDIP extends _ablieferungFilesDIP { constructor: new () => ablieferungFilesDIP }
-export var ablieferungFilesDIP: new () => ablieferungFilesDIP;
+export let ablieferungFilesDIP: new () => ablieferungFilesDIP;
 
 interface _ablieferungFilesSIP extends _ablieferungSIP {
     ordnungssystem: ordnungssystemFilesSIP;
     provenienz: provenienzFilesSIP;
 }
 export interface ablieferungFilesSIP extends _ablieferungFilesSIP { constructor: new () => ablieferungFilesSIP }
-export var ablieferungFilesSIP: new () => ablieferungFilesSIP;
+export let ablieferungFilesSIP: new () => ablieferungFilesSIP;
 
 interface _ablieferungGeverAIP extends _ablieferungAIP {
     ordnungssystem: ordnungssystemGeverAIP;
     provenienz: provenienzGeverAIP;
 }
 export interface ablieferungGeverAIP extends _ablieferungGeverAIP { constructor: new () => ablieferungGeverAIP }
-export var ablieferungGeverAIP: new () => ablieferungGeverAIP;
+export let ablieferungGeverAIP: new () => ablieferungGeverAIP;
 
 interface _ablieferungGeverDIP extends _ablieferungDIP {
     ordnungssystem: ordnungssystemGeverDIP;
     provenienz: provenienzGeverDIP;
 }
 export interface ablieferungGeverDIP extends _ablieferungGeverDIP { constructor: new () => ablieferungGeverDIP }
-export var ablieferungGeverDIP: new () => ablieferungGeverDIP;
+export let ablieferungGeverDIP: new () => ablieferungGeverDIP;
 
 interface _ablieferungGeverSIP extends _ablieferungSIP {
     ordnungssystem: ordnungssystemGeverSIP;
     provenienz: provenienzGeverSIP;
 }
 export interface ablieferungGeverSIP extends _ablieferungGeverSIP { constructor: new () => ablieferungGeverSIP }
-export var ablieferungGeverSIP: new () => ablieferungGeverSIP;
+export let ablieferungGeverSIP: new () => ablieferungGeverSIP;
 
 interface _ablieferungSIP extends _ablieferung {
     ablieferungsnummer?: string;
@@ -114,7 +115,7 @@ interface _ablieferungSIP extends _ablieferung {
     schutzfristenkategorie?: string;
 }
 export interface ablieferungSIP extends _ablieferungSIP { constructor: new () => ablieferungSIP }
-export var ablieferungSIP: new () => ablieferungSIP;
+export let ablieferungSIP: new () => ablieferungSIP;
 
 /** die Ablieferungsnummer dient zur Identifizierung der Ablieferung im Archiv. Sie besteht in der Regel aus dem Ablieferungsjahr und einer Laufnummer innerhalb dieses Jahres. Die Ablieferungsnummer kann auch Buchstaben enthalten. */
 export type ablieferungsnummer = string;
@@ -162,7 +163,7 @@ interface _aktivitaet extends BaseType {
     vorschreibung: string;
 }
 export interface aktivitaet extends _aktivitaet { constructor: new () => aktivitaet }
-export var aktivitaet: new () => aktivitaet;
+export let aktivitaet: new () => aktivitaet;
 
 /** die vom Archiv vergebene Nummer des Angebots, auf welches sich die Ablieferung stützt. */
 export type angebotsnummer = string;
@@ -187,7 +188,7 @@ interface _archivischeNotiz extends BaseType {
     notizErfasser?: string;
 }
 export interface archivischeNotiz extends _archivischeNotiz { constructor: new () => archivischeNotiz }
-export var archivischeNotiz: new () => archivischeNotiz;
+export let archivischeNotiz: new () => archivischeNotiz;
 
 interface _archivischerVorgang extends BaseType {
     bearbeiter: string;
@@ -197,7 +198,7 @@ interface _archivischerVorgang extends BaseType {
     vorgangstyp: string;
 }
 export interface archivischerVorgang extends _archivischerVorgang { constructor: new () => archivischerVorgang }
-export var archivischerVorgang: new () => archivischerVorgang;
+export let archivischerVorgang: new () => archivischerVorgang;
 
 /** verfasser eines Dokuments. */
 export type autor = string;
@@ -240,7 +241,7 @@ type _ca = Primitive._boolean;
 
 type _comparable = BaseType;
 export interface comparable extends _comparable { constructor: new () => comparable }
-export var comparable: new () => comparable;
+export let comparable: new () => comparable;
 
 interface _datei extends BaseType {
     id: string;
@@ -252,17 +253,17 @@ interface _datei extends BaseType {
     pruefsumme: string;
 }
 export interface datei extends _datei { constructor: new () => datei }
-export var datei: new () => datei;
+export let datei: new () => datei;
 
 type _dateiAIP = _datei;
 export interface dateiAIP extends _dateiAIP { constructor: new () => dateiAIP }
-export var dateiAIP: new () => dateiAIP;
+export let dateiAIP: new () => dateiAIP;
 
 interface _dateiDIP extends _datei {
     archivischeNotiz?: archivischeNotiz[];
 }
 export interface dateiDIP extends _dateiDIP { constructor: new () => dateiDIP }
-export var dateiDIP: new () => dateiDIP;
+export let dateiDIP: new () => dateiDIP;
 
 export type dateiRef = string;
 type _dateiRef = Primitive._string;
@@ -271,7 +272,7 @@ interface _dateiSIP extends _datei {
     archivischeNotiz?: archivischeNotiz[];
 }
 export interface dateiSIP extends _dateiSIP { constructor: new () => dateiSIP }
-export var dateiSIP: new () => dateiSIP;
+export let dateiSIP: new () => dateiSIP;
 
 /** markierung, die angibt, ob das Dokument besonders schützenswerte Personendaten oder Persönlichkeitsprofile gemäss Datenschutzrecht Art 3. */
 export type datenschutzDokument = boolean;
@@ -338,49 +339,49 @@ interface _dokument extends BaseType {
     zusatzDaten?: zusatzDaten;
 }
 export interface dokument extends _dokument { constructor: new () => dokument }
-export var dokument: new () => dokument;
+export let dokument: new () => dokument;
 
 type _dokumentFiles = _dokument;
 export interface dokumentFiles extends _dokumentFiles { constructor: new () => dokumentFiles }
-export var dokumentFiles: new () => dokumentFiles;
+export let dokumentFiles: new () => dokumentFiles;
 
 type _dokumentFilesAIP = _dokumentFiles;
 export interface dokumentFilesAIP extends _dokumentFilesAIP { constructor: new () => dokumentFilesAIP }
-export var dokumentFilesAIP: new () => dokumentFilesAIP;
+export let dokumentFilesAIP: new () => dokumentFilesAIP;
 
 interface _dokumentFilesDIP extends _dokumentFiles {
     archivischeNotiz?: archivischeNotiz[];
 }
 export interface dokumentFilesDIP extends _dokumentFilesDIP { constructor: new () => dokumentFilesDIP }
-export var dokumentFilesDIP: new () => dokumentFilesDIP;
+export let dokumentFilesDIP: new () => dokumentFilesDIP;
 
 interface _dokumentFilesSIP extends _dokumentFiles {
     archivischeNotiz?: archivischeNotiz[];
 }
 export interface dokumentFilesSIP extends _dokumentFilesSIP { constructor: new () => dokumentFilesSIP }
-export var dokumentFilesSIP: new () => dokumentFilesSIP;
+export let dokumentFilesSIP: new () => dokumentFilesSIP;
 
 interface _dokumentGever extends _dokument {
     anwendung?: string;
 }
 export interface dokumentGever extends _dokumentGever { constructor: new () => dokumentGever }
-export var dokumentGever: new () => dokumentGever;
+export let dokumentGever: new () => dokumentGever;
 
 type _dokumentGeverAIP = _dokumentGever;
 export interface dokumentGeverAIP extends _dokumentGeverAIP { constructor: new () => dokumentGeverAIP }
-export var dokumentGeverAIP: new () => dokumentGeverAIP;
+export let dokumentGeverAIP: new () => dokumentGeverAIP;
 
 interface _dokumentGeverDIP extends _dokumentGever {
     archivischeNotiz?: archivischeNotiz[];
 }
 export interface dokumentGeverDIP extends _dokumentGeverDIP { constructor: new () => dokumentGeverDIP }
-export var dokumentGeverDIP: new () => dokumentGeverDIP;
+export let dokumentGeverDIP: new () => dokumentGeverDIP;
 
 interface _dokumentGeverSIP extends _dokumentGever {
     archivischeNotiz?: archivischeNotiz[];
 }
 export interface dokumentGeverSIP extends _dokumentGeverSIP { constructor: new () => dokumentGeverSIP }
-export var dokumentGeverSIP: new () => dokumentGeverSIP;
+export let dokumentGeverSIP: new () => dokumentGeverSIP;
 
 /** aussehen des Dokuments, das zu erhalten ist. */
 export type dokumenttyp = string;
@@ -406,13 +407,13 @@ interface _dossier extends BaseType {
     zusatzmerkmal?: string;
 }
 export interface dossier extends _dossier { constructor: new () => dossier }
-export var dossier: new () => dossier;
+export let dossier: new () => dossier;
 
 interface _dossierFiles extends _dossier {
     aktenzeichen?: string;
 }
 export interface dossierFiles extends _dossierFiles { constructor: new () => dossierFiles }
-export var dossierFiles: new () => dossierFiles;
+export let dossierFiles: new () => dossierFiles;
 
 interface _dossierFilesAIP extends _dossierFiles {
     dateiRef?: string[];
@@ -424,7 +425,7 @@ interface _dossierFilesAIP extends _dossierFiles {
     umfang?: string;
 }
 export interface dossierFilesAIP extends _dossierFilesAIP { constructor: new () => dossierFilesAIP }
-export var dossierFilesAIP: new () => dossierFilesAIP;
+export let dossierFilesAIP: new () => dossierFilesAIP;
 
 interface _dossierFilesDIP extends _dossierFiles {
     archivischeNotiz?: archivischeNotiz[];
@@ -433,7 +434,7 @@ interface _dossierFilesDIP extends _dossierFiles {
     dossier?: dossierFilesDIP[];
 }
 export interface dossierFilesDIP extends _dossierFilesDIP { constructor: new () => dossierFilesDIP }
-export var dossierFilesDIP: new () => dossierFilesDIP;
+export let dossierFilesDIP: new () => dossierFilesDIP;
 
 interface _dossierFilesSIP extends _dossierFiles {
     archivischeNotiz?: archivischeNotiz[];
@@ -446,7 +447,7 @@ interface _dossierFilesSIP extends _dossierFiles {
     umfang?: string;
 }
 export interface dossierFilesSIP extends _dossierFilesSIP { constructor: new () => dossierFilesSIP }
-export var dossierFilesSIP: new () => dossierFilesSIP;
+export let dossierFilesSIP: new () => dossierFilesSIP;
 
 interface _dossierGever extends _dossier {
     /** zeitpunkt, an dem das Dossier abgeschlossen worden ist. */
@@ -460,7 +461,7 @@ interface _dossierGever extends _dossier {
     vorgang?: vorgangAktivitaet[];
 }
 export interface dossierGever extends _dossierGever { constructor: new () => dossierGever }
-export var dossierGever: new () => dossierGever;
+export let dossierGever: new () => dossierGever;
 
 interface _dossierGeverAIP extends _dossierGever {
     dokument?: dokumentGeverAIP[];
@@ -470,7 +471,7 @@ interface _dossierGeverAIP extends _dossierGever {
     schutzfristenkategorie?: string;
 }
 export interface dossierGeverAIP extends _dossierGeverAIP { constructor: new () => dossierGeverAIP }
-export var dossierGeverAIP: new () => dossierGeverAIP;
+export let dossierGeverAIP: new () => dossierGeverAIP;
 
 interface _dossierGeverDIP extends _dossierGever {
     archivischeNotiz?: archivischeNotiz[];
@@ -478,7 +479,7 @@ interface _dossierGeverDIP extends _dossierGever {
     dossier?: dossierGeverDIP[];
 }
 export interface dossierGeverDIP extends _dossierGeverDIP { constructor: new () => dossierGeverDIP }
-export var dossierGeverDIP: new () => dossierGeverDIP;
+export let dossierGeverDIP: new () => dossierGeverDIP;
 
 interface _dossierGeverSIP extends _dossierGever {
     archivischeNotiz?: archivischeNotiz[];
@@ -489,7 +490,7 @@ interface _dossierGeverSIP extends _dossierGever {
     schutzfristenkategorie?: string;
 }
 export interface dossierGeverSIP extends _dossierGeverSIP { constructor: new () => dossierGeverSIP }
-export var dossierGeverSIP: new () => dossierGeverSIP;
+export let dossierGeverSIP: new () => dossierGeverSIP;
 
 /** generisches Attribut, welches im Zusammenhang mit Wert verwendet wird. Wird bspw. eine CSV-Datei abgeliefert, dann können mittels Attributpaar "eigenschaft" und "wert" Feld- und Zeilendelemiter, Texterkennungszeichen oder Spaltennamen angegeben werden. */
 export type eigenschaft = string;
@@ -499,7 +500,7 @@ interface _eigenschaftDatei extends _eigenschaft {
     name: string;
 }
 export interface eigenschaftDatei extends _eigenschaftDatei { constructor: new () => eigenschaftDatei }
-export var eigenschaftDatei: new () => eigenschaftDatei;
+export let eigenschaftDatei: new () => eigenschaftDatei;
 
 /** zusätzliche Informationen, welche für die Ermittlung des Entstehungszeitraums relevant sind. Hier können Angaben über allfällige Löschungen und Mutationen an der Datensammlung eingetragen werden (für FILES relevant). Falls der Entstehungszeitraum geschätzt wurde, ist hier das Kriterium für die Schätzung zu nennen. */
 export type entstehungszeitraumAnmerkung = string;
@@ -546,14 +547,14 @@ interface _historischerZeitpunkt extends BaseType {
     datum: string;
 }
 export interface historischerZeitpunkt extends _historischerZeitpunkt { constructor: new () => historischerZeitpunkt }
-export var historischerZeitpunkt: new () => historischerZeitpunkt;
+export let historischerZeitpunkt: new () => historischerZeitpunkt;
 
 interface _historischerZeitraum extends BaseType {
     bis: historischerZeitpunkt;
     von: historischerZeitpunkt;
 }
 export interface historischerZeitraum extends _historischerZeitraum { constructor: new () => historischerZeitraum }
-export var historischerZeitraum: new () => historischerZeitraum;
+export let historischerZeitraum: new () => historischerZeitraum;
 
 /** paketweit eindeutige ID. */
 export type idArchivischeNotiz = string;
@@ -585,28 +586,28 @@ type _inhalt = _text4;
 
 type _inhaltsverzeichnis = BaseType;
 export interface inhaltsverzeichnis extends _inhaltsverzeichnis { constructor: new () => inhaltsverzeichnis }
-export var inhaltsverzeichnis: new () => inhaltsverzeichnis;
+export let inhaltsverzeichnis: new () => inhaltsverzeichnis;
 
 interface _inhaltsverzeichnisAIP extends _inhaltsverzeichnis {
     datei?: dateiAIP[];
     ordner?: ordnerAIP[];
 }
 export interface inhaltsverzeichnisAIP extends _inhaltsverzeichnisAIP { constructor: new () => inhaltsverzeichnisAIP }
-export var inhaltsverzeichnisAIP: new () => inhaltsverzeichnisAIP;
+export let inhaltsverzeichnisAIP: new () => inhaltsverzeichnisAIP;
 
 interface _inhaltsverzeichnisDIP extends _inhaltsverzeichnis {
     datei?: dateiDIP[];
     ordner?: ordnerDIP[];
 }
 export interface inhaltsverzeichnisDIP extends _inhaltsverzeichnisDIP { constructor: new () => inhaltsverzeichnisDIP }
-export var inhaltsverzeichnisDIP: new () => inhaltsverzeichnisDIP;
+export let inhaltsverzeichnisDIP: new () => inhaltsverzeichnisDIP;
 
 interface _inhaltsverzeichnisSIP extends _inhaltsverzeichnis {
     datei?: dateiSIP[];
     ordner?: ordnerSIP[];
 }
 export interface inhaltsverzeichnisSIP extends _inhaltsverzeichnisSIP { constructor: new () => inhaltsverzeichnisSIP }
-export var inhaltsverzeichnisSIP: new () => inhaltsverzeichnisSIP;
+export let inhaltsverzeichnisSIP: new () => inhaltsverzeichnisSIP;
 
 export type keineAngabe = 'keine Angabe';
 interface _keineAngabe extends Primitive._string { content: keineAngabe }
@@ -700,28 +701,28 @@ interface _ordner extends BaseType {
     originalName?: string;
 }
 export interface ordner extends _ordner { constructor: new () => ordner }
-export var ordner: new () => ordner;
+export let ordner: new () => ordner;
 
 interface _ordnerAIP extends _ordner {
     datei?: dateiAIP[];
     ordner?: ordnerAIP[];
 }
 export interface ordnerAIP extends _ordnerAIP { constructor: new () => ordnerAIP }
-export var ordnerAIP: new () => ordnerAIP;
+export let ordnerAIP: new () => ordnerAIP;
 
 interface _ordnerDIP extends _ordner {
     datei?: dateiDIP[];
     ordner?: ordnerDIP[];
 }
 export interface ordnerDIP extends _ordnerDIP { constructor: new () => ordnerDIP }
-export var ordnerDIP: new () => ordnerDIP;
+export let ordnerDIP: new () => ordnerDIP;
 
 interface _ordnerSIP extends _ordner {
     datei?: dateiSIP[];
     ordner?: ordnerSIP[];
 }
 export interface ordnerSIP extends _ordnerSIP { constructor: new () => ordnerSIP }
-export var ordnerSIP: new () => ordnerSIP;
+export let ordnerSIP: new () => ordnerSIP;
 
 interface _ordnungssystem extends BaseType {
     /** zeitraum, seit/während dem das Ordnungssystem bei der aktenbildenden Stelle eingesetzt wird/wurde. */
@@ -732,59 +733,59 @@ interface _ordnungssystem extends BaseType {
     zusatzDaten?: zusatzDaten;
 }
 export interface ordnungssystem extends _ordnungssystem { constructor: new () => ordnungssystem }
-export var ordnungssystem: new () => ordnungssystem;
+export let ordnungssystem: new () => ordnungssystem;
 
 interface _ordnungssystemFiles extends _ordnungssystem {
     name?: string;
 }
 export interface ordnungssystemFiles extends _ordnungssystemFiles { constructor: new () => ordnungssystemFiles }
-export var ordnungssystemFiles: new () => ordnungssystemFiles;
+export let ordnungssystemFiles: new () => ordnungssystemFiles;
 
 interface _ordnungssystemFilesAIP extends _ordnungssystemFiles {
     ordnungssystemposition: ordnungssystempositionFilesAIP[];
 }
 export interface ordnungssystemFilesAIP extends _ordnungssystemFilesAIP { constructor: new () => ordnungssystemFilesAIP }
-export var ordnungssystemFilesAIP: new () => ordnungssystemFilesAIP;
+export let ordnungssystemFilesAIP: new () => ordnungssystemFilesAIP;
 
 interface _ordnungssystemFilesDIP extends _ordnungssystemFiles {
     archivischeNotiz?: archivischeNotiz[];
     ordnungssystemposition: ordnungssystempositionFilesDIP[];
 }
 export interface ordnungssystemFilesDIP extends _ordnungssystemFilesDIP { constructor: new () => ordnungssystemFilesDIP }
-export var ordnungssystemFilesDIP: new () => ordnungssystemFilesDIP;
+export let ordnungssystemFilesDIP: new () => ordnungssystemFilesDIP;
 
 interface _ordnungssystemFilesSIP extends _ordnungssystemFiles {
     archivischeNotiz?: archivischeNotiz[];
     ordnungssystemposition: ordnungssystempositionFilesSIP[];
 }
 export interface ordnungssystemFilesSIP extends _ordnungssystemFilesSIP { constructor: new () => ordnungssystemFilesSIP }
-export var ordnungssystemFilesSIP: new () => ordnungssystemFilesSIP;
+export let ordnungssystemFilesSIP: new () => ordnungssystemFilesSIP;
 
 interface _ordnungssystemGever extends _ordnungssystem {
     name: string;
 }
 export interface ordnungssystemGever extends _ordnungssystemGever { constructor: new () => ordnungssystemGever }
-export var ordnungssystemGever: new () => ordnungssystemGever;
+export let ordnungssystemGever: new () => ordnungssystemGever;
 
 interface _ordnungssystemGeverAIP extends _ordnungssystemGever {
     ordnungssystemposition: ordnungssystempositionGeverAIP[];
 }
 export interface ordnungssystemGeverAIP extends _ordnungssystemGeverAIP { constructor: new () => ordnungssystemGeverAIP }
-export var ordnungssystemGeverAIP: new () => ordnungssystemGeverAIP;
+export let ordnungssystemGeverAIP: new () => ordnungssystemGeverAIP;
 
 interface _ordnungssystemGeverDIP extends _ordnungssystemGever {
     archivischeNotiz?: archivischeNotiz[];
     ordnungssystemposition: ordnungssystempositionGeverDIP[];
 }
 export interface ordnungssystemGeverDIP extends _ordnungssystemGeverDIP { constructor: new () => ordnungssystemGeverDIP }
-export var ordnungssystemGeverDIP: new () => ordnungssystemGeverDIP;
+export let ordnungssystemGeverDIP: new () => ordnungssystemGeverDIP;
 
 interface _ordnungssystemGeverSIP extends _ordnungssystemGever {
     archivischeNotiz?: archivischeNotiz[];
     ordnungssystemposition: ordnungssystempositionGeverSIP[];
 }
 export interface ordnungssystemGeverSIP extends _ordnungssystemGeverSIP { constructor: new () => ordnungssystemGeverSIP }
-export var ordnungssystemGeverSIP: new () => ordnungssystemGeverSIP;
+export let ordnungssystemGeverSIP: new () => ordnungssystemGeverSIP;
 
 interface _ordnungssystemposition extends BaseType {
     datenschutz?: boolean;
@@ -796,7 +797,7 @@ interface _ordnungssystemposition extends BaseType {
     zusatzDaten?: zusatzDaten;
 }
 export interface ordnungssystemposition extends _ordnungssystemposition { constructor: new () => ordnungssystemposition }
-export var ordnungssystemposition: new () => ordnungssystemposition;
+export let ordnungssystemposition: new () => ordnungssystemposition;
 
 interface _ordnungssystempositionFiles extends _ordnungssystemposition {
     id?: string;
@@ -804,7 +805,7 @@ interface _ordnungssystempositionFiles extends _ordnungssystemposition {
     titel?: string;
 }
 export interface ordnungssystempositionFiles extends _ordnungssystempositionFiles { constructor: new () => ordnungssystempositionFiles }
-export var ordnungssystempositionFiles: new () => ordnungssystempositionFiles;
+export let ordnungssystempositionFiles: new () => ordnungssystempositionFiles;
 
 interface _ordnungssystempositionFilesAIP extends _ordnungssystempositionFiles {
     dossier?: dossierFilesAIP[];
@@ -814,7 +815,7 @@ interface _ordnungssystempositionFilesAIP extends _ordnungssystempositionFiles {
     schutzfristenkategorie?: string;
 }
 export interface ordnungssystempositionFilesAIP extends _ordnungssystempositionFilesAIP { constructor: new () => ordnungssystempositionFilesAIP }
-export var ordnungssystempositionFilesAIP: new () => ordnungssystempositionFilesAIP;
+export let ordnungssystempositionFilesAIP: new () => ordnungssystempositionFilesAIP;
 
 interface _ordnungssystempositionFilesDIP extends _ordnungssystempositionFiles {
     archivischeNotiz?: archivischeNotiz[];
@@ -822,7 +823,7 @@ interface _ordnungssystempositionFilesDIP extends _ordnungssystempositionFiles {
     ordnungssystemposition?: ordnungssystempositionFilesDIP[];
 }
 export interface ordnungssystempositionFilesDIP extends _ordnungssystempositionFilesDIP { constructor: new () => ordnungssystempositionFilesDIP }
-export var ordnungssystempositionFilesDIP: new () => ordnungssystempositionFilesDIP;
+export let ordnungssystempositionFilesDIP: new () => ordnungssystempositionFilesDIP;
 
 interface _ordnungssystempositionFilesSIP extends _ordnungssystempositionFiles {
     archivischeNotiz?: archivischeNotiz[];
@@ -833,7 +834,7 @@ interface _ordnungssystempositionFilesSIP extends _ordnungssystempositionFiles {
     schutzfristenkategorie?: string;
 }
 export interface ordnungssystempositionFilesSIP extends _ordnungssystempositionFilesSIP { constructor: new () => ordnungssystempositionFilesSIP }
-export var ordnungssystempositionFilesSIP: new () => ordnungssystempositionFilesSIP;
+export let ordnungssystempositionFilesSIP: new () => ordnungssystempositionFilesSIP;
 
 interface _ordnungssystempositionGever extends _ordnungssystemposition {
     id: string;
@@ -841,7 +842,7 @@ interface _ordnungssystempositionGever extends _ordnungssystemposition {
     titel: string;
 }
 export interface ordnungssystempositionGever extends _ordnungssystempositionGever { constructor: new () => ordnungssystempositionGever }
-export var ordnungssystempositionGever: new () => ordnungssystempositionGever;
+export let ordnungssystempositionGever: new () => ordnungssystempositionGever;
 
 interface _ordnungssystempositionGeverAIP extends _ordnungssystempositionGever {
     dossier?: dossierGeverAIP[];
@@ -851,7 +852,7 @@ interface _ordnungssystempositionGeverAIP extends _ordnungssystempositionGever {
     schutzfristenkategorie?: string;
 }
 export interface ordnungssystempositionGeverAIP extends _ordnungssystempositionGeverAIP { constructor: new () => ordnungssystempositionGeverAIP }
-export var ordnungssystempositionGeverAIP: new () => ordnungssystempositionGeverAIP;
+export let ordnungssystempositionGeverAIP: new () => ordnungssystempositionGeverAIP;
 
 interface _ordnungssystempositionGeverDIP extends _ordnungssystempositionGever {
     archivischeNotiz?: archivischeNotiz[];
@@ -859,7 +860,7 @@ interface _ordnungssystempositionGeverDIP extends _ordnungssystempositionGever {
     ordnungssystemposition?: ordnungssystempositionGeverDIP[];
 }
 export interface ordnungssystempositionGeverDIP extends _ordnungssystempositionGeverDIP { constructor: new () => ordnungssystempositionGeverDIP }
-export var ordnungssystempositionGeverDIP: new () => ordnungssystempositionGeverDIP;
+export let ordnungssystempositionGeverDIP: new () => ordnungssystempositionGeverDIP;
 
 interface _ordnungssystempositionGeverSIP extends _ordnungssystempositionGever {
     archivischeNotiz?: archivischeNotiz[];
@@ -870,7 +871,7 @@ interface _ordnungssystempositionGeverSIP extends _ordnungssystempositionGever {
     schutzfristenkategorie?: string;
 }
 export interface ordnungssystempositionGeverSIP extends _ordnungssystempositionGeverSIP { constructor: new () => ordnungssystempositionGeverSIP }
-export var ordnungssystempositionGeverSIP: new () => ordnungssystempositionGeverSIP;
+export let ordnungssystempositionGeverSIP: new () => ordnungssystempositionGeverSIP;
 
 /** name des Ordners oder der Datei, wie diese in der Originalstruktur (im GEVER-System, in der Dateiablage) beim Aktenbildner geheissen hat (z.B. "Arbeitspaket" oder "Bericht.doc"). */
 export type originalName = string;
@@ -882,7 +883,7 @@ interface _paket extends BaseType {
     zusatzDaten?: zusatzDaten;
 }
 export interface paket extends _paket { constructor: new () => paket }
-export var paket: new () => paket;
+export let paket: new () => paket;
 
 interface _paketAIP extends _paket {
     ablieferung: ablieferungAIP;
@@ -896,7 +897,7 @@ interface _paketAIP extends _paket {
     version: number;
 }
 export interface paketAIP extends _paketAIP { constructor: new () => paketAIP }
-export var paketAIP: new () => paketAIP;
+export let paketAIP: new () => paketAIP;
 
 interface _paketDIP extends _paket {
     ablieferung: ablieferungDIP;
@@ -908,7 +909,7 @@ interface _paketDIP extends _paket {
     nameSIP?: string;
 }
 export interface paketDIP extends _paketDIP { constructor: new () => paketDIP }
-export var paketDIP: new () => paketDIP;
+export let paketDIP: new () => paketDIP;
 
 interface _paketSIP extends _paket {
     ablieferung: ablieferungSIP;
@@ -918,7 +919,7 @@ interface _paketSIP extends _paket {
     referenzUebernahmedossier?: string;
 }
 export interface paketSIP extends _paketSIP { constructor: new () => paketSIP }
-export var paketSIP: new () => paketSIP;
+export let paketSIP: new () => paketSIP;
 
 /** klassierung des Pakets. */
 export type paketTyp = ('SIP' | 'AIP' | 'DIP');
@@ -938,7 +939,7 @@ interface _provenienz extends BaseType {
     systemName?: string;
 }
 export interface provenienz extends _provenienz { constructor: new () => provenienz }
-export var provenienz: new () => provenienz;
+export let provenienz: new () => provenienz;
 
 interface _provenienzFiles extends _provenienz {
     archivierungsmodusLoeschvorschriften?: string;
@@ -946,45 +947,45 @@ interface _provenienzFiles extends _provenienz {
     verwandteSysteme?: string;
 }
 export interface provenienzFiles extends _provenienzFiles { constructor: new () => provenienzFiles }
-export var provenienzFiles: new () => provenienzFiles;
+export let provenienzFiles: new () => provenienzFiles;
 
 type _provenienzFilesAIP = _provenienzFiles;
 export interface provenienzFilesAIP extends _provenienzFilesAIP { constructor: new () => provenienzFilesAIP }
-export var provenienzFilesAIP: new () => provenienzFilesAIP;
+export let provenienzFilesAIP: new () => provenienzFilesAIP;
 
 interface _provenienzFilesDIP extends _provenienzFiles {
     archivischeNotiz?: archivischeNotiz[];
 }
 export interface provenienzFilesDIP extends _provenienzFilesDIP { constructor: new () => provenienzFilesDIP }
-export var provenienzFilesDIP: new () => provenienzFilesDIP;
+export let provenienzFilesDIP: new () => provenienzFilesDIP;
 
 interface _provenienzFilesSIP extends _provenienzFiles {
     archivischeNotiz?: archivischeNotiz[];
 }
 export interface provenienzFilesSIP extends _provenienzFilesSIP { constructor: new () => provenienzFilesSIP }
-export var provenienzFilesSIP: new () => provenienzFilesSIP;
+export let provenienzFilesSIP: new () => provenienzFilesSIP;
 
 interface _provenienzGever extends _provenienz {
     registratur: string;
 }
 export interface provenienzGever extends _provenienzGever { constructor: new () => provenienzGever }
-export var provenienzGever: new () => provenienzGever;
+export let provenienzGever: new () => provenienzGever;
 
 type _provenienzGeverAIP = _provenienzGever;
 export interface provenienzGeverAIP extends _provenienzGeverAIP { constructor: new () => provenienzGeverAIP }
-export var provenienzGeverAIP: new () => provenienzGeverAIP;
+export let provenienzGeverAIP: new () => provenienzGeverAIP;
 
 interface _provenienzGeverDIP extends _provenienzGever {
     archivischeNotiz?: archivischeNotiz[];
 }
 export interface provenienzGeverDIP extends _provenienzGeverDIP { constructor: new () => provenienzGeverDIP }
-export var provenienzGeverDIP: new () => provenienzGeverDIP;
+export let provenienzGeverDIP: new () => provenienzGeverDIP;
 
 interface _provenienzGeverSIP extends _provenienzGever {
     archivischeNotiz?: archivischeNotiz[];
 }
 export interface provenienzGeverSIP extends _provenienzGeverSIP { constructor: new () => provenienzGeverSIP }
-export var provenienzGeverSIP: new () => provenienzGeverSIP;
+export let provenienzGeverSIP: new () => provenienzGeverSIP;
 
 /** bezeichnung des verwendeten Prüfalgorithmus. */
 export type pruefalgorithmus = ('MD5' | 'SHA-1' | 'SHA-256' | 'SHA-512');
@@ -1106,7 +1107,7 @@ interface _unstrukturierterAnhang extends BaseType {
     dateiRef?: string;
 }
 export interface unstrukturierterAnhang extends _unstrukturierterAnhang { constructor: new () => unstrukturierterAnhang }
-export var unstrukturierterAnhang: new () => unstrukturierterAnhang;
+export let unstrukturierterAnhang: new () => unstrukturierterAnhang;
 
 /** die Versionierung des Pakets. Aus der Version ist schnell ersichtlich, wie oft ein AIP bereits migriert wurde. */
 export type version = number;
@@ -1136,7 +1137,7 @@ interface _vorgangAktivitaet extends BaseType {
     verweis?: string[];
 }
 export interface vorgangAktivitaet extends _vorgangAktivitaet { constructor: new () => vorgangAktivitaet }
-export var vorgangAktivitaet: new () => vorgangAktivitaet;
+export let vorgangAktivitaet: new () => vorgangAktivitaet;
 
 /** klassifizierung des Vorgangs. */
 export type vorgangstyp = string;
@@ -1154,14 +1155,14 @@ interface _zeitraum extends BaseType {
     von: string;
 }
 export interface zeitraum extends _zeitraum { constructor: new () => zeitraum }
-export var zeitraum: new () => zeitraum;
+export let zeitraum: new () => zeitraum;
 
 /** merkmal - Werte Gruppen erlaubt das festhalten weiterer Metadaten in tabellarisch strukturierter Form */
 interface _zusatzDaten extends BaseType {
     merkmal: zusatzDatenMerkmalType[];
 }
 export interface zusatzDaten extends _zusatzDaten { constructor: new () => zusatzDaten }
-export var zusatzDaten: new () => zusatzDaten;
+export let zusatzDaten: new () => zusatzDaten;
 
 interface _zusatzDatenMerkmalType extends _text4 {
     /** name des Merkmal - Werte Paares */
@@ -1176,4 +1177,4 @@ type _zusatzmerkmal = _text2;
 export interface document extends BaseType {
     paket: paket;
 }
-export var document: document;
+export let document: document;
