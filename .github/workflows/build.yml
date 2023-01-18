@@ -42,7 +42,7 @@ jobs:
       - name: Run the script
         run: yarn lint:ci
 
-  build-deploy:
+  build-lib-and-app:
     name: Build lib and app
     needs: [
       unit-tests,
@@ -62,3 +62,23 @@ jobs:
         run: yarn build:lib
       - name: Build the app
         run: yarn build:app
+
+  release-please:
+    name: Prepare next release
+    runs-on: ubuntu-latest
+    # Automate releases with Conventional Commit Messages as Pull Requests are merged into "main" branch
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Get release please action
+        uses: GoogleCloudPlatform/release-please-action@v2
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          release-type: node
+          package-name: ech-0160-DIMAG-Ingest
+          changelog-types: '[
+              {"type": "feat", "section": "Enhancements", "hidden": false },
+              {"type": "fix", "section": "Bug Fixes", "hidden": false },
+              {"type": "chore", "section": "Maintenance", "hidden": false },
+              {"type": "refactor", "section": "Maintenance", "hidden": false },
+              {"type": "docs", "section": "Documentation", "hidden": false }
+            ]'
