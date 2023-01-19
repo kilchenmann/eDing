@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.1](https://www.github.com/kilchenmann/eDing/compare/v1.0.0...v1.0.1) (2023-01-19)
+
+
+### Maintenance
+
+* **ci/cd:** prepare release with electron builder ([#7](https://www.github.com/kilchenmann/eDing/issues/7)) ([b6cb82d](https://www.github.com/kilchenmann/eDing/commit/b6cb82db78155337e0fba4854f7122f42e0f2f9d))
+
 ## 1.0.0 (2023-01-18)
 
 
