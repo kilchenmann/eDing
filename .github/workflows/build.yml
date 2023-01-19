@@ -112,10 +112,6 @@ jobs:
           node-version: ${{ env.node-version }}
       - name: Install dependencies
         run: yarn install --frozen-lockfile
-      - name: Build the lib
-        run: yarn build:lib
-      - name: Build the app
-        run: yarn build:app
       - name: Build and release Electron app
         uses: paneron/action-electron-builder@v1.8.1
         with:

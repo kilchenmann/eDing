@@ -1,27 +1,50 @@
 {
-  "name": "toolbox",
+  "name": "ech-0160-dimag-ingest",
+  "description": "Standalone Applikation für die Vorbereitung eines DIMAG Ingests von eCH-0160 SIPs",
+  "keywords": [
+    "dimag",
+    "ingest",
+    "archive",
+    "long-term archive",
+    "oais"
+  ],
   "version": "1.0.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kilchenmann/eDing.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kilchenmann/eDing/issues",
+    "email": "ak@avdimag.ch"
+  },
+  "author": {
+    "name": "AV DIMAG (André Kilchenmann)",
+    "email": "ak@avdimag.ch",
+    "url": "http://av-dimag.ch"
+  },
   "main": "main.js",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build:electron": "ng build && electron .",
-    "build:electron-dev": "yarn build-app-dev && electron .",
-    "build:app": "ng build",
+    "build": "yarn build:lib && yarn build:app",
+    "build:app": "ng build --configuration production",
     "build:app-dev": "ng build --configuration development",
     "build:app-dev-watch": "ng build --configuration development --watch=true",
+    "build:electron": "ng build && electron .",
+    "build:electron-dev": "yarn build-app-dev && electron .",
+    "build:lib": "ng build --configuration production --project @av-dimag/ingest && cp README.md dist/@av-dimag/ingest/",
+    "build:lib-dev": "ng build --configuration development --project @av-dimag/ingest",
+    "build:lib-dev-watch": "ng build --configuration development --project @av-dimag/ingest --watch=true",
     "build:page": "ng build --base-href /ingest-poc/",
-    "test:app": "ng test",
-    "test:app-ci": "ng test --watch=false --browsers=ChromeHeadless",
-    "test:lib": "ng t --project @av-dimag/ingest",
-    "test:lib-ci": "ng t --watch=false --browsers=ChromeHeadless --project @av-dimag/ingest",
-    "build:lib": "ng b --configuration production --project @av-dimag/ingest && cp README.md dist/@av-dimag/ingest/",
-    "build:lib-dev": "ng b --configuration development --project @av-dimag/ingest",
-    "build:lib-dev-watch": "ng b --configuration development --project @av-dimag/ingest --watch=true",
     "lint:app": "eslint --color --fix -c .eslintrc.js --ext .ts ./src/app",
     "lint:app-ci": "eslint --color -c .eslintrc.js --ext .ts ./src/app",
     "lint:lib": "eslint --color --fix -c .eslintrc.js --ext .ts ./projects/ingest/src/lib",
     "lint:lib-ci": "eslint --color -c .eslintrc.js --ext .ts ./projects/ingest/src/lib",
+    "test:app": "ng test",
+    "test:app-ci": "ng test --watch=false --browsers=ChromeHeadless",
+    "test:lib": "ng t --project @av-dimag/ingest",
+    "test:lib-ci": "ng t --watch=false --browsers=ChromeHeadless --project @av-dimag/ingest",
     "prep-testdata": "./prepare-testdata.sh"
   },
   "private": true,
