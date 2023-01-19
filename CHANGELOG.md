@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.2](https://www.github.com/kilchenmann/eDing/compare/v1.0.1...v1.0.2) (2023-01-19)
+
+
+### Maintenance
+
+* **ci/cd:** optimise electron build process ([#9](https://www.github.com/kilchenmann/eDing/issues/9)) ([05c7d32](https://www.github.com/kilchenmann/eDing/commit/05c7d3276963243ee701ef76b4b5ad53aa4b4b72))
+
 ### [1.0.1](https://www.github.com/kilchenmann/eDing/compare/v1.0.0...v1.0.1) (2023-01-19)
 
 
