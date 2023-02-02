@@ -1,8 +1,8 @@
 name: "💡 Feature Request"
 description: Create a new ticket for a new feature request
-title: "💡 [REQUEST] - <title>"
+title: "💡 feat [topic]: <title>"
 labels: [
-  "question"
+  "enhancement"
 ]
 body:
   - type: input
@@ -10,23 +10,7 @@ body:
     attributes:
       label: "Start Date"
       description: Start of development
-      placeholder: "month/day/year"
-    validations:
-      required: false
-  - type: textarea
-    id: implementation_pr
-    attributes:
-      label: "Implementation PR"
-      description: Pull request used
-      placeholder: "#Pull Request ID"
-    validations:
-      required: false
-  - type: textarea
-    id: reference_issues
-    attributes:
-      label: "Reference Issues"
-      description: Common issues
-      placeholder: "#Issues IDs"
+      placeholder: "year-month-day"
     validations:
       required: false
   - type: textarea
@@ -38,11 +22,14 @@ body:
     validations:
       required: true
   - type: textarea
-    id: basic_example
+    id: todo
     attributes:
-      label: "Basic Example"
-      description: Indicate here some basic examples of your feature.
-      placeholder: A few specific words about your feature request.
+      label: "Tasks / To do"
+      description: List here the steps to be taken
+      value: |
+        - [ ] Step_1
+        - [ ] Step_2
+      render: bash
     validations:
       required: true
   - type: textarea
@@ -52,12 +39,20 @@ body:
       description: What are the drawbacks/impacts of your feature request ?
       placeholder: Identify the drawbacks and impacts while being neutral on your feature request
     validations:
-      required: true
+      required: false
   - type: textarea
     id: unresolved_question
     attributes:
       label: "Unresolved questions"
       description: What questions still remain unresolved ?
       placeholder: Identify any unresolved issues.
+    validations:
+      required: false
+  - type: textarea
+    id: reference_issues
+    attributes:
+      label: "Reference Issues or PRs"
+      description: Common issues
+      placeholder: "#Issues IDs"
     validations:
       required: false
