@@ -1,6 +1,6 @@
 name: "💡 Feature Request"
 description: Create a new ticket for a new feature request
-title: "💡 feat [topic]: <title>"
+title: "💡 feat [topic]: title"
 labels: [
   "enhancement"
 ]
@@ -26,10 +26,9 @@ body:
     attributes:
       label: "Tasks / To do"
       description: List here the steps to be taken
-      value: |
+      placeholder: |
         - [ ] Step_1
         - [ ] Step_2
-      render: markdown
     validations:
       required: true
   - type: textarea
