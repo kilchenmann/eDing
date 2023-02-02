@@ -1,6 +1,7 @@
 name: "🐛 Bug Report"
 description: Create a new ticket for a bug.
 title: "🐛 bug [topic]: <title>"
+assignees: "kilchenmann"
 labels: [
   "bug"
 ]
@@ -18,21 +19,20 @@ body:
     attributes:
       label: "Reproduction steps"
       description: Please enter an explicit description of your issue
-      value: |
+      placeholder: |
         1. Go to '...'
         1. Click on '....'
         1. Scroll down to '....'
         1. See error
-      render: markdown
     validations:
       required: true
   - type: textarea
     id: screenshot
     attributes:
       label: "Screenshots"
-      description: If applicable, add screenshots to help explain your problem.
-      value: |
-        ![DESCRIPTION](LINK.png)
+      description: |
+        If applicable, add screenshots to help explain your problem.
+        Tip: You can attach images by clicking this area to highlight it and then dragging files in.
       render: bash
     validations:
       required: false
