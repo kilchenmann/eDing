@@ -23,7 +23,7 @@ body:
         1. Click on '....'
         1. Scroll down to '....'
         1. See error
-      render: bash
+      render: markdown
     validations:
       required: true
   - type: textarea
@@ -44,20 +44,19 @@ body:
       render: bash
     validations:
       required: false
-  - type: checkboxes
+  - type: dropdown
     id: environment
     attributes:
-      label: "Application"
-      description: With which application does the error occur ?
+      label: "Environment"
+      description: In which environment / application does the error occur ?
+      multiple: true
       options:
-      - label: Electron
-        required: false
-      - label: Browser
-        required: false
-      - label: Terminal (e.g. build)
-        required: false
-      - label: Github Actions
-        required: false
+        - Electron
+        - Browser
+        - Terminal (e.g. build)
+        - Github Actions
+    validations:
+      required: false
   - type: dropdown
     id: browsers
     attributes:

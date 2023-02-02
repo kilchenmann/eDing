@@ -29,7 +29,7 @@ body:
       value: |
         - [ ] Step_1
         - [ ] Step_2
-      render: bash
+      render: markdown
     validations:
       required: true
   - type: textarea
