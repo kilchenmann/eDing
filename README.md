@@ -1,6 +1,6 @@
-# Toolbox App and Angular Library
+# eCH-0160 DIMAG Ingest Preparation
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.2 and [YARN](https://yarnpkg.com) (instead npm!).
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.2 and [YARN](https://yarnpkg.com) (instead npm!). Please read  [our developer guidelines](https://av-dimag.github.io/guidelines/) for contribution.
 
 ## First Steps
 
