@@ -1,0 +1,8 @@
+<mat-card *ngIf="!currentFile">
+  <mat-card-content class="dropzone">
+    <mat-icon class="fileupload-icon" fontIcon="file_download"></mat-icon>
+    <h3><strong>Wählen Sie ein SIP </strong>oder ziehen Sie es hierher.</h3>
+    <input type="file" id="fileInput" (drop)="resetFileInput($event)" (click)="resetFileInput($event)"
+      (change)="uploadFile($event)" name="fileInput" accept=".zip" />
+  </mat-card-content>
+</mat-card>

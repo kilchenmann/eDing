@@ -23,7 +23,7 @@ jobs:
         with:
           node-version: ${{ env.NV }}
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
       - name: Run the lint scripts
         run: |
           yarn lint:app-ci
@@ -42,7 +42,7 @@ jobs:
         with:
           node-version: ${{ env.NV }}
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
       - name: Run the lib tests
         run: yarn test:lib-ci
       - name: Build the lib
@@ -71,7 +71,7 @@ jobs:
         with:
           node-version: ${{ env.node-version }}
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
       - name: Build the lib
         run: yarn build:lib
       - name: Build the app

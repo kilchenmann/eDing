@@ -12,6 +12,10 @@ import { StartComponent } from './pages/start/start.component';
 import { HeadlineComponent } from './shared/headline/headline.component';
 import { PlaygroundComponent } from './pages/playground/playground.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FileUploadComponent } from './shared/file-upload/file-upload.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
+import { GenericDialogComponent } from './shared/generic-dialog/generic-dialog.component';
 
 @NgModule({
     declarations: [
@@ -20,7 +24,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         AboutComponent,
         StartComponent,
         HeadlineComponent,
-        PlaygroundComponent
+        PlaygroundComponent,
+        FileUploadComponent,
+        GenericDialogComponent
     ],
     imports: [
         AppRoutingModule,
@@ -30,6 +36,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         FormsModule,
         MaterialModule,
         ReactiveFormsModule,
+        MatCardModule,
+        MatDialogModule,
     ],
     providers: [],
     bootstrap: [AppComponent]

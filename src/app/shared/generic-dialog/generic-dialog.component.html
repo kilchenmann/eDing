@@ -1,0 +1,8 @@
+<mat-dialog-content class="error-dialog">
+  <p mat-dialog-title>{{msg.title}}</p>
+  <p>{{msg.text}}</p>
+  <p *ngIf="msg.log">{{msg.log}}</p>
+  <div mat-dialog-actions align="center">
+    <button mat-button (click)="closeDialog()" location="center">Ok</button>
+  </div>
+</mat-dialog-content>
