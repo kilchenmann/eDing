@@ -26,7 +26,7 @@ function onReady() {
   win = new BrowserWindow({
     width: 900,
     height: 6700,
-    webPreferences: { nodeIntegration: true, contextIsolation: false, webSecurity: false }
+    webPreferences: { nodeIntegration: true, contextIsolation: false, webSecurity: true }
   });
 
   if (dev) {
