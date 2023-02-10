@@ -1,6 +1,6 @@
 name: CI
 env:
-  node-version: 16.17.0
+  nv: 16.17.0
 
 
 on:
@@ -10,39 +10,80 @@ on:
 
 
 jobs:
-  # code linter on lib and app
-  lint:
-    name: Run lint
+  install-dependencies:
+    name: Install dependencies
     runs-on: ubuntu-latest
     if: github.ref != 'refs/heads/main'
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
-      - name: Set up Node.js ${{ env.NV }}
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ env.NV }}
+          node-version: ${{ env.nv }}
       - name: Install dependencies
         run: yarn install --immutable
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+
+  # code linter on lib and app
+  lint:
+    name: Run lint
+    needs: [install-dependencies]
+    runs-on: ubuntu-latest
+    if: github.ref != 'refs/heads/main'
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Restore dependencies
+        uses: actions/cache@v3
+        id: restore-dependencies
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.nv }}
+        if: steps.restore-dependencies.outputs.cache-hit != 'true'
+      - name: Install dependencies
+        run: yarn install --immutable
+        if: steps.restore-dependencies.outputs.cache-hit != 'true'
       - name: Run the lint scripts
         run: |
           yarn lint:app-ci
           yarn lint:lib-ci
 
+
   # unit tests on lib and app
   unit-tests:
     name: Run unit tests
+    needs: [install-dependencies]
     runs-on: ubuntu-latest
     if: github.ref != 'refs/heads/main'
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
-      - name: Set up Node.js ${{ env.NV }}
+      - name: Restore dependencies
+        uses: actions/cache@v3
+        id: restore-dependencies
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ env.NV }}
+          node-version: ${{ env.nv }}
+        if: steps.restore-dependencies.outputs.cache-hit != 'true'
       - name: Install dependencies
         run: yarn install --immutable
+        if: steps.restore-dependencies.outputs.cache-hit != 'true'
       - name: Run the lib tests
         run: yarn test:lib-ci
       - name: Build the lib
@@ -54,6 +95,7 @@ jobs:
   build-lib-and-app:
     name: Build lib and app
     needs: [
+      install-dependencies,
       unit-tests,
       lint
     ]
@@ -66,12 +108,20 @@ jobs:
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
-      - name: Set up Node.js ${{ env.node-version }}
+      - name: Restore dependencies
+        uses: actions/cache@v3
+        id: restore-dependencies
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ env.node-version }}
+          node-version: ${{ env.nv }}
+        if: steps.restore-dependencies.outputs.cache-hit != 'true'
       - name: Install dependencies
         run: yarn install --immutable
+        if: steps.restore-dependencies.outputs.cache-hit != 'true'
       - name: Build the lib
         run: yarn build:lib
       - name: Build the app
@@ -116,10 +166,10 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 50
-      - name: Set up Node.js ${{ env.node-version }}
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ env.node-version }}
+          node-version: ${{ env.nv}}
       - name: Install dependencies
         run: yarn install
       - name: Build and release Electron app

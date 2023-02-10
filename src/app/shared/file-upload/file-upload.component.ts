@@ -16,6 +16,7 @@ declare let xmlToJSON: any;
     styleUrls: ['./file-upload.component.scss']
 })
 
+// todo: create a service for large functions and maybe a page to reduce component logic
 export class FileUploadComponent {
     currentFile?: File;
 
