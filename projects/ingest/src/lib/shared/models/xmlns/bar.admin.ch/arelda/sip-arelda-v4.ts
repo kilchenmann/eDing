@@ -148,7 +148,7 @@ export interface Paket {
     '_attrschemaLocation': ValueString;
     '_attrtype': ValueString;
     '_attrschemaVersion': ValueNumber;
-    'paketTyp': PaketTyp;
+    'paketTyp': PaketTyp[];
     'inhaltsverzeichnis': Inhaltsverzeichnis[];
     'ablieferung': Ablieferung[];
     'nameSIP'?: TextString;

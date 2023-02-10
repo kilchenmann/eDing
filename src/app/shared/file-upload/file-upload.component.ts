@@ -2,6 +2,13 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { GenericDialogComponent } from '../generic-dialog/generic-dialog.component';
 import * as JSZip from 'jszip';
+import { SIP } from '@av-dimag/ingest';
+import { XML_OPTIONS } from '../models/xml-options';
+
+// xmlToJSON does not export itself as ES6/ECMA2015 module,
+// it is loaded globally in scripts tag of angular.json,
+// we still need to declare the namespace to make TypeScript compiler happy.
+declare let xmlToJSON: any;
 
 @Component({
     selector: 'app-file-upload',
@@ -11,6 +18,16 @@ import * as JSZip from 'jszip';
 
 export class FileUploadComponent {
     currentFile?: File;
+
+    fileData = {
+        type: '',
+        publisher: '',
+        version: -1
+    };
+
+    sip: SIP = {
+        paket: []
+    };
 
     constructor(private _dialog: MatDialog) { };
 
@@ -27,6 +44,7 @@ export class FileUploadComponent {
 
             if (isFileValid) {
                 const wasSaveSuccessful = await this._saveFile(file);
+
                 if (wasSaveSuccessful) {
                     this.currentFile = file;
                 } else {
@@ -53,30 +71,75 @@ export class FileUploadComponent {
         (event.target as HTMLInputElement).value = '';
     };
 
+
+    /**
+     *
+     */
+    next() {
+        // todo: implement logic when 'weiter' is clicked
+        console.log('Weiter geklickt');
+    }
+
+    /**
+     *
+     */
+    cancel() {
+        this.currentFile = undefined;
+    }
+
     /**
      * validate file and check format
      * @param file - file which should be checked for it's validity
      * @returns a boolean promise
      */
     private async _validateFileAndCheckFormat(file: File): Promise<boolean> {
-        const hasValidFileType = file.type === 'application/zip' && file.name.split('.').pop() !== 'zip';
-        if (hasValidFileType) {
+        const hasValidFileType = file.type === 'application/zip' && file.name.split('.').pop() === 'zip';
+
+        if (!hasValidFileType) {
             return new Promise((resolve) => {
                 resolve(false);
             });
         } else {
-            const fileNameWithoutType = file.name.slice(0, file.name.lastIndexOf('.'));;
             return new Promise((resolve, reject) => {
                 const reader = new FileReader();
 
                 reader.onload = (e: any) => {
-                    const buffer = e.target.result;
-                    JSZip.loadAsync(buffer)
+                    JSZip.loadAsync(file)
                         .then(zip => {
-                            const hasContent = !!zip.files[fileNameWithoutType + '/content/'];
-                            const hasHeader = !!zip.files[fileNameWithoutType + '/header/'];
-                            const hasMetadata = !!zip.files[fileNameWithoutType + '/header/metadata.xml'];
-                            resolve(hasContent && hasHeader && hasMetadata);
+                            // check if the required folders & files exist
+                            const keys = Object.keys(zip.files);
+                            const hasContent = keys.some(key => key.endsWith('/content/'));
+                            const hasHeader = keys.some(key => key.endsWith('/header/'));
+                            const hasMetadata = keys.some(key => key.endsWith('/header/metadata.xml'));
+                            const metadataPath = keys.find(key => key.endsWith('/header/metadata.xml')) ?? '';
+
+                            if (!hasContent && !hasHeader && !hasMetadata) {
+                                resolve(false);
+                            }
+
+                            // read metadata.xml file and check for specific fields
+                            zip.files[metadataPath].async('text')
+                                .then(xmlFile => xmlToJSON.parseString(xmlFile, XML_OPTIONS))
+                                .then((value) => this.sip = value).then(() => {
+                                    const paket = this.sip.paket[0];
+                                    const hasPaketTyp = paket.paketTyp && paket.paketTyp[0]?._text;
+                                    // todo: add additional required fields for validation if neccessary
+                                    const hasRequiredMetadata = hasPaketTyp;
+
+                                    if (!hasRequiredMetadata) {
+                                        resolve(false);
+                                    }
+
+                                    // set important data which will be displayed to the user
+                                    this.fileData = {
+                                        type: paket.paketTyp[0]._text,
+                                        publisher: paket.ablieferung[0].ablieferndeStelle[0]._text,
+                                        version: paket._attrschemaVersion._value
+                                    };
+                                    resolve(true);
+                                }).catch(err => {
+                                    reject(err);
+                                });
                         })
                         .catch(err => {
                             reject(err);
@@ -97,6 +160,7 @@ export class FileUploadComponent {
             const reader = new FileReader();
             reader.readAsArrayBuffer(file);
 
+            // todo: currently each download is overwriting the old zip-file
             reader.onloadend = function () {
                 const buffer = new Uint8Array(reader.result as ArrayBuffer);
                 window.fs.writeFile(
