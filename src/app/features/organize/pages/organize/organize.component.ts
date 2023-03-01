@@ -41,7 +41,9 @@ export class OrganizeComponent implements OnInit, OnDestroy {
 
     dataSource = new MatTreeNestedDataSource<Ordner>();
 
+    // todo: where to use it?
     converterError = false;
+
     osp?: Ordnungssystemposition;
     dok?: Dokument;
     dos?: Dossier;
@@ -68,7 +70,7 @@ export class OrganizeComponent implements OnInit, OnDestroy {
     constructor(
         private fb: FormBuilder,
         private router: Router,
-        private _dialog: MatDialog,
+        private dialog: MatDialog,
         private electronService: ElectronService,
         private organizeService: OrganizeService
     ) {
@@ -97,7 +99,7 @@ export class OrganizeComponent implements OnInit, OnDestroy {
             filePath += node.name[0]._text + '/';
             if (node.datei && node.datei.length > 0) {
                 node.datei.forEach((file) => {
-                    file.path = { _value :filePath +file.name[0]._text };
+                    file.path = { _value: filePath + file.name[0]._text };
                     packageCopy.datei = packageCopy.datei || [];
                     if (!packageCopy.datei.includes(file)) {
                         packageCopy.datei.push(file);
@@ -125,7 +127,7 @@ export class OrganizeComponent implements OnInit, OnDestroy {
 
     /**
      * add all ingest packages
-     * @param ingestPackages: ingest packages which will be added
+     * @param ingestPackages: ingest packages which should get added
      */
     addAllIngestPackages(ingestPackages: Ordner[]) {
         let showInfo = false;
@@ -160,20 +162,19 @@ export class OrganizeComponent implements OnInit, OnDestroy {
 
     /**
      * remove ingest package
-     * @param ingestPackage: ingest package which will be removed
+     * @param ingestPackage: ingest package which should get removed
      */
     removeIngestPackage(ingestPackage: Ordner) {
         const packageIndex = this.ingestPackages.findIndex(existingPackage => existingPackage === ingestPackage);
         if (packageIndex >= 0) {
             this.ingestPackages.splice(packageIndex, 1);
         } else {
-            // todo: alert in electron is beautiful --> check if we need 'generic-dialog-component'
             alert('Error: Paket konnte nicht gelöscht werden');
         }
     }
 
     /**
-     * remove all ingest packages
+     * remove all ingest packages through setting an empty array
      */
     removeAllIngestPackage() {
         this.ingestPackages = [];
@@ -181,14 +182,17 @@ export class OrganizeComponent implements OnInit, OnDestroy {
 
     /**
      * export / save ingest packages to local storage
-     * @param nodes - notes to export
+     * @param nodes - nodes / ingestPackages to export
      */
     exportAllIngestPackages(nodes: Ordner[]) {
         this.electronService.ipcRenderer.invoke('show-save-dialog').then((path: string) => {
             if (path) {
-                if (window.fs.readdirSync(path).length === 0 || window.fs.readdirSync(path).length === 1 && window.fs.readdirSync(path)[0] === '.DS_Store') {
+                // check if choosen folder is empty
+                const isChoosenFolderEmpty = window.fs.readdirSync(path).length === 0 || window.fs.readdirSync(path).length === 1 && window.fs.readdirSync(path)[0] === '.DS_Store';
+                if (isChoosenFolderEmpty) {
                     const moreThanOneNode = (nodes.length > 1);
-                    const dialogRef = this._dialog.open(GenericDialogComponent, {
+                    // show dialog to user
+                    const dialogRef = this.dialog.open(GenericDialogComponent, {
                         data: {
                             title: 'Information',
                             text: `Es ${moreThanOneNode ? 'werden' : 'wird'} ${nodes.length} Ingest ${moreThanOneNode ? 'Pakete' : 'Paket'} gespeichert, wollen Sie fortfahren?`,
@@ -199,6 +203,7 @@ export class OrganizeComponent implements OnInit, OnDestroy {
                     this.subContainer.add(dialogRef.afterClosed().subscribe(result => {
                         if (result) {
                             try {
+                                // go through ingest packages, create xml and save files
                                 nodes.forEach((node, index) => {
                                     // create metadata.xml
                                     const xmlDos = document.implementation.createDocument('', '', null);
@@ -303,6 +308,7 @@ export class OrganizeComponent implements OnInit, OnDestroy {
                                     node.datei?.forEach(async (dat, datIntdex) => {
                                         const zip = await this._getCurrentZipFile();
                                         const keys = Object.keys(zip.files);
+                                        // get binary data for the file from the uploaded zip-file
                                         const filePath = keys.find(key => key.endsWith(dat.path._value)) ?? '';
 
                                         const foundFile = await zip.file(filePath)?.async('uint8array');
@@ -315,6 +321,7 @@ export class OrganizeComponent implements OnInit, OnDestroy {
                                         const fileReader = new FileReader();
                                         fileReader.readAsArrayBuffer(new Blob([foundFile]));
 
+                                        // write each file to local storage
                                         fileReader.onloadend = () => {
                                             const fileBuffer = new Uint8Array(fileReader.result as ArrayBuffer);
                                             window.fs.writeFile(`${newPath}/${datIntdex}_${dat.name[0]._text}`, fileBuffer, (error: Error) => {
@@ -338,7 +345,9 @@ export class OrganizeComponent implements OnInit, OnDestroy {
         });
     }
 
-    // convert action
+    /**
+     * convert xml to json
+     */
     convert() {
         // reset error status
         this.converterError = false;
@@ -442,7 +451,7 @@ export class OrganizeComponent implements OnInit, OnDestroy {
         } catch (error) {
             this.router.navigate(['/upload']);
             // todo: maybe just alert error instead of dialog?
-            this._dialog.open(GenericDialogComponent, {
+            this.dialog.open(GenericDialogComponent, {
                 data: { title: 'Error', text: 'Das File konnte nicht geladen werden, bitte laden Sie es erneut hoch.' },
                 panelClass: 'normal-dialog'
             });

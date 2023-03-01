@@ -1,19 +1,21 @@
-const {app, dialog, BrowserWindow, ipcMain} = require('electron');
+const {app, dialog, BrowserWindow, ipcMain, screen } = require('electron');
 const url = require('url');
 const path = require('path');
 const args = process.argv.slice(2);
 const dev = args.indexOf('--dev') !== -1;
 
 function onReady() {
+  const { width, height } = screen.getPrimaryDisplay().workAreaSize;
+
   win = new BrowserWindow({
-    width: 900,
-    height: 6700,
+    width,
+    height,
     webPreferences: { nodeIntegration: true, contextIsolation: false, webSecurity: true }
   });
 
   ipcMain.handle('show-save-dialog', async () => {
     const result = await dialog.showOpenDialog(win, {
-        properties: ['openDirectory']
+        properties: ['openDirectory', 'createDirectory']
     });
 
     if (!result.canceled) {
@@ -21,35 +23,36 @@ function onReady() {
     }
   });
 
-  if (dev) {
-    win.webContents.on('did-fail-load', () => {
-      console.log('did-fail-load');
-      win.loadURL(url.format({
-        pathname: 'http://localhost:4200'
-      }));
-    });
+  let retryCount = 0;
+  const maxRetries = 3;
 
-    win.loadURL(url.format({
-      pathname: 'http://localhost:4200'
-    }));
+  if (dev) {
+    const devUrl = 'http://localhost:4200';
+    win.loadURL(devUrl);
+
+    win.webContents.on('did-fail-load', () => {
+      handleLoadFail(devUrl, retryCount, maxRetries)
+    });
 
   } else {
-    win.webContents.on('did-fail-load', () => {
-      console.log('did-fail-load');
-      win.loadURL(url.format({
-        pathname: path.join(__dirname, 'dist/toolbox/index.html'),
-        protocol: 'file:',
-        slashes: true
-      }));
-    });
+    const prodUrl = `file://${path.join(__dirname, 'dist/toolbox/index.html')}`;
 
-    win.loadURL(url.format({
-      pathname: path.join(
-        __dirname,
-        'dist/toolbox/index.html'),
-      protocol: 'file:',
-      slashes: true
-    }));
+    win.loadURL(prodUrl);
+
+    win.webContents.on('did-fail-load', () => {
+      handleLoadFail(prodUrl, retryCount, maxRetries)
+    });
+  }
+}
+
+function handleLoadFail(url, retryCount, maxRetries) {
+  if (retryCount < maxRetries) {
+    console.log(`Page failed to load. Retrying (${retryCount + 1} of ${maxRetries})...`);
+    win.loadURL(url);
+    retryCount++;
+  } else {
+    console.error(`Page failed to load after ${maxRetries} attempts. Exiting.`);
+    app.exit(1);
   }
 }
 

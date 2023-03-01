@@ -1,6 +1,7 @@
 <div *ngFor="let item of sip.paket[0].ablieferung[0] | keyvalue; let last = last;">
     <div [ngSwitch]="item.key">
       <div *ngSwitchCase="'ordnungssystem'">
+        <!-- todo: why do nothing? -->
         <!-- do nothing -->
       </div>
       <div *ngSwitchCase="'provenienz'" [class.withSeparator]="!last">

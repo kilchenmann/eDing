@@ -18,6 +18,8 @@ import * as Primitive from '../../xml-primitives';
 // http://localhost:8080/zusatzDaten.xsd
 
 
+// todo: can we remove unused interfaces / types?
+
 interface BaseType {
     _exists: boolean;
     _namespace: string;

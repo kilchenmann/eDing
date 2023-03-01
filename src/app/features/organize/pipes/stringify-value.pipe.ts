@@ -14,7 +14,8 @@ import { OrganizeService } from '../services/organize.service';
 })
 export class StringifyValuePipe implements PipeTransform {
 
-    constructor(private organizeService: OrganizeService) {}
+    constructor(private organizeService: OrganizeService) {
+    }
 
     transform(value: any): string {
         let stringified = '';
@@ -35,7 +36,6 @@ export class StringifyValuePipe implements PipeTransform {
                             t++;
                         }
                         return stringified;
-                        break;
 
                     case this.organizeService.instanceOfTN(value[0]):
                         // instance of TextNumber
@@ -46,7 +46,6 @@ export class StringifyValuePipe implements PipeTransform {
                             i++;
                         }
                         return stringified;
-                        break;
 
                     case this.organizeService.instanceOfTB(value[0]):
                         // instance of TextBoolean
@@ -54,7 +53,6 @@ export class StringifyValuePipe implements PipeTransform {
                         // auch wenn der Wert als Array zurückkommt. Deshalb wird lediglich
                         // der erste Wert zurückgegeben.
                         return (value[0]._text === 'true' ? 'ja' : 'nein');
-                        break;
 
                     case this.organizeService.instanceOfZD(value[0]):
                         // instance of ZusatzDaten
@@ -67,7 +65,6 @@ export class StringifyValuePipe implements PipeTransform {
                             z++;
                         }
                         return stringified;
-                        break;
 
 
                     case this.organizeService.instanceOfDM(value[0]):
@@ -79,7 +76,6 @@ export class StringifyValuePipe implements PipeTransform {
                             d++;
                         }
                         return stringified;
-                        break;
 
 
                     case this.organizeService.instanceOfZR(value[0]):
@@ -91,11 +87,9 @@ export class StringifyValuePipe implements PipeTransform {
                             p++;
                         }
                         return stringified;
-                        break;
 
                     default:
                         return '<i class="warning">Warning! This object type is not yet supported: </i>' + JSON.stringify(value[0]);
-                        break;
                 }
 
             } else {
@@ -103,19 +97,15 @@ export class StringifyValuePipe implements PipeTransform {
                 switch (true) {
                     case (this.organizeService.instanceOfVS(value)):
                         return (value._value ? value._value : 'undefined');
-                        break;
 
                     case (this.organizeService.instanceOfVN(value)):
                         return JSON.stringify(value._value);
-                        break;
 
                     default:
                         return '<i class="warning">Warning! This object type is not yet supported: </i>' + JSON.stringify(value);
                 }
             }
         }
-
-        // return stringified;
     }
 
 

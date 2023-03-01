@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './material-module';
 import { ErrorComponent } from './core/components/error/error.component';
 import { HeadlineComponent } from './core/components/headline/headline.component';
-import { PlaygroundComponent } from './features/playground/pages/playground/playground.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GenericDialogComponent } from './shared/generic-dialog/generic-dialog.component';
 import { FileUploadComponent } from './features/upload/pages/file-upload/file-upload.component';
@@ -16,7 +15,6 @@ import { StartComponent } from './features/info/components/start/start.component
 import { InfoPageComponent } from './features/info/pages/info/info-page.component';
 import { OrganizeComponent } from './features/organize/pages/organize/organize.component';
 import { StringifyValuePipe } from './features/organize/pipes/stringify-value.pipe';
-import { HttpClientModule } from '@angular/common/http';
 import { SummaryTabComponent } from './features/organize/components/summary-tab/summary-tab.component';
 import { HeaderTabComponent } from './features/organize/components/header-tab/header-tab.component';
 import { DeliveryTabComponent } from './features/organize/components/delivery-tab/delivery-tab.component';
@@ -33,7 +31,6 @@ import { ElectronService } from 'ngx-electron';
         AboutComponent,
         StartComponent,
         HeadlineComponent,
-        PlaygroundComponent,
         FileUploadComponent,
         GenericDialogComponent,
         InfoPageComponent,
@@ -45,15 +42,12 @@ import { ElectronService } from 'ngx-electron';
         PackageExpansionPanelComponent
     ],
     imports: [
-        HttpClientModule,
         AppRoutingModule,
         BrowserAnimationsModule,
         BrowserModule,
         FormsModule,
         MaterialModule,
         ReactiveFormsModule,
-        ReactiveFormsModule,
-        MaterialModule,
         AngularSplitModule
     ],
     providers: [ElectronService],

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { InfoPageComponent } from './features/info/pages/info/info-page.component';
 import { ErrorComponent } from './core/components/error/error.component';
-import { PlaygroundComponent } from './features/playground/pages/playground/playground.component';
 import { OrganizeComponent } from './features/organize/pages/organize/organize.component';
 import { FileUploadComponent } from './features/upload/pages/file-upload/file-upload.component';
 
@@ -20,10 +19,6 @@ const routes: Routes = [
     {
         path: 'organize',
         component: OrganizeComponent
-    },
-    {
-        path: 'playground',
-        component: PlaygroundComponent
     },
     {
         path: 'info',

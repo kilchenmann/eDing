@@ -1,10 +1,14 @@
 <div class="generate-package">
-  <button mat-raised-button color="primary" (click)="addAllIngestPackages.emit(dataSource.data)">Automatische
-    Generierung
+  <button mat-raised-button color="primary"
+          (click)="addAllIngestPackages.emit(dataSource.data)">
+    Automatische Generierung
   </button>
-  <mat-slide-toggle class="add-files-subfolder-toggle" labelPosition="before" color="primary"
-                    [(ngModel)]="shouldAddFilesWithSubfolder" (click)="addFilesInSubfolder.emit()">Dateien auch aus
-    Unterordner paketieren
+  <mat-slide-toggle
+    class="add-files-subfolder-toggle"
+    labelPosition="before"
+    color="primary"
+    [(ngModel)]="shouldAddFilesWithSubfolder" (click)="addFilesInSubfolder.emit()">
+    Dateien auch aus Unterordner paketieren
   </mat-slide-toggle>
 </div>
 <div class="content">
@@ -40,6 +44,7 @@
               <button mat-button
                       (click)="getFileMeta(datei._attrid._value); fileName = datei.name[0]._text; displayDokDetails = true"
                       class="file" [class.active]="fileName === datei.name[0]._text">
+                <!-- todo: can we remove this 'outcommented' code? -->
                 <!-- [matTooltip]="datei._attrid._value"
                 matTooltipPosition="above" -->
                 <mat-icon fontIcon="description"></mat-icon>
@@ -70,7 +75,6 @@
         <span [innerHtml]="item.value | stringifyValue"></span>
       </p>
     </div>
-
     <!-- todo: display ordnungssystem und ordnungssystemposition -->
   </div>
 </div>

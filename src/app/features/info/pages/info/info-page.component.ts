@@ -4,4 +4,5 @@ import { Component } from '@angular/core';
     selector: 'app-info-page',
     templateUrl: './info-page.component.html'
 })
-export class InfoPageComponent {}
+export class InfoPageComponent {
+}

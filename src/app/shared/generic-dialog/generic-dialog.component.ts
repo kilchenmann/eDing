@@ -20,10 +20,16 @@ export class GenericDialogComponent {
         public dialogRef: MatDialogRef<GenericDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public msg: GenericDialogMessage) { }
 
+    /**
+     * close dialog and return false (cancelled)
+     */
     cancelDialog(): void {
         this.dialogRef.close(false);
     }
 
+    /**
+     * close dialog and return true (approved)
+     */
     approveDialog(): void {
         this.dialogRef.close(true);
     }

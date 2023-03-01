@@ -22,11 +22,12 @@ export class UploadService {
     /**
      * validate file and check format
      * @param file - file which should be checked for it is validity
-     * @returns a boolean promise
+     * @returns a promise with the file data
      */
     async validateFileAndCheckFormat(file: File): Promise<typeof FILE_DATA | false> {
         const hasValidFileType = file.type === 'application/zip' && file.name.split('.').pop() === 'zip';
 
+        // check file type
         if (!hasValidFileType) {
             return new Promise((resolve) => {
                 resolve(false);
@@ -35,6 +36,7 @@ export class UploadService {
             return new Promise((resolve, reject) => {
                 const reader = new FileReader();
 
+                // check for folder structure and xml file
                 reader.onload = () => {
                     JSZip.loadAsync(file)
                         .then(zip => {
@@ -49,7 +51,7 @@ export class UploadService {
                                 resolve(false);
                             }
 
-                            // read metadata.xml file and check for specific fields
+                            // read metadata.xml and check for specific fields
                             zip.files[metadataPath].async('text')
                                 .then(xmlFile => xmlToJSON.parseString(xmlFile, XML_OPTIONS))
                                 .then((value) => this.sip = value).then(() => {
@@ -60,7 +62,7 @@ export class UploadService {
                                         resolve(false);
                                     }
 
-                                    // set important data which will be displayed to the user
+                                    // set important file data which will be displayed to the user
                                     const fileData = {
                                         type: paket.paketTyp[0]._text,
                                         publisher: paket.ablieferung[0].ablieferndeStelle[0]._text,
@@ -83,14 +85,13 @@ export class UploadService {
     /**
      * save file to temporary folder
      * @param file - file which should be saved
-     * @notes - it's currently only working with electron app
+     * @returns - a promise with a boolean
      */
     async saveFile(file: File): Promise<boolean> {
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
             reader.readAsArrayBuffer(file);
 
-            // todo: currently each download is overwriting the old zip-file
             reader.onloadend = function () {
                 const buffer = new Uint8Array(reader.result as ArrayBuffer);
                 window.fs.writeFile(

@@ -18,6 +18,12 @@ import {
     providedIn: 'root'
 })
 export class OrganizeService {
+    /**
+     * todo: describe function
+     * @param root
+     * @param data
+     * @param file
+     */
     createEle(root: string, data: Object, file?: string): HTMLElement {
         const xml = document.implementation.createDocument('', '', null);
 
@@ -108,7 +114,7 @@ export class OrganizeService {
                                     let d = 0;
                                     for (const val of <Datum[]>value) {
 
-                                        if (val.ca && val.ca[d]._text === true) {
+                                        if (val.ca && val.ca[d]._text) {
                                             const ca = xml.createElement('ca');
                                             ca.innerHTML = 'true';
                                             ele.appendChild(ca);
