@@ -1,0 +1,36 @@
+<h1>Ingest Pakete: {{ingestPackages.length}}</h1>
+<mat-tab-group color="transparent">
+  <mat-tab disabled="true"></mat-tab>
+</mat-tab-group>
+<ng-container *ngIf="ingestPackages.length === 0; else packagePanel">
+  <div class="placeholder-message">
+    <p>Auf dieser Seite werden die Ingest Pakete zusammengestellt.</p>
+    <p>Sie können eine<strong style="color: green"> automatische Generierung durchführen</strong> oder manuell die
+      Pakete zusammenstellen.</p>
+  </div>
+</ng-container>
+
+<ng-template #packagePanel>
+  <div class="package-buttons">
+    <button mat-raised-button color="primary" (click)="removeAllIngestPackages.emit()">Alle Pakete entfernen</button>
+    <button mat-raised-button color="primary" (click)="exportAllIngestPackages.emit(ingestPackages)">Pakete exportieren/speichern</button>
+  </div>
+  <div *ngFor="let ingestPackage of ingestPackages" class="ingest-package-wrapper">
+    <mat-expansion-panel class="ingest-package-panel">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ingestPackage.name[0]._text}}
+        </mat-panel-title>
+        <mat-panel-description>
+          {{ ingestPackage.datei?.length }} Dateien
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-list role="list">
+        <mat-list-item role="listitem" *ngFor="let file of ingestPackage.datei">
+          {{ file.name[0]._text }}
+        </mat-list-item>
+      </mat-list>
+    </mat-expansion-panel>
+    <button mat-raised-button class="remove-package-button" (click)="removeIngestPackage.emit(ingestPackage)">Paket entfernen</button>
+  </div>
+</ng-template>

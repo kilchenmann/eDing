@@ -28,15 +28,7 @@
     ],
     "typeRoots": [
       "./node_modules/@types"
-    ],
-    "paths": {
-      "@av-dimag/ingest": [
-        "dist/@av-dimag/ingest"
-      ],
-      "@av-dimag/ingest/*": [
-        "dist/@av-dimag/ingest/*"
-      ]
-    }
+    ]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

@@ -1,10 +1,11 @@
 import { Component, Inject, ViewEncapsulation } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 interface GenericDialogMessage {
     title: string;
     text: string;
     log?: string;
+    showActions?: boolean;
 };
 
 @Component({
@@ -19,7 +20,11 @@ export class GenericDialogComponent {
         public dialogRef: MatDialogRef<GenericDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public msg: GenericDialogMessage) { }
 
-    closeDialog(): void {
-        this.dialogRef.close();
+    cancelDialog(): void {
+        this.dialogRef.close(false);
+    }
+
+    approveDialog(): void {
+        this.dialogRef.close(true);
     }
 }

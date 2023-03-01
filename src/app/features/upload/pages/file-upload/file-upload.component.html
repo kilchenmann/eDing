@@ -1,0 +1,25 @@
+<mat-card class="dropzone-card">
+  <ng-container *ngIf="!currentFile; else uploadedData">
+    <mat-card-content class="dropzone upload">
+      <mat-icon class="fileupload-icon" fontIcon="file_download"></mat-icon>
+      <h3><strong>Wählen Sie ein SIP </strong>oder ziehen Sie es hierher.</h3>
+      <input type="file" id="fileInput" (drop)="resetFileInput($event)" (click)="resetFileInput($event)"
+        (change)="uploadFile($event)" name="fileInput" accept=".zip" />
+    </mat-card-content>
+  </ng-container>
+</mat-card>
+
+
+<ng-template #uploadedData>
+  <mat-card-content class="dropzone custom">
+    <p>Typ: {{ fileData.type }}</p>
+    <p>Ersteller: {{ fileData.publisher }}</p>
+    <p>Version: {{ fileData.version }}</p>
+    <p>Das Paket ist valid und kann nun verarbeitet werden.</p>
+    <div class="actions">
+      <button mat-stroked-button (click)="cancel()">Abbrechen</button>
+      <span class="fill-remaining-space"></span>
+      <button mat-flat-button color="primary" (click)="next()">Weiter</button>
+    </div>
+  </mat-card-content>
+</ng-template>

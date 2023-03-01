@@ -1,0 +1,83 @@
+.content {
+  display: flex;
+  flex-direction: row;
+
+  .mat-tree {
+    width: 100%;
+  }
+
+  .tree {
+    display: flex;
+    flex-direction: row;
+  }
+
+  h4 {
+    font-weight: 700;
+  }
+
+  .file.active {
+    background: rgba(0,0,0,0.16);
+  }
+}
+
+.add-files-subfolder-toggle {
+  margin-left: 20px;
+}
+
+.generate-package {
+  margin-top: 15px;
+  margin-left: 8px;
+}
+
+.withSeparator {
+  border-bottom: 1px solid gray;
+  padding: 4px 0 12px 0;
+}
+
+.file-structure div[role=group]>.mat-tree-node {
+  padding-left: 40px;
+}
+
+.fill-remaining-space {
+  flex: 1 1 auto;
+}
+
+.half-width {
+  width: calc(50% - 32px);
+  margin: 8px;
+}
+
+.file-structure-invisible {
+  display: none;
+}
+
+.file-structure ul,
+.file-structure li {
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style-type: none;
+}
+
+.export {
+  margin-right: 8px;
+}
+
+.prefix {
+  padding-right: 8px;
+}
+
+/*
+ * Padding for leaf nodes.
+ * Leaf nodes need to have padding so as to align with other non-leaf nodes
+ * under the same parent.
+ */
+.file-structure div[role=group]>.mat-tree-node {
+  padding-left: 40px;
+}
+
+/*
+ * This padding sets alignment of the nested nodes.
+ */
+.file-structure .mat-nested-tree-node div[role=group] {
+  padding-left: 40px;
+}

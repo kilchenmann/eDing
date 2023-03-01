@@ -10,95 +10,45 @@ on:
 
 
 jobs:
-  install-dependencies:
-    name: Install dependencies
-    runs-on: ubuntu-latest
-    if: github.ref != 'refs/heads/main'
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v3
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ env.nv }}
-      - name: Install dependencies
-        run: yarn install --immutable
-      - name: Cache dependencies
-        uses: actions/cache@v3
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-
-
-  # code linter on lib and app
+  # code linter
   lint:
     name: Run lint
-    needs: [install-dependencies]
     runs-on: ubuntu-latest
     if: github.ref != 'refs/heads/main'
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
-      - name: Restore dependencies
-        uses: actions/cache@v3
-        id: restore-dependencies
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.nv }}
-        if: steps.restore-dependencies.outputs.cache-hit != 'true'
       - name: Install dependencies
         run: yarn install --immutable
-        if: steps.restore-dependencies.outputs.cache-hit != 'true'
       - name: Run the lint scripts
         run: |
-          yarn lint:app-ci
-          yarn lint:lib-ci
+          yarn lint-ci
 
-
-  # unit tests on lib and app
+  # unit tests
   unit-tests:
     name: Run unit tests
-    needs: [install-dependencies]
     runs-on: ubuntu-latest
     if: github.ref != 'refs/heads/main'
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
-      - name: Restore dependencies
-        uses: actions/cache@v3
-        id: restore-dependencies
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.nv }}
-        if: steps.restore-dependencies.outputs.cache-hit != 'true'
       - name: Install dependencies
         run: yarn install --immutable
-        if: steps.restore-dependencies.outputs.cache-hit != 'true'
-      - name: Run the lib tests
-        run: yarn test:lib-ci
-      - name: Build the lib
-        run: yarn build:lib
-      - name: Run the app tests
-        run: yarn test:app-ci
+      - name: Run tests
+        run: yarn test-ci
 
-  # build lib and app
-  build-lib-and-app:
-    name: Build lib and app
-    needs: [
-      install-dependencies,
-      unit-tests,
-      lint
-    ]
+  # build
+  build:
+    name: Build
+    needs: [unit-tests, lint]
     if: github.ref != 'refs/heads/main'
     runs-on: ${{ matrix.os }}
 
@@ -108,24 +58,14 @@ jobs:
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
-      - name: Restore dependencies
-        uses: actions/cache@v3
-        id: restore-dependencies
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.nv }}
-        if: steps.restore-dependencies.outputs.cache-hit != 'true'
       - name: Install dependencies
         run: yarn install --immutable
-        if: steps.restore-dependencies.outputs.cache-hit != 'true'
-      - name: Build the lib
-        run: yarn build:lib
-      - name: Build the app
-        run: yarn build:app
+      - name: Build
+        run: yarn build
 
   # Automate releases with Conventional Commit Messages as Pull Requests are merged into "main" branch
   release-please:
@@ -150,9 +90,7 @@ jobs:
   # publish only on release
   publish:
     name: Publish Electron App
-    needs: [
-      build-lib-and-app
-    ]
+    needs: [build]
     runs-on: ${{ matrix.os }}
 
     strategy:

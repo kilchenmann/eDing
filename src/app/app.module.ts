@@ -1,21 +1,30 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ConverterModule } from '@av-dimag/ingest';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material-module';
-import { AboutComponent } from './pages/about/about.component';
-import { ErrorComponent } from './pages/error/error.component';
-import { StartComponent } from './pages/start/start.component';
-import { HeadlineComponent } from './shared/headline/headline.component';
-import { PlaygroundComponent } from './pages/playground/playground.component';
+import { ErrorComponent } from './core/components/error/error.component';
+import { HeadlineComponent } from './core/components/headline/headline.component';
+import { PlaygroundComponent } from './features/playground/pages/playground/playground.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FileUploadComponent } from './shared/file-upload/file-upload.component';
-import { MatCardModule } from '@angular/material/card';
-import { MatDialogModule } from '@angular/material/dialog';
 import { GenericDialogComponent } from './shared/generic-dialog/generic-dialog.component';
+import { FileUploadComponent } from './features/upload/pages/file-upload/file-upload.component';
+import { AboutComponent } from './features/info/components/about/about.component';
+import { StartComponent } from './features/info/components/start/start.component';
+import { InfoPageComponent } from './features/info/pages/info/info-page.component';
+import { OrganizeComponent } from './features/organize/pages/organize/organize.component';
+import { StringifyValuePipe } from './features/organize/pipes/stringify-value.pipe';
+import { HttpClientModule } from '@angular/common/http';
+import { SummaryTabComponent } from './features/organize/components/summary-tab/summary-tab.component';
+import { HeaderTabComponent } from './features/organize/components/header-tab/header-tab.component';
+import { DeliveryTabComponent } from './features/organize/components/delivery-tab/delivery-tab.component';
+import { AngularSplitModule } from 'angular-split';
+import {
+    PackageExpansionPanelComponent
+} from './features/organize/components/package-expansion-panel/package-expansion-panel.component';
+import { ElectronService } from 'ngx-electron';
 
 @NgModule({
     declarations: [
@@ -26,20 +35,28 @@ import { GenericDialogComponent } from './shared/generic-dialog/generic-dialog.c
         HeadlineComponent,
         PlaygroundComponent,
         FileUploadComponent,
-        GenericDialogComponent
+        GenericDialogComponent,
+        InfoPageComponent,
+        OrganizeComponent,
+        StringifyValuePipe,
+        SummaryTabComponent,
+        HeaderTabComponent,
+        DeliveryTabComponent,
+        PackageExpansionPanelComponent
     ],
     imports: [
+        HttpClientModule,
         AppRoutingModule,
         BrowserAnimationsModule,
         BrowserModule,
-        ConverterModule,
         FormsModule,
         MaterialModule,
         ReactiveFormsModule,
-        MatCardModule,
-        MatDialogModule,
+        ReactiveFormsModule,
+        MaterialModule,
+        AngularSplitModule
     ],
-    providers: [],
+    providers: [ElectronService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

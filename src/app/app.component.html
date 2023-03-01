@@ -1,21 +1,16 @@
 <!-- main toolbar / header -->
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <!-- "close sidenav" button; can be activated later
-      <button mat-icon-button>
-      <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
-    </button> -->
-    <h1 [routerLink]="'/'" class="main-title link">Toolbox für eCH-0160 Ingest Prozess</h1>
-    <span class="fill-remaining-space"></span>
-    <div>
-      <a mat-button [routerLink]="'/info'"> Info </a>
-      <!-- <a mat-button [routerLink]="'/help'"> Hilfe </a> -->
+    <div class="title">
+      <h1 class="main-title">Toolbox für eCH-0160 Ingest Prozess</h1>
     </div>
-    <div>
+    <div class="nav-items">
+      <a mat-button [routerLink]="'/upload'">SIP hochladen</a>
+      <a mat-button [routerLink]="'/organize'">SIP verarbeiten</a>
+      <a mat-button [routerLink]="'/info'">Info</a>
       <a mat-button [routerLink]="'/playground'">Playground</a>
     </div>
   </mat-toolbar-row>
-
 </mat-toolbar>
 
 <!-- main navigation and routing content -->
@@ -25,10 +20,10 @@
   <mat-sidenav #sidenav mode="side" opened="false">
     <mat-nav-list>
       <a *ngFor="let item of navItems" mat-list-item
-        [routerLink]="item.route"
-        routerLinkActive="active-link">
-          {{ item.label }}
-        </a>
+         [routerLink]="item.route"
+         routerLinkActive="active-link">
+        {{ item.label }}
+      </a>
     </mat-nav-list>
     <!-- "close sidenav" button; can be activated later
     <mat-nav-list class="bottom">

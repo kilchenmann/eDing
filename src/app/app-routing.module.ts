@@ -1,40 +1,33 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {
-    Json2xmlComponent,
-    Xml2jsonComponent,
-    Xsd2tsComponent
-} from '@av-dimag/ingest';
-import { AboutComponent } from './pages/about/about.component';
-import { ErrorComponent } from './pages/error/error.component';
-import { PlaygroundComponent } from './pages/playground/playground.component';
+import { InfoPageComponent } from './features/info/pages/info/info-page.component';
+import { ErrorComponent } from './core/components/error/error.component';
+import { PlaygroundComponent } from './features/playground/pages/playground/playground.component';
+import { OrganizeComponent } from './features/organize/pages/organize/organize.component';
+import { FileUploadComponent } from './features/upload/pages/file-upload/file-upload.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: Xml2jsonComponent
-    },
-    // modules
-    {
-        path: 'xsd2ts',
-        component: Xsd2tsComponent
-    },
-    {
-        path: 'xml2json',
-        component: Xml2jsonComponent
-    },
-    {
-        path: 'json2xml',
-        component: Json2xmlComponent
+        redirectTo: 'upload',
+        pathMatch: 'full'
     },
     // main pages
     {
-        path: 'info',
-        component: AboutComponent
+        path: 'upload',
+        component: FileUploadComponent
+    },
+    {
+        path: 'organize',
+        component: OrganizeComponent
     },
     {
         path: 'playground',
         component: PlaygroundComponent
+    },
+    {
+        path: 'info',
+        component: InfoPageComponent
     },
     // in case of an error
     {

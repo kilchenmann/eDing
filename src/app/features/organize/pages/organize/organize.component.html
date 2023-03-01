@@ -1,0 +1,40 @@
+<div style="width: 100%; height: 1000px;">
+  <as-split direction="horizontal">
+    <as-split-area [size]="60">
+      <h1>SIP: {{sip.paket[0] && sip.paket[0].ablieferung[0] ? sip.paket[0].ablieferung[0]._attrtype._value : ''}}</h1>
+      <mat-tab-group animationDuration="0ms">
+        <!-- inhaltsverzeichnis -->
+        <mat-tab label="Inhaltsverzeichnis" [disabled]="!sip.paket || !sip.paket.length">
+          <app-summary-tab
+            *ngIf="sip.paket && sip.paket.length" [dataSource]="dataSource" [sip]="sip"
+            (addIngestPackage)="addIngestPackage($event)"
+            (addAllIngestPackages)="addAllIngestPackages($event)"
+            (addFilesInSubfolder)="toggleAddFileMode()">
+          </app-summary-tab>
+        </mat-tab>
+
+        <!-- ablieferung -->
+        <mat-tab label="Ablieferung" [disabled]="!sip.paket || !sip.paket.length">
+          <app-delivery-tab *ngIf="sip.paket && sip.paket.length" [sip]="sip"></app-delivery-tab>
+        </mat-tab>
+
+        <!-- header metadata -->
+        <mat-tab label="Header" [disabled]="!sip.paket || !sip.paket.length">
+          <app-header-tab *ngIf="sip.paket && sip.paket.length" [sip]="sip"></app-header-tab>
+        </mat-tab>
+      </mat-tab-group>
+    </as-split-area>
+    <as-split-area [size]="40">
+      <app-package-expansion-panel
+        [ingestPackages]="ingestPackages"
+        (removeIngestPackage)="removeIngestPackage($event)"
+        (exportAllIngestPackages)="exportAllIngestPackages($event)"
+        (removeAllIngestPackages)="removeAllIngestPackage()">
+      </app-package-expansion-panel>
+    </as-split-area>
+  </as-split>
+  <mat-divider></mat-divider>
+</div>
+
+
+

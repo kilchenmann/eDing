@@ -1,0 +1,18 @@
+<div *ngFor="let item of sip.paket[0].ablieferung[0] | keyvalue; let last = last;">
+    <div [ngSwitch]="item.key">
+      <div *ngSwitchCase="'ordnungssystem'">
+        <!-- do nothing -->
+      </div>
+      <div *ngSwitchCase="'provenienz'" [class.withSeparator]="!last">
+        <strong>{{item.key}}</strong><br>
+        <span *ngFor="let prov of provenienz | keyvalue">
+              &middot; <strong>{{prov.key}}</strong>:
+              <span [innerHtml]="prov.value | stringifyValue"></span><br>
+            </span>
+      </div>
+      <div *ngSwitchDefault [class.withSeparator]="!last">
+        <strong>{{item.key}}</strong><br>
+        <span [innerHtml]="item.value | stringifyValue"></span>
+      </div>
+    </div>
+</div>

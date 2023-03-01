@@ -1,0 +1,26 @@
+<div class="header" >
+  <p class="withSeparator">
+    <strong>Paket Typ</strong><br>
+    <span [innerHtml]="sip.paket[0].paketTyp | stringifyValue"></span>
+  </p>
+  <p class="withSeparator">
+    <strong>Typ</strong><br>
+    <span [innerHtml]="sip.paket[0]._attrtype | stringifyValue"></span>
+  </p>
+  <p class="withSeparator">
+    <strong>Schema Location</strong><br>
+    <span [innerHtml]="sip.paket[0]._attrschemaLocation | stringifyValue"></span>
+  </p>
+  <p class="withSeparator">
+    <strong>Schema Version</strong><br>
+    <span [innerHtml]="sip.paket[0]._attrschemaVersion | stringifyValue"></span>
+  </p>
+  <p class="withSeparator">
+    <strong>XML Nameserver</strong><br>
+    <span [innerHtml]="sip.paket[0]._attrxmlns | stringifyValue"></span>
+  </p>
+  <p>
+    <strong>XML Naemserver XSI</strong><br>
+    <span [innerHtml]="sip.paket[0]['_attrxmlns:xsi'] | stringifyValue"></span>
+  </p>
+</div>

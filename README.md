@@ -56,7 +56,7 @@ If you want to run it in an own application window (with electron), you can do s
 
 Run `ng generate component [path][component-name]` to generate a new component in the app itself. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-Run `ng generate component [path][component-name] --project @av-dimag/ingest` to generate a new component (or directive, pipe, service etc.) in the library.
+Run `ng generate component [path][component-name] --project toolbox` to generate a new component (or directive, pipe, service etc.) in the library.
 
 Run `ng generate library @av-dimag/[libray-name]` to generate a new library in the scope of "@av-dimag".
 
