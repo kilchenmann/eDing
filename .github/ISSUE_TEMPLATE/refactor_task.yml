@@ -1,0 +1,41 @@
+name: "🚧 Refactor Task"
+description: Create a new ticket to refactor code and tests
+title: "🚧 refactor [topic]: title"
+labels: [
+  "enhancement"
+]
+body:
+  - type: input
+    id: start_date
+    attributes:
+      label: "Start Date"
+      description: Start of development
+      placeholder: "year-month-day"
+    validations:
+      required: false
+  - type: textarea
+    id: summary
+    attributes:
+      label: "Summary"
+      description: Provide a brief explanation about the refactoring
+      placeholder: Describe in a few lines your reefactor task
+    validations:
+      required: true
+  - type: textarea
+    id: todo
+    attributes:
+      label: "Tasks / To do"
+      description: List here the steps to be taken
+      placeholder: |
+        - [ ] Step_1
+        - [ ] Step_2
+    validations:
+      required: false
+  - type: textarea
+    id: reference_issues
+    attributes:
+      label: "Reference Issues or PRs"
+      description: Common issues
+      placeholder: "#Issues IDs"
+    validations:
+      required: false
