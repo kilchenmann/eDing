@@ -1,6 +1,9 @@
 # eCH-0160 DIMAG Ingest
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.2 and [YARN](https://yarnpkg.com) (instead npm!). Please read  [our developer guidelines](https://av-dimag.github.io/guidelines/) for contribution.
+[![CI](https://github.com/av-dimag/ech-0160-dimag-ingest/actions/workflows/build.yml/badge.svg)](https://github.com/av-dimag/ech-0160-dimag-ingest/actions/workflows/build.yml)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/av-dimag/ech-0160-dimag-ingest)](https://github.com/av-dimag/ech-0160-dimag-ingest/releases/latest)
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.2 and [YARN](https://yarnpkg.com) (instead npm!). **Please read  [our developer guidelines](https://av-dimag.github.io/guidelines/) for contribution.**
 
 ## First Steps
 
@@ -24,51 +27,23 @@ Install the dependencies with:
 
 ```shell
 yarn install
+yarn postinstall
 ```
 
 ### Development server
 
-As we develop library packages, which will be published to npm, you have to build the library before running the application. There are two ways to run the build process in dev mode:
-
-Build the library once:
-
-```shell
-yarn build-lib-dev
-```
-
-OR build the library with "watch". This helps to rerun the build process after each change in the library code:
-
-```shell
-yarn build-lib-dev-watch
-```
-
-Run the demo application:
-
-```shell
-ng s
-```
-
-Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-If you want to run it in an own application window (with electron), you can do so by running `yarn app`.
+Start the development server with `yarn start` and in a second terminal window the electron application with `yarn build:electron-dev`. This will open the app in electron automatically.
 
 ## Code scaffolding
 
 Run `ng generate component [path][component-name]` to generate a new component in the app itself. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-Run `ng generate component [path][component-name] --project toolbox` to generate a new component (or directive, pipe, service etc.) in the library.
-
-Run `ng generate library @av-dimag/[libray-name]` to generate a new library in the scope of "@av-dimag".
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
 ## Running unit tests
 
-> `Not yet implemented`
+> `Not yet full implemented`
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Run `yarn test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
 ## Running end-to-end tests
 

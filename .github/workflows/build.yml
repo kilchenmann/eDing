@@ -41,7 +41,7 @@ jobs:
         with:
           node-version: ${{ env.nv }}
       - name: Install dependencies
-        run: yarn install --immutable
+        run: yarn install --immutable && yarn postinstall
       - name: Run tests
         run: yarn test-ci
 
@@ -63,7 +63,7 @@ jobs:
         with:
           node-version: ${{ env.nv }}
       - name: Install dependencies
-        run: yarn install --immutable
+        run: yarn install --immutable && yarn postinstall
       - name: Build
         run: yarn build
 
@@ -109,7 +109,7 @@ jobs:
         with:
           node-version: ${{ env.nv}}
       - name: Install dependencies
-        run: yarn install
+        run: yarn install && yarn postinstall
       - name: Build and release Electron app
         uses: paneron/action-electron-builder@v1.8.1
         with:
