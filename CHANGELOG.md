@@ -35,8 +35,8 @@
 
 * Add playground and XML to JSON parser ([e7c7826](https://www.github.com/kilchenmann/eDing/commit/e7c78266965cdd91ac6c28d1cfa6d3228f674b85))
 * **app:** better electron integration ([61ccc21](https://www.github.com/kilchenmann/eDing/commit/61ccc21e285a3a0c69225b8949520a227706dca5))
-* **app:** init toolbox ([9e9871e](https://www.github.com/kilchenmann/eDing/commit/9e9871ed36db98894b930ef916797d5504c1a7bc))
-* **app:** setup toolbox ([82788c2](https://www.github.com/kilchenmann/eDing/commit/82788c23494d1f5fffaf361094d7928ad2ad1b8c))
+* **app:** init ech-0160-dimag-ingest ([9e9871e](https://www.github.com/kilchenmann/eDing/commit/9e9871ed36db98894b930ef916797d5504c1a7bc))
+* **app:** setup ech-0160-dimag-ingest ([82788c2](https://www.github.com/kilchenmann/eDing/commit/82788c23494d1f5fffaf361094d7928ad2ad1b8c))
 * **ci-cd:** new pipeline for release and electron build ([d9e820f](https://www.github.com/kilchenmann/eDing/commit/d9e820f7a24527a0a4c2bbcc01ae483ee10c483e))
 * **electron:** run the app with electron ([fef8495](https://www.github.com/kilchenmann/eDing/commit/fef84951ad0b9cea7a3ade45f86a478ef7c77b14))
 * **fonts:** self hosting google fonts and icons ([e50f216](https://www.github.com/kilchenmann/eDing/commit/e50f21610b84afc760c862145831b2fd24afe5a4))

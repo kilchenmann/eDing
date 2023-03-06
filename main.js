@@ -1,5 +1,4 @@
 const {app, dialog, BrowserWindow, ipcMain, screen } = require('electron');
-const url = require('url');
 const path = require('path');
 const args = process.argv.slice(2);
 const dev = args.indexOf('--dev') !== -1;
@@ -35,7 +34,7 @@ function onReady() {
     });
 
   } else {
-    const prodUrl = `file://${path.join(__dirname, 'dist/toolbox/index.html')}`;
+    const prodUrl = `file://${path.join(__dirname, 'dist/ech-0160-dimag-ingest/index.html')}`;
 
     win.loadURL(prodUrl);
 

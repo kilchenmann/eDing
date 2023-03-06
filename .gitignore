@@ -6,7 +6,7 @@
 **/out-tsc
 **/bazel-out
 **/cache
-**/toolbox-**
+**/ech-0160-dimag-ingest-**
 
 # Node
 **/node_modules

@@ -12,23 +12,23 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$toolbox-primary: mat.define-palette(mat.$teal-palette);
-$toolbox-accent: mat.define-palette(mat.$amber-palette, A200, A100, A400);
+$ech-0160-dimag-ingest-primary: mat.define-palette(mat.$teal-palette);
+$ech-0160-dimag-ingest-accent: mat.define-palette(mat.$amber-palette, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
-$toolbox-warn: mat.define-palette(mat.$red-palette);
+$ech-0160-dimag-ingest-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$toolbox-theme: mat.define-light-theme((
+$ech-0160-dimag-ingest-theme: mat.define-light-theme((
   color: (
-    primary: $toolbox-primary,
-    accent: $toolbox-accent,
-    warn: $toolbox-warn,
+    primary: $ech-0160-dimag-ingest-primary,
+    accent: $ech-0160-dimag-ingest-accent,
+    warn: $ech-0160-dimag-ingest-warn,
   )
 ));
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include mat.all-component-themes($toolbox-theme);
+@include mat.all-component-themes($ech-0160-dimag-ingest-theme);

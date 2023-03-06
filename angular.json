@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "toolbox": {
+    "ech-0160-dimag-ingest": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/toolbox",
+            "outputPath": "dist/ech-0160-dimag-ingest",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -72,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "toolbox:build:production"
+              "browserTarget": "ech-0160-dimag-ingest:build:production"
             },
             "development": {
-              "browserTarget": "toolbox:build:development"
+              "browserTarget": "ech-0160-dimag-ingest:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "toolbox:build"
+            "browserTarget": "ech-0160-dimag-ingest:build"
           }
         },
         "test": {
