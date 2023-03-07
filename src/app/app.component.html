@@ -1,15 +1,11 @@
 <!-- main toolbar / header -->
 <mat-toolbar color="primary">
-  <mat-toolbar-row>
-    <div class="title">
-      <h1 class="main-title">Applikation für eCH-0160 Ingest Prozess</h1>
-    </div>
-    <div class="nav-items">
-      <a mat-button [routerLink]="'/upload'">SIP hochladen</a>
-      <a mat-button [routerLink]="'/organize'">SIP verarbeiten</a>
-      <a mat-button [routerLink]="'/info'">Info</a>
-    </div>
-  </mat-toolbar-row>
+  <a mat-button [routerLink]="'/upload'">SIP hochladen</a>
+  <a mat-button [routerLink]="'/organize'">SIP verarbeiten</a>
+  <span class="fill-remaining-space"></span>
+  <div>
+    <a mat-button [routerLink]="'/info'">Info <br><span style="font-size: small">{{appVersion}}</span></a>
+  </div>
 </mat-toolbar>
 
 <!-- main navigation and routing content -->

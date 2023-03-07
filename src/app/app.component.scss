@@ -6,18 +6,3 @@
 mat-toolbar {
   padding: 20px
 }
-
-mat-toolbar-row {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.title {
-  margin-bottom: 10px;
-}
-
-.nav-items {
-  display: flex;
-  justify-content: center;
-}

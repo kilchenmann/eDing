@@ -19,17 +19,4 @@ describe('AppComponent', () => {
         const app = fixture.componentInstance;
         expect(app).toBeTruthy();
     });
-
-    it('should have as title \'ech-0160-dimag-ingest\'', () => {
-        const fixture = TestBed.createComponent(AppComponent);
-        const app = fixture.componentInstance;
-        expect(app.navItems[0].label).toEqual('Playground');
-    });
-
-    it('should render title', () => {
-        const fixture = TestBed.createComponent(AppComponent);
-        fixture.detectChanges();
-        const compiled = fixture.nativeElement as HTMLElement;
-        expect(compiled.querySelector('h1.main-title')?.textContent).toContain('Applikation für eCH-0160 Ingest Prozess');
-    });
 });
