@@ -1,10 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HeaderTabComponent } from './header-tab.component';
-import { MaterialModule } from '../../../../material-module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { StringifyValuePipe } from '../../pipes/stringify-value.pipe';
+import { AppModule } from '../../../../app.module';
 
 describe('HeaderTabComponent', () => {
     let component: HeaderTabComponent;
@@ -13,7 +11,7 @@ describe('HeaderTabComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [HeaderTabComponent, StringifyValuePipe],
-            imports: [MaterialModule, BrowserAnimationsModule, HttpClientTestingModule]
+            imports: [AppModule]
         }).compileComponents();
         fixture = TestBed.createComponent(HeaderTabComponent);
         component = fixture.componentInstance;

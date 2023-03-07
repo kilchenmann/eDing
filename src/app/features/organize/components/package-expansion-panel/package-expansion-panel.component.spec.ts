@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PackageExpansionPanelComponent } from './package-expansion-panel.component';
+import { AppModule } from '../../../../app.module';
 
 describe('PackageExpansionPanelComponent', () => {
     let component: PackageExpansionPanelComponent;
@@ -8,6 +9,7 @@ describe('PackageExpansionPanelComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
+            imports: [AppModule],
             declarations: [ PackageExpansionPanelComponent ]
         }).compileComponents();
 

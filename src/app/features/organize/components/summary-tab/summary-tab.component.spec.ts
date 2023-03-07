@@ -1,12 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SummaryTabComponent } from './summary-tab.component';
-import { MaterialModule } from '../../../../material-module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { Ordner } from '../../models/xmlns/bar.admin.ch/arelda/sip-arelda-v4';
+import { AppModule } from '../../../../app.module';
 
 describe('SummaryTabComponent', () => {
     let component: SummaryTabComponent;
@@ -18,11 +15,7 @@ describe('SummaryTabComponent', () => {
                 SummaryTabComponent
             ],
             imports: [
-                MaterialModule,
-                BrowserAnimationsModule,
-                HttpClientTestingModule,
-                ReactiveFormsModule,
-                FormsModule
+                AppModule
             ]
         }).compileComponents();
 

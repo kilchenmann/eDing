@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HeadlineComponent } from 'src/app/core/components/headline/headline.component';
 
 import { StartComponent } from './start.component';
+import { AppModule } from '../../../../app.module';
 
 describe('StartComponent', () => {
     let component: StartComponent;
@@ -9,6 +10,7 @@ describe('StartComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
+            imports: [AppModule],
             declarations: [
                 StartComponent,
                 HeadlineComponent

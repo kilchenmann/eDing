@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DeliveryTabComponent } from './delivery-tab.component';
+import { AppModule } from '../../../../app.module';
 
 describe('DeliveryTabComponent', () => {
     let component: DeliveryTabComponent;
@@ -7,6 +8,7 @@ describe('DeliveryTabComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
+            imports: [AppModule],
             declarations: [ DeliveryTabComponent ]
         }).compileComponents();
 
