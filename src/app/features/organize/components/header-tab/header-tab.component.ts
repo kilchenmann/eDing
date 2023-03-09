@@ -3,8 +3,7 @@ import { SIP } from '../../models/xmlns/bar.admin.ch/arelda/sip-arelda-v4';
 
 @Component({
     selector: 'app-header-tab',
-    templateUrl: './header-tab.component.html',
-    styleUrls: ['./header-tab.component.scss']
+    templateUrl: './header-tab.component.html'
 })
 export class HeaderTabComponent   {
     @Input() sip!: SIP;

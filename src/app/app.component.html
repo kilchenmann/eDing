@@ -1,35 +1,15 @@
 <!-- main toolbar / header -->
 <mat-toolbar color="primary">
-  <a mat-button [routerLink]="'/upload'">SIP hochladen</a>
-  <a mat-button [routerLink]="'/organize'">SIP verarbeiten</a>
+  <a mat-button routerLink="/upload" routerLinkActive="active">Start</a>
+  <a mat-button routerLink="/organize" routerLinkActive="active">Paketieren</a>
   <span class="fill-remaining-space"></span>
-  <div>
-    <a mat-button [routerLink]="'/info'">Info <br><span style="font-size: small">{{appVersion}}</span></a>
-  </div>
+  <a mat-button routerLink="/info" routerLinkActive="active" class="info">
+    Info / Hilfe
+    <span class="version">{{appVersion}}</span>
+  </a>
 </mat-toolbar>
 
-<!-- main navigation and routing content -->
-<mat-sidenav-container>
-
-  <!-- todo: add sidenav? -->
-  <!-- main navigation -->
-  <mat-sidenav #sidenav mode="side" opened="false">
-    <mat-nav-list>
-      <a *ngFor="let item of navItems" mat-list-item
-         [routerLink]="item.route"
-         routerLinkActive="active-link">
-        {{ item.label }}
-      </a>
-    </mat-nav-list>
-    <!-- "close sidenav" button; can be activated later
-    <mat-nav-list class="bottom">
-      <a mat-list-item (click)="sidenav.toggle()" href="" mat-list-item>
-        <mat-icon>chevron_left</mat-icon> Schliessen</a>
-    </mat-nav-list> -->
-  </mat-sidenav>
-
-  <!-- main content -->
-  <mat-sidenav-content class="main-content">
-    <router-outlet></router-outlet>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+<!-- main content -->
+<div class="main-content">
+  <router-outlet></router-outlet>
+</div>

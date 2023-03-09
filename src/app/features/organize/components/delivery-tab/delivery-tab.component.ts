@@ -3,8 +3,7 @@ import { Provenienz, SIP } from '../../models/xmlns/bar.admin.ch/arelda/sip-arel
 
 @Component({
     selector: 'app-delivery-tab',
-    templateUrl: './delivery-tab.component.html',
-    styleUrls: ['./delivery-tab.component.scss']
+    templateUrl: './delivery-tab.component.html'
 })
 export class DeliveryTabComponent {
     @Input() sip!: SIP;

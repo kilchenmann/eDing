@@ -12,11 +12,12 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  overflow: hidden;
 }
 
-router-outlet + * {
+router-outlet+* {
   display: block;
-  margin: 24px;
+  // margin: 24px;
 }
 
 .fill-remaining-space {
@@ -25,26 +26,71 @@ router-outlet + * {
   flex: 1 1 auto;
 }
 
+.center {
+  margin: 0 auto !important;
+}
+
 .link {
   cursor: pointer;
 }
 
-.active-link {
-  background: rgba(0, 0, 0, 0.04);
+.withSeparator {
+  border-bottom: 1px solid gray;
+  padding: 4px 0 12px 0;
 }
 
 // tweak angular material design
+
+.mat-toolbar {
+  padding: 0 !important;
+
+  // big menu/nav buttons in the header
+  .mat-button {
+    border-radius: 0;
+    height: 64px;
+    padding-top: 12px;
+    min-width: 96px;
+
+    &.active {
+      background-color: rgba(0, 0, 0, 0.39);
+    }
+  }
+}
+
+// fix position of tab's header
+.mat-tab-header {
+  top: 0;
+  z-index: 1000;
+  position: sticky !important;
+  position: -webkit-sticky !important; /* macOS/iOS Safari */
+  background-color: #fff;
+}
+
+.mat-dialog-actions {
+  width: 100%;
+
+  .multiple-actions {
+    padding-top: 16px;
+    display: contents;
+  }
+}
+
+// todo: could be a solution for user feedback instead of dialog
 .mat-snack-bar-container {
   color: #000;
+
   &.success {
     background-color: rgb($success, 0.9);
   }
+
   &.failed {
     background-color: rgba($failed, 0.9);
   }
+
   &.note {
     background-color: rgb($note, 0.9);
   }
+
   .mat-simple-snackbar-action button {
     color: #000;
   }
@@ -56,4 +102,24 @@ router-outlet + * {
   background-color: rgb(255, 255, 160);
   border-radius: 4px;
   display: block;
+}
+
+
+
+.as-split-area {
+  overflow: hidden !important;
+
+  .mat-tab-label-active {
+    // color:rgba(0, 0, 0, 0.39)
+    opacity: 1;
+  }
+
+  .mat-tab-body-wrapper {
+    height: calc(100vh - 64px - 48px);
+
+    .mat-tab-body-content {
+      padding-bottom: 60px;
+      height: calc(100vh - 64px - 48px - 60px);
+    }
+  }
 }

@@ -1,17 +1,14 @@
-.dropzone-card {
-  height: 700px;
-}
-
 .dropzone {
   width: 450px;
   height: 200px;
   padding: 2rem;
-  border: dashed 2px;
+  border: dashed 2px #3a3a3a;
   position: relative;
   margin: 0 auto;
-  background-color: lightgrey;
+  background-color: #dadada;
   margin-top: 200px !important;
   transform: scale(1.8);
+  border-radius: 4px;
 
   input {
     opacity: 0;
@@ -24,7 +21,7 @@
   }
 
   h3 {
-    font-size: 20px;
+    font-size: 16px;
   }
 }
 

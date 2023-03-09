@@ -29,7 +29,8 @@ declare let xmlToJSON: any;
 
 @Component({
     selector: 'app-organize',
-    templateUrl: './organize.component.html'
+    templateUrl: './organize.component.html',
+    styleUrls: ['./organize.component.scss']
 })
 // todo: move some functions to organize.service.ts
 export class OrganizeComponent implements OnInit, OnDestroy {
@@ -194,10 +195,10 @@ export class OrganizeComponent implements OnInit, OnDestroy {
                     // show dialog to user
                     const dialogRef = this.dialog.open(GenericDialogComponent, {
                         data: {
-                            title: 'Information',
-                            text: `Es ${moreThanOneNode ? 'werden' : 'wird'} ${nodes.length} Ingest ${moreThanOneNode ? 'Pakete' : 'Paket'} gespeichert, wollen Sie fortfahren?`,
+                            title: 'Ingest Pakete Exportieren',
+                            text: `Es ${moreThanOneNode ? 'werden' : 'wird'} ${nodes.length} Ingest ${moreThanOneNode ? 'Pakete' : 'Paket'} gespeichert. Wollen Sie fortfahren?`,
                             showActions: true
-                        }, panelClass: 'normal-dialog'
+                        }, panelClass: 'simple-dialog'
                     });
 
                     this.subContainer.add(dialogRef.afterClosed().subscribe(result => {
@@ -346,7 +347,7 @@ export class OrganizeComponent implements OnInit, OnDestroy {
     }
 
     /**
-     * convert xml to json
+     * convert xml to json (xml2json)
      */
     convert() {
         // reset error status
@@ -443,7 +444,7 @@ export class OrganizeComponent implements OnInit, OnDestroy {
         try {
             const zip = await this._getCurrentZipFile();
             const keys = Object.keys(zip.files);
-            const metadataPath = keys.find(key => key.endsWith('/header/metadata.xml')) ?? '';
+            const metadataPath = keys.find(key => key.endsWith('header/metadata.xml')) ?? '';
             const metadataXML = await zip.file(metadataPath)?.async('string');
 
             this.form.controls['xml'].setValue(metadataXML);
@@ -452,10 +453,10 @@ export class OrganizeComponent implements OnInit, OnDestroy {
             this.router.navigate(['/upload']);
             // todo: maybe just alert error instead of dialog?
             this.dialog.open(GenericDialogComponent, {
-                data: { title: 'Error', text: 'Das File konnte nicht geladen werden, bitte laden Sie es erneut hoch.' },
-                panelClass: 'normal-dialog'
+                data: { title: 'Fehler beim SIP', text: 'Das SIP konnte nicht geladen werden. Bitte laden Sie es erneut hoch.' },
+                panelClass: 'simple-dialog'
             });
-            console.error(error);
+            // console.error(error);
         }
     }
 

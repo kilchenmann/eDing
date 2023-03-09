@@ -40,17 +40,17 @@ export class FileUploadComponent {
                 } else {
                     // todo: maybe use electron alert instead
                     this._dialog.open(GenericDialogComponent, {
-                        data: { title: 'Error', text: 'Fehler beim Speichern der Files. Bitte versuchen Sie es erneut.' },
-                        panelClass: 'normal-dialog'
+                        data: { title: 'Fehler beim Öffnen', text: 'Das ZIP-Paket konnte nicht richtig verarbeitet werden. Bitte versuchen Sie es erneut.' },
+                        panelClass: 'simple-dialog'
                     });
                 }
             } else {
                 // todo: maybe use electron alert instead
                 this._dialog.open(GenericDialogComponent, {
                     data: {
-                        title: 'Error',
+                        title: 'Fehler im Format',
                         text: 'Bitte laden Sie ein valides ZIP-File entsprechend dem eCH-0160 Standard hoch.'
-                    }, panelClass: 'normal-dialog'
+                    }, panelClass: 'simple-dialog'
                 });
             }
         } else {

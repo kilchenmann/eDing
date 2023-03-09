@@ -42,10 +42,10 @@ export class UploadService {
                         .then(zip => {
                             // check if the required folders & files exist
                             const keys = Object.keys(zip.files);
-                            const hasContent = keys.some(key => key.endsWith('/content/'));
-                            const hasHeader = keys.some(key => key.endsWith('/header/'));
-                            const hasMetadata = keys.some(key => key.endsWith('/header/metadata.xml'));
-                            const metadataPath = keys.find(key => key.endsWith('/header/metadata.xml')) ?? '';
+                            const hasContent = keys.some(key => key.endsWith('content/'));
+                            const hasHeader = keys.some(key => key.endsWith('header/'));
+                            const hasMetadata = keys.some(key => key.endsWith('header/metadata.xml'));
+                            const metadataPath = keys.find(key => key.endsWith('header/metadata.xml')) ?? '';
 
                             if (!hasContent && !hasHeader && !hasMetadata) {
                                 resolve(false);
