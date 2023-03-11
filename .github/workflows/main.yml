@@ -116,3 +116,4 @@ jobs:
           github_token: ${{ secrets.GH_TOKEN }}
           publish_dir: ./dist
           publish_branch: deploy
+          exclude_assets: ''
