@@ -9,10 +9,12 @@ jobs:
   publish:
     name: Build Electron
     runs-on: ${{ matrix.os }}
-
     strategy:
       matrix:
-        os: [ubuntu-latest]
+        include:
+          - os: macos-latest
+            artifact_name: ech-0160-dimag-ingest.app
+            asset_name: ech-0160-dimag-ingest-darwin-arm64
 
     if: github.ref == 'refs/heads/deploy'
     steps:
@@ -28,3 +30,13 @@ jobs:
         run: yarn install && yarn postinstall
       - name: Build Electron App
         run: yarn ef:make
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GH_TOKEN }}
+          file: out/${{ matrix.asset_name }}/${{ matrix.artifact_name }}
+          asset_name: ${{ matrix.asset_name }}
+          tag: refs/tag/v1.0.2
+          # tag: ${{ github.ref }}
+
+

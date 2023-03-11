@@ -117,3 +117,5 @@ jobs:
           publish_dir: ./dist
           publish_branch: deploy
           exclude_assets: ''
+          full_commit_message: ${{ github.event.head_commit.message }}
+
