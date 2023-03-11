@@ -38,7 +38,6 @@ Start the development server with `yarn start` and in a second terminal window t
 
 Run `ng generate component [path][component-name]` to generate a new component in the app itself. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-
 ## Running unit tests
 
 > `Not yet full implemented`

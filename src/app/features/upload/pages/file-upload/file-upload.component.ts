@@ -5,6 +5,8 @@ import { UploadService } from '../../services/upload.service';
 import { FILE_DATA } from '../../../../shared/models/file-data';
 import { Router } from '@angular/router';
 
+import { platform } from 'node:process';
+
 
 @Component({
     selector: 'app-file-upload',
@@ -18,6 +20,23 @@ export class FileUploadComponent {
     fileData = FILE_DATA;
 
     constructor(private _dialog: MatDialog, private uploadService: UploadService, private router: Router) {
+
+        switch (true) {
+            case (navigator.userAgent.indexOf('Win') !== -1):
+                console.log('windows');
+                break;
+            case (navigator.userAgent.indexOf('Mac') !== -1):
+                console.log('mac');
+                break;
+            case (navigator.userAgent.indexOf('X11') !== -1):
+                console.log('x11');
+                break;
+            case (navigator.userAgent.indexOf('Linux') !== -1):
+                console.log('Linux');
+                break;
+        }
+
+
     };
 
     /**

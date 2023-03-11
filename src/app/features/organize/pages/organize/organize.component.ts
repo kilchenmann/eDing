@@ -461,7 +461,7 @@ export class OrganizeComponent implements OnInit, OnDestroy {
     }
 
     private async _getCurrentZipFile() {
-        const zipFileData = window.fs.readFileSync('temp.zip');
+        const zipFileData = window.fs.readFileSync('/private/tmp/sip.zip');
         return JSZip.loadAsync(zipFileData);
     }
 }

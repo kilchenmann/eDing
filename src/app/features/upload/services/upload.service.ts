@@ -95,7 +95,7 @@ export class UploadService {
             reader.onloadend = function () {
                 const buffer = new Uint8Array(reader.result as ArrayBuffer);
                 window.fs.writeFile(
-                    'temp.zip',
+                    '/private/tmp/sip.zip',
                     buffer,
                     (error: Error) =>
                         error ? reject(error) : resolve(true)

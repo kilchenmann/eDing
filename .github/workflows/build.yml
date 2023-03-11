@@ -46,26 +46,26 @@ jobs:
         run: yarn test-ci
 
   # build
-  build:
-    name: Build
-    needs: [unit-tests, lint]
-    if: github.ref != 'refs/heads/main'
-    runs-on: ${{ matrix.os }}
+  # build:
+  #   name: Build
+  #   needs: [unit-tests, lint]
+  #   if: github.ref != 'refs/heads/main'
+  #   runs-on: ${{ matrix.os }}
 
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v3
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ env.nv }}
-      - name: Install dependencies
-        run: yarn install --immutable && yarn postinstall
-      - name: Build
-        run: yarn build
+  #   strategy:
+  #     matrix:
+  #       os: [ubuntu-latest, windows-latest]
+  #   steps:
+  #     - name: Checkout source
+  #       uses: actions/checkout@v3
+  #     - name: Set up Node.js
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version: ${{ env.nv }}
+  #     - name: Install dependencies
+  #       run: yarn install --immutable && yarn postinstall
+  #     - name: Build
+  #       run: yarn build
 
   # Automate releases with Conventional Commit Messages as Pull Requests are merged into "main" branch
   release-please:
@@ -89,16 +89,16 @@ jobs:
 
   # publish only on release
   publish:
-    name: Publish Electron App
-    needs: [build]
+    name: Prepare Electron App Deployment
+    # needs: [build]
     runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
-        os: [windows-latest]
+        os: [ubuntu-latest]
 
 
-    if: github.event_name == 'release' && startsWith(github.ref, 'refs/tags')
+    # if: github.event_name == 'release' && startsWith(github.ref, 'refs/tags')
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
@@ -110,13 +110,11 @@ jobs:
           node-version: ${{ env.nv}}
       - name: Install dependencies
         run: yarn install && yarn postinstall
-      - name: Build and release Electron app
-        uses: paneron/action-electron-builder@v1.8.1
+      - name: Prepare Deployment (build and copy files)
+        run: yarn prepare-deployment
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          # GitHub token, automatically provided to the action
-          # (No need to define this secret in the repo settings)
           github_token: ${{ secrets.GH_TOKEN }}
-
-          # If the commit is tagged with a version (e.g. "v1.0.0"),
-          # release the app after building
-          release: ${{ startsWith(github.ref, 'refs/tags/v') }}
+          publish_dir: ./dist
+          publish_branch: deploy

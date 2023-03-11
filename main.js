@@ -53,7 +53,7 @@ function onReady() {
         });
 
     } else {
-        const prodUrl = `file://${path.join(__dirname, 'dist/ech-0160-dimag-ingest/index.html')}`;
+        const prodUrl = `file://${path.join(__dirname, 'ech-0160-dimag-ingest/index.html')}`;
 
         win.loadURL(prodUrl);
 
