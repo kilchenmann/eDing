@@ -40,7 +40,8 @@
     "prepare-deployment": "./prepare-deployment.sh",
     "ef:start": "electron-forge start",
     "ef:package": "electron-forge package",
-    "ef:make": "electron-forge make"
+    "ef:make": "electron-forge make",
+    "ef:publish": "electron-forge publish"
   },
   "private": true,
   "dependencies": {
@@ -77,6 +78,7 @@
     "@electron-forge/maker-rpm": "^6.0.5",
     "@electron-forge/maker-squirrel": "^6.0.5",
     "@electron-forge/maker-zip": "^6.0.5",
+    "@electron-forge/publisher-github": "^6.0.5",
     "@types/jasmine": "~4.0.0",
     "@types/jest": "^29.1.0",
     "@types/node": "^18.7.18",

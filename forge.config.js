@@ -2,6 +2,17 @@ module.exports = {
   "packagerConfig": {
     "dir": "./dist"
   },
+  "publishers": [
+    {
+      "name": "@electron-forge/publisher-github",
+      "config": {
+        "repository": {
+          "owner": "AV-DIMAG",
+          "name": "ech-0160-dimag-ingest"
+        }
+      }
+    }
+  ],
   "makers": [
     {
       "name": "@electron-forge/maker-squirrel",

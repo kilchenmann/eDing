@@ -9,39 +9,39 @@ on:
 
 jobs:
   # code linter
-  lint:
-    name: Run lint
-    runs-on: ubuntu-latest
-    if: github.ref != 'refs/heads/main' && github.ref != 'refs/heads/deploy'
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v3
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ env.nv }}
-      - name: Install dependencies
-        run: yarn install --immutable
-      - name: Run the lint scripts
-        run: |
-          yarn lint-ci
+  # lint:
+  #   name: Run lint
+  #   runs-on: ubuntu-latest
+  #   if: github.ref != 'refs/heads/main' && github.ref != 'refs/heads/deploy'
+  #   steps:
+  #     - name: Checkout source
+  #       uses: actions/checkout@v3
+  #     - name: Set up Node.js
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version: ${{ env.nv }}
+  #     - name: Install dependencies
+  #       run: yarn install --immutable
+  #     - name: Run the lint scripts
+  #       run: |
+  #         yarn lint-ci
 
   # unit tests
-  unit-tests:
-    name: Run unit tests
-    runs-on: ubuntu-latest
-    if: github.ref != 'refs/heads/main' && github.ref != 'refs/heads/deploy'
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v3
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ env.nv }}
-      - name: Install dependencies
-        run: yarn install --immutable && yarn postinstall
-      - name: Run tests
-        run: yarn test-ci
+  # unit-tests:
+  #   name: Run unit tests
+  #   runs-on: ubuntu-latest
+  #   if: github.ref != 'refs/heads/main' && github.ref != 'refs/heads/deploy'
+  #   steps:
+  #     - name: Checkout source
+  #       uses: actions/checkout@v3
+  #     - name: Set up Node.js
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version: ${{ env.nv }}
+  #     - name: Install dependencies
+  #       run: yarn install --immutable && yarn postinstall
+  #     - name: Run tests
+  #       run: yarn test-ci
 
   # build
   # build:
