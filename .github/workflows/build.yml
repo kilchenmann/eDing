@@ -14,7 +14,7 @@ jobs:
   lint:
     name: Run lint
     runs-on: ubuntu-latest
-    if: github.ref != 'refs/heads/main'
+    if: github.ref != 'refs/heads/main' && github.ref != 'refs/heads/deploy'
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
@@ -32,7 +32,7 @@ jobs:
   unit-tests:
     name: Run unit tests
     runs-on: ubuntu-latest
-    if: github.ref != 'refs/heads/main'
+    if: github.ref != 'refs/heads/main' && github.ref != 'refs/heads/deploy'
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
@@ -71,7 +71,7 @@ jobs:
   release-please:
     name: Prepare next release
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' && github.ref != 'refs/heads/deploy'
     steps:
       - name: Get release please action
         uses: GoogleCloudPlatform/release-please-action@v2
@@ -87,16 +87,15 @@ jobs:
               {"type": "docs", "section": "Documentation", "hidden": false }
             ]'
 
-  # publish only on release
-  publish:
-    name: Prepare Electron App Deployment
+  # prepare deployment only on release
+  prepare:
+    name: Prepare Deployment
     # needs: [build]
     runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
         os: [ubuntu-latest]
-
 
     # if: github.event_name == 'release' && startsWith(github.ref, 'refs/tags')
     steps:
@@ -112,9 +111,32 @@ jobs:
         run: yarn install && yarn postinstall
       - name: Prepare Deployment (build and copy files)
         run: yarn prepare-deployment
-      - name: Deploy
+      - name: Push to deploy branch
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GH_TOKEN }}
           publish_dir: ./dist
           publish_branch: deploy
+
+  publish:
+    name: Publish Electron App
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+
+    if: github.ref == 'refs/heads/deploy'
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 50
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.nv}}
+      - name: Install dependencies
+        run: yarn install && yarn postinstall
+      - name: Build Electron App
+        run: yarn ef:make
