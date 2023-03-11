@@ -1,0 +1,30 @@
+name: Build and Publish
+env:
+  nv: 16.17.0
+
+on:
+  push:
+
+jobs:
+  publish:
+    name: Build Electron
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+
+    if: github.ref == 'refs/heads/deploy'
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 50
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.nv}}
+      - name: Install dependencies
+        run: yarn install && yarn postinstall
+      - name: Build Electron App
+        run: yarn ef:make
