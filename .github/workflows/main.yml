@@ -2,12 +2,10 @@ name: Main CI/CD
 env:
   nv: 16.17.0
 
-
 on:
   push:
   release:
     types: [published]
-
 
 jobs:
   # code linter
@@ -98,6 +96,7 @@ jobs:
         os: [ubuntu-latest]
 
     # if: github.event_name == 'release' && startsWith(github.ref, 'refs/tags')
+    if: github.ref != 'refs/heads/deploy'
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
