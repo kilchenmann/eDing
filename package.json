@@ -37,7 +37,7 @@
     "lint-ci": "eslint --color -c .eslintrc.js --ext .ts ./src/app",
     "test": "ng test",
     "test-ci": "ng test --watch=false --browsers=ChromeHeadless",
-    "prepare-deployment": "yarn build && cp package.json dist/ && cp CHANGELOG.md dist/ && cp -r patches dist/ && cp main.js dist/ && cp yarn.lock dist/ && cp forge.config.js dist/ && cp .gitignore dist/",
+    "prepare-deployment": "yarn build && cp package.json dist/ && cp CHANGELOG.md dist/ && cp -r patches dist/ && cp main.js dist/ && cp yarn.lock dist/ && cp forge.config.js dist/ && cp .gitignore dist/ && cp -r .github dist/",
     "ef:start": "electron-forge start",
     "ef:package": "electron-forge package",
     "ef:make": "electron-forge make"
