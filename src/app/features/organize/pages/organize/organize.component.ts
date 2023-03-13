@@ -20,6 +20,7 @@ import { ElectronService } from 'ngx-electron';
 import { cloneDeep, isEqual } from 'lodash';
 import { Subscription } from 'rxjs';
 import { OrganizeService } from '../../services/organize.service';
+import { AppInitService } from 'src/app/app-init.service';
 
 
 // xmlToJSON does not export itself as ES6/ECMA2015 module,
@@ -73,7 +74,8 @@ export class OrganizeComponent implements OnInit, OnDestroy {
         private router: Router,
         private dialog: MatDialog,
         private electronService: ElectronService,
-        private organizeService: OrganizeService
+        private organizeService: OrganizeService,
+        private _ais: AppInitService
     ) {
     }
 
@@ -461,7 +463,9 @@ export class OrganizeComponent implements OnInit, OnDestroy {
     }
 
     private async _getCurrentZipFile() {
-        const zipFileData = window.fs.readFileSync('/private/tmp/sip.zip');
+
+        const tp = this._ais.getTempPath();
+        const zipFileData = window.fs.readFileSync(tp + '/sip.zip');
         return JSZip.loadAsync(zipFileData);
     }
 }

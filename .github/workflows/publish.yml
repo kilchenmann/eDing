@@ -14,7 +14,10 @@ jobs:
         include:
           - os: macos-latest
             artifact_name: ech-0160-dimag-ingest.app
-            asset_name: ech-0160-dimag-ingest-darwin-arm64
+            asset_name: ech-0160-dimag-ingest-macos
+          - os: windows-latest
+            artifact_name: ech-0160-dimag-ingest.exe
+            asset_name: ech-0160-dimag-ingest-win64
 
     if: github.ref == 'refs/heads/deploy'
     steps:

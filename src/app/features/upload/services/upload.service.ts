@@ -3,6 +3,7 @@ import * as JSZip from 'jszip';
 import { XML_OPTIONS } from '../../../shared/models/xml-options';
 import { SIP } from '../../organize/models/xmlns/bar.admin.ch/arelda/sip-arelda-v4';
 import { FILE_DATA } from '../../../shared/models/file-data';
+import { AppInitService } from 'src/app/app-init.service';
 
 // xmlToJSON does not export itself as ES6/ECMA2015 module,
 // it is loaded globally in scripts tag of angular.json,
@@ -17,7 +18,7 @@ export class UploadService {
         paket: []
     };
 
-    constructor() { }
+    constructor(private _ais: AppInitService) { }
 
     /**
      * validate file and check format
@@ -89,13 +90,16 @@ export class UploadService {
      */
     async saveFile(file: File): Promise<boolean> {
         return new Promise((resolve, reject) => {
+
+            const tp = this._ais.getTempPath();
+
             const reader = new FileReader();
             reader.readAsArrayBuffer(file);
 
             reader.onloadend = function () {
                 const buffer = new Uint8Array(reader.result as ArrayBuffer);
                 window.fs.writeFile(
-                    '/private/tmp/sip.zip',
+                    tp + '/sip.zip',
                     buffer,
                     (error: Error) =>
                         error ? reject(error) : resolve(true)
