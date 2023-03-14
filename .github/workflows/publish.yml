@@ -12,9 +12,9 @@ jobs:
     strategy:
       matrix:
         include:
-          - os: macos-latest
-            artifact_name: ech-0160-dimag-ingest.app
-            asset_name: ech-0160-dimag-ingest-macos
+          # - os: macos-latest
+          #   artifact_name: ech-0160-dimag-ingest.app
+          #   asset_name: ech-0160-dimag-ingest-macos
           - os: windows-latest
             artifact_name: ech-0160-dimag-ingest.exe
             asset_name: ech-0160-dimag-ingest-win64

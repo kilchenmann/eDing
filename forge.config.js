@@ -17,7 +17,7 @@ module.exports = {
     {
       "name": "@electron-forge/maker-squirrel",
       "config": {
-        "name": "electron_quick_start"
+        "name": "ech-0160-dimag-ingest"
       }
     },
     {

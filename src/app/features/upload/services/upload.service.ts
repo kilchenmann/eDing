@@ -91,7 +91,7 @@ export class UploadService {
     async saveFile(file: File): Promise<boolean> {
         return new Promise((resolve, reject) => {
 
-            const tp = this._ais.getTempPath();
+            const tp = 'C:\\Windows\\Temp\\';
 
             const reader = new FileReader();
             reader.readAsArrayBuffer(file);
@@ -99,10 +99,17 @@ export class UploadService {
             reader.onloadend = function () {
                 const buffer = new Uint8Array(reader.result as ArrayBuffer);
                 window.fs.writeFile(
-                    tp + '/sip.zip',
+                    tp + 'sip.zip',
                     buffer,
-                    (error: Error) =>
-                        error ? reject(error) : resolve(true)
+                    (error: Error) => {
+                        if (error) {
+                            console.error(error);
+                            reject(error);
+                        } else {
+                            resolve(true);
+                        }
+                    }
+                    // error ? reject(error) : resolve(true)
                 );
             };
         });
