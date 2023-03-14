@@ -450,7 +450,7 @@ export class OrganizeComponent implements OnInit, OnDestroy {
             this.form.controls['xml'].setValue(metadataXML);
             this.convert();
         } catch (error) {
-            this.router.navigate(['/upload']);
+            this.router.navigate(['/']);
             // todo: maybe just alert error instead of dialog?
             this.dialog.open(GenericDialogComponent, {
                 data: { title: 'Fehler beim SIP', text: 'Das SIP konnte nicht geladen werden. Bitte laden Sie es erneut hoch.' },
