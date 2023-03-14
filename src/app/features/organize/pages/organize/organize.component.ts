@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { ErrorMessage } from '../../models/error-message';
 import {
@@ -37,6 +36,8 @@ export class OrganizeComponent implements OnInit, OnDestroy {
     sip: SIP = {
         paket: []
     };
+    xml = '';
+    json = '';
 
     provenienz?: Provenienz;
 
@@ -55,13 +56,6 @@ export class OrganizeComponent implements OnInit, OnDestroy {
         text: 'Beim Konvertieren ist ein Fehler aufgetreten. Wahrscheinlich handelt es sich nicht um valides XML.'
     };
 
-    // define form
-    form: FormGroup = this.fb.group({
-        testdata: [''],
-        xml: ['', Validators.required],
-        json: ['']
-    });
-
     ingestPackages: Ordner[] = [];
 
     addFilesFromSubfolders = true;
@@ -69,7 +63,6 @@ export class OrganizeComponent implements OnInit, OnDestroy {
     subContainer = new Subscription;
 
     constructor(
-        private fb: FormBuilder,
         private router: Router,
         private dialog: MatDialog,
         private electronService: ElectronService,
@@ -79,9 +72,22 @@ export class OrganizeComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this._readCurrentMetadataXml();
+
+        // store ingestPackages before window close
+        window.addEventListener('beforeunload', async () => {
+            window.localStorage.setItem('ingestPackages', JSON.stringify(this.ingestPackages));
+        });
+
+        // get stored ingestPackages
+        const storedIngestPackages = window.localStorage.getItem('ingestPackages');
+        if (storedIngestPackages) {
+            this.ingestPackages = JSON.parse(storedIngestPackages);
+        }
     }
 
     ngOnDestroy() {
+        // store ingestPackages
+        window.localStorage.setItem('ingestPackages', JSON.stringify(this.ingestPackages));
         this.subContainer.unsubscribe();
     }
 
@@ -354,11 +360,11 @@ export class OrganizeComponent implements OnInit, OnDestroy {
         this.converterError = false;
 
         // parse xml and return json
-        this.sip = xmlToJSON.parseString(this.form.value['xml'], XML_OPTIONS);
+        this.sip = xmlToJSON.parseString(this.xml, XML_OPTIONS);
 
         if (this.sip.paket && this.sip.paket.length) {
             // display json in the second textarea
-            this.form.controls['json'].setValue(JSON.stringify(this.sip, undefined, 4));
+            this.json = JSON.stringify(this.sip, undefined, 4);
 
             this.sip.paket[0].inhaltsverzeichnis[0].ordner.forEach(content => {
                 // display folder structure of content
@@ -372,7 +378,7 @@ export class OrganizeComponent implements OnInit, OnDestroy {
         } else {
             // in case of an error: display the error message
             this.converterError = true;
-            this.form.controls['json'].setValue('');
+            this.json = '';
             this.error.message = (this.sip.html ? this.sip.html[0].body[0].parsererror[0].h3[0]._text + ' ' +
                 this.sip.html[0].body[0].parsererror[0].div[0]._text : 'no error message');
         }
@@ -447,13 +453,16 @@ export class OrganizeComponent implements OnInit, OnDestroy {
             const metadataPath = keys.find(key => key.endsWith('header/metadata.xml')) ?? '';
             const metadataXML = await zip.file(metadataPath)?.async('string');
 
-            this.form.controls['xml'].setValue(metadataXML);
+            this.xml = metadataXML ?? '';
             this.convert();
         } catch (error) {
             this.router.navigate(['/']);
             // todo: maybe just alert error instead of dialog?
             this.dialog.open(GenericDialogComponent, {
-                data: { title: 'Fehler beim SIP', text: 'Das SIP konnte nicht geladen werden. Bitte laden Sie es erneut hoch.' },
+                data: {
+                    title: 'Fehler beim SIP',
+                    text: 'Das SIP konnte nicht geladen werden. Bitte laden Sie es erneut hoch.'
+                },
                 panelClass: 'simple-dialog'
             });
             // console.error(error);

@@ -1,6 +1,10 @@
-import {Selector} from 'testcafe';
+import {ClientFunction, Selector} from 'testcafe';
 
-// declare elements
+const removeLocalStorage = ClientFunction(() => {
+    window.localStorage.removeItem('ingestPackages');
+});
+
+// declare test elements
 const links = {
     upload: Selector('a').withText('Start'),
     organize: Selector('a').withText('Paketieren'),
@@ -25,7 +29,9 @@ const matDialog = Selector("mat-dialog-container");
 
 // path to application
 fixture`Electron tests`
-    .page('../dist/ech-0160-dimag-ingest/index.html');
+    .page('../dist/ech-0160-dimag-ingest/index.html').afterEach(async () => {
+    await removeLocalStorage();
+});
 
 // run tests
 test('Upload wrong file and check if dialog is visible', async page => {
