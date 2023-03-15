@@ -22,11 +22,22 @@
 
 .add-files-subfolder-toggle {
   margin-left: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.generate-package {
+.package-header {
   margin-top: 15px;
   margin-left: 8px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .file-structure div[role=group]>.mat-tree-node {

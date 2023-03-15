@@ -1,16 +1,23 @@
-<div class="generate-package">
+<div class="package-header">
+  <div class="left-container">
+    <button mat-raised-button color="primary" (click)="expandAll()">
+      {{ areAllNodesExpanded ? 'Alle zuklappen' : 'Alle aufklappen' }}
+    </button>
+    <mat-slide-toggle
+      class="add-files-subfolder-toggle"
+      labelPosition="before"
+      color="primary"
+      [(ngModel)]="shouldAddFilesWithSubfolder"
+      (click)="addFilesInSubfolder.emit()">
+      Dateien auch aus Unterordner paketieren
+    </mat-slide-toggle>
+  </div>
   <button mat-raised-button color="primary"
           (click)="addAllIngestPackages.emit(dataSource.data)">
     Automatische Generierung
   </button>
-  <mat-slide-toggle
-    class="add-files-subfolder-toggle"
-    labelPosition="before"
-    color="primary"
-    [(ngModel)]="shouldAddFilesWithSubfolder" (click)="addFilesInSubfolder.emit()">
-    Dateien auch aus Unterordner paketieren
-  </mat-slide-toggle>
 </div>
+
 <div class="content">
   <!-- file structure on the left hand side -->
   <div class="half-width tree">

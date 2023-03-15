@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import {
     Dokument,
     Dossier,
@@ -8,30 +8,88 @@ import {
 } from '../../models/xmlns/bar.admin.ch/arelda/sip-arelda-v4';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
+import { isEqual } from 'lodash';
 
 @Component({
     selector: 'app-summary-tab',
     templateUrl: './summary-tab.component.html',
     styleUrls: ['./summary-tab.component.scss']
 })
-export class SummaryTabComponent {
+export class SummaryTabComponent implements OnInit, OnDestroy {
     @Input() sip!: SIP;
     @Input() dataSource!: MatTreeNestedDataSource<Ordner>;
     @Output() addIngestPackage = new EventEmitter<Ordner>;
     @Output() addAllIngestPackages = new EventEmitter<Ordner[]>;
     @Output() addFilesInSubfolder = new EventEmitter<boolean>;
 
-    shouldAddFilesWithSubfolder = true;
     treeControl = new NestedTreeControl<Ordner>(node => node.ordner);
+    areAllNodesExpanded!: boolean;
+
+    shouldAddFilesWithSubfolder = true;
     displayDokDetails = false;
     fileName = '';
     osp?: Ordnungssystemposition;
     dok?: Dokument;
     dos?: Dossier;
 
+    ngOnInit() {
+        // store tree expansion model before window close
+        window.addEventListener('beforeunload', () => {
+            window.localStorage.setItem('treeExpansionModel', JSON.stringify(Array.from(this.treeControl.expansionModel.selected)));
+        });
+
+        this.treeControl.dataNodes = this.dataSource.data;
+
+        // get stored expansion model
+        const storedExpansionModel = window.localStorage.getItem('treeExpansionModel');
+        if (storedExpansionModel) {
+            const selectedNodes = JSON.parse(storedExpansionModel);
+            this.expandNodes(selectedNodes, this.treeControl.dataNodes);
+            this.areAllNodesExpanded = this.checkAllExpanded();
+        }
+
+        // subscribe to expansion model changes
+        this.treeControl.expansionModel.changed.subscribe(() => {
+            this.areAllNodesExpanded = this.checkAllExpanded();
+        });
+    }
+
+    expandNodes(selectedNodes: Ordner[], nodes: Ordner[]): void {
+        nodes.forEach((node: Ordner) => {
+            const isSelected = selectedNodes.some((selectedNode) => isEqual(selectedNode, node));
+            if (isSelected) {
+                this.treeControl.expand(node);
+                if (node.ordner && node.ordner.length > 0) {
+                    this.expandNodes(selectedNodes, node.ordner);
+                }
+            }
+        });
+    }
+
+    checkAllExpanded(): boolean {
+        const hasUnexpandedNode = (node: Ordner): boolean => {
+            if (!this.treeControl.isExpanded(node)) {
+                return true;
+            }
+            if (node.ordner) {
+                return node.ordner.some(hasUnexpandedNode);
+            }
+            return false;
+        };
+
+        return !(this.treeControl.dataNodes as Ordner[]).some(hasUnexpandedNode);
+    }
+
+    ngOnDestroy() {
+        window.localStorage.setItem('treeExpansionModel', JSON.stringify(Array.from(this.treeControl.expansionModel.selected)));
+    }
+
+    expandAll() {
+        void (this.areAllNodesExpanded ? this.treeControl.collapseAll() : this.treeControl.expandAll());
+    }
+
     // check, if a node has child nodes
     hasChild = (_: number, node: Ordner) => (!!node.ordner && node.ordner.length > 0) || (!!node.datei && node.datei.length > 0);
-
 
     // todo: these two functions should be in the service somehow as they also get used in another page
     /**
