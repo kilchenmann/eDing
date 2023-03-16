@@ -14,6 +14,10 @@ cp main.js dist/
 cp package.json dist/
 cp yarn.lock dist/
 
+# move the app to a dist folder
+mkdir dist/dist
+mv dist/ech-0160-dimag-ingest dist/dist
+
 # create a hidden github folder with the workflows
 mkdir dist/.github
 mkdir dist/.github/workflows

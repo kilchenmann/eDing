@@ -91,9 +91,7 @@ export class UploadService {
     async saveFile(file: File): Promise<boolean> {
         return new Promise((resolve, reject) => {
 
-
-
-            const tp = 'C:\\Users\\sstarkil\\AppData\\Local\\Temp\\';
+            const tp = this._ais.getTempPath();
 
             const reader = new FileReader();
             reader.readAsArrayBuffer(file);

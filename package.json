@@ -38,10 +38,10 @@
     "test": "ng test",
     "test-ci": "ng test --watch=false --browsers=ChromeHeadless",
     "prepare-deployment": "./prepare-deployment.sh",
-    "ef:start": "electron-forge start",
-    "ef:package": "electron-forge package",
-    "ef:make": "electron-forge make",
-    "ef:publish": "electron-forge publish"
+    "ef:start": "yarn build && electron-forge start",
+    "ef:package": "yarn build && electron-forge package",
+    "ef:make": "yarn build && electron-forge make",
+    "ef:publish": "yarn build && electron-forge publish"
   },
   "private": true,
   "dependencies": {

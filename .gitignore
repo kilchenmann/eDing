@@ -4,6 +4,7 @@
 **/dist
 **/tmp
 **/out-tsc
+**/out
 **/bazel-out
 **/cache
 **/ech-0160-dimag-ingest-**
