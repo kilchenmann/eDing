@@ -4,10 +4,15 @@
 
       <!-- inhaltsverzeichnis -->
       <mat-tab label="SIP Inhalt" [disabled]="!sip.paket || !sip.paket.length">
-        <app-summary-tab class="content" *ngIf="sip.paket && sip.paket.length" [dataSource]="dataSource" [sip]="sip"
-          (addIngestPackage)="addIngestPackage($event)" (addAllIngestPackages)="addAllIngestPackages($event)"
+        <app-summary-tab
+          *ngIf="sip.paket && sip.paket.length"
+          [dataSource]="dataSource"
+          [sip]="sip"
+          [alreadyAddedPackages]="alreadyAddedPackages"
+          (addIngestPackage)="addIngestPackage($event)"
+          (addAllIngestPackages)="addAllIngestPackages($event)"
           (addFilesInSubfolder)="toggleAddFileMode()">
-        </app-summary-tab>
+      </app-summary-tab>
       </mat-tab>
 
       <!-- ablieferung -->
@@ -25,8 +30,11 @@
 
   </as-split-area>
   <as-split-area [size]="50" [minSize]="20">
-    <app-package-expansion-panel [ingestPackages]="ingestPackages" (removeIngestPackage)="removeIngestPackage($event)"
-      (exportAllIngestPackages)="exportAllIngestPackages($event)" (removeAllIngestPackages)="removeAllIngestPackage()">
+    <app-package-expansion-panel
+      [ingestPackages]="ingestPackages"
+      (removeIngestPackage)="removeIngestPackage($event)"
+      (exportAllIngestPackages)="exportAllIngestPackages($event)"
+      (removeAllIngestPackages)="removeAllIngestPackage()">
     </app-package-expansion-panel>
   </as-split-area>
 </as-split>

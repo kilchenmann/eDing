@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 import { GenericDialogComponent } from '../../../../shared/generic-dialog/generic-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ElectronService } from 'ngx-electron';
-import { cloneDeep, isEqual } from 'lodash';
+import { cloneDeep } from 'lodash';
 import { Subscription } from 'rxjs';
 import { OrganizeService } from '../../services/organize.service';
 
@@ -60,6 +60,8 @@ export class OrganizeComponent implements OnInit, OnDestroy {
 
     addFilesFromSubfolders = true;
 
+    alreadyAddedPackages: { node: Ordner; addFilesFromSubfolders: boolean }[] = [];
+
     subContainer = new Subscription;
 
     constructor(
@@ -76,6 +78,7 @@ export class OrganizeComponent implements OnInit, OnDestroy {
         // store ingestPackages before window close
         window.addEventListener('beforeunload', async () => {
             window.localStorage.setItem('ingestPackages', JSON.stringify(this.ingestPackages));
+            window.localStorage.setItem('addedIngestPackages', JSON.stringify(this.alreadyAddedPackages));
         });
 
         // get stored ingestPackages
@@ -83,11 +86,18 @@ export class OrganizeComponent implements OnInit, OnDestroy {
         if (storedIngestPackages) {
             this.ingestPackages = JSON.parse(storedIngestPackages);
         }
+
+        // get stored addedIngestPackages
+        const storedAddedIngestPackages = window.localStorage.getItem('addedIngestPackages');
+        if (storedAddedIngestPackages) {
+            this.alreadyAddedPackages = JSON.parse(storedAddedIngestPackages);
+        }
     }
 
     ngOnDestroy() {
         // store ingestPackages
         window.localStorage.setItem('ingestPackages', JSON.stringify(this.ingestPackages));
+        window.localStorage.setItem('addedIngestPackages', JSON.stringify(this.alreadyAddedPackages));
         this.subContainer.unsubscribe();
     }
 
@@ -104,6 +114,7 @@ export class OrganizeComponent implements OnInit, OnDestroy {
 
         function processOrdner(node: Ordner, filePath: string, addFilesFromSubfolder: boolean) {
             filePath += node.name[0]._text + '/';
+
             if (node.datei && node.datei.length > 0) {
                 node.datei.forEach((file) => {
                     file.path = { _value: filePath + file.name[0]._text };
@@ -113,9 +124,11 @@ export class OrganizeComponent implements OnInit, OnDestroy {
                     }
                 });
             }
+
             if (!addFilesFromSubfolder) {
                 return;
             }
+
             if (node.ordner) {
                 node.ordner.forEach((ordner) => {
                     processOrdner(ordner, filePath, addFilesFromSubfolder);
@@ -125,8 +138,10 @@ export class OrganizeComponent implements OnInit, OnDestroy {
 
         processOrdner(packageCopy, '', this.addFilesFromSubfolders);
 
-        if (!this.ingestPackages.find((existingPackage) => isEqual(existingPackage, packageCopy))) {
+        // check if package already exists and if not add it to array
+        if (!this.ingestPackages.find((existingPackage) => this.organizeService.comparePackages(existingPackage, packageCopy))) {
             this.ingestPackages.unshift(packageCopy);
+            this.alreadyAddedPackages.unshift({ node: ingestPackage, addFilesFromSubfolders: this.addFilesFromSubfolders });
         } else {
             alert('Error: Dieses Paket wurde schon hinzugefügt');
         }
@@ -144,12 +159,19 @@ export class OrganizeComponent implements OnInit, OnDestroy {
                 const packageCopy = cloneDeep(ingestPackage);
                 const filePath = parentPath + packageCopy.name[0]._text + '/';
 
+                // save path for each file
                 if (packageCopy.datei && packageCopy.datei.length > 0) {
                     packageCopy.datei.forEach((file) => {
                         file.path = { _value: filePath + file.name[0]._text };
                     });
-                    if (!this.ingestPackages.find((existingPackage) => isEqual(existingPackage, packageCopy))) {
+
+                    // check if package already exists and if not add it to array
+                    if (!this.ingestPackages.find((existingPackage) => this.organizeService.comparePackages(existingPackage, packageCopy))) {
                         this.ingestPackages.push(packageCopy);
+                        this.alreadyAddedPackages.push({
+                            node: ingestPackage,
+                            addFilesFromSubfolders: false
+                        });
                     } else {
                         showInfo = true;
                     }
@@ -172,9 +194,11 @@ export class OrganizeComponent implements OnInit, OnDestroy {
      * @param ingestPackage: ingest package which should get removed
      */
     removeIngestPackage(ingestPackage: Ordner) {
-        const packageIndex = this.ingestPackages.findIndex(existingPackage => existingPackage === ingestPackage);
+        const packageIndex = this.ingestPackages.findIndex(existingPackage => this.organizeService.comparePackages(existingPackage, ingestPackage));
+
         if (packageIndex >= 0) {
             this.ingestPackages.splice(packageIndex, 1);
+            this.alreadyAddedPackages.splice(packageIndex, 1);
         } else {
             alert('Error: Paket konnte nicht gelöscht werden');
         }
@@ -185,6 +209,7 @@ export class OrganizeComponent implements OnInit, OnDestroy {
      */
     removeAllIngestPackage() {
         this.ingestPackages = [];
+        this.alreadyAddedPackages = [];
     }
 
     /**
@@ -194,9 +219,10 @@ export class OrganizeComponent implements OnInit, OnDestroy {
     exportAllIngestPackages(nodes: Ordner[]) {
         this.electronService.ipcRenderer.invoke('show-save-dialog').then((path: string) => {
             if (path) {
-                // check if choosen folder is empty
-                const isChoosenFolderEmpty = window.fs.readdirSync(path).length === 0 || window.fs.readdirSync(path).length === 1 && window.fs.readdirSync(path)[0] === '.DS_Store';
-                if (isChoosenFolderEmpty) {
+                // check if chosen folder is empty
+                const isChosenFolderEmpty = window.fs.readdirSync(path).length === 0 || window.fs.readdirSync(path).length === 1 && window.fs.readdirSync(path)[0] === '.DS_Store';
+
+                if (isChosenFolderEmpty) {
                     const moreThanOneNode = (nodes.length > 1);
                     // show dialog to user
                     const dialogRef = this.dialog.open(GenericDialogComponent, {

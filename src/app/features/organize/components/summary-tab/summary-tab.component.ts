@@ -9,15 +9,18 @@ import {
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { isEqual } from 'lodash';
+import { OrganizeService } from '../../services/organize.service';
 
 @Component({
     selector: 'app-summary-tab',
     templateUrl: './summary-tab.component.html',
     styleUrls: ['./summary-tab.component.scss']
+
 })
 export class SummaryTabComponent implements OnInit, OnDestroy {
     @Input() sip!: SIP;
     @Input() dataSource!: MatTreeNestedDataSource<Ordner>;
+    @Input() alreadyAddedPackages: { node: Ordner; addFilesFromSubfolders: boolean }[] = [];
     @Output() addIngestPackage = new EventEmitter<Ordner>;
     @Output() addAllIngestPackages = new EventEmitter<Ordner[]>;
     @Output() addFilesInSubfolder = new EventEmitter<boolean>;
@@ -25,17 +28,21 @@ export class SummaryTabComponent implements OnInit, OnDestroy {
     treeControl = new NestedTreeControl<Ordner>(node => node.ordner);
     areAllNodesExpanded!: boolean;
 
-    shouldAddFilesWithSubfolder = true;
+    shouldAddFilesWithSubfolder!: boolean;
     displayDokDetails = false;
     fileName = '';
     osp?: Ordnungssystemposition;
     dok?: Dokument;
     dos?: Dossier;
 
+    constructor(private organizeService: OrganizeService) {
+    }
+
     ngOnInit() {
         // store tree expansion model before window close
         window.addEventListener('beforeunload', () => {
             window.localStorage.setItem('treeExpansionModel', JSON.stringify(Array.from(this.treeControl.expansionModel.selected)));
+            window.localStorage.setItem('shouldAddFilesWithSubfolder', JSON.stringify(this.shouldAddFilesWithSubfolder));
         });
 
         this.treeControl.dataNodes = this.dataSource.data;
@@ -47,6 +54,10 @@ export class SummaryTabComponent implements OnInit, OnDestroy {
             this.expandNodes(selectedNodes, this.treeControl.dataNodes);
             this.areAllNodesExpanded = this.checkAllExpanded();
         }
+
+        // get stored shouldAddFilesWithSubfolder boolean
+        const shouldAddFilesWithSubfolder = window.localStorage.getItem('shouldAddFilesWithSubfolder');
+        void (shouldAddFilesWithSubfolder ? this.shouldAddFilesWithSubfolder = JSON.parse(shouldAddFilesWithSubfolder) : this.shouldAddFilesWithSubfolder = true);
 
         // subscribe to expansion model changes
         this.treeControl.expansionModel.changed.subscribe(() => {
@@ -82,6 +93,7 @@ export class SummaryTabComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         window.localStorage.setItem('treeExpansionModel', JSON.stringify(Array.from(this.treeControl.expansionModel.selected)));
+        window.localStorage.setItem('shouldAddFilesWithSubfolder', JSON.stringify(this.shouldAddFilesWithSubfolder));
     }
 
     expandAll() {
@@ -90,6 +102,14 @@ export class SummaryTabComponent implements OnInit, OnDestroy {
 
     // check, if a node has child nodes
     hasChild = (_: number, node: Ordner) => (!!node.ordner && node.ordner.length > 0) || (!!node.datei && node.datei.length > 0);
+
+    // todo: the function should not get called on every click the user makes -> therefore we need to find a solution
+    isAlreadyAdded(node: Ordner, addFilesFromSubfolders: boolean): boolean {
+        return this.alreadyAddedPackages.some((addedPackage) =>
+            (addedPackage.addFilesFromSubfolders === addFilesFromSubfolders || !node.ordner) &&
+            this.organizeService.comparePackages(addedPackage.node, node)
+        );
+    }
 
     // todo: these two functions should be in the service somehow as they also get used in another page
     /**

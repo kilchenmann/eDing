@@ -19,6 +19,7 @@ const buttons = {
     expandAll: Selector('button').withText('Alle aufklappen'),
     collapseAll: Selector('button').withText('Alle zuklappen')
 }
+
 const expansionPanels = Selector('mat-expansion-panel');
 
 const firstPanelDescription = Selector("mat-expansion-panel-header")
@@ -173,7 +174,7 @@ function getRemovePackageButton(page: TestController, element: number) {
     return Selector('button').withText('Paket entfernen').nth(element);
 }
 
-// expand specific mat node
+// expand / collapse specific mat node
 function expandOrCollapseMatNode(page: TestController, element: number) {
     return page.click(Selector(matNodes).nth(element).find('button'));
 }

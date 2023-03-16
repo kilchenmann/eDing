@@ -37,8 +37,7 @@ export class FileUploadComponent {
                 if (wasSaveSuccessful) {
                     this.fileData = fileData;
                     this.currentFile = file;
-                    window.localStorage.removeItem('ingestPackages');
-                    window.localStorage.removeItem('treeExpansionModel');
+                    window.localStorage.clear();
                 } else {
                     this._dialog.open(GenericDialogComponent, {
                         data: {
