@@ -21,7 +21,7 @@
   "author": {
     "name": "AV DIMAG",
     "email": "ak@avdimag.ch",
-    "url": "http://av-dimag.ch"
+    "url": "http://avdimag.ch"
   },
   "main": "main.js",
   "scripts": {
@@ -30,20 +30,18 @@
     "start": "ng serve",
     "build": "ng build --configuration production",
     "build-dev": "ng build --configuration development",
-    "build-dev-watch": "ng build --configuration development --watch=true",
     "build:electron": "ng build && electron .",
     "build:electron-dev": "yarn build-dev && electron . --dev",
     "lint": "eslint --color --fix -c .eslintrc.js --ext .ts ./src/app",
     "lint-ci": "eslint --color -c .eslintrc.js --ext .ts ./src/app",
     "test": "ng test",
     "test-ci": "ng test --watch=false --browsers=ChromeHeadless",
-    "prepare-deployment": "./prepare-deployment.sh",
+    "test-e2e": " rm temp.zip && testcafe electron testcafe-tests/main.spec.ts",
     "ef:start": "yarn build && electron-forge start",
     "ef:package": "yarn build && electron-forge package",
     "ef:make": "yarn build && electron-forge make",
-    "ef:publish": "yarn build && electron-forge publish",
-    "prep-testdata": "./prepare-testdata.sh",
-    "test-e2e": " rm temp.zip && testcafe electron testcafe-tests/main.spec.ts"
+    "ef:publish": "electron-forge publish",
+    "clean": "rm -rf dist && rm -rf out"
   },
   "private": true,
   "dependencies": {
@@ -77,6 +75,7 @@
     "@babel/runtime": "^7.21.0",
     "@electron-forge/cli": "^6.0.5",
     "@electron-forge/maker-deb": "^6.0.5",
+    "@electron-forge/maker-dmg": "^6.0.5",
     "@electron-forge/maker-rpm": "^6.0.5",
     "@electron-forge/maker-squirrel": "^6.0.5",
     "@electron-forge/maker-zip": "^6.0.5",
