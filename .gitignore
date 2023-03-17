@@ -39,6 +39,7 @@ typings
 Thumbs.db
 ~$*
 temp.zip
+sip.zip
 
 # Ingest
 mapping/Logs

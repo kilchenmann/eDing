@@ -10,21 +10,23 @@ module.exports = {
       "^/out$",
       "^/patches$",
       "^/src$",
+      "^/testdata$",
       "^/testcafe-tests$",
       "^/[.]browserslistrc$",
       "^/[.]editorconfig$",
+      "^/[.]eslintrc[.]js$",
       "^/[.]gitignore$",
+      "^/[.]testcafe-electron-rc[.]json$",
       "^/[.]yarnrc.yml$",
       "^/angular[.]json$",
-      "^/forge[.]config[.]json$",
       "^/karma[.]conf[.]js$",
-      "^/prepare-deployment[.]sh$",
       "^/temp[.]zip$",
+      "^/README[.]md$",
+      "^/sip[.]zip$",
       "^/tsconfig[.]app[.]json$",
       "^/tsconfig[.]eslint[.]json$",
       "^/tsconfig[.]json$",
       "^/tsconfig[.]spec[.]json$",
-      "^/[.]editorconfig$",
       "^/yarn[.]lock$",
     ]
   },
@@ -40,10 +42,10 @@ module.exports = {
     }
   ],
   "makers": [
-    {
-      "name": "@electron-forge/maker-dmg",
-      "config": {}
-    },
+    // {
+    //   "name": "@electron-forge/maker-dmg",
+    //   "config": {}
+    // },
     {
       "name": "@electron-forge/maker-deb",
       "config": {
@@ -53,20 +55,19 @@ module.exports = {
         }
       }
     },
-    {
-      "name": "@electron-forge/maker-squirrel",
-      "config": {
-        "authors": "AV DIMAG",
-        "description": "Standalone Applikation für die Vorbereitung eines DIMAG Ingests von eCH-0160 SIPs",
-        "name": "ech-0160-dimag-ingest"
-      }
-    },
+    // {
+    //   "name": "@electron-forge/maker-squirrel",
+    //   "config": {
+    //     "authors": "AV DIMAG",
+    //     "description": "Standalone Applikation für die Vorbereitung eines DIMAG Ingests von eCH-0160 SIPs",
+    //     "name": "ech-0160-dimag-ingest"
+    //   }
+    // },
     {
       "name": "@electron-forge/maker-zip",
       "platforms": [
         "darwin",
-        "win32",
-        "linux"
+        "win32"
       ],
       "config": {
         "name": "ech-0160-dimag-ingest"
