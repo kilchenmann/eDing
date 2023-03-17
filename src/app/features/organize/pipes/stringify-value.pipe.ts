@@ -8,6 +8,7 @@ import {
     ZusatzDaten
 } from '../models/xmlns/bar.admin.ch/arelda/sip-arelda-v4';
 import { OrganizeService } from '../services/organize.service';
+import { isArray } from 'lodash';
 
 @Pipe({
     name: 'stringifyValue'
@@ -21,7 +22,7 @@ export class StringifyValuePipe implements PipeTransform {
         let stringified = '';
 
         if (value === undefined) {
-            return '<i class="warning">Warning! This value is undefined or the element does not exist.</i>' + JSON.stringify(value);
+            return '<i class="hint">Hinweis: Dieser Wert ist nicht definiert oder existiert nicht.</i>' + JSON.stringify(value);
         } else {
             // which kind of value do we have?
             // switch in case of an array
@@ -58,11 +59,11 @@ export class StringifyValuePipe implements PipeTransform {
                         // instance of ZusatzDaten
                         let z = 0;
                         for (const val of <ZusatzDaten[]>value) {
-                            const delimiter = (z > 0 ? '</br>' : '');
                             for (const m of <Merkmal[]>val.merkmal) {
-                                stringified += delimiter + m._attrname._value + ' ' + m._text;
+                                const delimiter = (z > 0 ? '<br>' : '');
+                                stringified += delimiter + m._attrname._value + ': ' + (!isArray(m._text) && m._text ? m._text : ' --');
+                                z++;
                             }
-                            z++;
                         }
                         return stringified;
 
@@ -71,7 +72,7 @@ export class StringifyValuePipe implements PipeTransform {
                         // instance of Datum
                         let d = 0;
                         for (const val of <Datum[]>value) {
-                            const delimiter = (d > 0 ? '</br>' : '');
+                            const delimiter = (d > 0 ? '<br>' : '');
                             stringified += delimiter + this._setDate(val);
                             d++;
                         }
@@ -82,14 +83,19 @@ export class StringifyValuePipe implements PipeTransform {
                         // instance of Zeitraum
                         let p = 0;
                         for (const val of <Zeitraum[]>value) {
-                            const delimiter = (p > 0 ? '</br>' : '');
+                            const delimiter = (p > 0 ? '<br>' : '');
                             stringified += delimiter + this._setDate(val.von[0]) + ' - ' + this._setDate(val.bis[0]);
                             p++;
                         }
                         return stringified;
 
+                    case this.organizeService.instanceOfDOS(value[0]):
+
+                        stringified = '<i class="warning">Achtung!<br>Dieses Dossier enthält weitere (Sub-)Dossiers &mdash; ein Objekttyp, der noch nicht unterstützt wird.</i>';
+                        return stringified;
+
                     default:
-                        return '<i class="warning">Warning! This object type is not yet supported: </i>' + JSON.stringify(value[0]);
+                        return '<i class="hint">Hinweis: Dieser Objekttyp wird noch nicht unterstützt. </i>' + JSON.stringify(value[0]);
                 }
 
             } else {
@@ -102,7 +108,7 @@ export class StringifyValuePipe implements PipeTransform {
                         return JSON.stringify(value._value);
 
                     default:
-                        return '<i class="warning">Warning! This object type is not yet supported: </i>' + JSON.stringify(value);
+                        return '<i class="hint">Hinweis: Dieser Objekttyp wird noch nicht unterstützt. </i>' + JSON.stringify(value);
                 }
             }
         }

@@ -39,7 +39,7 @@
     "test": "ng test",
     "test-ci": "ng test --watch=false --browsers=ChromeHeadless",
     "prep-testdata": "./prepare-testdata.sh",
-    "test-e2e": " rm temp.zip && testcafe electron testcafe-tests/main.spec.ts"
+    "test-e2e": " rm -f temp.zip && testcafe electron testcafe-tests/main.spec.ts"
   },
   "private": true,
   "dependencies": {

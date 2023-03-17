@@ -66,7 +66,7 @@ export interface Zeitraum {
 
 export interface Merkmal {
     '_attrname': ValueString;
-    '_text': number | string;
+    '_text': number | string | null[];
 }
 
 export interface ZusatzDaten {
@@ -113,6 +113,7 @@ export interface Dossier {
     'dokument': Dokument[];
     'vorgang': Vorgang[];
     'dateiRef': TextString[];
+    'dossier': Dossier[];
 }
 
 export interface Ordnungssystemposition {

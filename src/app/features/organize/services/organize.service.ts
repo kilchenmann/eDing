@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {
     Datum,
+    Dossier,
     Merkmal,
     Ordner,
     Ordnungssystem,
@@ -112,7 +113,7 @@ export class OrganizeService {
                                     // instance of ZusatzDaten
                                     let z = 0;
                                     for (const val of <ZusatzDaten[]>value) {
-                                        const delimiter = (z > 0 ? '</br>' : '');
+                                        const delimiter = (z > 0 ? '<br>' : '');
                                         for (const m of <Merkmal[]>val.merkmal) {
                                             stringified += delimiter + m._attrname._value + ' ' + m._text;
 
@@ -263,6 +264,10 @@ export class OrganizeService {
     }
 
     instanceOfOSP(object: any): object is Ordnungssystemposition {
+        return 'dossier' in object || 'nummer' in object;
+    }
+
+    instanceOfDOS(object: any): object is Dossier {
         return 'dossier' in object || 'nummer' in object;
     }
 }

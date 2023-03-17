@@ -16,8 +16,8 @@ const buttons = {
     removeAllPackages: Selector('button').withText('Alle Pakete entfernen'),
     exportPackages: Selector('button').withText('Pakete exportieren/speichern'),
     generateAllPackages: Selector('button').withText('Automatische Generierung'),
-    expandAll: Selector('button').withText('Alle aufklappen'),
-    collapseAll: Selector('button').withText('Alle zuklappen')
+    expandAll: Selector('button.expand'),
+    collapseAll: Selector('button.collapse')
 }
 
 const expansionPanels = Selector('mat-expansion-panel');
@@ -131,10 +131,10 @@ test('Test expand / collapse button', async page => {
     await page.click(buttons.expandAll);
 
     await page.expect(buttons.collapseAll.visible).ok();
-    await expandOrCollapseMatNode(page, 0);
+    await expandOrCollapseMatNode(page, 1);
     await page.expect(buttons.expandAll.visible).ok();
 
-    await expandOrCollapseMatNode(page, 0);
+    await expandOrCollapseMatNode(page, 1);
     await page.expect(buttons.collapseAll.visible).ok();
 
     // navigate and check if button state was restored correctly

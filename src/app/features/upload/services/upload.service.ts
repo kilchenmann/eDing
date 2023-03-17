@@ -17,8 +17,6 @@ export class UploadService {
         paket: []
     };
 
-    constructor() { }
-
     /**
      * validate file and check format
      * @param file - file which should be checked for it is validity

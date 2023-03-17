@@ -75,6 +75,10 @@ router-outlet+* {
   }
 }
 
+.mirror-icon {
+  transform: scaleX(-1);
+}
+
 // todo: could be a solution for user feedback instead of dialog
 .mat-snack-bar-container {
   color: #000;
@@ -96,15 +100,23 @@ router-outlet+* {
   }
 }
 
+.hint,
 .warning {
   padding: 8px;
   margin: 4px 0;
-  background-color: rgb(255, 255, 160);
   border-radius: 4px;
   display: block;
 }
-
-
+.hint {
+  background-color: rgb(255, 255, 160);
+}
+.warning {
+  background-color: rgba(255, 0, 60, .39);
+}
+.mat-menu-panel.metadata {
+  max-width: 640px !important;
+  padding: 8px !important;
+}
 
 .as-split-area {
   overflow: hidden !important;
