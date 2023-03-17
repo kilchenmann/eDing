@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {
     Datum,
     Merkmal,
+    Ordner,
     Ordnungssystem,
     Ordnungssystemposition,
     Provenienz,
@@ -13,11 +14,24 @@ import {
     Zeitraum,
     ZusatzDaten
 } from '../models/xmlns/bar.admin.ch/arelda/sip-arelda-v4';
+import { isEqualWith } from 'lodash';
 
 @Injectable({
     providedIn: 'root'
 })
 export class OrganizeService {
+    /**
+     * compare if two ingest packages are equal
+     * @param firstPackage - first package for comparing
+     * @param secondPackage - second package for comparing
+     * @notes path is dependent on the package creation method therefore it gets ignored
+     */
+    comparePackages(firstPackage: Ordner, secondPackage: Ordner) {
+        return isEqualWith(firstPackage, secondPackage, (value1, value2, key) =>
+            key === 'path' ? true : undefined
+        );
+    }
+
     /**
      * todo: describe function
      * @param root

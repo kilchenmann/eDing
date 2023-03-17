@@ -1,16 +1,23 @@
-<div class="generate-package">
-  <button mat-raised-button color="primary"
+<div class="package-header">
+  <div class="left-container">
+    <button mat-raised-button color="primary" (click)="expandAll()">
+      {{ areAllNodesExpanded ? 'Alle zuklappen' : 'Alle aufklappen' }}
+    </button>
+    <mat-slide-toggle
+      class="add-files-subfolder-toggle"
+      labelPosition="before"
+      color="primary"
+      [(ngModel)]="shouldAddFilesWithSubfolder"
+      (click)="addFilesInSubfolder.emit()">
+      Dateien auch aus Unterordner paketieren
+    </mat-slide-toggle>
+  </div>
+  <button mat-raised-button color="primary" style="margin-right: 15px"
           (click)="addAllIngestPackages.emit(dataSource.data)">
     Automatische Generierung
   </button>
-  <mat-slide-toggle
-    class="add-files-subfolder-toggle"
-    labelPosition="before"
-    color="primary"
-    [(ngModel)]="shouldAddFilesWithSubfolder" (click)="addFilesInSubfolder.emit()">
-    Dateien auch aus Unterordner paketieren
-  </mat-slide-toggle>
 </div>
+
 <div class="content">
   <!-- file structure on the left hand side -->
   <div class="half-width tree">
@@ -29,8 +36,12 @@
           </button>
           {{node.name[0]._text}}
           <span class="fill-remaining-space"></span>
-          <button *ngIf="node.datei?.length > 0 || shouldAddFilesWithSubfolder" mat-stroked-button class="export"
-                  (click)="addIngestPackage.emit(node); fileName = ''; displayDokDetails = false">
+          <button
+            *ngIf="node.datei?.length > 0 || shouldAddFilesWithSubfolder"
+            mat-stroked-button
+            class="export"
+            (click)="addIngestPackage.emit(node)"
+            [disabled]="isAlreadyAdded(node, shouldAddFilesWithSubfolder)">
             <mat-icon class="prefix">east</mat-icon>
             Paket hinzufügen
           </button>
@@ -44,9 +55,6 @@
               <button mat-button
                       (click)="getFileMeta(datei._attrid._value); fileName = datei.name[0]._text; displayDokDetails = true"
                       class="file" [class.active]="fileName === datei.name[0]._text">
-                <!-- todo: can we remove this 'outcommented' code? -->
-                <!-- [matTooltip]="datei._attrid._value"
-                matTooltipPosition="above" -->
                 <mat-icon fontIcon="description"></mat-icon>
                 <span>{{datei.name[0]._text}}</span>
               </button>

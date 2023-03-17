@@ -42,15 +42,17 @@ export class FileUploadComponent {
                 if (wasSaveSuccessful) {
                     this.fileData = fileData;
                     this.currentFile = file;
+                    window.localStorage.clear();
                 } else {
-                    // todo: maybe use electron alert instead
                     this._dialog.open(GenericDialogComponent, {
-                        data: { title: 'Fehler beim Öffnen', text: 'Das ZIP-Paket konnte nicht richtig verarbeitet werden. Bitte versuchen Sie es erneut.' },
+                        data: {
+                            title: 'Fehler beim Öffnen',
+                            text: 'Das ZIP-Paket konnte nicht richtig verarbeitet werden. Bitte versuchen Sie es erneut.'
+                        },
                         panelClass: 'simple-dialog'
                     });
                 }
             } else {
-                // todo: maybe use electron alert instead
                 this._dialog.open(GenericDialogComponent, {
                     data: {
                         title: 'Fehler im Format',

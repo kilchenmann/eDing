@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { ErrorMessage } from '../../models/error-message';
 import {
@@ -17,7 +16,7 @@ import { Router } from '@angular/router';
 import { GenericDialogComponent } from '../../../../shared/generic-dialog/generic-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ElectronService } from 'ngx-electron';
-import { cloneDeep, isEqual } from 'lodash';
+import { cloneDeep } from 'lodash';
 import { Subscription } from 'rxjs';
 import { OrganizeService } from '../../services/organize.service';
 import { AppInitService } from 'src/app/app-init.service';
@@ -38,6 +37,8 @@ export class OrganizeComponent implements OnInit, OnDestroy {
     sip: SIP = {
         paket: []
     };
+    xml = '';
+    json = '';
 
     provenienz?: Provenienz;
 
@@ -56,21 +57,15 @@ export class OrganizeComponent implements OnInit, OnDestroy {
         text: 'Beim Konvertieren ist ein Fehler aufgetreten. Wahrscheinlich handelt es sich nicht um valides XML.'
     };
 
-    // define form
-    form: FormGroup = this.fb.group({
-        testdata: [''],
-        xml: ['', Validators.required],
-        json: ['']
-    });
-
     ingestPackages: Ordner[] = [];
 
     addFilesFromSubfolders = true;
 
+    alreadyAddedPackages: { node: Ordner; addFilesFromSubfolders: boolean }[] = [];
+
     subContainer = new Subscription;
 
     constructor(
-        private fb: FormBuilder,
         private router: Router,
         private dialog: MatDialog,
         private electronService: ElectronService,
@@ -81,9 +76,30 @@ export class OrganizeComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this._readCurrentMetadataXml();
+
+        // store ingestPackages before window close
+        window.addEventListener('beforeunload', async () => {
+            window.localStorage.setItem('ingestPackages', JSON.stringify(this.ingestPackages));
+            window.localStorage.setItem('addedIngestPackages', JSON.stringify(this.alreadyAddedPackages));
+        });
+
+        // get stored ingestPackages
+        const storedIngestPackages = window.localStorage.getItem('ingestPackages');
+        if (storedIngestPackages) {
+            this.ingestPackages = JSON.parse(storedIngestPackages);
+        }
+
+        // get stored addedIngestPackages
+        const storedAddedIngestPackages = window.localStorage.getItem('addedIngestPackages');
+        if (storedAddedIngestPackages) {
+            this.alreadyAddedPackages = JSON.parse(storedAddedIngestPackages);
+        }
     }
 
     ngOnDestroy() {
+        // store ingestPackages
+        window.localStorage.setItem('ingestPackages', JSON.stringify(this.ingestPackages));
+        window.localStorage.setItem('addedIngestPackages', JSON.stringify(this.alreadyAddedPackages));
         this.subContainer.unsubscribe();
     }
 
@@ -100,6 +116,7 @@ export class OrganizeComponent implements OnInit, OnDestroy {
 
         function processOrdner(node: Ordner, filePath: string, addFilesFromSubfolder: boolean) {
             filePath += node.name[0]._text + '/';
+
             if (node.datei && node.datei.length > 0) {
                 node.datei.forEach((file) => {
                     file.path = { _value: filePath + file.name[0]._text };
@@ -109,9 +126,11 @@ export class OrganizeComponent implements OnInit, OnDestroy {
                     }
                 });
             }
+
             if (!addFilesFromSubfolder) {
                 return;
             }
+
             if (node.ordner) {
                 node.ordner.forEach((ordner) => {
                     processOrdner(ordner, filePath, addFilesFromSubfolder);
@@ -121,8 +140,10 @@ export class OrganizeComponent implements OnInit, OnDestroy {
 
         processOrdner(packageCopy, '', this.addFilesFromSubfolders);
 
-        if (!this.ingestPackages.find((existingPackage) => isEqual(existingPackage, packageCopy))) {
+        // check if package already exists and if not add it to array
+        if (!this.ingestPackages.find((existingPackage) => this.organizeService.comparePackages(existingPackage, packageCopy))) {
             this.ingestPackages.unshift(packageCopy);
+            this.alreadyAddedPackages.unshift({ node: ingestPackage, addFilesFromSubfolders: this.addFilesFromSubfolders });
         } else {
             alert('Error: Dieses Paket wurde schon hinzugefügt');
         }
@@ -140,12 +161,19 @@ export class OrganizeComponent implements OnInit, OnDestroy {
                 const packageCopy = cloneDeep(ingestPackage);
                 const filePath = parentPath + packageCopy.name[0]._text + '/';
 
+                // save path for each file
                 if (packageCopy.datei && packageCopy.datei.length > 0) {
                     packageCopy.datei.forEach((file) => {
                         file.path = { _value: filePath + file.name[0]._text };
                     });
-                    if (!this.ingestPackages.find((existingPackage) => isEqual(existingPackage, packageCopy))) {
+
+                    // check if package already exists and if not add it to array
+                    if (!this.ingestPackages.find((existingPackage) => this.organizeService.comparePackages(existingPackage, packageCopy))) {
                         this.ingestPackages.push(packageCopy);
+                        this.alreadyAddedPackages.push({
+                            node: ingestPackage,
+                            addFilesFromSubfolders: false
+                        });
                     } else {
                         showInfo = true;
                     }
@@ -168,9 +196,11 @@ export class OrganizeComponent implements OnInit, OnDestroy {
      * @param ingestPackage: ingest package which should get removed
      */
     removeIngestPackage(ingestPackage: Ordner) {
-        const packageIndex = this.ingestPackages.findIndex(existingPackage => existingPackage === ingestPackage);
+        const packageIndex = this.ingestPackages.findIndex(existingPackage => this.organizeService.comparePackages(existingPackage, ingestPackage));
+
         if (packageIndex >= 0) {
             this.ingestPackages.splice(packageIndex, 1);
+            this.alreadyAddedPackages.splice(packageIndex, 1);
         } else {
             alert('Error: Paket konnte nicht gelöscht werden');
         }
@@ -181,6 +211,7 @@ export class OrganizeComponent implements OnInit, OnDestroy {
      */
     removeAllIngestPackage() {
         this.ingestPackages = [];
+        this.alreadyAddedPackages = [];
     }
 
     /**
@@ -190,9 +221,10 @@ export class OrganizeComponent implements OnInit, OnDestroy {
     exportAllIngestPackages(nodes: Ordner[]) {
         this.electronService.ipcRenderer.invoke('show-save-dialog').then((path: string) => {
             if (path) {
-                // check if choosen folder is empty
-                const isChoosenFolderEmpty = window.fs.readdirSync(path).length === 0 || window.fs.readdirSync(path).length === 1 && window.fs.readdirSync(path)[0] === '.DS_Store';
-                if (isChoosenFolderEmpty) {
+                // check if chosen folder is empty
+                const isChosenFolderEmpty = window.fs.readdirSync(path).length === 0 || window.fs.readdirSync(path).length === 1 && window.fs.readdirSync(path)[0] === '.DS_Store';
+
+                if (isChosenFolderEmpty) {
                     const moreThanOneNode = (nodes.length > 1);
                     // show dialog to user
                     const dialogRef = this.dialog.open(GenericDialogComponent, {
@@ -356,11 +388,11 @@ export class OrganizeComponent implements OnInit, OnDestroy {
         this.converterError = false;
 
         // parse xml and return json
-        this.sip = xmlToJSON.parseString(this.form.value['xml'], XML_OPTIONS);
+        this.sip = xmlToJSON.parseString(this.xml, XML_OPTIONS);
 
         if (this.sip.paket && this.sip.paket.length) {
             // display json in the second textarea
-            this.form.controls['json'].setValue(JSON.stringify(this.sip, undefined, 4));
+            this.json = JSON.stringify(this.sip, undefined, 4);
 
             this.sip.paket[0].inhaltsverzeichnis[0].ordner.forEach(content => {
                 // display folder structure of content
@@ -374,7 +406,7 @@ export class OrganizeComponent implements OnInit, OnDestroy {
         } else {
             // in case of an error: display the error message
             this.converterError = true;
-            this.form.controls['json'].setValue('');
+            this.json = '';
             this.error.message = (this.sip.html ? this.sip.html[0].body[0].parsererror[0].h3[0]._text + ' ' +
                 this.sip.html[0].body[0].parsererror[0].div[0]._text : 'no error message');
         }
@@ -449,13 +481,16 @@ export class OrganizeComponent implements OnInit, OnDestroy {
             const metadataPath = keys.find(key => key.endsWith('header/metadata.xml')) ?? '';
             const metadataXML = await zip.file(metadataPath)?.async('string');
 
-            this.form.controls['xml'].setValue(metadataXML);
+            this.xml = metadataXML ?? '';
             this.convert();
         } catch (error) {
-            this.router.navigate(['/upload']);
+            this.router.navigate(['/']);
             // todo: maybe just alert error instead of dialog?
             this.dialog.open(GenericDialogComponent, {
-                data: { title: 'Fehler beim SIP', text: 'Das SIP konnte nicht geladen werden. Bitte laden Sie es erneut hoch.' },
+                data: {
+                    title: 'Fehler beim SIP',
+                    text: 'Das SIP konnte nicht geladen werden. Bitte laden Sie es erneut hoch.'
+                },
                 panelClass: 'simple-dialog'
             });
             // console.error(error);

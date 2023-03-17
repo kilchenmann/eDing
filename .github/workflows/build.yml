@@ -5,26 +5,26 @@ env:
 on:
   push:
   release:
-    types: [published]
+    types: [ published ]
 
 jobs:
-  # code linter
-  # lint:
-  #   name: Run lint
-  #   runs-on: ubuntu-latest
-  #   if: github.ref != 'refs/heads/main' && github.ref != 'refs/heads/deploy'
-  #   steps:
-  #     - name: Checkout source
-  #       uses: actions/checkout@v3
-  #     - name: Set up Node.js
-  #       uses: actions/setup-node@v3
-  #       with:
-  #         node-version: ${{ env.nv }}
-  #     - name: Install dependencies
-  #       run: yarn install --immutable
-  #     - name: Run the lint scripts
-  #       run: |
-  #         yarn lint-ci
+   # code linter
+  lint:
+    name: Run lint
+    runs-on: ubuntu-latest
+    if: github.ref != 'refs/heads/main'
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.nv }}
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Run the lint scripts
+        run: |
+          yarn lint-ci
 
   # unit tests
   # unit-tests:
@@ -43,27 +43,26 @@ jobs:
   #     - name: Run tests
   #       run: yarn test-ci
 
-  # build
-  # build:
-  #   name: Build
-  #   needs: [unit-tests, lint]
-  #   if: github.ref != 'refs/heads/main'
-  #   runs-on: ${{ matrix.os }}
-
-  #   strategy:
-  #     matrix:
-  #       os: [ubuntu-latest, windows-latest]
-  #   steps:
-  #     - name: Checkout source
-  #       uses: actions/checkout@v3
-  #     - name: Set up Node.js
-  #       uses: actions/setup-node@v3
-  #       with:
-  #         node-version: ${{ env.nv }}
-  #     - name: Install dependencies
-  #       run: yarn install --immutable && yarn postinstall
-  #     - name: Build
-  #       run: yarn build
+  # e2e tests
+  build-and-test:
+    name: Build and run e2e tests
+    runs-on: windows-latest
+    if: github.ref != 'refs/heads/main'
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.nv }}
+      - name: Install dependencies
+        run: yarn install --immutable && yarn postinstall
+      - name: Build
+        run: yarn build
+      - name: Run tests
+        uses: DevExpress/testcafe-action@latest
+        with:
+          args: "electron ./testcafe-tests/main.spec.ts"
 
   # Automate releases with Conventional Commit Messages as Pull Requests are merged into "main" branch
   release-please:
@@ -89,6 +88,11 @@ jobs:
   # prepare:
   #   name: Prepare Deployment
   #   # needs: [build]
+  #   runs-on: ${{ matrix.os }}
+  # publish only on release
+  # publish:
+  #   name: Publish Electron App
+  #   needs: [ lint, unit-tests, build-and-test ]
   #   runs-on: ${{ matrix.os }}
 
   #   strategy:

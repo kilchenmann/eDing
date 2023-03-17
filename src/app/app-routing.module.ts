@@ -11,7 +11,6 @@ const routes: Routes = [
         redirectTo: 'upload',
         pathMatch: 'full'
     },
-    // main pages
     {
         path: 'upload',
         component: FileUploadComponent
