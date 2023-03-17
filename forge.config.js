@@ -33,7 +33,7 @@ module.exports = {
       "name": "@electron-forge/publisher-github",
       "config": {
         "repository": {
-          "owner": "AV DIMAG",
+          "owner": "av-dimag",
           "name": "ech-0160-dimag-ingest"
         }
       }
