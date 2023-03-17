@@ -36,7 +36,7 @@
     "lint-ci": "eslint --color -c .eslintrc.js --ext .ts ./src/app",
     "test": "ng test",
     "test-ci": "ng test --watch=false --browsers=ChromeHeadless",
-    "test-e2e": " rm temp.zip && testcafe electron testcafe-tests/main.spec.ts",
+    "test-e2e": " rm -f temp.zip && testcafe electron testcafe-tests/main.spec.ts",
     "ef:start": "yarn build && electron-forge start",
     "ef:package": "yarn build && electron-forge package",
     "ef:make": "yarn build && electron-forge make",

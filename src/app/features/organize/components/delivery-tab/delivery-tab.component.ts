@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Provenienz, SIP } from '../../models/xmlns/bar.admin.ch/arelda/sip-arelda-v4';
+import { Provenienz, SIP } from '../../../../shared/models/xmlns/bar.admin.ch/arelda/sip-arelda-v4';
 
 @Component({
     selector: 'app-delivery-tab',

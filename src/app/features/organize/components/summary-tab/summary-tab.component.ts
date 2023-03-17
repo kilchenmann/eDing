@@ -5,7 +5,7 @@ import {
     Ordner,
     Ordnungssystemposition,
     SIP
-} from '../../models/xmlns/bar.admin.ch/arelda/sip-arelda-v4';
+} from '../../../../shared/models/xmlns/bar.admin.ch/arelda/sip-arelda-v4';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { isEqual } from 'lodash';
@@ -127,6 +127,7 @@ export class SummaryTabComponent implements OnInit, OnDestroy {
 
     }
 
+    // todo: wird im inhalt verwendet. -> gemeinsamen service nutzen
     /**
      * geht durch die "ordnungssystemposition"-Hierarchie
      * @param ordnungssystemposition
@@ -139,34 +140,41 @@ export class SummaryTabComponent implements OnInit, OnDestroy {
                     this._findOsp(osp.ordnungssystemposition, dateiRef);
                 }
                 if (osp.dossier && osp.dossier.length > 0) {
-                    osp.dossier.forEach(
-                        (dos: Dossier) => {
-                            if (dos.dokument && dos.dokument.length > 0) {
-                                // dateiRef kommt erst im Dokument vor
-                                dos.dokument.forEach(
-                                    (dok: Dokument) => {
-                                        if (dok.dateiRef && dok.dateiRef.length) {
-                                            const index = dok.dateiRef.findIndex(ref => ref._text === dateiRef);
-                                            if (index > -1) {
-                                                this.dok = dok;
-                                                this.dos = dos;
-                                                this.osp = osp;
-                                            }
-                                        }
-                                    }
-                                );
+                    this._findDos(osp.dossier, dateiRef, osp);
+                }
+            }
+        );
+    }
 
-                            } else if (dos.dateiRef && dos.dateiRef.length) {
-                                // dateiRef kommt bereits im Dossier vor
-                                const index = dos.dateiRef.findIndex(ref => ref._text === dateiRef);
+    private _findDos(dossier: Dossier[], dateiRef: string, osp: Ordnungssystemposition) {
+        dossier.forEach(
+            (dos: Dossier) => {
+                if (dos.dossier && dos.dossier.length > 0) {
+                    this._findDos(dos.dossier, dateiRef, osp);
+                }
+                if (dos.dokument && dos.dokument.length > 0) {
+                    // dateiRef kommt erst im Dokument vor
+                    dos.dokument.forEach(
+                        (dok: Dokument) => {
+                            if (dok.dateiRef && dok.dateiRef.length) {
+                                const index = dok.dateiRef.findIndex(ref => ref._text === dateiRef);
                                 if (index > -1) {
+                                    this.dok = dok;
                                     this.dos = dos;
                                     this.osp = osp;
-                                    return;
                                 }
                             }
                         }
                     );
+
+                } else if (dos.dateiRef && dos.dateiRef.length) {
+                    // dateiRef kommt bereits im Dossier vor
+                    const index = dos.dateiRef.findIndex(ref => ref._text === dateiRef);
+                    if (index > -1) {
+                        this.dos = dos;
+                        this.osp = osp;
+                        return;
+                    }
                 }
             }
         );

@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SummaryTabComponent } from './summary-tab.component';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
-import { Ordner } from '../../models/xmlns/bar.admin.ch/arelda/sip-arelda-v4';
+import { Ordner } from '../../../../shared/models/xmlns/bar.admin.ch/arelda/sip-arelda-v4';
 import { AppModule } from '../../../../app.module';
 
 describe('SummaryTabComponent', () => {

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
-import { ErrorMessage } from '../../models/error-message';
+import { ErrorMessage } from '../../../../shared/models/error-message';
 import {
     Datei,
     Dokument,
@@ -9,7 +9,7 @@ import {
     Ordnungssystemposition,
     Provenienz,
     SIP
-} from '../../models/xmlns/bar.admin.ch/arelda/sip-arelda-v4';
+} from '../../../../shared/models/xmlns/bar.admin.ch/arelda/sip-arelda-v4';
 import { XML_OPTIONS } from '../../../../shared/models/xml-options';
 import * as JSZip from 'jszip';
 import { Router } from '@angular/router';
@@ -332,7 +332,7 @@ export class OrganizeComponent implements OnInit, OnDestroy {
                                         const xmlBuffer = new Uint8Array(xmlReader.result as ArrayBuffer);
                                         window.fs.mkdirSync(newPath);
                                         window.fs.writeFile(
-                                            `${newPath}/${node.name[0]._text}_${index}.xml`,
+                                            `${newPath}/metadata.xml`,
                                             xmlBuffer, (error: Error) => {
                                                 if (error) {
                                                     console.error(error);
@@ -426,6 +426,7 @@ export class OrganizeComponent implements OnInit, OnDestroy {
         this._findOsp(this.sip.paket[0].ablieferung[0].ordnungssystem[0].ordnungssystemposition, dateiRef);
     }
 
+    // todo: wird im export verwendet. -> gemeinsamen service nutzen
     /**
      * geht durch die "ordnungssystemposition"-Hierarchie
      * @param ordnungssystemposition
@@ -438,34 +439,41 @@ export class OrganizeComponent implements OnInit, OnDestroy {
                     this._findOsp(osp.ordnungssystemposition, dateiRef);
                 }
                 if (osp.dossier && osp.dossier.length > 0) {
-                    osp.dossier.forEach(
-                        (dos: Dossier) => {
-                            if (dos.dokument && dos.dokument.length > 0) {
-                                // dateiRef kommt erst im Dokument vor
-                                dos.dokument.forEach(
-                                    (dok: Dokument) => {
-                                        if (dok.dateiRef && dok.dateiRef.length) {
-                                            const index = dok.dateiRef.findIndex(ref => ref._text === dateiRef);
-                                            if (index > -1) {
-                                                this.dok = dok;
-                                                this.dos = dos;
-                                                this.osp = osp;
-                                            }
-                                        }
-                                    }
-                                );
+                    this._findDos(osp.dossier, dateiRef, osp);
+                }
+            }
+        );
+    }
 
-                            } else if (dos.dateiRef && dos.dateiRef.length) {
-                                // dateiRef kommt bereits im Dossier vor
-                                const index = dos.dateiRef.findIndex(ref => ref._text === dateiRef);
+    private _findDos(dossier: Dossier[], dateiRef: string, osp: Ordnungssystemposition) {
+        dossier.forEach(
+            (dos: Dossier) => {
+                if (dos.dossier && dos.dossier.length > 0) {
+                    this._findDos(dos.dossier, dateiRef, osp);
+                }
+                if (dos.dokument && dos.dokument.length > 0) {
+                    // dateiRef kommt erst im Dokument vor
+                    dos.dokument.forEach(
+                        (dok: Dokument) => {
+                            if (dok.dateiRef && dok.dateiRef.length) {
+                                const index = dok.dateiRef.findIndex(ref => ref._text === dateiRef);
                                 if (index > -1) {
+                                    this.dok = dok;
                                     this.dos = dos;
                                     this.osp = osp;
-                                    return;
                                 }
                             }
                         }
                     );
+
+                } else if (dos.dateiRef && dos.dateiRef.length) {
+                    // dateiRef kommt bereits im Dossier vor
+                    const index = dos.dateiRef.findIndex(ref => ref._text === dateiRef);
+                    if (index > -1) {
+                        this.dos = dos;
+                        this.osp = osp;
+                        return;
+                    }
                 }
             }
         );
@@ -485,7 +493,6 @@ export class OrganizeComponent implements OnInit, OnDestroy {
             this.convert();
         } catch (error) {
             this.router.navigate(['/']);
-            // todo: maybe just alert error instead of dialog?
             this.dialog.open(GenericDialogComponent, {
                 data: {
                     title: 'Fehler beim SIP',
