@@ -135,16 +135,17 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        include:
-          - os: macos-latest
-            artifact_name: ech-0160-dimag-ingest.app
-            asset_name: ech-0160-dimag-ingest-macos
-          - os: windows-latest
-            artifact_name: ech-0160-dimag-ingest.exe
-            asset_name: ech-0160-dimag-ingest-win64
-          - os: ubuntu-latest
-            artifact_name: ech-0160-dimag-ingest.deb
-            asset_name: ech-0160-dimag-ingest-linux
+        os: [ macos-latest, windows-latest, ubuntu-latest ]
+        # include:
+        #   - os: macos-latest
+        #     artifact_name: ech-0160-dimag-ingest.app
+        #     asset_name: ech-0160-dimag-ingest-macos
+        #   - os: windows-latest
+        #     artifact_name: ech-0160-dimag-ingest.exe
+        #     asset_name: ech-0160-dimag-ingest-win64
+        #   - os: ubuntu-latest
+        #     artifact_name: ech-0160-dimag-ingest.deb
+        #     asset_name: ech-0160-dimag-ingest-linux
     # if: github.event_name == 'release' && startsWith(github.ref, 'refs/tags')
     steps:
       - name: Checkout source
