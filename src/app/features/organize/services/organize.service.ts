@@ -14,7 +14,7 @@ import {
     ValueString,
     Zeitraum,
     ZusatzDaten
-} from '../models/xmlns/bar.admin.ch/arelda/sip-arelda-v4';
+} from '../../../shared/models/xmlns/bar.admin.ch/arelda/sip-arelda-v4';
 import { isEqualWith } from 'lodash';
 
 @Injectable({

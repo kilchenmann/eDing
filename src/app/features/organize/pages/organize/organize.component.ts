@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
-import { ErrorMessage } from '../../models/error-message';
+import { ErrorMessage } from '../../../../shared/models/error-message';
 import {
     Datei,
     Dokument,
@@ -9,7 +9,7 @@ import {
     Ordnungssystemposition,
     Provenienz,
     SIP
-} from '../../models/xmlns/bar.admin.ch/arelda/sip-arelda-v4';
+} from '../../../../shared/models/xmlns/bar.admin.ch/arelda/sip-arelda-v4';
 import { XML_OPTIONS } from '../../../../shared/models/xml-options';
 import * as JSZip from 'jszip';
 import { Router } from '@angular/router';
@@ -491,7 +491,6 @@ export class OrganizeComponent implements OnInit, OnDestroy {
             this.convert();
         } catch (error) {
             this.router.navigate(['/']);
-            // todo: maybe just alert error instead of dialog?
             this.dialog.open(GenericDialogComponent, {
                 data: {
                     title: 'Fehler beim SIP',

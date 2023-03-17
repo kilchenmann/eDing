@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as JSZip from 'jszip';
 import { XML_OPTIONS } from '../../../shared/models/xml-options';
-import { SIP } from '../../organize/models/xmlns/bar.admin.ch/arelda/sip-arelda-v4';
+import { SIP } from '../../../shared/models/xmlns/bar.admin.ch/arelda/sip-arelda-v4';
 import { FILE_DATA } from '../../../shared/models/file-data';
 
 // xmlToJSON does not export itself as ES6/ECMA2015 module,

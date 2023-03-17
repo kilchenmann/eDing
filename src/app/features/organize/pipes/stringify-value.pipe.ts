@@ -6,7 +6,7 @@ import {
     TextString,
     Zeitraum,
     ZusatzDaten
-} from '../models/xmlns/bar.admin.ch/arelda/sip-arelda-v4';
+} from '../../../shared/models/xmlns/bar.admin.ch/arelda/sip-arelda-v4';
 import { OrganizeService } from '../services/organize.service';
 import { isArray } from 'lodash';
 

@@ -38,7 +38,7 @@ fixture`Electron tests`
 
 // run tests
 test('Upload wrong file and check if dialog is visible', async page => {
-    await page.setFilesToUpload('input[type=file]', ['../files-to-upload/test.txt']);
+    await page.setFilesToUpload('input[type=file]', ['../testdata/invalid-file.txt']);
     await page.expect(matDialog.visible).ok();
 });
 
@@ -149,14 +149,14 @@ test('Test expand / collapse button', async page => {
 //
 //     await page.click(getAddPackageButton(page, 0));
 //     await page.click(buttons.exportPackages);
-// })
+// }
 
 // todo: add a test which a more complex zip-file to test the 'flat' packages
 
 // upload a zip file and click next
 async function uploadZip(page: TestController) {
     // todo: add parameter to function to upload an easy or complex zip-file
-    await page.setFilesToUpload('input[type=file]', ['../files-to-upload/test.zip']);
+    await page.setFilesToUpload('input[type=file]', ['../testdata/simple-data.zip']);
     await page.click(buttons.next);
     await page.expect(buttons.generateAllPackages.visible).ok();
     await page.expect(matDialog.exists).notOk()
