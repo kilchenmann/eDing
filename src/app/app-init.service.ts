@@ -25,7 +25,7 @@ export class AppInitService {
 
         console.log('temp dir: ', os.tmpdir());
 
-        return os.tmpdir() + '/';
+        return os.tmpdir();
         // const os = window.navigator.userAgent.toLowerCase();
         // console.log( window.fs.getTempPath )
 
