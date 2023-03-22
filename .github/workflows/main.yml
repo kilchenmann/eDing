@@ -27,42 +27,42 @@ jobs:
           yarn lint-ci
 
   # unit tests
-  # unit-tests:
-  #   name: Run unit tests
-  #   runs-on: ubuntu-latest
-  #   if: github.ref != 'refs/heads/main'
-  #   steps:
-  #     - name: Checkout source
-  #       uses: actions/checkout@v3
-  #     - name: Set up Node.js
-  #       uses: actions/setup-node@v3
-  #       with:
-  #         node-version: ${{ env.nv }}
-  #     - name: Install dependencies
-  #       run: yarn install --immutable && yarn postinstall
-  #     - name: Run unit tests
-  #       run: yarn test-ci
+  unit-tests:
+    name: Run unit tests
+    runs-on: ubuntu-latest
+    if: github.ref != 'refs/heads/main'
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.nv }}
+      - name: Install dependencies
+        run: yarn install --immutable && yarn postinstall
+      - name: Run unit tests
+        run: yarn test-ci
 
   # e2e tests
-  # e2e-tests:
-  #   name: Run e2e tests (incl. build)
-  #   runs-on: windows-latest
-  #   if: github.ref != 'refs/heads/main'
-  #   steps:
-  #     - name: Checkout source
-  #       uses: actions/checkout@v3
-  #     - name: Set up Node.js
-  #       uses: actions/setup-node@v3
-  #       with:
-  #         node-version: ${{ env.nv }}
-  #     - name: Install dependencies
-  #       run: yarn install --immutable && yarn postinstall
-  #     - name: Build the app
-  #       run: yarn build
-  #     - name: Run e2e tests
-  #       uses: DevExpress/testcafe-action@latest
-  #       with:
-  #         args: "electron ./testcafe-tests/main.spec.ts"
+  e2e-tests:
+    name: Run e2e tests (incl. build)
+    runs-on: windows-latest
+    if: github.ref != 'refs/heads/main'
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.nv }}
+      - name: Install dependencies
+        run: yarn install --immutable && yarn postinstall
+      - name: Build the app
+        run: yarn build
+      - name: Run e2e tests
+        uses: DevExpress/testcafe-action@latest
+        with:
+          args: "electron ./testcafe-tests/main.spec.ts"
 
   # Automate releases with Conventional Commit Messages as Pull Requests are merged into "main" branch
   release-please:
@@ -127,11 +127,11 @@ jobs:
   # deploy and publish; runs on release only
   publish:
     name: Publish
-    # needs: [
-    #   lint,
-    #   unit-tests,
-    #   e2e-tests
-    # ]
+    needs: [
+      lint,
+      unit-tests,
+      e2e-tests
+    ]
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
