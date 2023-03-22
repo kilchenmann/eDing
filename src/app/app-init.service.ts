@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 
+const remote = require('remote');
+const app = remote.require('app');
+
 @Injectable({
     providedIn: 'root'
 })
@@ -13,10 +16,10 @@ export class AppInitService {
         // navigator.u userAgentData .toLowerCase();
         console.log('get OS: ', os);
         switch (true) {
-            // case os.indexOf('win') > -1:
+            case os.indexOf('win') > -1:
 
-            //     console.log('win: C:\\Windows\\Temp\\');
-            //     return 'C:\\Windows\\Temp\\';
+                console.log('win: C:\\Windows\\Temp\\?', app.getTempPath());
+                return app.getTempPath();
             case os.indexOf('mac') > -1:
                 console.log('mac: /private/tmp/');
                 return '/private/tmp/';
