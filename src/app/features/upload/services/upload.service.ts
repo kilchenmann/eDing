@@ -99,7 +99,7 @@ export class UploadService {
             reader.onloadend = function () {
                 const buffer = new Uint8Array(reader.result as ArrayBuffer);
                 window.fs.writeFile(
-                    tp + '\\sip.zip',
+                    tp + '/sip.zip',
                     buffer,
                     (error: Error) => {
                         if (error) {
