@@ -16,7 +16,7 @@ import {
     Zeitraum,
     ZusatzDaten
 } from '../../../shared/models/xmlns/bar.admin.ch/arelda/sip-arelda-v4';
-import { isEqualWith } from 'lodash';
+import { isEqualWith } from 'lodash-es';
 
 @Injectable({
     providedIn: 'root'

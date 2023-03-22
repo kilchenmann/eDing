@@ -28,18 +28,18 @@ function onReady() {
         }
     });
 
-    const retryCount = 0;
-    const maxRetries = 3;
+    let retryCount = 0;
+    const maxRetries = 5;
 
-    function handleLoadFail(url, retry, max) {
-        if (retry < max) {
+    function handleLoadFail(url) {
+        if (retryCount < maxRetries) {
             // eslint-disable-next-line no-console
-            console.log(`Page failed to load. Retrying (${retry + 1} of ${max})...`);
+            console.error(`Page failed to load. Retrying (${retryCount + 1} of ${maxRetries})...`);
             win.loadURL(url);
-            retry++;
+            retryCount++;
         } else {
             // eslint-disable-next-line no-console
-            console.error(`Page failed to load after ${max} attempts. Exiting.`);
+            console.error(`Page failed to load after ${maxRetries} attempts. Exiting.`);
             app.exit(1);
         }
     }
@@ -49,7 +49,7 @@ function onReady() {
         win.loadURL(devUrl);
 
         win.webContents.on('did-fail-load', () => {
-            handleLoadFail(devUrl, retryCount, maxRetries);
+            handleLoadFail(devUrl);
         });
 
     } else {
@@ -58,7 +58,7 @@ function onReady() {
         win.loadURL(prodUrl);
 
         win.webContents.on('did-fail-load', () => {
-            handleLoadFail(prodUrl, retryCount, maxRetries);
+            handleLoadFail(prodUrl);
         });
     }
 }

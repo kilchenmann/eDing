@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 import { GenericDialogComponent } from '../../../../shared/generic-dialog/generic-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ElectronService } from 'ngx-electron';
-import { cloneDeep } from 'lodash';
+import { cloneDeep } from 'lodash-es';
 import { Subscription } from 'rxjs';
 import { OrganizeService } from '../../services/organize.service';
 import JSZip from 'jszip';
@@ -59,7 +59,7 @@ export class OrganizeComponent implements OnInit, OnDestroy {
 
     addFilesFromSubfolders = true;
 
-    alreadyAddedPackages: { node: Ordner; addFilesFromSubfolders: boolean }[] = [];
+    alreadyAddedIngestPackages: { ingestPackage: Ordner; addFilesFromSubfolders: boolean }[] = [];
 
     subContainer = new Subscription;
 
@@ -77,7 +77,7 @@ export class OrganizeComponent implements OnInit, OnDestroy {
         // store ingestPackages before window close
         window.addEventListener('beforeunload', async () => {
             window.localStorage.setItem('ingestPackages', JSON.stringify(this.ingestPackages));
-            window.localStorage.setItem('addedIngestPackages', JSON.stringify(this.alreadyAddedPackages));
+            window.localStorage.setItem('addedIngestPackages', JSON.stringify(this.alreadyAddedIngestPackages));
         });
 
         // get stored ingestPackages
@@ -89,14 +89,14 @@ export class OrganizeComponent implements OnInit, OnDestroy {
         // get stored addedIngestPackages
         const storedAddedIngestPackages = window.localStorage.getItem('addedIngestPackages');
         if (storedAddedIngestPackages) {
-            this.alreadyAddedPackages = JSON.parse(storedAddedIngestPackages);
+            this.alreadyAddedIngestPackages = JSON.parse(storedAddedIngestPackages);
         }
     }
 
     ngOnDestroy() {
         // store ingestPackages
         window.localStorage.setItem('ingestPackages', JSON.stringify(this.ingestPackages));
-        window.localStorage.setItem('addedIngestPackages', JSON.stringify(this.alreadyAddedPackages));
+        window.localStorage.setItem('addedIngestPackages', JSON.stringify(this.alreadyAddedIngestPackages));
         this.subContainer.unsubscribe();
     }
 
@@ -111,7 +111,7 @@ export class OrganizeComponent implements OnInit, OnDestroy {
     addIngestPackage(ingestPackage: Ordner) {
         const packageCopy = cloneDeep(ingestPackage);
 
-        function processOrdner(node: Ordner, filePath: string, addFilesFromSubfolder: boolean) {
+        function processNode(node: Ordner, filePath: string, addFilesFromSubfolder: boolean) {
             filePath += node.name[0]._text + '/';
 
             if (node.datei && node.datei.length > 0) {
@@ -130,18 +130,18 @@ export class OrganizeComponent implements OnInit, OnDestroy {
 
             if (node.ordner) {
                 node.ordner.forEach((ordner) => {
-                    processOrdner(ordner, filePath, addFilesFromSubfolder);
+                    processNode(ordner, filePath, addFilesFromSubfolder);
                 });
             }
         }
 
-        processOrdner(packageCopy, '', this.addFilesFromSubfolders);
+        processNode(packageCopy, '', this.addFilesFromSubfolders);
 
         // check if package already exists and if not add it to array
         if (!this.ingestPackages.find((existingPackage) => this.organizeService.comparePackages(existingPackage, packageCopy))) {
             this.ingestPackages.unshift(packageCopy);
-            this.alreadyAddedPackages.unshift({
-                node: ingestPackage,
+            this.alreadyAddedIngestPackages.unshift({
+                ingestPackage,
                 addFilesFromSubfolders: this.addFilesFromSubfolders
             });
         } else {
@@ -170,8 +170,8 @@ export class OrganizeComponent implements OnInit, OnDestroy {
                     // check if package already exists and if not add it to array
                     if (!this.ingestPackages.find((existingPackage) => this.organizeService.comparePackages(existingPackage, packageCopy))) {
                         this.ingestPackages.push(packageCopy);
-                        this.alreadyAddedPackages.push({
-                            node: ingestPackage,
+                        this.alreadyAddedIngestPackages.push({
+                            ingestPackage,
                             addFilesFromSubfolders: false
                         });
                     } else {
@@ -200,7 +200,7 @@ export class OrganizeComponent implements OnInit, OnDestroy {
 
         if (packageIndex >= 0) {
             this.ingestPackages.splice(packageIndex, 1);
-            this.alreadyAddedPackages.splice(packageIndex, 1);
+            this.alreadyAddedIngestPackages.splice(packageIndex, 1);
         } else {
             alert('Error: Paket konnte nicht gelöscht werden');
         }
@@ -211,26 +211,27 @@ export class OrganizeComponent implements OnInit, OnDestroy {
      */
     removeAllIngestPackage() {
         this.ingestPackages = [];
-        this.alreadyAddedPackages = [];
+        this.alreadyAddedIngestPackages = [];
     }
 
     /**
      * export / save ingest packages to local storage
-     * @param nodes - nodes / ingestPackages to export
+     * @param ingestPackages - nodes / ingestPackages to export
      */
-    exportAllIngestPackages(nodes: Ordner[]) {
+    exportAllIngestPackages(ingestPackages: Ordner[]) {
         this.electronService.ipcRenderer.invoke('show-save-dialog').then((path: string) => {
             if (path) {
                 // check if chosen folder is empty
                 const isChosenFolderEmpty = window.fs.readdirSync(path).length === 0 || window.fs.readdirSync(path).length === 1 && window.fs.readdirSync(path)[0] === '.DS_Store';
 
                 if (isChosenFolderEmpty) {
-                    const moreThanOneNode = (nodes.length > 1);
+                    const moreThanOneIngestPackage = (ingestPackages.length > 1);
                     // show dialog to user
                     const dialogRef = this.dialog.open(GenericDialogComponent, {
                         data: {
                             title: 'Ingest Pakete Exportieren',
-                            text: `Es ${moreThanOneNode ? 'werden' : 'wird'} ${nodes.length} Ingest ${moreThanOneNode ? 'Pakete' : 'Paket'} gespeichert. Wollen Sie fortfahren?`,
+                            text: `Es ${moreThanOneIngestPackage ? 'werden' : 'wird'} ${ingestPackages.length} Ingest
+                            ${moreThanOneIngestPackage ? 'Pakete' : 'Paket'} gespeichert. Wollen Sie fortfahren?`,
                             showActions: true
                         }, panelClass: 'simple-dialog'
                     });
@@ -239,7 +240,7 @@ export class OrganizeComponent implements OnInit, OnDestroy {
                         if (result) {
                             try {
                                 // go through ingest packages, create xml and save files
-                                nodes.forEach((node, index) => {
+                                ingestPackages.forEach((ingestPackage, index) => {
                                     // create metadata.xml
                                     const xmlDos = document.implementation.createDocument('', '', null);
                                     const paket = xmlDos.createElement('paket');
@@ -269,14 +270,14 @@ export class OrganizeComponent implements OnInit, OnDestroy {
                                     const ordner = xmlDos.createElement('ordner');
 
                                     const name = xmlDos.createElement('name');
-                                    name.innerHTML = node.name[0]._text;
+                                    name.innerHTML = ingestPackage.name[0]._text;
                                     ordner.appendChild(name);
 
                                     const originalName = xmlDos.createElement('originalName');
-                                    originalName.innerHTML = node.originalName[0]._text;
+                                    originalName.innerHTML = ingestPackage.originalName[0]._text;
                                     ordner.appendChild(originalName);
 
-                                    node.datei?.forEach(
+                                    ingestPackage.datei?.forEach(
                                         (dat: Datei) => {
                                             const datei = this.organizeService.createEle('datei', dat);
                                             ordner.appendChild(datei);
@@ -293,7 +294,7 @@ export class OrganizeComponent implements OnInit, OnDestroy {
                                     const dossier = xmlDos.createElement('dossier');
 
                                     // // create metadata-dossier.xml
-                                    node.datei?.forEach(
+                                    ingestPackage.datei?.forEach(
                                         (dat: Datei) => {
                                             this.getFileMeta(dat._attrid._value);
 
@@ -325,7 +326,7 @@ export class OrganizeComponent implements OnInit, OnDestroy {
 
                                     const xmlFile = new Blob([xmlString], { type: 'application/xml' });
                                     const xmlReader = new FileReader();
-                                    const newPath = `${path}/${node.name[0]._text}_${index}`;
+                                    const newPath = `${path}/${ingestPackage.name[0]._text}_${index}`;
                                     xmlReader.readAsArrayBuffer(xmlFile);
 
                                     xmlReader.onloadend = function () {
@@ -340,7 +341,7 @@ export class OrganizeComponent implements OnInit, OnDestroy {
                                             });
                                     };
 
-                                    node.datei?.forEach(async (dat, datIndex) => {
+                                    ingestPackage.datei?.forEach(async (dat, datIndex) => {
                                         const zip = await this._getCurrentZipFile();
                                         const keys = Object.keys(zip.files);
                                         // get binary data for the file from the uploaded zip-file
@@ -367,7 +368,7 @@ export class OrganizeComponent implements OnInit, OnDestroy {
                                         };
                                     });
                                 });
-                                alert(`Success: Es ${moreThanOneNode ? 'wurden' : 'wurde'} ${nodes.length} Ingest ${moreThanOneNode ? 'Pakete' : 'Paket'} gespeichert.`);
+                                alert(`Success: Es ${moreThanOneIngestPackage ? 'wurden' : 'wurde'} ${ingestPackages.length} Ingest ${moreThanOneIngestPackage ? 'Pakete' : 'Paket'} gespeichert.`);
                             } catch (error) {
                                 alert(error);
                             }

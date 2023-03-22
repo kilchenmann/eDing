@@ -8,7 +8,7 @@ import {
 } from '../../../../shared/models/xmlns/bar.admin.ch/arelda/sip-arelda-v4';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
-import { isEqual } from 'lodash';
+import { isEqual } from 'lodash-es';
 import { OrganizeService } from '../../services/organize.service';
 
 @Component({
@@ -20,7 +20,7 @@ import { OrganizeService } from '../../services/organize.service';
 export class SummaryTabComponent implements OnInit, OnDestroy {
     @Input() sip!: SIP;
     @Input() dataSource!: MatTreeNestedDataSource<Ordner>;
-    @Input() alreadyAddedPackages: { node: Ordner; addFilesFromSubfolders: boolean }[] = [];
+    @Input() alreadyAddedIngestPackages: { ingestPackage: Ordner; addFilesFromSubfolders: boolean }[] = [];
     @Output() addIngestPackage = new EventEmitter<Ordner>;
     @Output() addAllIngestPackages = new EventEmitter<Ordner[]>;
     @Output() addFilesInSubfolder = new EventEmitter<boolean>;
@@ -105,9 +105,9 @@ export class SummaryTabComponent implements OnInit, OnDestroy {
 
     // todo: the function should not get called on every click the user makes -> therefore we need to find a solution
     isAlreadyAdded(node: Ordner, addFilesFromSubfolders: boolean): boolean {
-        return this.alreadyAddedPackages.some((addedPackage) =>
+        return this.alreadyAddedIngestPackages.some((addedPackage) =>
             (addedPackage.addFilesFromSubfolders === addFilesFromSubfolders || !node.ordner) &&
-            this.organizeService.comparePackages(addedPackage.node, node)
+            this.organizeService.comparePackages(addedPackage.ingestPackage, node)
         );
     }
 

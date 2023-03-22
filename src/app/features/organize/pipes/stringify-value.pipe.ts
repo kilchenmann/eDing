@@ -8,7 +8,7 @@ import {
     ZusatzDaten
 } from '../../../shared/models/xmlns/bar.admin.ch/arelda/sip-arelda-v4';
 import { OrganizeService } from '../services/organize.service';
-import { isArray } from 'lodash';
+import { isArray } from 'lodash-es';
 
 @Pipe({
     name: 'stringifyValue'

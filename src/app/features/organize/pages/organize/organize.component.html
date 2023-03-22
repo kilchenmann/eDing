@@ -8,7 +8,7 @@
           *ngIf="sip.paket && sip.paket.length"
           [dataSource]="dataSource"
           [sip]="sip"
-          [alreadyAddedPackages]="alreadyAddedPackages"
+          [alreadyAddedIngestPackages]="alreadyAddedIngestPackages"
           (addIngestPackage)="addIngestPackage($event)"
           (addAllIngestPackages)="addAllIngestPackages($event)"
           (addFilesInSubfolder)="toggleAddFileMode()">

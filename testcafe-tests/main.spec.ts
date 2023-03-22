@@ -155,7 +155,6 @@ test('Test expand / collapse button', async page => {
 
 // upload a zip file and click next
 async function uploadZip(page: TestController) {
-    // todo: add parameter to function to upload an easy or complex zip-file
     await page.setFilesToUpload('input[type=file]', ['../testdata/simple-data.zip']);
     await page.click(buttons.next);
     await page.expect(buttons.generateAllPackages.visible).ok();
