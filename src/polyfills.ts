@@ -1,5 +1,5 @@
 /**
- * This file includes polyfills needed by Angular and is loaded before the app.
+ * --> This file includes polyfills needed by Angular and is loaded before the app.
  * You can add your own extra polyfills to this file.
  *
  * This file is divided into 2 sections:
@@ -14,12 +14,12 @@
  * Learn more in https://angular.io/guide/browser-support
  */
 
-/***************************************************************************************************
- * BROWSER POLYFILLS
+/* **************************************************************************************************
+ * browser POLYFILLS
  */
 
 /**
- * By default, zone.js will patch all possible macroTask and DomEvents
+ * --> By default, zone.js will patch all possible macroTask and DomEvents
  * user can disable parts of macroTask/DomEvents patch by setting following flags
  * because those flags need to be set before `zone.js` being loaded, and webpack
  * will put import in the top of bundle, so user need to create a separate file
@@ -42,18 +42,28 @@
  *
  */
 
- declare global {
+declare global {
     interface Window {
         fs: any;
     }
 }
 
-/***************************************************************************************************
- * Zone JS is required by default for Angular itself.
+/* **************************************************************************************************
+ * zone JS is required by default for Angular itself.
  */
-import 'zone.js';  // Included with Angular CLI.
+import 'zone.js';  // included with Angular CLI.
 
 
-/***************************************************************************************************
- * APPLICATION IMPORTS
+/* **************************************************************************************************
+ * application imports
  */
+
+import { Buffer } from 'buffer';
+
+(window as any).global = window;
+global.Buffer = Buffer;
+// global.process = {
+//     env: { DEBUG: undefined },
+//     version: '',
+//     nextTick: require('next-tick'),
+// } as any;

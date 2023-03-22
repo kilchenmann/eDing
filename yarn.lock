@@ -6085,6 +6085,7 @@ __metadata:
     lodash: ^4.17.21
     ng-packagr: ^14.2.0
     ngx-electron: 2.2.0
+    os-browserify: ^0.3.0
     patch-package: ^6.5.1
     rxjs: ~7.5.0
     testcafe: ^2.4.0
@@ -11340,6 +11341,13 @@ __metadata:
     strip-ansi: ^6.0.0
     wcwidth: ^1.0.1
   checksum: 28d476ee6c1049d68368c0dc922e7225e3b5600c3ede88fade8052837f9ed342625fdaa84a6209302587c8ddd9b664f71f0759833cbdb3a4cf81344057e63c63
+  languageName: node
+  linkType: hard
+
+"os-browserify@npm:^0.3.0":
+  version: 0.3.0
+  resolution: "os-browserify@npm:0.3.0"
+  checksum: 16e37ba3c0e6a4c63443c7b55799ce4066d59104143cb637ecb9fce586d5da319cdca786ba1c867abbe3890d2cbf37953f2d51eea85e20dd6c4570d6c54bfebf
   languageName: node
   linkType: hard
 

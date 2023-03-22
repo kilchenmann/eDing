@@ -96,6 +96,7 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
     "ng-packagr": "^14.2.0",
+    "os-browserify": "^0.3.0",
     "patch-package": "^6.5.1",
     "testcafe": "^2.4.0",
     "testcafe-browser-provider-electron": "^0.0.19",
