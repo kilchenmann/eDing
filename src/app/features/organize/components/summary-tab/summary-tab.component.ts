@@ -111,72 +111,15 @@ export class SummaryTabComponent implements OnInit, OnDestroy {
         );
     }
 
-    // todo: these two functions should be in the service somehow as they also get used in another page
-    /**
+    /*
      * gets file meta
      * @param dateiRef
      */
     getFileMeta(dateiRef: string) {
-        // reset dok and dos
-        this.osp = undefined;
-        this.dos = undefined;
-        this.dok = undefined;
+        const result = this.organizeService.findOsp(this.sip.paket[0].ablieferung[0].ordnungssystem[0].ordnungssystemposition, dateiRef);
+        this.dos = result.dos;
+        this.osp = result.osp;
+        this.dok = result.dok;
 
-        // start on "ordnungssystemposition" to find dokument or dossier by "datei referenz"
-        this._findOsp(this.sip.paket[0].ablieferung[0].ordnungssystem[0].ordnungssystemposition, dateiRef);
-
-    }
-
-    // todo: wird im inhalt verwendet. -> gemeinsamen service nutzen
-    /**
-     * geht durch die "ordnungssystemposition"-Hierarchie
-     * @param ordnungssystemposition
-     * @param dateiRef
-     */
-    private _findOsp(ordnungssystemposition: Ordnungssystemposition[], dateiRef: string) {
-        ordnungssystemposition.forEach(
-            (osp: Ordnungssystemposition) => {
-                if (osp.ordnungssystemposition && osp.ordnungssystemposition.length > 0) {
-                    this._findOsp(osp.ordnungssystemposition, dateiRef);
-                }
-                if (osp.dossier && osp.dossier.length > 0) {
-                    this._findDos(osp.dossier, dateiRef, osp);
-                }
-            }
-        );
-    }
-
-    private _findDos(dossier: Dossier[], dateiRef: string, osp: Ordnungssystemposition) {
-        dossier.forEach(
-            (dos: Dossier) => {
-                if (dos.dossier && dos.dossier.length > 0) {
-                    this._findDos(dos.dossier, dateiRef, osp);
-                }
-                if (dos.dokument && dos.dokument.length > 0) {
-                    // dateiRef kommt erst im Dokument vor
-                    dos.dokument.forEach(
-                        (dok: Dokument) => {
-                            if (dok.dateiRef && dok.dateiRef.length) {
-                                const index = dok.dateiRef.findIndex(ref => ref._text === dateiRef);
-                                if (index > -1) {
-                                    this.dok = dok;
-                                    this.dos = dos;
-                                    this.osp = osp;
-                                }
-                            }
-                        }
-                    );
-
-                } else if (dos.dateiRef && dos.dateiRef.length) {
-                    // dateiRef kommt bereits im Dossier vor
-                    const index = dos.dateiRef.findIndex(ref => ref._text === dateiRef);
-                    if (index > -1) {
-                        this.dos = dos;
-                        this.osp = osp;
-                        return;
-                    }
-                }
-            }
-        );
     }
 }

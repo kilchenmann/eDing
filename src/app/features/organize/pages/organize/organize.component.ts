@@ -1,6 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
+import { Router } from '@angular/router';
+import JSZip from 'jszip';
+import { cloneDeep } from 'lodash';
+import { ElectronService } from 'ngx-electron';
+import { Subscription } from 'rxjs';
+import { AppInitService } from 'src/app/app-init.service';
+import { GenericDialogComponent } from '../../../../shared/generic-dialog/generic-dialog.component';
 import { ErrorMessage } from '../../../../shared/models/error-message';
+import { XML_OPTIONS } from '../../../../shared/models/xml-options';
 import {
     Datei,
     Dokument,
@@ -10,16 +19,7 @@ import {
     Provenienz,
     SIP
 } from '../../../../shared/models/xmlns/bar.admin.ch/arelda/sip-arelda-v4';
-import { XML_OPTIONS } from '../../../../shared/models/xml-options';
-import * as JSZip from 'jszip';
-import { Router } from '@angular/router';
-import { GenericDialogComponent } from '../../../../shared/generic-dialog/generic-dialog.component';
-import { MatDialog } from '@angular/material/dialog';
-import { ElectronService } from 'ngx-electron';
-import { cloneDeep } from 'lodash';
-import { Subscription } from 'rxjs';
 import { OrganizeService } from '../../services/organize.service';
-import { AppInitService } from 'src/app/app-init.service';
 
 
 // xmlToJSON does not export itself as ES6/ECMA2015 module,
@@ -32,7 +32,6 @@ declare let xmlToJSON: any;
     templateUrl: './organize.component.html',
     styleUrls: ['./organize.component.scss']
 })
-// todo: move some functions to organize.service.ts
 export class OrganizeComponent implements OnInit, OnDestroy {
     sip: SIP = {
         paket: []
@@ -143,7 +142,10 @@ export class OrganizeComponent implements OnInit, OnDestroy {
         // check if package already exists and if not add it to array
         if (!this.ingestPackages.find((existingPackage) => this.organizeService.comparePackages(existingPackage, packageCopy))) {
             this.ingestPackages.unshift(packageCopy);
-            this.alreadyAddedPackages.unshift({ node: ingestPackage, addFilesFromSubfolders: this.addFilesFromSubfolders });
+            this.alreadyAddedPackages.unshift({
+                node: ingestPackage,
+                addFilesFromSubfolders: this.addFilesFromSubfolders
+            });
         } else {
             alert('Error: Dieses Paket wurde schon hinzugefügt');
         }
@@ -340,7 +342,7 @@ export class OrganizeComponent implements OnInit, OnDestroy {
                                             });
                                     };
 
-                                    node.datei?.forEach(async (dat, datIntdex) => {
+                                    node.datei?.forEach(async (dat, datIndex) => {
                                         const zip = await this._getCurrentZipFile();
                                         const keys = Object.keys(zip.files);
                                         // get binary data for the file from the uploaded zip-file
@@ -359,7 +361,7 @@ export class OrganizeComponent implements OnInit, OnDestroy {
                                         // write each file to local storage
                                         fileReader.onloadend = () => {
                                             const fileBuffer = new Uint8Array(fileReader.result as ArrayBuffer);
-                                            window.fs.writeFile(`${newPath}/${datIntdex}_${dat.name[0]._text}`, fileBuffer, (error: Error) => {
+                                            window.fs.writeFile(`${newPath}/${datIndex}_${dat.name[0]._text}`, fileBuffer, (error: Error) => {
                                                 if (error) {
                                                     console.error(error);
                                                 }
@@ -402,7 +404,6 @@ export class OrganizeComponent implements OnInit, OnDestroy {
             });
 
             this.provenienz = this.sip.paket[0].ablieferung[0].provenienz[0];
-
         } else {
             // in case of an error: display the error message
             this.converterError = true;
@@ -417,66 +418,10 @@ export class OrganizeComponent implements OnInit, OnDestroy {
      * @param dateiRef
      */
     getFileMeta(dateiRef: string) {
-        // reset dok and dos
-        this.osp = undefined;
-        this.dos = undefined;
-        this.dok = undefined;
-
-        // start on "ordnungssystemposition" to find dokument or dossier by "datei referenz"
-        this._findOsp(this.sip.paket[0].ablieferung[0].ordnungssystem[0].ordnungssystemposition, dateiRef);
-    }
-
-    // todo: wird im export verwendet. -> gemeinsamen service nutzen
-    /**
-     * geht durch die "ordnungssystemposition"-Hierarchie
-     * @param ordnungssystemposition
-     * @param dateiRef
-     */
-    private _findOsp(ordnungssystemposition: Ordnungssystemposition[], dateiRef: string) {
-        ordnungssystemposition.forEach(
-            (osp: Ordnungssystemposition) => {
-                if (osp.ordnungssystemposition && osp.ordnungssystemposition.length > 0) {
-                    this._findOsp(osp.ordnungssystemposition, dateiRef);
-                }
-                if (osp.dossier && osp.dossier.length > 0) {
-                    this._findDos(osp.dossier, dateiRef, osp);
-                }
-            }
-        );
-    }
-
-    private _findDos(dossier: Dossier[], dateiRef: string, osp: Ordnungssystemposition) {
-        dossier.forEach(
-            (dos: Dossier) => {
-                if (dos.dossier && dos.dossier.length > 0) {
-                    this._findDos(dos.dossier, dateiRef, osp);
-                }
-                if (dos.dokument && dos.dokument.length > 0) {
-                    // dateiRef kommt erst im Dokument vor
-                    dos.dokument.forEach(
-                        (dok: Dokument) => {
-                            if (dok.dateiRef && dok.dateiRef.length) {
-                                const index = dok.dateiRef.findIndex(ref => ref._text === dateiRef);
-                                if (index > -1) {
-                                    this.dok = dok;
-                                    this.dos = dos;
-                                    this.osp = osp;
-                                }
-                            }
-                        }
-                    );
-
-                } else if (dos.dateiRef && dos.dateiRef.length) {
-                    // dateiRef kommt bereits im Dossier vor
-                    const index = dos.dateiRef.findIndex(ref => ref._text === dateiRef);
-                    if (index > -1) {
-                        this.dos = dos;
-                        this.osp = osp;
-                        return;
-                    }
-                }
-            }
-        );
+        const result = this.organizeService.findOsp(this.sip.paket[0].ablieferung[0].ordnungssystem[0].ordnungssystemposition, dateiRef);
+        this.dos = result.dos;
+        this.osp = result.osp;
+        this.dok = result.dok;
     }
 
     /**
@@ -492,7 +437,7 @@ export class OrganizeComponent implements OnInit, OnDestroy {
             this.xml = metadataXML ?? '';
             this.convert();
         } catch (error) {
-            this.router.navigate(['/']);
+            await this.router.navigate(['/']);
             this.dialog.open(GenericDialogComponent, {
                 data: {
                     title: 'Fehler beim SIP',
@@ -500,7 +445,6 @@ export class OrganizeComponent implements OnInit, OnDestroy {
                 },
                 panelClass: 'simple-dialog'
             });
-            // console.error(error);
         }
     }
 

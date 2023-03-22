@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {
     Datum,
+    Dokument,
     Dossier,
     Merkmal,
     Ordner,
@@ -21,6 +22,12 @@ import { isEqualWith } from 'lodash';
     providedIn: 'root'
 })
 export class OrganizeService {
+    findOsp(ordnungssystemposition: Ordnungssystemposition[], dateiRef: string) {
+        const result: { osp?: Ordnungssystemposition; dos?: Dossier; dok?: Dokument } = {};
+        this._findOsp(ordnungssystemposition, dateiRef, result);
+        return result;
+    }
+
     /**
      * compare if two ingest packages are equal
      * @param firstPackage - first package for comparing
@@ -220,8 +227,6 @@ export class OrganizeService {
         return rootEle;
     }
 
-
-    // which type do we have? Solution from
     // https://stackoverflow.com/questions/14425568/interface-type-check-with-typescript
     instanceOfTS(object: any): object is TextString {
         return '_text' in object && typeof object._text == 'string';
@@ -269,5 +274,64 @@ export class OrganizeService {
 
     instanceOfDOS(object: any): object is Dossier {
         return 'dossier' in object || 'nummer' in object;
+    }
+
+    /**
+     * geht durch die "ordnungssystemposition"-Hierarchie
+     * @param ordnungssystemposition
+     * @param dateiRef
+     * @param result
+     */
+    private _findOsp(ordnungssystemposition: Ordnungssystemposition[], dateiRef: string, result: { osp?: Ordnungssystemposition; dos?: Dossier; dok?: Dokument }) {
+        ordnungssystemposition.forEach(
+            (osp: Ordnungssystemposition) => {
+                if (osp.ordnungssystemposition && osp.ordnungssystemposition.length > 0) {
+                    this._findOsp(osp.ordnungssystemposition, dateiRef, result);
+                }
+                if (osp.dossier && osp.dossier.length > 0) {
+                    this._findDos(osp.dossier, dateiRef, osp, result);
+                }
+            }
+        );
+    }
+
+    /**
+     * geht durch die "Dossier"-Hierarchie
+     * @param dossier
+     * @param dateiRef
+     * @param osp
+     * @param result
+     * @private
+     */
+    private _findDos(dossier: Dossier[], dateiRef: string, osp: Ordnungssystemposition, result: { osp?: Ordnungssystemposition; dos?: Dossier; dok?: Dokument }) {
+        dossier.forEach(
+            (dos: Dossier) => {
+                if (dos.dossier && dos.dossier.length > 0) {
+                    this._findDos(dos.dossier, dateiRef, osp, result);
+                }
+                if (dos.dokument && dos.dokument.length > 0) {
+                    dos.dokument.forEach(
+                        (dok: Dokument) => {
+                            if (dok.dateiRef && dok.dateiRef.length) {
+                                const index = dok.dateiRef.findIndex(ref => ref._text === dateiRef);
+                                if (index > -1) {
+                                    result.dok = dok;
+                                    result.dos = dos;
+                                    result.osp = osp;
+                                }
+                            }
+                        }
+                    );
+
+                } else if (dos.dateiRef && dos.dateiRef.length) {
+                    const index = dos.dateiRef.findIndex(ref => ref._text === dateiRef);
+                    if (index > -1) {
+                        result.dos = dos;
+                        result.osp = osp;
+                        return;
+                    }
+                }
+            }
+        );
     }
 }
