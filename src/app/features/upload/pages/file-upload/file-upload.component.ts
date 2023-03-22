@@ -4,8 +4,7 @@ import { GenericDialogComponent } from 'src/app/shared/generic-dialog/generic-di
 import { UploadService } from '../../services/upload.service';
 import { FILE_DATA } from '../../../../shared/models/file-data';
 import { Router } from '@angular/router';
-
-import { platform } from 'node:process';
+import { AppInitService } from 'src/app/app-init.service';
 
 
 @Component({
@@ -22,8 +21,19 @@ export class FileUploadComponent {
     constructor(
         private _dialog: MatDialog,
         private uploadService: UploadService,
-        private router: Router
-    ) { };
+        private router: Router,
+        private _ais: AppInitService
+    ) {
+
+        console.log('WO SIND WIR?');
+
+        const os = window.navigator.userAgent.toLowerCase();
+        console.log('operating system: ', os);
+
+        const tp = this._ais.getTempPath();
+
+        console.warn('temp folder: ', tp);
+    };
 
     /**
      * upload a file and check validity
