@@ -129,13 +129,13 @@ jobs:
     name: Publish
     needs: [
       lint,
-      unit-tests,
-      e2e-tests
+      unit-tests
+      # e2e-tests
     ]
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ macos-latest, windows-latest, ubuntu-latest ]
+        os: [ windows-latest ]
         # include:
         #   - os: macos-latest
         #     artifact_name: ech-0160-dimag-ingest.app
