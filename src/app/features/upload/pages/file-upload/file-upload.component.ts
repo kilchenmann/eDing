@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { ElectronService } from 'ngx-electron';
 import { GenericDialogComponent } from 'src/app/shared/generic-dialog/generic-dialog.component';
 import { FILE_DATA } from '../../../../shared/models/file-data';
 import { UploadService } from '../../services/upload.service';
@@ -16,11 +17,15 @@ export class FileUploadComponent {
 
     fileData = FILE_DATA;
 
+    tmpDir: any;
+
     constructor(
         private _dialog: MatDialog,
         private uploadService: UploadService,
-        private router: Router
+        private router: Router,
+        private electronService: ElectronService
     ) { };
+
 
     /**
      * upload a file and check validity
@@ -29,12 +34,18 @@ export class FileUploadComponent {
     async uploadFile(event: Event): Promise<void> {
         const target = event.target as HTMLInputElement;
 
+        this.tmpDir = await this.electronService.ipcRenderer.invoke('get-temp-path').then((path: string) => {
+            console.log('our temp path file-upload.component', this.tmpDir);
+            return path;
+        });
+
+
         if (target.files && target.files.length) {
             const file: File = target.files[0];
             const fileData = await this.uploadService.validateFileAndCheckFormat(file);
 
             if (fileData) {
-                const wasSaveSuccessful = await this.uploadService.saveFile(file);
+                const wasSaveSuccessful = await this.uploadService.saveFile(file, this.tmpDir);
 
                 if (wasSaveSuccessful) {
                     this.fileData = fileData;

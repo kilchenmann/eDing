@@ -1,11 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ElectronService } from 'ngx-electron';
+import { AppModule } from '../../../../app.module';
 import {
     PackageExpansionPanelComponent
 } from '../../components/package-expansion-panel/package-expansion-panel.component';
 import { OrganizeComponent } from './organize.component';
-import { AppModule } from '../../../../app.module';
 
 describe('OrganizeComponent', () => {
     let component: OrganizeComponent;

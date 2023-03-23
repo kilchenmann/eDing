@@ -31,9 +31,7 @@
     "typeRoots": [
       "./node_modules/@types"
     ],
-    "paths": {
-      "os": ["./node_modules/os-browserify"],
-    }
+    "paths": { }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

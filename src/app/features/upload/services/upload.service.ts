@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import * as JSZip from 'jszip';
+import { FILE_DATA } from '../../../shared/models/file-data';
 import { XML_OPTIONS } from '../../../shared/models/xml-options';
 import { SIP } from '../../../shared/models/xmlns/bar.admin.ch/arelda/sip-arelda-v4';
-import { FILE_DATA } from '../../../shared/models/file-data';
-import { ElectronService } from 'ngx-electron';
 
 // xmlToJSON does not export itself as ES6/ECMA2015 module,
 // it is loaded globally in scripts tag of angular.json,
@@ -18,7 +17,7 @@ export class UploadService {
         paket: []
     };
 
-    constructor(private electronService: ElectronService) { }
+    constructor() { }
 
     /**
      * validate file and check format
@@ -88,11 +87,9 @@ export class UploadService {
      * @param file - file which should be saved
      * @returns - a promise with a boolean
      */
-    async saveFile(file: File): Promise<boolean> {
-        const tp = await this.electronService.ipcRenderer.invoke('get-temp-path').then((path: string) => {
-            console.log('our temp path', path);
-            return path;
-        });
+    async saveFile(file: File, tmpdir: string): Promise<boolean> {
+
+        console.log('our temp path upload.service', tmpdir);
 
         return new Promise((resolve, reject) => {
 
@@ -102,10 +99,11 @@ export class UploadService {
             const reader = new FileReader();
             reader.readAsArrayBuffer(file);
 
+            // const tp = this.electronService.ipcRenderer.invoke('get-temp-path').then((path: string) => path );
             reader.onloadend = function () {
                 const buffer = new Uint8Array(reader.result as ArrayBuffer);
                 window.fs.writeFile(
-                    tp + '/sip.zip',
+                    tmpdir + '/sip.zip',
                     buffer,
                     (error: Error) => {
                         if (error) {

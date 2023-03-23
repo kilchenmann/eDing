@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { GenericDialogComponent } from './generic-dialog.component';
@@ -10,7 +11,11 @@ describe('GenericDialogComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [GenericDialogComponent], imports: [
+            declarations: [
+                GenericDialogComponent
+            ],
+            imports: [
+                MatButtonModule,
                 MatDialogModule
             ],
             providers: [{ provide: MatDialogRef, useValue: {} }, { provide: MAT_DIALOG_DATA, useValue: data }]

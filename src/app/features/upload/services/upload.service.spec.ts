@@ -7,11 +7,7 @@ describe('UploadService', () => {
     let service: UploadService;
 
     beforeEach(() => {
-        TestBed.configureTestingModule({
-            providers: [
-                { provide: ElectronService, useValue: {} }
-            ]
-        });
+        TestBed.configureTestingModule({});
         service = TestBed.inject(UploadService);
     });
 
