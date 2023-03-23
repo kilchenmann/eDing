@@ -6,7 +6,6 @@ import JSZip from 'jszip';
 import { cloneDeep } from 'lodash';
 import { ElectronService } from 'ngx-electron';
 import { Subscription } from 'rxjs';
-import { AppInitService } from 'src/app/app-init.service';
 import { GenericDialogComponent } from '../../../../shared/generic-dialog/generic-dialog.component';
 import { ErrorMessage } from '../../../../shared/models/error-message';
 import { XML_OPTIONS } from '../../../../shared/models/xml-options';
@@ -68,8 +67,7 @@ export class OrganizeComponent implements OnInit, OnDestroy {
         private router: Router,
         private dialog: MatDialog,
         private electronService: ElectronService,
-        private organizeService: OrganizeService,
-        private _ais: AppInitService
+        private organizeService: OrganizeService
     ) {
     }
 
@@ -450,7 +448,12 @@ export class OrganizeComponent implements OnInit, OnDestroy {
 
     private async _getCurrentZipFile() {
 
-        const tp = this._ais.getTempPath();
+        // const tp = this._ais.getTempPath();
+
+        const tp = await this.electronService.ipcRenderer.invoke('get-temp-path').then((path: string) => {
+            console.log('our temp path', path);
+            return path;
+        });
         const zipFileData = window.fs.readFileSync(tp + '/sip.zip');
         return JSZip.loadAsync(zipFileData);
     }

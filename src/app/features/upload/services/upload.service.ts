@@ -3,7 +3,7 @@ import * as JSZip from 'jszip';
 import { XML_OPTIONS } from '../../../shared/models/xml-options';
 import { SIP } from '../../../shared/models/xmlns/bar.admin.ch/arelda/sip-arelda-v4';
 import { FILE_DATA } from '../../../shared/models/file-data';
-import { AppInitService } from 'src/app/app-init.service';
+import { ElectronService } from 'ngx-electron';
 
 // xmlToJSON does not export itself as ES6/ECMA2015 module,
 // it is loaded globally in scripts tag of angular.json,
@@ -18,7 +18,7 @@ export class UploadService {
         paket: []
     };
 
-    constructor(private _ais: AppInitService) { }
+    constructor(private electronService: ElectronService) { }
 
     /**
      * validate file and check format
@@ -89,9 +89,15 @@ export class UploadService {
      * @returns - a promise with a boolean
      */
     async saveFile(file: File): Promise<boolean> {
+        const tp = await this.electronService.ipcRenderer.invoke('get-temp-path').then((path: string) => {
+            console.log('our temp path', path);
+            return path;
+        });
+
         return new Promise((resolve, reject) => {
 
-            const tp = this._ais.getTempPath();
+            // const tp = this._ais.getTempPath();
+
 
             const reader = new FileReader();
             reader.readAsArrayBuffer(file);

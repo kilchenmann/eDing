@@ -3,6 +3,8 @@ const path = require('path');
 const args = process.argv.slice(2);
 const dev = args.indexOf('--dev') !== -1;
 
+const tmp = require('tmp');
+
 function onReady() {
     const { width, height } = screen.getPrimaryDisplay().workAreaSize;
 
@@ -14,7 +16,8 @@ function onReady() {
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false,
-            webSecurity: true
+            webSecurity: true,
+            preload: `file://${path.join(__dirname, 'dist/ech-0160-dimag-ingest/preload.js')}`
         }
     });
 
@@ -27,6 +30,8 @@ function onReady() {
             return result.filePaths[0];
         }
     });
+
+    ipcMain.handle('get-temp-path', async () => app.getPath('temp'));
 
     const retryCount = 0;
     const maxRetries = 3;
@@ -55,7 +60,13 @@ function onReady() {
     } else {
         const prodUrl = `file://${path.join(__dirname, 'dist/ech-0160-dimag-ingest/index.html')}`;
 
-        win.loadURL(prodUrl);
+        win.loadURL(prodUrl)
+            .then(() => {
+                win.webContents.send('sendSettings', tempDir);
+            })
+            .then(() => {
+                win.show();
+            });
 
         win.webContents.on('did-fail-load', () => {
             handleLoadFail(prodUrl, retryCount, maxRetries);
