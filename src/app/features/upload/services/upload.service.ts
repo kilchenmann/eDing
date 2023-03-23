@@ -87,9 +87,9 @@ export class UploadService {
      * @param file - file which should be saved
      * @returns - a promise with a boolean
      */
-    async saveFile(file: File, tmpdir: string): Promise<boolean> {
+    async saveFile(file: File, tmpFile: string): Promise<boolean> {
 
-        console.log('our temp path upload.service', tmpdir);
+        console.log('our temp path in upload.service', tmpFile);
 
         return new Promise((resolve, reject) => {
 
@@ -103,7 +103,7 @@ export class UploadService {
             reader.onloadend = function () {
                 const buffer = new Uint8Array(reader.result as ArrayBuffer);
                 window.fs.writeFile(
-                    tmpdir + '/sip.zip',
+                    tmpFile,
                     buffer,
                     (error: Error) => {
                         if (error) {

@@ -450,11 +450,11 @@ export class OrganizeComponent implements OnInit, OnDestroy {
 
         // const tp = this._ais.getTempPath();
 
-        const tp = await this.electronService.ipcRenderer.invoke('get-temp-path').then((path: string) => {
-            console.log('our temp path', path);
+        const tmpFile = await this.electronService.ipcRenderer.invoke('get-temp-path').then((path: string) => {
+            console.log('our temp path in organize component', path);
             return path;
         });
-        const zipFileData = window.fs.readFileSync(tp + '/sip.zip');
+        const zipFileData = window.fs.readFileSync(tmpFile);
         return JSZip.loadAsync(zipFileData);
     }
 }

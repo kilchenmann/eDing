@@ -17,7 +17,7 @@ export class FileUploadComponent {
 
     fileData = FILE_DATA;
 
-    tmpDir: any;
+    tmpFile: any;
 
     constructor(
         private _dialog: MatDialog,
@@ -34,8 +34,8 @@ export class FileUploadComponent {
     async uploadFile(event: Event): Promise<void> {
         const target = event.target as HTMLInputElement;
 
-        this.tmpDir = await this.electronService.ipcRenderer.invoke('get-temp-path').then((path: string) => {
-            console.log('our temp path file-upload.component', this.tmpDir);
+        this.tmpFile = await this.electronService.ipcRenderer.invoke('get-temp-path').then((path: string) => {
+            console.log('our temp path in file-upload.component', this.tmpFile);
             return path;
         });
 
@@ -45,7 +45,7 @@ export class FileUploadComponent {
             const fileData = await this.uploadService.validateFileAndCheckFormat(file);
 
             if (fileData) {
-                const wasSaveSuccessful = await this.uploadService.saveFile(file, this.tmpDir);
+                const wasSaveSuccessful = await this.uploadService.saveFile(file, this.tmpFile);
 
                 if (wasSaveSuccessful) {
                     this.fileData = fileData;

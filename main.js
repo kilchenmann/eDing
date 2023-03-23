@@ -29,7 +29,7 @@ function onReady() {
         }
     });
 
-    ipcMain.handle('get-temp-path', async () => app.getPath('temp'));
+    ipcMain.handle('get-temp-path', async () => path.join(app.getPath('temp'), 'sip.zip'));
 
     const retryCount = 0;
     const maxRetries = 3;
