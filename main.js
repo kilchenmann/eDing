@@ -3,8 +3,6 @@ const path = require('path');
 const args = process.argv.slice(2);
 const dev = args.indexOf('--dev') !== -1;
 
-const tmp = require('tmp');
-
 function onReady() {
     const { width, height } = screen.getPrimaryDisplay().workAreaSize;
 
