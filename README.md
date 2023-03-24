@@ -38,7 +38,6 @@ Start the development server with `yarn start` and in a second terminal window t
 
 Run `ng generate component [path][component-name]` to generate a new component in the app itself. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-
 ## Running unit tests
 
 > `Not yet full implemented`
@@ -46,9 +45,22 @@ Run `ng generate component [path][component-name]` to generate a new component i
 Run `yarn test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
 ## Running end-to-end tests
+
 [Testcafe](https://testcafe.io/) is used as framework which makes it possible to run the tests directly in the electron application and not in the browser.
 
 Run `yarn test-e2e` to execute the end-to-end tests.
+
+## Build the app with electron
+
+We are using [electron-forge](https://www.electronforge.io/) to start, build, package and publish the electron app:
+
+* Run `yarn ef:start` to build and open the app with electron
+* Run `yarn ef:package` to bundle the app code and to build an executable application (`.exe`, `.app`, `.deb` depending on the current OS).
+* Run `yarn ef:make`, which uses `electron-forge package` first and creates separate distributable for each configured maker.
+
+You'll find the result of `yarn ef:package` and `yarn ef:make` in the `./out` folder.
+
+The command `yarn ef:publish` is only used in the [Github Actions](.github/workflows/main.yml) to publish the electron app and append the bundles (as zip-file) to the current release.
 
 ## Further help
 

@@ -1,19 +1,27 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { FileUploadComponent } from './file-upload.component';
+import { ElectronService } from 'ngx-electron';
 import { AppModule } from '../../../../app.module';
+import { FileUploadComponent } from './file-upload.component';
 
 describe('FileUploadComponent', () => {
     let component: FileUploadComponent;
     let fixture: ComponentFixture<FileUploadComponent>;
 
+    const mockFs = {
+        readFileSync: () => {
+        }
+    };
+
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [FileUploadComponent], imports: [
-                AppModule
+            imports: [AppModule],
+            declarations: [
+                FileUploadComponent
+            ],
+            providers: [
+                { provide: ElectronService, useValue: {} }
             ]
-        })
-            .compileComponents();
+        }).compileComponents();
 
         fixture = TestBed.createComponent(FileUploadComponent);
         component = fixture.componentInstance;
@@ -21,6 +29,7 @@ describe('FileUploadComponent', () => {
     });
 
     it('should create', () => {
+        mockFs.readFileSync();
         expect(component).toBeTruthy();
     });
 });

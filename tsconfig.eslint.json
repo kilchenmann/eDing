@@ -2,7 +2,7 @@
   "extends": "./tsconfig.json",
   "include": [
     // custom include - what do you want to be tested
-    "./src/app/**/*.ts",
+    "./src/**/*.ts",
     "./main.js"
     // "./src/app/**/*.somelib.js"
   ]

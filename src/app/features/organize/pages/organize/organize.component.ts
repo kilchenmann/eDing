@@ -1,6 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
+import { Router } from '@angular/router';
+import JSZip from 'jszip';
+import { cloneDeep } from 'lodash';
+import { ElectronService } from 'ngx-electron';
+import { Subscription } from 'rxjs';
+import { GenericDialogComponent } from '../../../../shared/generic-dialog/generic-dialog.component';
 import { ErrorMessage } from '../../../../shared/models/error-message';
+import { XML_OPTIONS } from '../../../../shared/models/xml-options';
 import {
     Datei,
     Dokument,
@@ -10,15 +18,7 @@ import {
     Provenienz,
     SIP
 } from '../../../../shared/models/xmlns/bar.admin.ch/arelda/sip-arelda-v4';
-import { XML_OPTIONS } from '../../../../shared/models/xml-options';
-import { Router } from '@angular/router';
-import { GenericDialogComponent } from '../../../../shared/generic-dialog/generic-dialog.component';
-import { MatDialog } from '@angular/material/dialog';
-import { ElectronService } from 'ngx-electron';
-import { cloneDeep } from 'lodash-es';
-import { Subscription } from 'rxjs';
 import { OrganizeService } from '../../services/organize.service';
-import JSZip from 'jszip';
 
 
 // xmlToJSON does not export itself as ES6/ECMA2015 module,
@@ -448,7 +448,7 @@ export class OrganizeComponent implements OnInit, OnDestroy {
     }
 
     private async _getCurrentZipFile() {
-        const zipFileData = window.fs.readFileSync('temp.zip');
-        return JSZip.loadAsync(zipFileData);
+        const tmpPath = await this.electronService.ipcRenderer.invoke('get-temp-path').then((path: string) => path);
+        return JSZip.loadAsync(window.fs.readFileSync(tmpPath));
     }
 }

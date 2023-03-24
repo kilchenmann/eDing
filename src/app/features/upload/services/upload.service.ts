@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import * as JSZip from 'jszip';
+import { FILE_DATA } from '../../../shared/models/file-data';
 import { XML_OPTIONS } from '../../../shared/models/xml-options';
 import { SIP } from '../../../shared/models/xmlns/bar.admin.ch/arelda/sip-arelda-v4';
-import { FILE_DATA } from '../../../shared/models/file-data';
 
 // xmlToJSON does not export itself as ES6/ECMA2015 module,
 // it is loaded globally in scripts tag of angular.json,
@@ -23,7 +23,7 @@ export class UploadService {
      * @returns a promise with the file data
      */
     async validateFileAndCheckFormat(file: File): Promise<typeof FILE_DATA | false> {
-        const hasValidFileType = file.type === 'application/zip' && file.name.split('.').pop() === 'zip';
+        const hasValidFileType = (file.type === 'application/zip' || file.type === 'application/x-zip-compressed') && file.name.split('.').pop() === 'zip';
 
         // check file type
         if (!hasValidFileType) {
@@ -83,20 +83,22 @@ export class UploadService {
     /**
      * save file to temporary folder
      * @param file - file which should be saved
+     * @param tmpPath - temp path for used os
      * @returns - a promise with a boolean
      */
-    async saveFile(file: File): Promise<boolean> {
+    async saveFile(file: File, tmpPath: string): Promise<boolean> {
+
         return new Promise((resolve, reject) => {
+
             const reader = new FileReader();
             reader.readAsArrayBuffer(file);
 
             reader.onloadend = function () {
                 const buffer = new Uint8Array(reader.result as ArrayBuffer);
                 window.fs.writeFile(
-                    'temp.zip',
+                    tmpPath,
                     buffer,
-                    (error: Error) =>
-                        error ? reject(error) : resolve(true)
+                    (error: Error) => error ? reject(error) : resolve(true)
                 );
             };
         });

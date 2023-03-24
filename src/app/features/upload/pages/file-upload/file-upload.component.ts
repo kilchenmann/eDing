@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { GenericDialogComponent } from 'src/app/shared/generic-dialog/generic-dialog.component';
-import { UploadService } from '../../services/upload.service';
-import { FILE_DATA } from '../../../../shared/models/file-data';
 import { Router } from '@angular/router';
-
+import { ElectronService } from 'ngx-electron';
+import { GenericDialogComponent } from 'src/app/shared/generic-dialog/generic-dialog.component';
+import { FILE_DATA } from '../../../../shared/models/file-data';
+import { UploadService } from '../../services/upload.service';
 
 @Component({
     selector: 'app-file-upload',
@@ -14,11 +14,16 @@ import { Router } from '@angular/router';
 
 export class FileUploadComponent {
     currentFile?: File;
-
     fileData = FILE_DATA;
 
-    constructor(private _dialog: MatDialog, private uploadService: UploadService, private router: Router) {
+    constructor(
+        private _dialog: MatDialog,
+        private uploadService: UploadService,
+        private router: Router,
+        private electronService: ElectronService
+    ) {
     };
+
 
     /**
      * upload a file and check validity
@@ -32,7 +37,7 @@ export class FileUploadComponent {
             const fileData = await this.uploadService.validateFileAndCheckFormat(file);
 
             if (fileData) {
-                const wasSaveSuccessful = await this.uploadService.saveFile(file);
+                const wasSaveSuccessful = await this.uploadService.saveFile(file, await this.electronService.ipcRenderer.invoke('get-temp-path').then((path: string) => path));
 
                 if (wasSaveSuccessful) {
                     this.fileData = fileData;

@@ -21,7 +21,7 @@
   "author": {
     "name": "AV DIMAG",
     "email": "ak@avdimag.ch",
-    "url": "http://av-dimag.ch"
+    "url": "http://avdimag.ch"
   },
   "main": "main.js",
   "scripts": {
@@ -30,16 +30,18 @@
     "start": "ng serve",
     "build": "ng build --configuration production",
     "build-dev": "ng build --configuration development",
-    "build-dev-watch": "ng build --configuration development --watch=true",
     "build:electron": "ng build && electron .",
     "build:electron-dev": "yarn build-dev && electron . --dev",
-    "build:page": "ng build --base-href /ingest-poc/",
     "lint": "eslint --color --fix -c .eslintrc.js --ext .ts ./src/app",
     "lint-ci": "eslint --color -c .eslintrc.js --ext .ts ./src/app",
     "test": "ng test",
     "test-ci": "ng test --watch=false --browsers=ChromeHeadless",
-    "prep-testdata": "./prepare-testdata.sh",
-    "test-e2e": " rm -f temp.zip && testcafe electron testcafe-tests/main.spec.ts"
+    "test-e2e": "testcafe electron testcafe-tests/main.spec.ts",
+    "ef:start": "yarn build && electron-forge start",
+    "ef:package": "yarn build && electron-forge package",
+    "ef:make": "yarn build && electron-forge make",
+    "ef:publish": "electron-forge publish",
+    "clean": "rm -rf dist && rm -rf out"
   },
   "private": true,
   "dependencies": {
@@ -68,6 +70,14 @@
     "@angular-eslint/eslint-plugin": "^14.1.2",
     "@angular/cli": "~14.2.2",
     "@angular/compiler-cli": "^14.2.0",
+    "@babel/runtime": "^7.21.0",
+    "@electron-forge/cli": "^6.0.5",
+    "@electron-forge/maker-deb": "^6.0.5",
+    "@electron-forge/maker-dmg": "^6.0.5",
+    "@electron-forge/maker-rpm": "^6.0.5",
+    "@electron-forge/maker-squirrel": "^6.0.5",
+    "@electron-forge/maker-zip": "^6.0.5",
+    "@electron-forge/publisher-github": "^6.0.5",
     "@types/jasmine": "~4.0.0",
     "@types/jest": "^29.1.0",
     "@types/lodash-es": "^4.17.7",
@@ -75,7 +85,6 @@
     "@typescript-eslint/eslint-plugin": "^5.38.1",
     "@typescript-eslint/parser": "^5.38.1",
     "electron": "23.1.1",
-    "electron-builder": "^23.6.0",
     "eslint": "^8.24.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsdoc": "^39.3.6",
