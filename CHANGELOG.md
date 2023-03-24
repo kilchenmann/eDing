@@ -1,5 +1,48 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/av-dimag/ech-0160-dimag-ingest/compare/v1.0.2...v1.1.0) (2023-03-24)
+
+
+### Maintenance
+
+* **ci/cd:** cache node_modules to speed up pipeline time ([#49](https://www.github.com/av-dimag/ech-0160-dimag-ingest/issues/49)) ([d0682f3](https://www.github.com/av-dimag/ech-0160-dimag-ingest/commit/d0682f35a6b9457163428ca1e641abb6785dba09))
+* code refactoring ([#126](https://www.github.com/av-dimag/ech-0160-dimag-ingest/issues/126)) ([af0a4bf](https://www.github.com/av-dimag/ech-0160-dimag-ingest/commit/af0a4bfe948d97aadbb7432165ea34db41c55287))
+* **deps-dev:** bump electron from 13.6.6 to 23.1.1 ([#65](https://www.github.com/av-dimag/ech-0160-dimag-ingest/issues/65)) ([fd88085](https://www.github.com/av-dimag/ech-0160-dimag-ingest/commit/fd880854bc8db6ab01f1cdb9d6780f02089ab493))
+* **gh:** add issue template config ([65cb68c](https://www.github.com/av-dimag/ech-0160-dimag-ingest/commit/65cb68cece2f95c1ca11c9cd01fe06c2ba8d9b7b))
+* **gh:** add pr template ([17c0945](https://www.github.com/av-dimag/ech-0160-dimag-ingest/commit/17c0945bc918235c788da494d4a7d15ec0d7cc0e))
+* **gh:** create simple issue templates ([#15](https://www.github.com/av-dimag/ech-0160-dimag-ingest/issues/15)) ([398b347](https://www.github.com/av-dimag/ech-0160-dimag-ingest/commit/398b3471060cee41977962f8ca2fc7d6b3370dfa))
+* **gh:** issue templates ([#18](https://www.github.com/av-dimag/ech-0160-dimag-ingest/issues/18)) ([53ce9df](https://www.github.com/av-dimag/ech-0160-dimag-ingest/commit/53ce9df07f97b5bcc2beb33f2617787bb7d50cfd))
+* **gh:** new issue template ([#72](https://www.github.com/av-dimag/ech-0160-dimag-ingest/issues/72)) ([f7ca8a4](https://www.github.com/av-dimag/ech-0160-dimag-ingest/commit/f7ca8a4ebe50df53a3bc5d917e3f0bb96071ff17))
+* **gh:** resolve issue template ([68f68a0](https://www.github.com/av-dimag/ech-0160-dimag-ingest/commit/68f68a09a0caaf1f91b4d70ecf9aefe675f06906))
+* **gh:** resolve template issue ([7036009](https://www.github.com/av-dimag/ech-0160-dimag-ingest/commit/7036009fd9c3ac409ed68bf1ce46d8704ffc8a0c))
+* **gh:** resolve template issue ([48619d5](https://www.github.com/av-dimag/ech-0160-dimag-ingest/commit/48619d512ba37063cd22b197f40f12799c49d7d9))
+* **gh:** update issue templates ([#12](https://www.github.com/av-dimag/ech-0160-dimag-ingest/issues/12)) ([641f963](https://www.github.com/av-dimag/ech-0160-dimag-ingest/commit/641f9635385f2c657c907747b5a3b880863312ed))
+* **gh:** update issue templates ([#21](https://www.github.com/av-dimag/ech-0160-dimag-ingest/issues/21)) ([78a0ab3](https://www.github.com/av-dimag/ech-0160-dimag-ingest/commit/78a0ab34f8f5fa3de707510576dd436d92ca0d5a))
+* move models and testdata to another place ([#124](https://www.github.com/av-dimag/ech-0160-dimag-ingest/issues/124)) ([2cdf3ee](https://www.github.com/av-dimag/ech-0160-dimag-ingest/commit/2cdf3ee44d910c391204196f6af7c3200c84f904))
+* move shared functions to service ([#125](https://www.github.com/av-dimag/ech-0160-dimag-ingest/issues/125)) ([69f6767](https://www.github.com/av-dimag/ech-0160-dimag-ingest/commit/69f6767f46c6820bd7308c92f9b41ef339c1b317))
+* refactor code part 1 ([#66](https://www.github.com/av-dimag/ech-0160-dimag-ingest/issues/66)) ([ab5f39a](https://www.github.com/av-dimag/ech-0160-dimag-ingest/commit/ab5f39aaacaa9bba7272da52e5141dd4005359ca))
+* rename toolbox to ech-0160-ingest.process ([#75](https://www.github.com/av-dimag/ech-0160-dimag-ingest/issues/75)) ([e2ffee3](https://www.github.com/av-dimag/ech-0160-dimag-ingest/commit/e2ffee3bd3f2c6a7cd70031e8739482df990b87f))
+* **security:** enable electron websecurity ([#45](https://www.github.com/av-dimag/ech-0160-dimag-ingest/issues/45)) ([9dc3296](https://www.github.com/av-dimag/ech-0160-dimag-ingest/commit/9dc3296f9bc769e980e572602589c1a4bd1ac1ec))
+* **test:** solve warnings in unit tests ([#76](https://www.github.com/av-dimag/ech-0160-dimag-ingest/issues/76)) ([9214a24](https://www.github.com/av-dimag/ech-0160-dimag-ingest/commit/9214a24331a014b807891375e2cc9a9a0030173e))
+* update package.json ([#50](https://www.github.com/av-dimag/ech-0160-dimag-ingest/issues/50)) ([7642cfd](https://www.github.com/av-dimag/ech-0160-dimag-ingest/commit/7642cfd19766a3b450c269b75e65fd8e6b9693d4))
+
+
+### Enhancements
+
+* add first functional prototype ([#64](https://www.github.com/av-dimag/ech-0160-dimag-ingest/issues/64)) ([0e637a4](https://www.github.com/av-dimag/ech-0160-dimag-ingest/commit/0e637a4c54e218b6464d23a61184f736dff82660))
+* add ingest packages to local storage ([#117](https://www.github.com/av-dimag/ech-0160-dimag-ingest/issues/117)) ([49016fe](https://www.github.com/av-dimag/ech-0160-dimag-ingest/commit/49016feaa6c9e3ba948be84bb0a549229b836a0e))
+* **ci/cd:** deployment process ([#118](https://www.github.com/av-dimag/ech-0160-dimag-ingest/issues/118)) ([dbc5ae1](https://www.github.com/av-dimag/ech-0160-dimag-ingest/commit/dbc5ae1a98143572e4ed351a183576ddd4768123))
+* disable add package button if it is already added ([#74](https://www.github.com/av-dimag/ech-0160-dimag-ingest/issues/74)) ([dbdc5e1](https://www.github.com/av-dimag/ech-0160-dimag-ingest/commit/dbdc5e1ca113baf322b910f526bcb45a115f7e60))
+* **upload:** read metadata.xml and display important data ([#47](https://www.github.com/av-dimag/ech-0160-dimag-ingest/issues/47)) ([9be3254](https://www.github.com/av-dimag/ech-0160-dimag-ingest/commit/9be325484118682ac5d79fcb9bc882e430917dfb))
+* **version:** display application version in header ([#77](https://www.github.com/av-dimag/ech-0160-dimag-ingest/issues/77)) ([e23fd8a](https://www.github.com/av-dimag/ech-0160-dimag-ingest/commit/e23fd8ac15200642d37e716774b44bc8bd44a614))
+* **workflow:** add fileupload and dialog component ([#42](https://www.github.com/av-dimag/ech-0160-dimag-ingest/issues/42)) ([f3649ee](https://www.github.com/av-dimag/ech-0160-dimag-ingest/commit/f3649eeb220ca75f7b19db32f931b9ec42977620))
+
+
+### Documentation
+
+* replace ci/cd badge in README ([d4b80b1](https://www.github.com/av-dimag/ech-0160-dimag-ingest/commit/d4b80b139815c5424c895ba52369b562654599cb))
+* update README ([fab0e42](https://www.github.com/av-dimag/ech-0160-dimag-ingest/commit/fab0e428afa1e81dc76d2a3e2f90fb934ff74ba4))
+
 ### [1.0.2](https://www.github.com/kilchenmann/eDing/compare/v1.0.1...v1.0.2) (2023-01-19)
 
 
