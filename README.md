@@ -1,7 +1,7 @@
 # eCH-0160 DIMAG Ingest
 
 [![CI/CD](https://github.com/av-dimag/ech-0160-dimag-ingest/actions/workflows/main.yml/badge.svg)](https://github.com/av-dimag/ech-0160-dimag-ingest/actions/workflows/main.yml)
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/av-dimag/ech-0160-dimag-ingest)](https://github.com/av-dimag/ech-0160-dimag-ingest/releases/latest)
+<!-- [![GitHub release (latest by date)](https://img.shields.io/github/v/release/av-dimag/ech-0160-dimag-ingest)](https://github.com/av-dimag/ech-0160-dimag-ingest/releases/latest) -->
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.2 and [YARN](https://yarnpkg.com) (instead npm!). **Please read  [our developer guidelines](https://av-dimag.github.io/guidelines/) for contribution.**
 
