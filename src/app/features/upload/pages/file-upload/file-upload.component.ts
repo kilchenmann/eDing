@@ -17,7 +17,7 @@ export class FileUploadComponent {
     fileData = FILE_DATA;
 
     constructor(
-        private _dialog: MatDialog,
+        private dialog: MatDialog,
         private uploadService: UploadService,
         private router: Router,
         private electronService: ElectronService
@@ -44,7 +44,7 @@ export class FileUploadComponent {
                     this.currentFile = file;
                     window.localStorage.clear();
                 } else {
-                    this._dialog.open(GenericDialogComponent, {
+                    this.dialog.open(GenericDialogComponent, {
                         data: {
                             title: 'Fehler beim Öffnen',
                             text: 'Das ZIP-Paket konnte nicht richtig verarbeitet werden. Bitte versuchen Sie es erneut.'
@@ -53,7 +53,7 @@ export class FileUploadComponent {
                     });
                 }
             } else {
-                this._dialog.open(GenericDialogComponent, {
+                this.dialog.open(GenericDialogComponent, {
                     data: {
                         title: 'Fehler im Format',
                         text: 'Bitte laden Sie ein valides ZIP-File entsprechend dem eCH-0160 Standard hoch.'

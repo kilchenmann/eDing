@@ -73,7 +73,7 @@ export class StringifyValuePipe implements PipeTransform {
                         let d = 0;
                         for (const val of <Datum[]>value) {
                             const delimiter = (d > 0 ? '<br>' : '');
-                            stringified += delimiter + this._setDate(val);
+                            stringified += delimiter + this.setDate(val);
                             d++;
                         }
                         return stringified;
@@ -84,7 +84,7 @@ export class StringifyValuePipe implements PipeTransform {
                         let p = 0;
                         for (const val of <Zeitraum[]>value) {
                             const delimiter = (p > 0 ? '<br>' : '');
-                            stringified += delimiter + this._setDate(val.von[0]) + ' - ' + this._setDate(val.bis[0]);
+                            stringified += delimiter + this.setDate(val.von[0]) + ' - ' + this.setDate(val.bis[0]);
                             p++;
                         }
                         return stringified;
@@ -115,7 +115,7 @@ export class StringifyValuePipe implements PipeTransform {
     }
 
 
-    private _parseDate(val: string): string {
+    private parseDate(val: string): string {
         // the format could be: 2022-11-31 OR 2022-11 OR 2022
         const m = val.toString().split('-');
 
@@ -133,8 +133,8 @@ export class StringifyValuePipe implements PipeTransform {
 
     }
 
-    private _setDate(date: Datum): string {
+    private setDate(date: Datum): string {
         const ca = ((date.ca && date.ca[0]._text) ? 'ca. ' : '');
-        return ca + this._parseDate(date.datum[0]._text);
+        return ca + this.parseDate(date.datum[0]._text);
     }
 }

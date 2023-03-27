@@ -112,14 +112,13 @@ export class SummaryTabComponent implements OnInit, OnDestroy {
     }
 
     /*
-     * gets file meta
+     * gets file metadata
      * @param dateiRef
      */
-    getFileMeta(dateiRef: string) {
-        const result = this.organizeService.findOsp(this.sip.paket[0].ablieferung[0].ordnungssystem[0].ordnungssystemposition, dateiRef);
+    getFileMetadata(dateiRef: string) {
+        const result = this.organizeService.getOsp(this.sip.paket[0].ablieferung[0].ordnungssystem[0].ordnungssystemposition, dateiRef);
         this.dos = result.dos;
         this.osp = result.osp;
         this.dok = result.dok;
-
     }
 }

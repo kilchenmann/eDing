@@ -73,8 +73,7 @@ module.exports = {
             {
                 "selector": ["classProperty", "classMethod"],
                 "modifiers": ["private"],
-                "format": ["camelCase"],
-                "leadingUnderscore": "require"
+                "format": ["camelCase"]
             },
             {
                 "selector": ["classProperty"],

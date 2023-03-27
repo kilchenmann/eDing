@@ -50,7 +50,7 @@
             <div *ngFor="let datei of node.datei">
               <button mat-button class="file"
                 [matMenuTriggerFor]="meta"
-                (click)="getFileMeta(datei._attrid._value); fileName = datei.name[0]._text; displayDokDetails = true">
+                (click)="getFileMetadata(datei._attrid._value); fileName = datei.name[0]._text; displayDokDetails = true">
                 <mat-icon fontIcon="description"></mat-icon>
                 <span>{{datei.name[0]._text}}</span>
               </button>

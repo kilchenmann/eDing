@@ -72,7 +72,7 @@ export class OrganizeComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this._readCurrentMetadataXml();
+        this.readCurrentMetadataXml();
 
         // store ingestPackages before window close
         window.addEventListener('beforeunload', async () => {
@@ -296,7 +296,7 @@ export class OrganizeComponent implements OnInit, OnDestroy {
                                     // // create metadata-dossier.xml
                                     ingestPackage.datei?.forEach(
                                         (dat: Datei) => {
-                                            this.getFileMeta(dat._attrid._value);
+                                            this.getFileMetadata(dat._attrid._value);
 
                                             if (this.dok) {
                                                 const dokument = this.organizeService.createEle('dokument', this.dok, dat.originalName[0]._text);
@@ -342,7 +342,7 @@ export class OrganizeComponent implements OnInit, OnDestroy {
                                     };
 
                                     ingestPackage.datei?.forEach(async (dat, datIndex) => {
-                                        const zip = await this._getCurrentZipFile();
+                                        const zip = await this.getCurrentZipFile();
                                         const keys = Object.keys(zip.files);
                                         // get binary data for the file from the uploaded zip-file
                                         const filePath = keys.find(key => key.endsWith(dat.path._value)) ?? '';
@@ -384,7 +384,7 @@ export class OrganizeComponent implements OnInit, OnDestroy {
     /**
      * convert xml to json (xml2json)
      */
-    convert() {
+    convertXmlToJson() {
         // reset error status
         this.converterError = false;
 
@@ -413,11 +413,11 @@ export class OrganizeComponent implements OnInit, OnDestroy {
     }
 
     /**
-     * gets file meta
+     * gets file metadata
      * @param dateiRef
      */
-    getFileMeta(dateiRef: string) {
-        const result = this.organizeService.findOsp(this.sip.paket[0].ablieferung[0].ordnungssystem[0].ordnungssystemposition, dateiRef);
+    getFileMetadata(dateiRef: string) {
+        const result = this.organizeService.getOsp(this.sip.paket[0].ablieferung[0].ordnungssystem[0].ordnungssystemposition, dateiRef);
         this.dos = result.dos;
         this.osp = result.osp;
         this.dok = result.dok;
@@ -426,15 +426,15 @@ export class OrganizeComponent implements OnInit, OnDestroy {
     /**
      * read uploaded metadata.xml file and select it
      */
-    private async _readCurrentMetadataXml(): Promise<void> {
+    private async readCurrentMetadataXml(): Promise<void> {
         try {
-            const zip = await this._getCurrentZipFile();
+            const zip = await this.getCurrentZipFile();
             const keys = Object.keys(zip.files);
             const metadataPath = keys.find(key => key.endsWith('header/metadata.xml')) ?? '';
             const metadataXML = await zip.file(metadataPath)?.async('string');
 
             this.xml = metadataXML ?? '';
-            this.convert();
+            this.convertXmlToJson();
         } catch (error) {
             await this.router.navigate(['/']);
             this.dialog.open(GenericDialogComponent, {
@@ -447,7 +447,7 @@ export class OrganizeComponent implements OnInit, OnDestroy {
         }
     }
 
-    private async _getCurrentZipFile() {
+    private async getCurrentZipFile() {
         const tmpPath = await this.electronService.ipcRenderer.invoke('get-temp-path').then((path: string) => path);
         return JSZip.loadAsync(window.fs.readFileSync(tmpPath));
     }

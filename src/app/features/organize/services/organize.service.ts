@@ -22,9 +22,9 @@ import { isEqualWith } from 'lodash-es';
     providedIn: 'root'
 })
 export class OrganizeService {
-    findOsp(ordnungssystemposition: Ordnungssystemposition[], dateiRef: string) {
+    getOsp(ordnungssystemposition: Ordnungssystemposition[], dateiRef: string) {
         const result: { osp?: Ordnungssystemposition; dos?: Dossier; dok?: Dokument } = {};
-        this._findOsp(ordnungssystemposition, dateiRef, result);
+        this.findOsp(ordnungssystemposition, dateiRef, result);
         return result;
     }
 
@@ -282,14 +282,14 @@ export class OrganizeService {
      * @param dateiRef
      * @param result
      */
-    private _findOsp(ordnungssystemposition: Ordnungssystemposition[], dateiRef: string, result: { osp?: Ordnungssystemposition; dos?: Dossier; dok?: Dokument }) {
+    private findOsp(ordnungssystemposition: Ordnungssystemposition[], dateiRef: string, result: { osp?: Ordnungssystemposition; dos?: Dossier; dok?: Dokument }) {
         ordnungssystemposition.forEach(
             (osp: Ordnungssystemposition) => {
                 if (osp.ordnungssystemposition && osp.ordnungssystemposition.length > 0) {
-                    this._findOsp(osp.ordnungssystemposition, dateiRef, result);
+                    this.findOsp(osp.ordnungssystemposition, dateiRef, result);
                 }
                 if (osp.dossier && osp.dossier.length > 0) {
-                    this._findDos(osp.dossier, dateiRef, osp, result);
+                    this.findDos(osp.dossier, dateiRef, osp, result);
                 }
             }
         );
@@ -303,11 +303,11 @@ export class OrganizeService {
      * @param result
      * @private
      */
-    private _findDos(dossier: Dossier[], dateiRef: string, osp: Ordnungssystemposition, result: { osp?: Ordnungssystemposition; dos?: Dossier; dok?: Dokument }) {
+    private findDos(dossier: Dossier[], dateiRef: string, osp: Ordnungssystemposition, result: { osp?: Ordnungssystemposition; dos?: Dossier; dok?: Dokument }) {
         dossier.forEach(
             (dos: Dossier) => {
                 if (dos.dossier && dos.dossier.length > 0) {
-                    this._findDos(dos.dossier, dateiRef, osp, result);
+                    this.findDos(dos.dossier, dateiRef, osp, result);
                 }
                 if (dos.dokument && dos.dokument.length > 0) {
                     dos.dokument.forEach(
