@@ -90,7 +90,7 @@ export class OrganizeService {
                                     // instance of TextString
                                     let t = 0;
                                     for (const val of <TextString[]>value) {
-                                        const delimiter = (t > 0 ? '<br>' : '');
+                                        const delimiter = (t > 0 ? '<br/>' : '');
                                         stringified += delimiter + val._text;
                                         t++;
                                     }
@@ -101,7 +101,7 @@ export class OrganizeService {
                                     // instance of TextNumber
                                     let i = 0;
                                     for (const val of <TextNumber[]>value) {
-                                        const delimiter = (i > 0 ? '<br>' : '');
+                                        const delimiter = (i > 0 ? '<br/>' : '');
                                         stringified += delimiter + val._text;
                                         i++;
                                     }
@@ -120,7 +120,7 @@ export class OrganizeService {
                                     // instance of ZusatzDaten
                                     let z = 0;
                                     for (const val of <ZusatzDaten[]>value) {
-                                        const delimiter = (z > 0 ? '<br>' : '');
+                                        const delimiter = (z > 0 ? '<br/>' : '');
                                         for (const m of <Merkmal[]>val.merkmal) {
                                             stringified += delimiter + m._attrname._value + ' ' + m._text;
 

@@ -274,7 +274,9 @@ export class OrganizeComponent implements OnInit, OnDestroy {
                                     ordner.appendChild(name);
 
                                     const originalName = xmlDos.createElement('originalName');
-                                    originalName.innerHTML = ingestPackage.originalName[0]._text;
+                                    if (ingestPackage.originalName) {
+                                        originalName.innerHTML = ingestPackage.originalName[0]?._text;
+                                    }
                                     ordner.appendChild(originalName);
 
                                     ingestPackage.datei?.forEach(
