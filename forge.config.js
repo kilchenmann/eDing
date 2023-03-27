@@ -1,10 +1,11 @@
 module.exports = {
   "packagerConfig": {
+    "icon": "src/app/assets/icons/av-dimag-ech-logo",
     "dir": "./dist",
     "ignore": [
       "^/[.]angular$",
       "^/[.]git$",
-      "^/[.]gith$",
+      "^/[.]github$",
       "^/[.]yarn$",
       "^/node_modules$",
       "^/out$",
@@ -42,16 +43,13 @@ module.exports = {
     }
   ],
   "makers": [
-    // {
-    //   "name": "@electron-forge/maker-dmg",
-    //   "config": {}
-    // },
     {
       "name": "@electron-forge/maker-deb",
       "config": {
         "options": {
           "maintainer": "AV DIMAG",
-          "homepage": "https://avdimag.ch"
+          "homepage": "https://avdimag.ch",
+          "icon": "src/app/assets/icons/av-dimag-ech-logo.png"
         }
       }
     },
@@ -70,7 +68,8 @@ module.exports = {
         "win32"
       ],
       "config": {
-        "name": "ech-0160-dimag-ingest"
+        "name": "ech-0160-dimag-ingest",
+        "icon": "src/app/assets/icons/av-dimag-ech-logo"
       }
     }
   ]
