@@ -1,6 +1,6 @@
 name: "🚧 Refactor Task"
 description: Create a new ticket to refactor code and tests
-title: "🚧 refactor [topic]: title"
+title: "🚧 refactor(topic): title"
 labels: [
   "enhancement"
 ]

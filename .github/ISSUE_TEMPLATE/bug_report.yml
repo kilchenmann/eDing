@@ -1,6 +1,6 @@
 name: "🐛 Bug Report"
 description: Create a new ticket for a bug.
-title: "🐛 bug [topic]: title"
+title: "🐛 bug(topic): title"
 assignees: "kilchenmann"
 labels: [
   "bug"
@@ -21,8 +21,8 @@ body:
       description: Please enter an explicit description of your issue
       placeholder: |
         1. Go to '...'
-        1. Click on '....'
-        1. Scroll down to '....'
+        1. Click on '...'
+        1. Scroll down to '...'
         1. See error
     validations:
       required: true
