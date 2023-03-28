@@ -198,6 +198,10 @@ export class OrganizeService {
                                     // skip!!!
                                     break;
 
+                                case (value[0] && value[0]._text && value[0]._text[0] === null):
+                                    // something is empty in xml, skip
+                                    break;
+
                                 default:
                                     console.warn('Warning! This object type (array) is not yet supported!');
                             }
