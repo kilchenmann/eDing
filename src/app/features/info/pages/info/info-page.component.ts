@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+
+import packageInfo from '../../../../../../package.json';
 
 @Component({
     selector: 'app-info-page',
@@ -6,4 +9,8 @@ import { Component } from '@angular/core';
     styleUrls: ['./info-page.component.scss']
 })
 export class InfoPageComponent {
+
+    constructor(private titleService: Title) {
+        this.titleService.setTitle(`${packageInfo.name} > Info / Hilfe`);
+    }
 }

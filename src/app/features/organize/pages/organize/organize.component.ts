@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import JSZip from 'jszip';
 import { cloneDeep } from 'lodash';
@@ -19,6 +20,7 @@ import {
     SIP
 } from '../../../../shared/models/xmlns/bar.admin.ch/arelda/sip-arelda-v4';
 import { OrganizeService } from '../../services/organize.service';
+import packageInfo from '../../../../../../package.json';
 
 
 // xmlToJSON does not export itself as ES6/ECMA2015 module,
@@ -64,10 +66,11 @@ export class OrganizeComponent implements OnInit, OnDestroy {
     subContainer = new Subscription;
 
     constructor(
-        private router: Router,
         private dialog: MatDialog,
         private electronService: ElectronService,
-        private organizeService: OrganizeService
+        private organizeService: OrganizeService,
+        private router: Router,
+        private titleService: Title
     ) {
     }
 
@@ -79,6 +82,12 @@ export class OrganizeComponent implements OnInit, OnDestroy {
             window.localStorage.setItem('ingestPackages', JSON.stringify(this.ingestPackages));
             window.localStorage.setItem('addedIngestPackages', JSON.stringify(this.alreadyAddedIngestPackages));
         });
+
+        // get stored project name
+        const projectName = window.localStorage.getItem('currentProject');
+        if (projectName) {
+            this.titleService.setTitle(`${packageInfo.name} > ${projectName}`);
+        }
 
         // get stored ingestPackages
         const storedIngestPackages = window.localStorage.getItem('ingestPackages');
@@ -434,7 +443,6 @@ export class OrganizeComponent implements OnInit, OnDestroy {
             const keys = Object.keys(zip.files);
             const metadataPath = keys.find(key => key.endsWith('header/metadata.xml')) ?? '';
             const metadataXML = await zip.file(metadataPath)?.async('string');
-
             this.xml = metadataXML ?? '';
             this.convertXmlToJson();
         } catch (error) {
