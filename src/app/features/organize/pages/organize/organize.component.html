@@ -17,7 +17,7 @@
 
       <!-- ablieferung -->
       <mat-tab label="Ablieferung" [disabled]="!sip.paket || !sip.paket.length">
-        <app-delivery-tab class="content" *ngIf="sip.paket && sip.paket.length" [sip]="sip"></app-delivery-tab>
+        <app-delivery-tab class="content" *ngIf="sip.paket && sip.paket.length" [sip]="sip" [provenienz]="sip.paket[0].ablieferung[0].provenienz[0]"></app-delivery-tab>
       </mat-tab>
 
       <!-- header metadata -->

@@ -1,23 +1,15 @@
 import { Html } from '../../../xml-error';
 
 export interface TextString {
-    '_text': string;
+    '_text': string | 'true' | 'false';
 }
 
-export interface TextNumber {
-    '_text': number;
-}
-
-export interface TextBoolean {
-    '_text': boolean;
+export interface AttrschemaVersion {
+    '_value': number;
 }
 
 export interface ValueString {
     '_value': string;
-}
-
-export interface ValueNumber {
-    '_value': number;
 }
 
 export interface HashFunktion {
@@ -44,36 +36,37 @@ export interface Ordner {
     'datei'?: Datei[];
 }
 
-export interface Inhaltsverzeichnis {
+export interface Inhaltsverzeichnis extends TextString {
     'ordner': Ordner[];
 }
 
-export interface Datum {
-    'ca'?: TextBoolean[];
+export interface Datum extends TextString {
+    'ca'?: TextString[];
     'datum': TextString[];
 }
 
-export interface Provenienz {
+export interface Provenienz extends TextString {
     'aktenbildnerName': TextString[];
     'systemName': TextString[];
+    'systemBeschreibung': TextString[];
     'registratur': TextString[];
+    'bemerkung': TextString[];
 }
 
-export interface Zeitraum {
+export interface Zeitraum extends TextString {
     'von': Datum[];
     'bis': Datum[];
 }
 
-export interface Merkmal {
+export interface Merkmal extends TextString {
     '_attrname': ValueString;
-    '_text': number | string | null[];
 }
 
-export interface ZusatzDaten {
+export interface ZusatzDaten extends TextString {
     'merkmal': Merkmal[];
 }
 
-export interface Dokument {
+export interface Dokument extends TextString {
     '_attrid': ValueString;
     'titel': TextString[];
     'autor': TextString[];
@@ -83,11 +76,11 @@ export interface Dokument {
     'klassifizierungskategorie': TextString[];
     'oeffentlichkeitsstatus': TextString[];
     'dateiRef': TextString[];
-    'datenschutz': TextBoolean[];
+    'datenschutz': TextString[];
 }
 
 export interface Aktivitaet {
-    '_attrorder': ValueNumber;
+    '_attrorder': ValueString;
     'vorschreibung': TextString[];
     'abschlussdatum': TextString[];
 }
@@ -97,7 +90,7 @@ export interface Vorgang {
     'aktivitaet': Aktivitaet[];
 }
 
-export interface Dossier {
+export interface Dossier extends TextString {
     '_attrid': ValueString;
     'titel': TextString[];
     'erscheinungsform': TextString[];
@@ -105,7 +98,7 @@ export interface Dossier {
     'entstehungszeitraum': Zeitraum[];
     'zusatzDaten': ZusatzDaten[];
     'klassifizierungskategorie': TextString[];
-    'datenschutz': TextBoolean[];
+    'datenschutz': TextString[];
     'oeffentlichkeitsstatus': TextString[];
     'aktenzeichen': TextString[];
     'eroeffnungsdatum': Datum[];
@@ -116,40 +109,40 @@ export interface Dossier {
     'dossier': Dossier[];
 }
 
-export interface Ordnungssystemposition {
+export interface Ordnungssystemposition extends TextString {
     '_attrid': ValueString;
-    'datenschutz': TextBoolean[];
-    'nummer': TextNumber[];
+    'datenschutz': TextString[];
+    'nummer': TextString[];
     'titel': TextString[];
     'ordnungssystemposition'?: Ordnungssystemposition[];
     'dossier'?: Dossier[];
 }
 
-export interface Ordnungssystem {
+export interface Ordnungssystem extends TextString {
     'generation': TextString[];
     'name': TextString[];
     'ordnungssystemposition': Ordnungssystemposition[];
 }
 
-export interface Ablieferung {
+export interface Ablieferung extends TextString {
     '_attrtype': ValueString;
     'ablieferungstyp': TextString[];
     'ablieferndeStelle': TextString[];
     'entstehungszeitraum': TextString[];
     'ablieferungsnummer': TextString[];
     'schutzfristenkategorie': TextString[];
-    'schutzfrist': TextNumber[];
+    'schutzfrist': TextString[];
     'provenienz': Provenienz[];
     'ordnungssystem': Ordnungssystem[];
 }
 
-export interface Paket {
+export interface Paket extends TextString {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     '_attrxmlns:xsi': ValueString;
     '_attrxmlns': ValueString;
     '_attrschemaLocation': ValueString;
     '_attrtype': ValueString;
-    '_attrschemaVersion': ValueNumber;
+    '_attrschemaVersion': AttrschemaVersion;
     'paketTyp': PaketTyp[];
     'inhaltsverzeichnis': Inhaltsverzeichnis[];
     'ablieferung': Ablieferung[];

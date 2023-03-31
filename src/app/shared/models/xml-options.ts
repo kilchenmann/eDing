@@ -1,7 +1,7 @@
 export const XML_OPTIONS = {
     mergeCDATA: false,      // extract cdata and merge with text nodes
     grokAttr: true,         // convert truthy attributes to boolean, etc
-    grokText: true,         // convert truthy text/attr to boolean, etc
+    grokText: false,         // convert truthy text/attr to boolean, etc
     normalize: true,        // collapse multiple spaces to single space
     xmlns: false,           // include namespaces as attributes in output
     namespaceKey: '_ns',    // tag name for namespace objects

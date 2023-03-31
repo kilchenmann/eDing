@@ -113,9 +113,45 @@ router-outlet+* {
 .warning {
   background-color: rgba(255, 0, 60, .39);
 }
-.mat-menu-panel.metadata {
-  max-width: 640px !important;
-  padding: 8px !important;
+.mat-menu-panel.menu-metadata {
+  width: 480px;
+  max-width: 480px !important;
+  max-height: 640px;
+  overflow: hidden;
+
+  .mat-menu-content {
+    padding: 0 !important;
+    height: 640px;
+  }
+
+  .header {
+    display: flex;
+    height: 48px;
+    background-color: rgba(0, 0, 0, 0.39);
+    padding: 8px;
+
+    .title {
+
+      .mat-subheading-1 {
+        margin: 0;
+      }
+
+      .mat-subheading-2 {
+        max-width: calc(480px - 48px - 16px);
+        height: 24px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+
+    }
+  }
+
+  .content {
+    padding: 16px 8px;
+    overflow: auto;
+    height: calc(640px - 64px - 36px);
+  }
 }
 
 .as-split-area {

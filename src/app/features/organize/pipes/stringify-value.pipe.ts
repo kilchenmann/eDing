@@ -2,7 +2,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 import {
     Datum,
     Merkmal,
-    TextNumber,
     TextString,
     Zeitraum,
     ZusatzDaten
@@ -22,7 +21,7 @@ export class StringifyValuePipe implements PipeTransform {
         let stringified = '';
 
         if (value === undefined) {
-            return '<i class="hint">Hinweis: Dieser Wert ist nicht definiert oder existiert nicht.</i>' + JSON.stringify(value);
+            return '--';
         } else {
             // which kind of value do we have?
             // switch in case of an array
@@ -32,28 +31,17 @@ export class StringifyValuePipe implements PipeTransform {
                         // instance of TextString
                         let t = 0;
                         for (const val of <TextString[]>value) {
-                            const delimiter = (t > 0 ? '<br>' : '');
-                            stringified += delimiter + val._text;
+                            if (!isArray(val._text)) {
+                                const delimiter = (t > 0 ? '<br>' : '');
+
+                                const strVal = ((val._text === 'true' || val._text === 'false') ? (val._text === ('true' ) ? 'ja' : 'nein') : val._text);
+                                stringified += delimiter + strVal;
+                            } else {
+                                stringified = '--';
+                            }
                             t++;
                         }
                         return stringified;
-
-                    case this.organizeService.instanceOfTN(value[0]):
-                        // instance of TextNumber
-                        let i = 0;
-                        for (const val of <TextNumber[]>value) {
-                            const delimiter = (i > 0 ? '<br>' : '');
-                            stringified += delimiter + val._text;
-                            i++;
-                        }
-                        return stringified;
-
-                    case this.organizeService.instanceOfTB(value[0]):
-                        // instance of TextBoolean
-                        // wir gehen davon aus, dass der boolsche Wert nur einmal vorkommt,
-                        // auch wenn der Wert als Array zurückkommt. Deshalb wird lediglich
-                        // der erste Wert zurückgegeben.
-                        return (value[0]._text === 'true' ? 'ja' : 'nein');
 
                     case this.organizeService.instanceOfZD(value[0]):
                         // instance of ZusatzDaten
@@ -100,16 +88,7 @@ export class StringifyValuePipe implements PipeTransform {
 
             } else {
                 // switch in case of an object
-                switch (true) {
-                    case (this.organizeService.instanceOfVS(value)):
-                        return (value._value ? value._value : 'undefined');
-
-                    case (this.organizeService.instanceOfVN(value)):
-                        return JSON.stringify(value._value);
-
-                    default:
-                        return '<i class="hint">Hinweis: Dieser Objekttyp wird noch nicht unterstützt. </i>' + JSON.stringify(value);
-                }
+                return (value._value ? value._value : '--');
             }
         }
     }

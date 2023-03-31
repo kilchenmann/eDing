@@ -15,9 +15,22 @@ describe('HeaderTabComponent', () => {
         }).compileComponents();
         fixture = TestBed.createComponent(HeaderTabComponent);
         component = fixture.componentInstance;
-        component.sip = { paket: [{ paketTyp: [{ _text: 'SIP' }], _attrxmlns: { _value: '' },_attrschemaLocation: { _value: '' },
-            // eslint-disable-next-line @typescript-eslint/naming-convention
-            ablieferung: [],_attrtype: { _value: '1' },_attrschemaVersion: { _value: 1 }, inhaltsverzeichnis: [], '_attrxmlns:xsi':  { _value: '' } }] };
+        component.sip = {
+            'paket': [{
+                'paketTyp': [
+                    { '_text': 'SIP' }
+                ],
+                '_attrxmlns': { '_value': '' },
+                '_attrschemaLocation': { '_value': '' },
+                '_attrtype': { '_value': '1' },
+                '_attrschemaVersion': { '_value': 1 },
+                'inhaltsverzeichnis': [],
+                // eslint-disable-next-line @typescript-eslint/naming-convention
+                '_attrxmlns:xsi': { '_value': '' },
+                'ablieferung': [],
+                '_text': ''
+            }]
+        };
         fixture.detectChanges();
     });
 

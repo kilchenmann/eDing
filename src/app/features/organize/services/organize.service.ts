@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { isEqualWith } from 'lodash-es';
 import {
     Datum,
     Dokument,
@@ -8,15 +9,11 @@ import {
     Ordnungssystem,
     Ordnungssystemposition,
     Provenienz,
-    TextBoolean,
-    TextNumber,
     TextString,
-    ValueNumber,
     ValueString,
     Zeitraum,
     ZusatzDaten
 } from '../../../shared/models/xmlns/bar.admin.ch/arelda/sip-arelda-v4';
-import { isEqualWith } from 'lodash-es';
 
 @Injectable({
     providedIn: 'root'
@@ -55,18 +52,8 @@ export class OrganizeService {
             const attr = key.split('_attr');
             if (attr.length > 1) {
                 // switch in case of an object
-                switch (true) {
-                    case (this.instanceOfVS(value)):
-                        rootEle.setAttribute(attr[1], value._value);
-                        break;
+                rootEle.setAttribute(attr[1],  (value._value ? JSON.stringify(value._value) : 'undefined'));
 
-                    case (this.instanceOfVN(value)):
-                        rootEle.setAttribute(attr[1], JSON.stringify(value._value));
-                        break;
-
-                    default:
-                        console.warn('Was not able to get type of this object: ', JSON.stringify(value));
-                }
             } else {
                 let ele = xml.createElement(key);
 
@@ -97,25 +84,6 @@ export class OrganizeService {
                                     ele.innerHTML = stringified;
                                     break;
 
-                                case this.instanceOfTN(value[0]):
-                                    // instance of TextNumber
-                                    let i = 0;
-                                    for (const val of <TextNumber[]>value) {
-                                        const delimiter = (i > 0 ? '<br/>' : '');
-                                        stringified += delimiter + val._text;
-                                        i++;
-                                    }
-                                    ele.innerHTML = stringified;
-                                    break;
-
-                                case this.instanceOfTB(value[0]):
-                                    // instance of TextBoolean
-                                    // wir gehen davon aus, dass der boolsche Wert nur einmal vorkommt,
-                                    // auch wenn der Wert als Array zurückkommt. Deshalb wird lediglich
-                                    // der erste Wert zurückgegeben.
-                                    ele.innerHTML = (value[0]._text === true ? 'true' : 'false');
-                                    break;
-
                                 case this.instanceOfZD(value[0]):
                                     // instance of ZusatzDaten
                                     let z = 0;
@@ -123,7 +91,6 @@ export class OrganizeService {
                                         const delimiter = (z > 0 ? '<br/>' : '');
                                         for (const m of <Merkmal[]>val.merkmal) {
                                             stringified += delimiter + m._attrname._value + ' ' + m._text;
-
                                         }
                                         z++;
                                     }
@@ -207,18 +174,7 @@ export class OrganizeService {
                             }
                         } else {
                             // switch in case of an object
-                            switch (true) {
-                                case (this.instanceOfVS(value)):
-                                    ele.innerHTML = (value._value ? value._value : 'undefined');
-                                    break;
-
-                                case (this.instanceOfVN(value)):
-                                    ele.innerHTML = JSON.stringify(value._value);
-                                    break;
-
-                                default:
-                                    console.warn('Warning! This object type (object) is not yet supported!');
-                            }
+                            ele.innerHTML = (value._value ? JSON.stringify(value._value) : 'undefined');
                         }
                     }
                 }
@@ -233,23 +189,15 @@ export class OrganizeService {
 
     // https://stackoverflow.com/questions/14425568/interface-type-check-with-typescript
     instanceOfTS(object: any): object is TextString {
-        return '_text' in object && typeof object._text == 'string';
-    }
-
-    instanceOfTN(object: any): object is TextNumber {
-        return '_text' in object && typeof object._text == 'number';
-    }
-
-    instanceOfTB(object: any): object is TextBoolean {
-        return '_text' in object && typeof object._text == 'boolean';
+        const keys = Object.keys(object);
+        const key = keys[0];
+        return (keys.length === 1 && key === '_text');
     }
 
     instanceOfVS(object: any): object is ValueString {
-        return '_value' in object && typeof object._value == 'string';
-    }
-
-    instanceOfVN(object: any): object is ValueNumber {
-        return '_value' in object && typeof object._value == 'number';
+        const keys = Object.keys(object);
+        const key = keys[0];
+        return (keys.length === 1 && key === '_value');
     }
 
     instanceOfDM(object: any): object is Datum {
@@ -265,7 +213,10 @@ export class OrganizeService {
     }
 
     instanceOfPR(object: any): object is Provenienz {
-        return 'aktenbildnerName' in object || 'registratur' in object;
+        // return 'aktenbildnerName' in object || 'registratur' in object || 'systemName' in object;
+        const keys = Object.keys(object);
+        const key = keys[0];
+        return (keys.length > 1 && (key === 'aktenbildnerName' || key === 'registratur' || key === 'systemName'));
     }
 
     instanceOfOS(object: any): object is Ordnungssystem {
