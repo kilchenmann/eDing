@@ -68,8 +68,7 @@ module.exports = {
         "win32"
       ],
       "config": {
-        "name": "ech-0160-dimag-ingest",
-        "icon": "src/app/assets/icons/av-dimag-ech-logo"
+        "name": "ech-0160-dimag-ingest"
       }
     }
   ]
