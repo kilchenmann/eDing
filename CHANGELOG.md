@@ -1,5 +1,26 @@
 # Changelog
 
+## [1.2.0](https://github.com/av-dimag/ech-0160-dimag-ingest/compare/v1.1.0...v1.2.0) (2023-03-31)
+
+
+### Bug Fixes
+
+* **export:** resolve export issues ([#138](https://github.com/av-dimag/ech-0160-dimag-ingest/issues/138)) ([464f9ea](https://github.com/av-dimag/ech-0160-dimag-ingest/commit/464f9ea6710ac804858b7f632207616d74c40c49))
+* fix array null warnings ([#142](https://github.com/av-dimag/ech-0160-dimag-ingest/issues/142)) ([234a0be](https://github.com/av-dimag/ech-0160-dimag-ingest/commit/234a0be632ae28df2ab298471500899f826af673))
+* resolve issues in CHANGELOG ([#136](https://github.com/av-dimag/ech-0160-dimag-ingest/issues/136)) ([38e1daa](https://github.com/av-dimag/ech-0160-dimag-ingest/commit/38e1daa3e34d6294cb9aae3b274eb4f28f8420d7))
+* **xml2json:** resolve issues with types ([#144](https://github.com/av-dimag/ech-0160-dimag-ingest/issues/144)) ([faafcad](https://github.com/av-dimag/ech-0160-dimag-ingest/commit/faafcadd2a507ec0bfe6e51038b1c13cd13dab0f))
+
+
+### Maintenance
+
+* **gh:** better titles in issue templates ([#140](https://github.com/av-dimag/ech-0160-dimag-ingest/issues/140)) ([f8289af](https://github.com/av-dimag/ech-0160-dimag-ingest/commit/f8289afb1a7e555a955d21bdc48b74ee948bfa41))
+
+
+### Enhancements
+
+* **electron:** new app icons ech-package ([#139](https://github.com/av-dimag/ech-0160-dimag-ingest/issues/139)) ([959bf11](https://github.com/av-dimag/ech-0160-dimag-ingest/commit/959bf11f76de5ab48b82a22dbb14edfd06ae8b7b))
+* **title:** use sip name in title ([#147](https://github.com/av-dimag/ech-0160-dimag-ingest/issues/147)) ([470dee9](https://github.com/av-dimag/ech-0160-dimag-ingest/commit/470dee9e6e7a80f98c6004b9efd7233cbe20b194))
+
 ## [1.1.0](https://www.github.com/av-dimag/ech-0160-dimag-ingest/compare/v1.0.2...v1.1.0) (2023-03-24)
 
 
