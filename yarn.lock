@@ -3454,6 +3454,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/node@npm:^16.11.26":
+  version: 16.18.23
+  resolution: "@types/node@npm:16.18.23"
+  checksum: 00e51db28fc7a182747f37215b3f25400b1c7a8525e09fa14e55be5798891a118ebf636a49d3197335a3580fcb8222fd4ecc20c2ccff69f1c0d233fc5697465d
+  languageName: node
+  linkType: hard
+
 "@types/parse-json@npm:^4.0.0":
   version: 4.0.0
   resolution: "@types/parse-json@npm:4.0.0"
@@ -6126,6 +6133,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^5.38.1
     "@typescript-eslint/parser": ^5.38.1
     angular-split: ^14.1.0
+    electron: 23.1.1
     eslint: ^8.24.0
     eslint-plugin-import: ^2.26.0
     eslint-plugin-jsdoc: ^39.3.6
@@ -6276,6 +6284,19 @@ __metadata:
     lodash.template: ^4.2.2
     temp: ^0.9.0
   checksum: a283b1ee0b0355a54602c807dcf55e7cef92b79ddd08de8ec1e0913ca0c976ed0c03ec651fb0cc69ff86d6a21f2caef7d6992b83c03af772cc03ddf17fd68151
+  languageName: node
+  linkType: hard
+
+"electron@npm:23.1.1":
+  version: 23.1.1
+  resolution: "electron@npm:23.1.1"
+  dependencies:
+    "@electron/get": ^2.0.0
+    "@types/node": ^16.11.26
+    extract-zip: ^2.0.1
+  bin:
+    electron: cli.js
+  checksum: 8f1ade0518957f40f399d2e47dfeea690ff5cea81201e4f9cfaa1ad768d14699168c37c1376586a9f21bca2dc9f7fde01885967a88f39af6667df25d574452fa
   languageName: node
   linkType: hard
 
@@ -7443,7 +7464,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"extract-zip@npm:^2.0.0":
+"extract-zip@npm:^2.0.0, extract-zip@npm:^2.0.1":
   version: 2.0.1
   resolution: "extract-zip@npm:2.0.1"
   dependencies:
