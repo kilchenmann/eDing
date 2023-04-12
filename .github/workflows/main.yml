@@ -33,7 +33,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Install dependencies
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install --immutable
       - name: Run the lint scripts
         run: |
@@ -64,7 +63,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Install dependencies
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install --immutable && yarn postinstall
       - name: Run unit tests
         run: yarn test-ci
@@ -83,7 +81,8 @@ jobs:
           node-version: ${{ env.nv }}
       - name: Get cache path
         id: yarn-cache-dir-path
-        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+        # run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
       - name: Use cached node modules
         uses: actions/cache@v3
         id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
@@ -93,7 +92,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Install dependencies
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install --immutable && yarn postinstall
       - name: Build the app
         run: yarn build
@@ -160,7 +158,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Install dependencies
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install --immutable && yarn postinstall
       - name: Build the angular app
         run: yarn build
