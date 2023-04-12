@@ -20,8 +20,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.nv }}
+      - name: Use chached node modules
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
       - name: Install dependencies
-        run: yarn install --immutable
+        run: yarn install
       - name: Run the lint scripts
         run: |
           yarn lint-ci
@@ -38,8 +43,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.nv }}
+      - name: Use chached node modules
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
       - name: Install dependencies
-        run: yarn install --immutable
+        run: yarn install
       - name: Run unit tests
         run: yarn test-ci
 
@@ -55,8 +65,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.nv }}
+      - name: Use chached node modules
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
       - name: Install dependencies
-        run: yarn install --immutable
+        run: yarn install
       - name: Build the app
         run: yarn build
       - name: Run e2e tests
@@ -109,6 +124,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.nv}}
+      - name: Use chached node modules
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
       - name: Install dependencies
         run: yarn install
       - name: Build the angular app
