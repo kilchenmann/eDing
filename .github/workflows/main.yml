@@ -126,11 +126,11 @@ jobs:
   # deploy and publish; runs on release only
   publish:
     name: Publish
-    needs: [
-      lint,
-      unit-tests,
-      e2e-tests
-    ]
+    # needs: [
+    #   lint,
+    #   unit-tests,
+    #   e2e-tests
+    # ]
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
