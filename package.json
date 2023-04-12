@@ -55,6 +55,7 @@
     "@angular/platform-browser": "^14.2.0",
     "@angular/platform-browser-dynamic": "^14.2.0",
     "@angular/router": "^14.2.0",
+    "@types/electron": "^1.6.10",
     "@types/jsontoxml": "^1.0.3",
     "angular-split": "^14.1.0",
     "jszip": "^3.10.1",

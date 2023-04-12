@@ -3232,6 +3232,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/electron@npm:^1.6.10":
+  version: 1.6.10
+  resolution: "@types/electron@npm:1.6.10"
+  dependencies:
+    electron: "*"
+  checksum: 1194d023d425fad826d719b761c67022ef97a4d3bea40ce6a3ac36aa40f913e3714775ef816744ec61214ab49b0ca377a939b18a8c29bfd76285011c21e2de76
+  languageName: node
+  linkType: hard
+
 "@types/eslint-scope@npm:^3.7.3":
   version: 3.7.4
   resolution: "@types/eslint-scope@npm:3.7.4"
@@ -3440,7 +3449,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:>=10.0.0, @types/node@npm:^18.7.18":
+"@types/node@npm:*, @types/node@npm:>=10.0.0, @types/node@npm:^18.11.18, @types/node@npm:^18.7.18":
   version: 18.15.11
   resolution: "@types/node@npm:18.15.11"
   checksum: 977b4ad04708897ff0eb049ecf82246d210939c82461922d20f7d2dcfd81bbc661582ba3af28869210f7e8b1934529dcd46bff7d448551400f9d48b9d3bddec3
@@ -6125,6 +6134,7 @@ __metadata:
     "@electron-forge/maker-squirrel": ^6.0.5
     "@electron-forge/maker-zip": ^6.0.5
     "@electron-forge/publisher-github": ^6.0.5
+    "@types/electron": ^1.6.10
     "@types/jasmine": ~4.0.0
     "@types/jest": ^29.1.0
     "@types/jsontoxml": ^1.0.3
@@ -6284,6 +6294,19 @@ __metadata:
     lodash.template: ^4.2.2
     temp: ^0.9.0
   checksum: a283b1ee0b0355a54602c807dcf55e7cef92b79ddd08de8ec1e0913ca0c976ed0c03ec651fb0cc69ff86d6a21f2caef7d6992b83c03af772cc03ddf17fd68151
+  languageName: node
+  linkType: hard
+
+"electron@npm:*":
+  version: 24.1.0
+  resolution: "electron@npm:24.1.0"
+  dependencies:
+    "@electron/get": ^2.0.0
+    "@types/node": ^18.11.18
+    extract-zip: ^2.0.1
+  bin:
+    electron: cli.js
+  checksum: 239c26b9958e25e3e80d96b33ccd45f8f2d1bb5357b473431fcf3581b42bfdc78ea5e5389aa8310f78c1c48d8ef532c0246709ed8cb26e458984b8dc92f5ee1c
   languageName: node
   linkType: hard
 
