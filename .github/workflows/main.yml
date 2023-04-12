@@ -24,7 +24,7 @@ jobs:
       - name: Get cache path
         id: yarn-cache-dir-path
         run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
-      - name: Use chached node modules
+      - name: Use cached node modules
         uses: actions/cache@v3
         id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
@@ -33,6 +33,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Install dependencies
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install --immutable
       - name: Run the lint scripts
         run: |
@@ -54,7 +55,7 @@ jobs:
       - name: Get cache path
         id: yarn-cache-dir-path
         run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
-      - name: Use chached node modules
+      - name: Use cached node modules
         uses: actions/cache@v3
         id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
@@ -63,6 +64,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Install dependencies
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install --immutable && yarn postinstall
       - name: Run unit tests
         run: yarn test-ci
@@ -79,13 +81,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.nv }}
-          cache: 'yarn'
-      # - name: Pre-Install dependencies
-      #   run: yarn install
       - name: Get cache path
         id: yarn-cache-dir-path
         run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
-      - name: Use chached node modules
+      - name: Use cached node modules
         uses: actions/cache@v3
         id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
@@ -94,6 +93,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Install dependencies
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install --immutable && yarn postinstall
       - name: Build the app
         run: yarn build
@@ -151,7 +151,7 @@ jobs:
       - name: Get cache path
         id: yarn-cache-dir-path
         run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
-      - name: Use chached node modules
+      - name: Use cached node modules
         uses: actions/cache@v3
         id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
@@ -160,6 +160,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Install dependencies
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install --immutable && yarn postinstall
       - name: Build the angular app
         run: yarn build
