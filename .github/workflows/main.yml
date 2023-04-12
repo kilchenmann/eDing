@@ -20,10 +20,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.nv }}
-      - name: Use chached node modules
+          cache: 'yarn'
+      - name: Get cache path
         id: yarn-cache-dir-path
         run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
-      - uses: actions/cache@v3
+      - name: Use chached node modules
+        uses: actions/cache@v3
         id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
@@ -48,10 +50,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.nv }}
-      - name: Use chached node modules
+          cache: 'yarn'
+      - name: Get cache path
         id: yarn-cache-dir-path
         run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
-      - uses: actions/cache@v3
+      - name: Use chached node modules
+        uses: actions/cache@v3
         id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
@@ -75,10 +79,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.nv }}
-      - name: Use chached node modules
+          cache: 'yarn'
+      - name: Get cache path
         id: yarn-cache-dir-path
         run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
-      - uses: actions/cache@v3
+      - name: Use chached node modules
+        uses: actions/cache@v3
         id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
@@ -139,10 +145,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.nv}}
-      - name: Use chached node modules
+          cache: 'yarn'
+      - name: Get cache path
         id: yarn-cache-dir-path
         run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
-      - uses: actions/cache@v3
+      - name: Use chached node modules
+        uses: actions/cache@v3
         id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
