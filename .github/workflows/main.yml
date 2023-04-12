@@ -70,7 +70,7 @@ jobs:
   # e2e tests
   e2e-tests:
     name: Run e2e tests (incl. build)
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     if: github.ref != 'refs/heads/main'
     steps:
       - name: Checkout source
@@ -80,6 +80,8 @@ jobs:
         with:
           node-version: ${{ env.nv }}
           cache: 'yarn'
+      - name: Pre-Install dependencies
+        run: yarn install
       - name: Get cache path
         id: yarn-cache-dir-path
         run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
