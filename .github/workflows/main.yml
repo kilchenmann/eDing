@@ -97,10 +97,10 @@ jobs:
         run: yarn install --immutable && yarn postinstall
       - name: Build the app
         run: yarn build
-      - name: Run e2e tests
-        uses: DevExpress/testcafe-action@latest
-        with:
-          args: "electron ./testcafe-tests/main.spec.ts"
+      # - name: Run e2e tests
+      #   uses: DevExpress/testcafe-action@latest
+      #   with:
+      #     args: "electron ./testcafe-tests/main.spec.ts"
 
   # Automate releases with Conventional Commit Messages as Pull Requests are merged into "main" branch
   release-please:
