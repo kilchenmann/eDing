@@ -49,7 +49,7 @@ jobs:
           path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
       - name: Install dependencies
-        run: yarn install
+        run: yarn install-with-patch
       - name: Run unit tests
         run: yarn test-ci
 
@@ -71,7 +71,7 @@ jobs:
           path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
       - name: Install dependencies
-        run: yarn install
+        run: yarn install-with-patch
       - name: Build the app
         run: yarn build
       - name: Run e2e tests
@@ -130,7 +130,7 @@ jobs:
           path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
       - name: Install dependencies
-        run: yarn install
+        run: yarn install-with-patch
       - name: Build the angular app
         run: yarn build
       - name: Publish the electron app

@@ -26,7 +26,7 @@
   "main": "main.js",
   "scripts": {
     "ng": "ng",
-    "install": "yarn install && patch-package",
+    "install-with-patch": "yarn install && patch-package",
     "serve": "ng serve",
     "build": "ng build --configuration production",
     "build:watch": "ng build --configuration development --watch",
