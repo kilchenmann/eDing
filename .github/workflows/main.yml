@@ -84,7 +84,7 @@ jobs:
         id: win-cache-dir-path
         run: |
           echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
-          echo "Path: ", ${{ steps.win-cache-dir-path.outputs.dir }}
+          echo "Path: ${{ steps.win-cache-dir-path.outputs.dir }}"
       - name: Use chached node modules
         uses: actions/cache@v3
         id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
