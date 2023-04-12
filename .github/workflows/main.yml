@@ -80,8 +80,8 @@ jobs:
         with:
           node-version: ${{ env.nv }}
           cache: 'yarn'
-      - name: Pre-Install dependencies
-        run: yarn install
+      # - name: Pre-Install dependencies
+      #   run: yarn install
       - name: Get cache path
         id: yarn-cache-dir-path
         run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
@@ -89,7 +89,7 @@ jobs:
         uses: actions/cache@v3
         id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          path: D:\a\ech-0160-dimag-ingest\ech-0160-dimag-ingest\.yarn\cache # ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
