@@ -86,7 +86,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Install dependencies
-        run: yarn install && yarn postinstall
+        run: yarn install
       - name: Build the app
         run: yarn build
       - name: Run e2e tests
