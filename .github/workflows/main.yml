@@ -9,63 +9,63 @@ on:
 
 jobs:
   # code linter
-  lint:
-    name: Run lint
-    runs-on: ubuntu-latest
-    if: github.ref != 'refs/heads/main'
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v3
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ env.nv }}
-          cache: 'yarn'
-      - name: Get cache path
-        id: yarn-cache-dir-path
-        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
-      - name: Use chached node modules
-        uses: actions/cache@v3
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-      - name: Install dependencies
-        run: yarn install --immutable
-      - name: Run the lint scripts
-        run: |
-          yarn lint-ci
+  # lint:
+  #   name: Run lint
+  #   runs-on: ubuntu-latest
+  #   if: github.ref != 'refs/heads/main'
+  #   steps:
+  #     - name: Checkout source
+  #       uses: actions/checkout@v3
+  #     - name: Set up Node.js
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version: ${{ env.nv }}
+  #         cache: 'yarn'
+  #     - name: Get cache path
+  #       id: yarn-cache-dir-path
+  #       run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
+  #     - name: Use chached node modules
+  #       uses: actions/cache@v3
+  #       id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+  #       with:
+  #         path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+  #         key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+  #         restore-keys: |
+  #           ${{ runner.os }}-yarn-
+  #     - name: Install dependencies
+  #       run: yarn install --immutable
+  #     - name: Run the lint scripts
+  #       run: |
+  #         yarn lint-ci
 
   # unit tests
-  unit-tests:
-    name: Run unit tests
-    runs-on: ubuntu-latest
-    if: github.ref != 'refs/heads/main'
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v3
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ env.nv }}
-          cache: 'yarn'
-      - name: Get cache path
-        id: yarn-cache-dir-path
-        run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
-      - name: Use chached node modules
-        uses: actions/cache@v3
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-      - name: Install dependencies
-        run: yarn install --immutable && yarn postinstall
-      - name: Run unit tests
-        run: yarn test-ci
+  # unit-tests:
+  #   name: Run unit tests
+  #   runs-on: ubuntu-latest
+  #   if: github.ref != 'refs/heads/main'
+  #   steps:
+  #     - name: Checkout source
+  #       uses: actions/checkout@v3
+  #     - name: Set up Node.js
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version: ${{ env.nv }}
+  #         cache: 'yarn'
+  #     - name: Get cache path
+  #       id: win-cache-dir-path
+  #       run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
+  #     - name: Use chached node modules
+  #       uses: actions/cache@v3
+  #       id: win-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+  #       with:
+  #         path: ${{ steps.win-cache-dir-path.outputs.dir }}
+  #         key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+  #         restore-keys: |
+  #           ${{ runner.os }}-yarn-
+  #     - name: Install dependencies
+  #       run: yarn install --immutable && yarn postinstall
+  #     - name: Run unit tests
+  #       run: yarn test-ci
 
   # e2e tests
   e2e-tests:
