@@ -39,7 +39,7 @@ jobs:
         with:
           node-version: ${{ env.nv }}
       - name: Install dependencies
-        run: yarn install --immutable && yarn postinstall
+        run: yarn install --immutable
       - name: Run unit tests
         run: yarn test-ci
 
@@ -56,7 +56,7 @@ jobs:
         with:
           node-version: ${{ env.nv }}
       - name: Install dependencies
-        run: yarn install --immutable && yarn postinstall
+        run: yarn install --immutable
       - name: Build the app
         run: yarn build
       - name: Run e2e tests
@@ -110,11 +110,11 @@ jobs:
         with:
           node-version: ${{ env.nv}}
       - name: Install dependencies
-        run: yarn install && yarn postinstall
+        run: yarn install
       - name: Build the angular app
         run: yarn build
       - name: Publish the electron app
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: yarn ef:publish
+        run: yarn publish
 

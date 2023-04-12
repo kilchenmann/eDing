@@ -27,12 +27,25 @@ Install the dependencies with:
 
 ```shell
 yarn install
-yarn postinstall
 ```
 
 ### Development server
 
-Start the development server with `yarn start` and in a second terminal window the electron application with `yarn build:electron-dev`. This will open the app in electron automatically.
+There are two ways to run the Elektron application locally. In both cases, the application is rebuilt when changes are made to the code. 
+
+One way is the classical one with Angular running in the background on `http://localhost:4200` and using the basic electron build-command to run the Electron application in the foreground. Running the app in a browser is not recommended because of "read file system" which will not work from browser-side.
+
+The other way uses the Angular build command with the --watch parameter and the electron-forge setup which is also used in the publish and deployment process
+
+#### On localhost
+
+Start the development server with `yarn serve` and in a second terminal window start the electron application with `yarn electron:dev`. This will open the app whithin electron automatically.
+
+#### As build
+
+Build the app with `yarn build:watch` and in a second terminal window start the electron application with `yarn electron`. This will open the app whithin electron automatically.
+
+
 
 ## Code scaffolding
 
@@ -48,19 +61,19 @@ Run `yarn test` to execute the unit tests via [Karma](https://karma-runner.githu
 
 [Testcafe](https://testcafe.io/) is used as framework which makes it possible to run the tests directly in the electron application and not in the browser.
 
-Run `yarn test-e2e` to execute the end-to-end tests.
+Run `yarn e2e` to execute the end-to-end tests.
 
 ## Build the app with electron
 
 We are using [electron-forge](https://www.electronforge.io/) to start, build, package and publish the electron app:
 
-* Run `yarn ef:start` to build and open the app with electron
-* Run `yarn ef:package` to bundle the app code and to build an executable application (`.exe`, `.app`, `.deb` depending on the current OS).
-* Run `yarn ef:make`, which uses `electron-forge package` first and creates separate distributable for each configured maker.
+* Run `yarn electron` to open the app with electron. This commands needs a build first. To do so run `yarn build`.
+* Run `yarn package` to bundle the app code and to build an executable application (`.exe`, `.app`, `.deb` depending on the current OS).
+* Run `yarn make`, which uses `electron-forge package` first and creates separate distributable for each configured maker.
 
-You'll find the result of `yarn ef:package` and `yarn ef:make` in the `./out` folder.
+You'll find the result of `yarn package` and `yarn make` in the `./out` folder.
 
-The command `yarn ef:publish` is only used in the [Github Actions](.github/workflows/main.yml) to publish the electron app and append the bundles (as zip-file) to the current release.
+The command `yarn publish` is only used in the [Github Actions](.github/workflows/main.yml) to publish the electron app and append the bundles (as zip-file) to the current release.
 
 ## Further help
 
