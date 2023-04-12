@@ -40,11 +40,11 @@ The other way uses the Angular build command with the --watch parameter and the 
 
 #### On localhost
 
-Start the development server with `yarn serve` and in a second terminal window start the electron application with `yarn electron:dev`. This will open the app whithin electron automatically.
+Start the development server with `yarn serve` and in a second terminal window start the electron application with `yarn electron`. This will open the app whithin electron automatically.
 
 #### As build
 
-Build the app with `yarn build:watch` and in a second terminal window start the electron application with `yarn electron`. This will open the app whithin electron automatically.
+Run `yarn dev` to build the app (in dev mode and stored in `/dist` folder) and to open it with electron automatically.
 
 ## Code scaffolding
 
