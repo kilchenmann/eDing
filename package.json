@@ -83,7 +83,6 @@
     "@types/node": "^18.7.18",
     "@typescript-eslint/eslint-plugin": "^5.38.1",
     "@typescript-eslint/parser": "^5.38.1",
-    "electron": "23.1.1",
     "eslint": "^8.24.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsdoc": "^39.3.6",
@@ -100,5 +99,6 @@
     "testcafe": "^2.4.0",
     "testcafe-browser-provider-electron": "^0.0.19",
     "typescript": "~4.8.2"
-  }
+  },
+  "packageManager": "yarn@3.3.1"
 }
