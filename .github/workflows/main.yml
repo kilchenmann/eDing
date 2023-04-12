@@ -31,7 +31,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Install dependencies
-        run: yarn install-with-patch
+        run: yarn install
       - name: Run the lint scripts
         run: |
           yarn lint-ci
@@ -59,7 +59,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Install dependencies
-        run: yarn install-with-patch
+        run: yarn install && yarn postinstall
       - name: Run unit tests
         run: yarn test-ci
 
@@ -86,7 +86,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Install dependencies
-        run: yarn install-with-patch
+        run: yarn install && yarn postinstall
       - name: Build the app
         run: yarn build
       - name: Run e2e tests
@@ -150,7 +150,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Install dependencies
-        run: yarn install-with-patch
+        run: yarn install && yarn postinstall
       - name: Build the angular app
         run: yarn build
       - name: Publish the electron app

@@ -26,7 +26,8 @@ git clone https://gitlab.com/av-dimag/ingest-poc.git
 Install the dependencies with:
 
 ```shell
-yarn install-with-patch
+yarn install
+yarn postinstall
 ```
 
 ### Development server
