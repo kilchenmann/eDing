@@ -2,7 +2,8 @@
 
 <mat-dialog-content>
   <p>{{msg.text}}</p>
-  <p *ngIf="msg.log">{{msg.log}}</p>
+  <br>
+  <code *ngIf="msg.log">{{msg.log}}</code>
 </mat-dialog-content>
 
 <mat-dialog-actions>

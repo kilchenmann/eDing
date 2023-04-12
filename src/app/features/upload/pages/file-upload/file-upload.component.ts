@@ -66,7 +66,8 @@ export class FileUploadComponent {
                     data: {
                         title: 'Fehler im Format',
                         text: 'Bitte laden Sie ein valides ZIP-File entsprechend dem eCH-0160 Standard hoch.'
-                    }, panelClass: 'simple-dialog'
+                    },
+                    panelClass: 'simple-dialog'
                 });
             }
         } else {

@@ -154,7 +154,13 @@ export class OrganizeComponent implements OnInit, OnDestroy {
                 addFilesFromSubfolders: this.addFilesFromSubfolders
             });
         } else {
-            alert('Error: Dieses Paket wurde schon hinzugefügt');
+            const dialogRef = this.dialog.open(GenericDialogComponent, {
+                data: {
+                    title: 'Fehler beim Paketieren',
+                    text: 'Diese Struktur wurde bereits einem Ingest Paket hinzugefügt.',
+                    showActions: false
+                }, panelClass: 'simple-dialog'
+            });
         }
     }
 
@@ -196,7 +202,13 @@ export class OrganizeComponent implements OnInit, OnDestroy {
         searchPackages(ingestPackages);
 
         if (showInfo) {
-            alert('Info: Ein oder mehrere Paket/e konnten nicht hinzugefügt werden, da sie bereits vorhanden sind.');
+            this.dialog.open(GenericDialogComponent, {
+                data: {
+                    title: 'Fehler beim Paketieren',
+                    text: 'Ein oder mehrere Paket/e konnten nicht erstellt werden, da sie bereits einem Ingest Paket hinzugefügt wurden.'
+                },
+                panelClass: 'simple-dialog'
+            });
         }
     }
 
@@ -211,7 +223,13 @@ export class OrganizeComponent implements OnInit, OnDestroy {
             this.ingestPackages.splice(packageIndex, 1);
             this.alreadyAddedIngestPackages.splice(packageIndex, 1);
         } else {
-            alert('Error: Paket konnte nicht gelöscht werden');
+            this.dialog.open(GenericDialogComponent, {
+                data: {
+                    title: 'Fehler beim Löschen',
+                    text: 'Das Paket konnte nicht gelöscht werden.'
+                },
+                panelClass: 'simple-dialog'
+            });
         }
     }
 
@@ -381,14 +399,32 @@ export class OrganizeComponent implements OnInit, OnDestroy {
                                         };
                                     });
                                 });
-                                alert(`Success: Es ${moreThanOneIngestPackage ? 'wurden' : 'wurde'} ${ingestPackages.length} Ingest ${moreThanOneIngestPackage ? 'Pakete' : 'Paket'} gespeichert.`);
+                                this.dialog.open(GenericDialogComponent, {
+                                    data: {
+                                        title: 'Exportieren war erfolgreich',
+                                        text: `Es ${moreThanOneIngestPackage ? 'wurden' : 'wurde'} ${ingestPackages.length} Ingest ${moreThanOneIngestPackage ? 'Pakete' : 'Paket'} gespeichert.`
+                                    },
+                                    panelClass: 'simple-dialog'
+                                });
                             } catch (error) {
-                                alert(error);
+                                this.dialog.open(GenericDialogComponent, {
+                                    data: {
+                                        title: 'Fehler beim Exportieren',
+                                        text: error
+                                    },
+                                    panelClass: 'simple-dialog'
+                                });
                             }
                         }
                     }));
                 } else {
-                    alert('Error: Der Speicherpfad muss leer sein, um die Dateien dort speichern zu können.');
+                    this.dialog.open(GenericDialogComponent, {
+                        data: {
+                            title: 'Fehler im Speicherpfad',
+                            text: 'Der Pfad / Ordner muss leer sein, um die Dateien dort speichern zu können. Bitte wählen Sie einen anderen Pfad aus.'
+                        },
+                        panelClass: 'simple-dialog'
+                    });
                 }
             }
         });
@@ -451,8 +487,9 @@ export class OrganizeComponent implements OnInit, OnDestroy {
             await this.router.navigate(['/']);
             this.dialog.open(GenericDialogComponent, {
                 data: {
-                    title: 'Fehler beim SIP',
-                    text: 'Das SIP konnte nicht geladen werden. Bitte laden Sie es erneut hoch.'
+                    title: 'SIP nicht vorhanden',
+                    text: 'Das SIP konnte nicht geladen werden. Bitte laden Sie es erneut hoch.',
+                    log: error
                 },
                 panelClass: 'simple-dialog'
             });
