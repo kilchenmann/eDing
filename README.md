@@ -32,7 +32,7 @@ yarn postinstall
 
 ### Development server
 
-There are two ways to run the Elektron application locally. In both cases, the application is rebuilt when changes are made to the code. 
+There are two ways to run the Elektron application locally. In both cases, the application is rebuilt when changes are made to the code.
 
 One way is the classical one with Angular running in the background on `http://localhost:4200` and using the basic electron build-command to run the Electron application in the foreground. Running the app in a browser is not recommended because of "read file system" which will not work from browser-side.
 
@@ -45,8 +45,6 @@ Start the development server with `yarn serve` and in a second terminal window s
 #### As build
 
 Build the app with `yarn build:watch` and in a second terminal window start the electron application with `yarn electron`. This will open the app whithin electron automatically.
-
-
 
 ## Code scaffolding
 
