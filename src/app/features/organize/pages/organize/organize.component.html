@@ -1,9 +1,9 @@
 <as-split direction="horizontal">
   <as-split-area [size]="50" [minSize]="20">
     <mat-tab-group animationDuration="0ms">
-
       <!-- inhaltsverzeichnis -->
       <mat-tab label="SIP Inhalt" [disabled]="!sip.paket || !sip.paket.length">
+        <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
         <app-summary-tab
           *ngIf="sip.paket && sip.paket.length"
           [dataSource]="dataSource"
@@ -27,13 +27,13 @@
 
     </mat-tab-group>
 
-
   </as-split-area>
   <as-split-area [size]="50" [minSize]="20">
     <app-package-expansion-panel
       [ingestPackages]="ingestPackages"
+      [loading]="loading"
       (removeIngestPackage)="removeIngestPackage($event)"
-      (exportAllIngestPackages)="exportAllIngestPackages($event)"
+      (exportAllIngestPackages)="exportIngestPackages($event)"
       (removeAllIngestPackages)="removeAllIngestPackage()">
     </app-package-expansion-panel>
   </as-split-area>

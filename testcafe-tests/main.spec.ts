@@ -13,8 +13,8 @@ const links = {
 
 const buttons = {
     next: Selector('button').withText('Weiter'),
-    removeAllPackages: Selector('button').withText('Alle Pakete entfernen'),
-    exportPackages: Selector('button').withText('Pakete exportieren/speichern'),
+    removeAllPackages: Selector('button').withText('Alle entfernen'),
+    exportPackages: Selector('button').withText('Pakete exportieren'),
     generateAllPackages: Selector('button').withText('Automatische Generierung'),
     expandAll: Selector('button.expand'),
     collapseAll: Selector('button.collapse')
@@ -119,8 +119,8 @@ test('Generate custom packages', async page => {
     // remove all packages
     await page.click(buttons.removeAllPackages);
     await page.expect(expansionPanels.exists).notOk();
-    await page.expect(buttons.removeAllPackages.exists).notOk();
-    await page.expect(buttons.exportPackages.exists).notOk();
+    await page.expect(buttons.removeAllPackages.exists).ok();
+    await page.expect(buttons.exportPackages.exists).ok();
 });
 
 test('Test expand / collapse button', async page => {
@@ -159,8 +159,8 @@ async function uploadZip(page: TestController) {
     await page.click(buttons.next);
     await page.expect(buttons.generateAllPackages.visible).ok();
     await page.expect(matDialog.exists).notOk()
-    await page.expect(buttons.removeAllPackages.exists).notOk();
-    await page.expect(buttons.exportPackages.exists).notOk();
+    await page.expect(buttons.removeAllPackages.exists).ok();
+    await page.expect(buttons.exportPackages.exists).ok();
 }
 
 // get specific 'add package'-button

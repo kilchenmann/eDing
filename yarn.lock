@@ -7097,7 +7097,6 @@ __metadata:
     eslint-plugin-import: ^2.26.0
     eslint-plugin-jsdoc: ^39.3.6
     jasmine-core: ~4.3.0
-    jszip: ^3.10.1
     karma: ~6.4.0
     karma-chrome-launcher: ~3.1.0
     karma-coverage: ~2.2.0
@@ -7112,6 +7111,7 @@ __metadata:
     testcafe-browser-provider-electron: ^0.0.19
     tslib: ^2.3.0
     typescript: ~4.8.2
+    unzipit: ^1.4.2
     xmltojson: 1.3.5
     zone.js: ~0.11.4
   languageName: unknown
@@ -9446,13 +9446,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"immediate@npm:~3.0.5":
-  version: 3.0.6
-  resolution: "immediate@npm:3.0.6"
-  checksum: f9b3486477555997657f70318cc8d3416159f208bec4cca3ff3442fd266bc23f50f0c9bd8547e1371a6b5e82b821ec9a7044a4f7b944798b25aa3cc6d5e63e62
-  languageName: node
-  linkType: hard
-
 "immutable@npm:^4.0.0":
   version: 4.3.0
   resolution: "immutable@npm:4.3.0"
@@ -10481,18 +10474,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jszip@npm:^3.10.1":
-  version: 3.10.1
-  resolution: "jszip@npm:3.10.1"
-  dependencies:
-    lie: ~3.3.0
-    pako: ~1.0.2
-    readable-stream: ~2.3.6
-    setimmediate: ^1.0.5
-  checksum: abc77bfbe33e691d4d1ac9c74c8851b5761fba6a6986630864f98d876f3fcc2d36817dfc183779f32c00157b5d53a016796677298272a714ae096dfe6b1c8b60
-  languageName: node
-  linkType: hard
-
 "junk@npm:^3.1.0":
   version: 3.1.0
   resolution: "junk@npm:3.1.0"
@@ -10716,15 +10697,6 @@ __metadata:
     webpack-sources:
       optional: true
   checksum: e88ebdb9c8bdfc0926dd7211d7fe2ee8697a44bb00a96bb5e6ca844b6acb7d24dd54eb17ec485e2e0140c3cc86709d1c2bd46e091ab52af076e1e421054c8322
-  languageName: node
-  linkType: hard
-
-"lie@npm:~3.3.0":
-  version: 3.3.0
-  resolution: "lie@npm:3.3.0"
-  dependencies:
-    immediate: ~3.0.5
-  checksum: 33102302cf19766f97919a6a98d481e01393288b17a6aa1f030a3542031df42736edde8dab29ffdbf90bebeffc48c761eb1d064dc77592ca3ba3556f9fe6d2a8
   languageName: node
   linkType: hard
 
@@ -12345,7 +12317,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pako@npm:^1.0.3, pako@npm:~1.0.2":
+"pako@npm:^1.0.3":
   version: 1.0.11
   resolution: "pako@npm:1.0.11"
   checksum: 1be2bfa1f807608c7538afa15d6f25baa523c30ec870a3228a89579e474a4d992f4293859524e46d5d87fd30fa17c5edf34dbef0671251d9749820b488660b16
@@ -13115,7 +13087,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"readable-stream@npm:^2.0.1, readable-stream@npm:~2.3.6":
+"readable-stream@npm:^2.0.1":
   version: 2.3.8
   resolution: "readable-stream@npm:2.3.8"
   dependencies:
@@ -13879,13 +13851,6 @@ __metadata:
   version: 2.6.0
   resolution: "set-cookie-parser@npm:2.6.0"
   checksum: bf11ebc594c53d84588f1b4c04f1b8ce14e0498b1c011b3d76b5c6d5aac481bbc3f7c5260ec4ce99bdc1d9aed19f9fc315e73166a36ca74d0f12349a73f6bdc9
-  languageName: node
-  linkType: hard
-
-"setimmediate@npm:^1.0.5":
-  version: 1.0.5
-  resolution: "setimmediate@npm:1.0.5"
-  checksum: c9a6f2c5b51a2dabdc0247db9c46460152ffc62ee139f3157440bd48e7c59425093f42719ac1d7931f054f153e2d26cf37dfeb8da17a794a58198a2705e527fd
   languageName: node
   linkType: hard
 
@@ -15344,6 +15309,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"unzipit@npm:^1.4.2":
+  version: 1.4.2
+  resolution: "unzipit@npm:1.4.2"
+  dependencies:
+    uzip-module: ^1.0.2
+  checksum: de82f2ac040a57e97e8789ea5ca6d922e9c263ab47ecedd87673174af300b1dedf5572b4a9dd3e4ffebb203bbc19409e1a510b56b9f43a2870561e299d1de82c
+  languageName: node
+  linkType: hard
+
 "update-browserslist-db@npm:^1.0.10":
   version: 1.0.10
   resolution: "update-browserslist-db@npm:1.0.10"
@@ -15427,6 +15401,13 @@ __metadata:
   bin:
     uuid: dist/bin/uuid
   checksum: 8dd2c83c43ddc7e1c71e36b60aea40030a6505139af6bee0f382ebcd1a56f6cd3028f7f06ffb07f8cf6ced320b76aea275284b224b002b289f89fe89c389b028
+  languageName: node
+  linkType: hard
+
+"uzip-module@npm:^1.0.2":
+  version: 1.0.3
+  resolution: "uzip-module@npm:1.0.3"
+  checksum: fc286c44a04d75055577fae8293d3fee499d1e850f87e88c158b1e3657f4794a3a40ca2d34f73474ff82917176dd5ca9d1c0d1e375a083714e11afabd3afa423
   languageName: node
   linkType: hard
 

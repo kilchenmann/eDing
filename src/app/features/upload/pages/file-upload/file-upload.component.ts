@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ElectronService } from 'ngx-electron';
@@ -17,6 +17,8 @@ import packageInfo from '../../../../../../package.json';
 export class FileUploadComponent {
     currentFile?: File;
     fileData = FILE_DATA;
+
+    loading = false;
 
     constructor(
         private dialog: MatDialog,
@@ -41,7 +43,9 @@ export class FileUploadComponent {
             const fileData = await this.uploadService.validateFileAndCheckFormat(file);
 
             if (fileData) {
+                this.loading = true;
                 const wasSaveSuccessful = await this.uploadService.saveFile(file, await this.electronService.ipcRenderer.invoke('get-temp-path').then((path: string) => path));
+                this.loading = false;
 
 
                 if (wasSaveSuccessful) {

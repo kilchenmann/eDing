@@ -1,18 +1,20 @@
 import { NgModule } from '@angular/core';
-import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
-import { MatLegacyCardModule as MatCardModule } from '@angular/material/legacy-card';
-import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { MatLegacyListModule as MatListModule } from '@angular/material/legacy-list';
-import { MatLegacyMenuModule as MatMenuModule } from '@angular/material/legacy-menu';
-import { MatLegacySlideToggleModule as MatSlideToggleModule } from '@angular/material/legacy-slide-toggle';
-import { MatLegacyTabsModule as MatTabsModule } from '@angular/material/legacy-tabs';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatLegacyTooltipModule as MatTooltipModule } from '@angular/material/legacy-tooltip';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+
 
 const matModules = [
     MatButtonModule,
@@ -28,7 +30,8 @@ const matModules = [
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    MatTreeModule
+    MatTreeModule,
+    MatProgressBarModule
 ];
 
 @NgModule({

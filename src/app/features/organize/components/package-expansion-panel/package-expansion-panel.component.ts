@@ -8,6 +8,7 @@ import { Ordner } from '../../../../shared/models/xmlns/bar.admin.ch/arelda/sip-
 })
 export class PackageExpansionPanelComponent {
     @Input() ingestPackages!: Ordner[];
+    @Input() loading!: boolean;
     @Output() removeIngestPackage = new EventEmitter<Ordner>;
     @Output() exportAllIngestPackages = new EventEmitter<Ordner[]>;
     @Output() removeAllIngestPackages = new EventEmitter<void>;

@@ -1,9 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import JSZip from 'jszip';
 import { cloneDeep } from 'lodash';
 import { ElectronService } from 'ngx-electron';
 import { Subscription } from 'rxjs';
@@ -21,6 +20,7 @@ import {
 } from '../../../../shared/models/xmlns/bar.admin.ch/arelda/sip-arelda-v4';
 import { OrganizeService } from '../../services/organize.service';
 import packageInfo from '../../../../../../package.json';
+import { FileService } from '../../../../shared/services/file.service';
 
 
 // xmlToJSON does not export itself as ES6/ECMA2015 module,
@@ -65,12 +65,15 @@ export class OrganizeComponent implements OnInit, OnDestroy {
 
     subContainer = new Subscription;
 
+    loading = true;
+
     constructor(
         private dialog: MatDialog,
         private electronService: ElectronService,
         private organizeService: OrganizeService,
         private router: Router,
-        private titleService: Title
+        private titleService: Title,
+        private fileService: FileService
     ) {
     }
 
@@ -241,11 +244,7 @@ export class OrganizeComponent implements OnInit, OnDestroy {
         this.alreadyAddedIngestPackages = [];
     }
 
-    /**
-     * export / save ingest packages to local storage
-     * @param ingestPackages - nodes / ingestPackages to export
-     */
-    exportAllIngestPackages(ingestPackages: Ordner[]) {
+    async exportIngestPackages(ingestPackages: Ordner[]) {
         this.electronService.ipcRenderer.invoke('show-save-dialog').then((path: string) => {
             if (path) {
                 // check if chosen folder is empty
@@ -263,142 +262,11 @@ export class OrganizeComponent implements OnInit, OnDestroy {
                         }, panelClass: 'simple-dialog'
                     });
 
-                    this.subContainer.add(dialogRef.afterClosed().subscribe(result => {
+                    this.subContainer.add(dialogRef.afterClosed().subscribe(async (result) => {
                         if (result) {
                             try {
-                                // go through ingest packages, create xml and save files
-                                ingestPackages.forEach((ingestPackage, index) => {
-                                    // create metadata.xml
-                                    const xmlDos = document.implementation.createDocument('', '', null);
-                                    const paket = xmlDos.createElement('paket');
-                                    paket.setAttribute('xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance');
-                                    paket.setAttribute('xmlns', 'http://bar.admin.ch/arelda/v4');
-                                    paket.setAttribute('xsi:schemaLocation', 'http://bar.admin.ch/arelda/v4 xsd/arelda.xsd');
-                                    paket.setAttribute('xsi:type', 'paketAIP');
-                                    paket.setAttribute('schemaVersion', '4.1');
-
-                                    // header
-                                    const paketTyp = xmlDos.createElement('paketTyp');
-                                    paketTyp.innerHTML = 'AIP';
-                                    paket.appendChild(paketTyp);
-
-                                    const nameSIP = xmlDos.createElement('nameSIP');
-                                    // todo: WARNING! Hardcoded, but we do not have this information yet
-                                    nameSIP.innerHTML = 'SIP_20070923_KOST_eCH0160_1_1_GEVER';
-                                    paket.appendChild(nameSIP);
-
-                                    const version = xmlDos.createElement('version');
-                                    version.innerHTML = '0.1';
-                                    paket.appendChild(version);
-
-                                    // inhaltsverzeichnis
-                                    const inhaltsverzeichnis = xmlDos.createElement('inhaltsverzeichnis');
-
-                                    const ordner = xmlDos.createElement('ordner');
-
-                                    const name = xmlDos.createElement('name');
-                                    name.innerHTML = ingestPackage.name[0]._text;
-                                    ordner.appendChild(name);
-
-                                    const originalName = xmlDos.createElement('originalName');
-                                    if (ingestPackage.originalName) {
-                                        originalName.innerHTML = ingestPackage.originalName[0]?._text;
-                                    }
-                                    ordner.appendChild(originalName);
-
-                                    ingestPackage.datei?.forEach(
-                                        (dat: Datei) => {
-                                            const datei = this.organizeService.createEle('datei', dat);
-                                            ordner.appendChild(datei);
-                                        }
-                                    );
-
-                                    inhaltsverzeichnis.appendChild(ordner);
-                                    paket.appendChild(inhaltsverzeichnis);
-
-                                    // ablieferung
-                                    const ablieferung = this.organizeService.createEle('ablieferung', this.sip.paket[0].ablieferung[0]);
-
-                                    // const ordnungssystemposition = xmlDos.createElement('ordnungssystemposition');
-                                    const dossier = xmlDos.createElement('dossier');
-
-                                    // // create metadata-dossier.xml
-                                    ingestPackage.datei?.forEach(
-                                        (dat: Datei) => {
-                                            this.getFileMetadata(dat._attrid._value);
-
-                                            if (this.dok) {
-                                                const dokument = this.organizeService.createEle('dokument', this.dok, dat.originalName[0]._text);
-                                                dossier.appendChild(dokument);
-                                            }
-                                        }
-                                    );
-
-                                    const ordnungssystem = ablieferung.getElementsByTagName('ordnungssystem').item(0);
-                                    if (ordnungssystem) {
-                                        if (this.osp) {
-                                            const ordnungssystemposition = this.organizeService.createEle('ordnungssystemposition', this.osp);
-                                            ordnungssystemposition.appendChild(dossier);
-                                            ordnungssystem.appendChild(ordnungssystemposition);
-                                        }
-                                    }
-
-                                    paket.appendChild(ablieferung);
-
-                                    xmlDos.appendChild(paket);
-
-                                    const comment = xmlDos.createComment(
-                                        ` ${new Date().toLocaleString('de-CH')} | Automatically generated with ${packageInfo.name} (v${packageInfo.version}) by AV DIMAG (CH) `
-                                    );
-                                    xmlDos.appendChild(comment);
-
-                                    const serializer = new XMLSerializer();
-                                    const xmlString = `<?xml version="1.0" encoding="UTF-8"?> ${serializer.serializeToString(xmlDos)}`;
-
-                                    const xmlFile = new Blob([xmlString], { type: 'application/xml' });
-                                    const xmlReader = new FileReader();
-                                    const newPath = `${path}/${ingestPackage.name[0]._text}_${index}`;
-                                    xmlReader.readAsArrayBuffer(xmlFile);
-
-                                    xmlReader.onloadend = function () {
-                                        const xmlBuffer = new Uint8Array(xmlReader.result as ArrayBuffer);
-                                        window.fs.mkdirSync(newPath);
-                                        window.fs.writeFile(
-                                            `${newPath}/metadata.xml`,
-                                            xmlBuffer, (error: Error) => {
-                                                if (error) {
-                                                    console.error(error);
-                                                }
-                                            });
-                                    };
-
-                                    ingestPackage.datei?.forEach(async (dat, datIndex) => {
-                                        const zip = await this.getCurrentZipFile();
-                                        const keys = Object.keys(zip.files);
-                                        // get binary data for the file from the uploaded zip-file
-                                        const filePath = keys.find(key => key.endsWith(dat.path._value)) ?? '';
-
-                                        const foundFile = await zip.file(filePath)?.async('uint8array');
-
-                                        if (!foundFile) {
-                                            console.error('Following file not found: ' + dat.name[0]._text);
-                                            return;
-                                        }
-
-                                        const fileReader = new FileReader();
-                                        fileReader.readAsArrayBuffer(new Blob([foundFile]));
-
-                                        // write each file to local storage
-                                        fileReader.onloadend = () => {
-                                            const fileBuffer = new Uint8Array(fileReader.result as ArrayBuffer);
-                                            window.fs.writeFile(`${newPath}/${datIndex}_${dat.name[0]._text}`, fileBuffer, (error: Error) => {
-                                                if (error) {
-                                                    console.error(error);
-                                                }
-                                            });
-                                        };
-                                    });
-                                });
+                                // todo: add loading spinner while wating for files to be saved (ps: not working here with await)
+                                await this.savePackagesToFileSystem(ingestPackages, path, moreThanOneIngestPackage);
                                 this.dialog.open(GenericDialogComponent, {
                                     data: {
                                         title: 'Exportieren war erfolgreich',
@@ -410,7 +278,8 @@ export class OrganizeComponent implements OnInit, OnDestroy {
                                 this.dialog.open(GenericDialogComponent, {
                                     data: {
                                         title: 'Fehler beim Exportieren',
-                                        text: error
+                                        text: 'Da ging etwas schief. Bitte folgende Fehlermeldung bachten:',
+                                        log: error
                                     },
                                     panelClass: 'simple-dialog'
                                 });
@@ -429,6 +298,163 @@ export class OrganizeComponent implements OnInit, OnDestroy {
             }
         });
     }
+
+    /**
+     * export / save ingest packages to filesystem
+     * @param ingestPackages - nodes / ingestPackages to export/save
+     * @param path
+     * @param moreThanOneIngestPackage
+     */
+    async savePackagesToFileSystem(ingestPackages: Ordner[], path: string, moreThanOneIngestPackage: boolean) {
+        const zip = await this.fileService.getCurrentZipFile();
+        const keys = Object.keys(zip.entries);
+
+        ingestPackages.forEach((ingestPackage, index) => {
+            // create metadata.xml
+            const xmlDos = document.implementation.createDocument('', '', null);
+            const paket = xmlDos.createElement('paket');
+            paket.setAttribute('xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance');
+            paket.setAttribute('xmlns', 'http://bar.admin.ch/arelda/v4');
+            paket.setAttribute('xsi:schemaLocation', 'http://bar.admin.ch/arelda/v4 xsd/arelda.xsd');
+            paket.setAttribute('xsi:type', 'paketAIP');
+            paket.setAttribute('schemaVersion', '4.1');
+
+            // header
+            const paketTyp = xmlDos.createElement('paketTyp');
+            paketTyp.innerHTML = 'AIP';
+            paket.appendChild(paketTyp);
+
+            const nameSIP = xmlDos.createElement('nameSIP');
+            // todo: WARNING! Hardcoded, but we do not have this information yet
+            nameSIP.innerHTML = 'SIP_20070923_KOST_eCH0160_1_1_GEVER';
+            paket.appendChild(nameSIP);
+
+            const version = xmlDos.createElement('version');
+            version.innerHTML = '0.1';
+            paket.appendChild(version);
+
+            // inhaltsverzeichnis
+            const inhaltsverzeichnis = xmlDos.createElement('inhaltsverzeichnis');
+
+            const ordner = xmlDos.createElement('ordner');
+
+            const name = xmlDos.createElement('name');
+            name.innerHTML = ingestPackage.name[0]._text;
+            ordner.appendChild(name);
+
+            const originalName = xmlDos.createElement('originalName');
+            if (ingestPackage.originalName) {
+                originalName.innerHTML = ingestPackage.originalName[0]?._text;
+            }
+            ordner.appendChild(originalName);
+
+            ingestPackage.datei?.forEach(
+                (dat: Datei) => {
+                    const datei = this.organizeService.createEle('datei', dat);
+                    ordner.appendChild(datei);
+                }
+            );
+
+            inhaltsverzeichnis.appendChild(ordner);
+            paket.appendChild(inhaltsverzeichnis);
+
+            // ablieferung
+            const ablieferung = this.organizeService.createEle('ablieferung', this.sip.paket[0].ablieferung[0]);
+
+            // const ordnungssystemposition = xmlDos.createElement('ordnungssystemposition');
+            const dossier = xmlDos.createElement('dossier');
+
+            // // create metadata-dossier.xml
+            ingestPackage.datei?.forEach(
+                (dat: Datei) => {
+                    this.getFileMetadata(dat._attrid._value);
+
+                    if (this.dok) {
+                        const dokument = this.organizeService.createEle('dokument', this.dok, dat.originalName[0]._text);
+                        dossier.appendChild(dokument);
+                    }
+                }
+            );
+
+            const ordnungssystem = ablieferung.getElementsByTagName('ordnungssystem').item(0);
+            if (ordnungssystem) {
+                if (this.osp) {
+                    const ordnungssystemposition = this.organizeService.createEle('ordnungssystemposition', this.osp);
+                    ordnungssystemposition.appendChild(dossier);
+                    ordnungssystem.appendChild(ordnungssystemposition);
+                }
+            }
+
+            paket.appendChild(ablieferung);
+
+            xmlDos.appendChild(paket);
+
+            const comment = xmlDos.createComment(
+                ` ${new Date().toLocaleString('de-CH')} | Automatically generated with ${packageInfo.name} (v${packageInfo.version}) by AV DIMAG (CH) `
+            );
+            xmlDos.appendChild(comment);
+
+            const serializer = new XMLSerializer();
+            const xmlString = `<?xml version="1.0" encoding="UTF-8"?> ${serializer.serializeToString(xmlDos)}`;
+
+            const xmlFile = new Blob([xmlString], { type: 'application/xml' });
+            const xmlReader = new FileReader();
+            const newPath = `${path}/${ingestPackage.name[0]._text}_${index}`;
+            xmlReader.readAsArrayBuffer(xmlFile);
+
+            xmlReader.onloadend = function () {
+                const xmlBuffer = new Uint8Array(xmlReader.result as ArrayBuffer);
+                window.fs.mkdirSync(newPath);
+                window.fs.writeFile(
+                    `${newPath}/metadata.xml`,
+                    xmlBuffer, (error: Error) => {
+                        if (error) {
+                            // this.dialog can´t be used here
+                            console.error(error);
+                        }
+                    });
+            };
+
+            ingestPackage.datei?.forEach(async (dat, datIndex) => {
+                // get binary data for the file from the uploaded zip-file
+                const filePath = keys.find(key => key.endsWith(dat.path._value)) ?? '';
+
+                const foundFile = await zip.entries[filePath]?.blob();
+
+                if (!foundFile) {
+                    this.dialog.open(GenericDialogComponent, {
+                        data: {
+                            title: 'Fehler beim Exportieren',
+                            text: `Die folgende Datei konnte nicht gefunden werden: ${dat.name[0]._text}`
+                        },
+                        panelClass: 'simple-dialog'
+                    });
+                    return;
+                }
+
+                const fileReader = new FileReader();
+                fileReader.readAsArrayBuffer(new Blob([foundFile]));
+
+                // write each file to local storage
+                fileReader.onloadend = async () => {
+                    const fileBuffer = new Uint8Array(fileReader.result as ArrayBuffer);
+                    await window.fs.writeFile(`${newPath}/${datIndex}_${dat.name[0]._text}`, fileBuffer, (error: Error) => {
+                        if (error) {
+                            this.dialog.open(GenericDialogComponent, {
+                                data: {
+                                    title: 'Fehler beim Exportieren',
+                                    text: 'Da ging etwas schief. Bitte folgende Fehlermeldung bachten:',
+                                    log: error
+                                },
+                                panelClass: 'simple-dialog'
+                            });
+                        }
+                    });
+                };
+            });
+        });
+    }
+
 
     /**
      * convert xml to json (xml2json)
@@ -477,10 +503,11 @@ export class OrganizeComponent implements OnInit, OnDestroy {
      */
     private async readCurrentMetadataXml(): Promise<void> {
         try {
-            const zip = await this.getCurrentZipFile();
-            const keys = Object.keys(zip.files);
+            const zip = await this.fileService.getCurrentZipFile();
+            this.loading = false;
+            const keys = Object.keys(zip.entries);
             const metadataPath = keys.find(key => key.endsWith('header/metadata.xml')) ?? '';
-            const metadataXML = await zip.file(metadataPath)?.async('string');
+            const metadataXML = await zip.entries[metadataPath].text();
             this.xml = metadataXML ?? '';
             this.convertXmlToJson();
         } catch (error) {
@@ -494,10 +521,5 @@ export class OrganizeComponent implements OnInit, OnDestroy {
                 panelClass: 'simple-dialog'
             });
         }
-    }
-
-    private async getCurrentZipFile() {
-        const tmpPath = await this.electronService.ipcRenderer.invoke('get-temp-path').then((path: string) => path);
-        return JSZip.loadAsync(window.fs.readFileSync(tmpPath));
     }
 }
