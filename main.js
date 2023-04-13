@@ -11,6 +11,8 @@ function onReady() {
         height,
         minHeight: 720,
         minWidth: 1000,
+        maxHeight: height,
+        maxWidth: 2024,
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false,
@@ -46,23 +48,14 @@ function onReady() {
         }
     }
 
-    if (dev) {
-        const devUrl = 'http://localhost:4200';
-        win.loadURL(devUrl);
+    const index = (dev ? 'http://localhost:4200' : `file://${path.join(__dirname, 'dist/ech-0160-dimag-ingest/index.html')}`);
 
-        win.webContents.on('did-fail-load', () => {
-            handleLoadFail(devUrl);
-        });
+    win.loadURL(index);
 
-    } else {
-        const prodUrl = `file://${path.join(__dirname, 'dist/ech-0160-dimag-ingest/index.html')}`;
+    win.webContents.on('did-fail-load', () => {
+        handleLoadFail(index);
+    });
 
-        win.loadURL(prodUrl);
-
-        win.webContents.on('did-fail-load', () => {
-            handleLoadFail(prodUrl);
-        });
-    }
 }
 
 app.on('ready', onReady);

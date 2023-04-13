@@ -20,6 +20,15 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.nv }}
+          cache: 'yarn'
+      - name: Use cached packages
+        uses: actions/cache@v3
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ./.yarn/cache
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - name: Install dependencies
         run: yarn install --immutable
       - name: Run the lint scripts
@@ -38,6 +47,15 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.nv }}
+          cache: 'yarn'
+      - name: Use cached packages
+        uses: actions/cache@v3
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ./.yarn/cache
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - name: Install dependencies
         run: yarn install --immutable && yarn postinstall
       - name: Run unit tests
@@ -55,6 +73,15 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.nv }}
+          cache: 'yarn'
+      - name: Use cached packages
+        uses: actions/cache@v3
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ./.yarn/cache
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - name: Install dependencies
         run: yarn install --immutable && yarn postinstall
       - name: Build the app
@@ -108,13 +135,22 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ env.nv}}
+          node-version: ${{ env.nv }}
+          cache: 'yarn'
+      - name: Use cached packages
+        uses: actions/cache@v3
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ./.yarn/cache
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
       - name: Install dependencies
-        run: yarn install && yarn postinstall
+        run: yarn install --immutable && yarn postinstall
       - name: Build the angular app
         run: yarn build
       - name: Publish the electron app
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: yarn ef:publish
+        run: yarn publish
 

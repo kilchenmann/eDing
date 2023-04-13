@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
