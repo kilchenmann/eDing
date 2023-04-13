@@ -44,7 +44,7 @@ Start the development server with `yarn serve` and in a second terminal window s
 
 #### As build
 
-Run `yarn dev` to build the app (in dev mode and stored in `/dist` folder) and to open it with electron automatically.
+Run `yarn build-dev-watch` to build the app with watch param in dev mode. The build is stored in `/dist` folder. In a second terminal run `yarn electron-forge` to open the build with electron. Any change in the code will rerun the yarn build in background. Refresh the electron application with `Ctrl+r` or `Cmd+r`.
 
 ## Code scaffolding
 
