@@ -22,15 +22,24 @@ jobs:
           node-version: ${{ env.nv }}
           cache: 'yarn'
       - name: Use cached packages
+        id: yarn-cache
         uses: actions/cache@v3
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        env:
+          cache-name: cache-node-modules
         with:
-          path: ./.yarn/cache
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          # npm cache files are stored in `~/.npm` on Linux/macOS
+          path: ~/.yarn/cache
+          key: ${{ runner.os }}-yarn-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
+            ${{ runner.os }}-yarn-${{ env.cache-name }}-
             ${{ runner.os }}-yarn-
+            ${{ runner.os }}-
+      - if: ${{ steps.yarn-cache.outputs.cache-hit != 'true' }}
+        name: List the state of node modules
+        continue-on-error: true
+        run: yarn info --name-only
       - name: Install dependencies
-        run: yarn install --immutable
+        run: yarn install && yarn postinstall
       - name: Run the lint scripts
         run: |
           yarn lint-ci
@@ -49,15 +58,24 @@ jobs:
           node-version: ${{ env.nv }}
           cache: 'yarn'
       - name: Use cached packages
+        id: yarn-cache
         uses: actions/cache@v3
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        env:
+          cache-name: cache-node-modules
         with:
-          path: ./.yarn/cache
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          # npm cache files are stored in `~/.npm` on Linux/macOS
+          path: ~/.yarn/cache
+          key: ${{ runner.os }}-yarn-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
+            ${{ runner.os }}-yarn-${{ env.cache-name }}-
             ${{ runner.os }}-yarn-
+            ${{ runner.os }}-
+      - if: ${{ steps.yarn-cache.outputs.cache-hit != 'true' }}
+        name: List the state of node modules
+        continue-on-error: true
+        run: yarn info --name-only
       - name: Install dependencies
-        run: yarn install --immutable && yarn postinstall
+        run: yarn install && yarn postinstall
       - name: Run unit tests
         run: yarn test-ci
 
@@ -75,15 +93,24 @@ jobs:
           node-version: ${{ env.nv }}
           cache: 'yarn'
       - name: Use cached packages
+        id: yarn-cache
         uses: actions/cache@v3
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        env:
+          cache-name: cache-node-modules
         with:
-          path: ./.yarn/cache
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          # npm cache files are stored in `~/.npm` on Linux/macOS
+          path: ~/.yarn/cache
+          key: ${{ runner.os }}-yarn-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
+            ${{ runner.os }}-yarn-${{ env.cache-name }}-
             ${{ runner.os }}-yarn-
+            ${{ runner.os }}-
+      - if: ${{ steps.yarn-cache.outputs.cache-hit != 'true' }}
+        name: List the state of node modules
+        continue-on-error: true
+        run: yarn info --name-only
       - name: Install dependencies
-        run: yarn install --immutable && yarn postinstall
+        run: yarn install && yarn postinstall
       - name: Build the app
         run: yarn build
       - name: Run e2e tests
@@ -105,7 +132,7 @@ jobs:
         with:
           token: ${{ secrets.GH_TOKEN }}
           release-type: node
-          package-name: ech-0160-DIMAG-Ingest
+          package-name: eDing
           prerelease: true
           changelog-types: '[
               {"type": "feat", "section": "Enhancements", "hidden": false },
@@ -139,15 +166,24 @@ jobs:
           node-version: ${{ env.nv }}
           cache: 'yarn'
       - name: Use cached packages
+        id: yarn-cache
         uses: actions/cache@v3
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        env:
+          cache-name: cache-node-modules
         with:
-          path: ./.yarn/cache
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          # npm cache files are stored in `~/.npm` on Linux/macOS
+          path: ~/.yarn/cache
+          key: ${{ runner.os }}-yarn-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
+            ${{ runner.os }}-yarn-${{ env.cache-name }}-
             ${{ runner.os }}-yarn-
+            ${{ runner.os }}-
+      - if: ${{ steps.yarn-cache.outputs.cache-hit != 'true' }}
+        name: List the state of node modules
+        continue-on-error: true
+        run: yarn info --name-only
       - name: Install dependencies
-        run: yarn install --immutable && yarn postinstall
+        run: yarn install && yarn postinstall
       - name: Build the angular app
         run: yarn build
       - name: Publish the electron app
