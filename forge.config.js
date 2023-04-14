@@ -36,8 +36,8 @@ module.exports = {
       "name": "@electron-forge/publisher-github",
       "config": {
         "repository": {
-          "owner": "av-dimag",
-          "name": "ech-0160-dimag-ingest"
+          "owner": "kilchenmann",
+          "name": "eding"
         }
       }
     }
@@ -53,19 +53,22 @@ module.exports = {
         }
       }
     },
-    // {
-    //   "name": "@electron-forge/maker-squirrel",
-    //   "config": {
-    //     "authors": "AV DIMAG",
-    //     "description": "Standalone Applikation für die Vorbereitung eines DIMAG Ingests von eCH-0160 SIPs",
-    //     "name": "ech-0160-dimag-ingest"
-    //   }
-    // },
+    {
+      "name": "@electron-forge/maker-squirrel",
+      "config": {
+        "authors": "AV DIMAG",
+        "description": "Standalone Applikation für die Vorbereitung eines DIMAG Ingests von eCH-0160 SIPs",
+        "name": "ech-0160-dimag-ingest",
+        "setupIcon": "src/app/assets/icons/av-dimag-ech-logo.ico"
+      }
+    },
     {
       "name": "@electron-forge/maker-zip",
       "platforms": [
         "darwin",
-        "win32"
+        "win32",
+        "win64",
+        "linux"
       ],
       "config": {
         "name": "ech-0160-dimag-ingest"
