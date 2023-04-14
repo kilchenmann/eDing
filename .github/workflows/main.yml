@@ -99,11 +99,10 @@ jobs:
     #   unit-tests,
     #   e2e-tests
     # ]
-    runs-on: ubuntu-latest
-    # runs-on: ${{ matrix.os }}
-    # strategy:
-    #   matrix:
-    #     os: [ windows-latest, ubuntu-latest ]
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ windows-latest ]
     # if: github.event_name == 'release' && startsWith(github.ref, 'refs/tags')
     steps:
       - name: Checkout source
