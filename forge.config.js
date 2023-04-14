@@ -1,5 +1,4 @@
 const path = require('path');
-const package = require('./package.json');
 
 module.exports = {
   "packagerConfig": {
