@@ -1,6 +1,6 @@
 module.exports = {
   "packagerConfig": {
-    "icon": "src/app/assets/icons/av-dimag-ech-logo",
+    "icon": "./src/app/assets/icons/av-dimag-ech-logo",
     "dir": "./dist",
     "ignore": [
       "^/[.]angular$",
