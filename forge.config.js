@@ -64,17 +64,17 @@ module.exports = {
         "setupIcon": path.resolve(__dirname, "src", "app", "assets", "icons", "icon.ico"),
       }
     },
-    // {
-    //   "name": "@electron-forge/maker-zip",
-    //   "platforms": [
-    //     "darwin",
-    //     "win32",
-    //     "win64",
-    //     "linux"
-    //   ],
-    //   "config": {
-    //     "name": "ech-0160-dimag-ingest"
-    //   }
-    // }
+    {
+      "name": "@electron-forge/maker-zip",
+      "platforms": [
+        "darwin",
+        "win32",
+        "win64",
+        "linux"
+      ],
+      "config": {
+        "name": "ech-0160-dimag-ingest"
+      }
+    }
   ]
 }
