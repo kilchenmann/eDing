@@ -59,20 +59,20 @@ module.exports = {
         "authors": "AV DIMAG",
         "description": "Standalone Applikation für die Vorbereitung eines DIMAG Ingests von eCH-0160 SIPs",
         "name": "ech-0160-dimag-ingest",
-        "setupIcon": "src/app/assets/icons/av-dimag-ech-logo.ico"
+        "setupIcon": "./src/app/assets/icons/av-dimag-ech-logo.ico"
       }
     },
-    {
-      "name": "@electron-forge/maker-zip",
-      "platforms": [
-        "darwin",
-        "win32",
-        "win64",
-        "linux"
-      ],
-      "config": {
-        "name": "ech-0160-dimag-ingest"
-      }
-    }
+    // {
+    //   "name": "@electron-forge/maker-zip",
+    //   "platforms": [
+    //     "darwin",
+    //     "win32",
+    //     "win64",
+    //     "linux"
+    //   ],
+    //   "config": {
+    //     "name": "ech-0160-dimag-ingest"
+    //   }
+    // }
   ]
 }
