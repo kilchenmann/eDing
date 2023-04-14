@@ -106,6 +106,7 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}
           release-type: node
           package-name: ech-0160-DIMAG-Ingest
+          prerelease: true
           changelog-types: '[
               {"type": "feat", "section": "Enhancements", "hidden": false },
               {"type": "fix", "section": "Bug Fixes", "hidden": false },
