@@ -1,6 +1,9 @@
+const path = require('path');
+const package = require('./package.json');
+
 module.exports = {
   "packagerConfig": {
-    "icon": "./src/app/assets/icons/av-dimag-ech-logo",
+    "icon": path.resolve(__dirname, "src", "app", "assets", "icons", "icon"),
     "dir": "./dist",
     "ignore": [
       "^/[.]angular$",
@@ -49,7 +52,7 @@ module.exports = {
         "options": {
           "maintainer": "AV DIMAG",
           "homepage": "https://avdimag.ch",
-          "icon": "src/app/assets/icons/av-dimag-ech-logo.png"
+          "icon": path.resolve(__dirname, "src", "app", "assets", "icons", "icon.png")
         }
       }
     },
@@ -59,7 +62,7 @@ module.exports = {
         "authors": "AV DIMAG",
         "description": "Standalone Applikation für die Vorbereitung eines DIMAG Ingests von eCH-0160 SIPs",
         "name": "ech-0160-dimag-ingest",
-        "setupIcon": "./src/app/assets/icons/av-dimag-ech-logo.ico"
+        "setupIcon": path.resolve(__dirname, "src", "app", "assets", "icons", "icon.ico"),
       }
     },
     // {
