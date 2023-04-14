@@ -20,8 +20,26 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.nv }}
+          cache: 'yarn'
+      - name: Use cached packages
+        id: yarn-cache
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-node-modules
+        with:
+          # npm cache files are stored in `~/.npm` on Linux/macOS
+          path: ./.yarn/cache
+          key: ${{ runner.os }}-yarn-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-${{ env.cache-name }}-
+            ${{ runner.os }}-yarn-
+            ${{ runner.os }}-
+      - if: ${{ steps.yarn-cache.outputs.cache-hit != 'true' }}
+        name: List the state of node modules
+        continue-on-error: true
+        run: yarn info --name-only
       - name: Install dependencies
-        run: yarn install --immutable
+        run: yarn install && yarn postinstall
       - name: Run the lint scripts
         run: |
           yarn lint-ci
@@ -38,8 +56,26 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.nv }}
+          cache: 'yarn'
+      - name: Use cached packages
+        id: yarn-cache
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-node-modules
+        with:
+          # npm cache files are stored in `~/.npm` on Linux/macOS
+          path: ./.yarn/cache
+          key: ${{ runner.os }}-yarn-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-${{ env.cache-name }}-
+            ${{ runner.os }}-yarn-
+            ${{ runner.os }}-
+      - if: ${{ steps.yarn-cache.outputs.cache-hit != 'true' }}
+        name: List the state of node modules
+        continue-on-error: true
+        run: yarn info --name-only
       - name: Install dependencies
-        run: yarn install --immutable && yarn postinstall
+        run: yarn install && yarn postinstall
       - name: Run unit tests
         run: yarn test-ci
 
@@ -55,8 +91,26 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.nv }}
+          cache: 'yarn'
+      - name: Use cached packages
+        id: yarn-cache
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-node-modules
+        with:
+          # npm cache files are stored in `~/.npm` on Linux/macOS
+          path: ./.yarn/cache
+          key: ${{ runner.os }}-yarn-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-${{ env.cache-name }}-
+            ${{ runner.os }}-yarn-
+            ${{ runner.os }}-
+      - if: ${{ steps.yarn-cache.outputs.cache-hit != 'true' }}
+        name: List the state of node modules
+        continue-on-error: true
+        run: yarn info --name-only
       - name: Install dependencies
-        run: yarn install --immutable && yarn postinstall
+        run: yarn install && yarn postinstall
       - name: Build the app
         run: yarn build
       - name: Run e2e tests
@@ -69,13 +123,17 @@ jobs:
     name: Prepare next release
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' && github.ref != 'refs/heads/deploy'
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - name: Run release please
         uses: GoogleCloudPlatform/release-please-action@v3
         with:
           token: ${{ secrets.GH_TOKEN }}
           release-type: node
-          package-name: ech-0160-DIMAG-Ingest
+          package-name: eDing
+          prerelease: true
           changelog-types: '[
               {"type": "feat", "section": "Enhancements", "hidden": false },
               {"type": "fix", "section": "Bug Fixes", "hidden": false },
@@ -105,7 +163,25 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ env.nv}}
+          node-version: ${{ env.nv }}
+          cache: 'yarn'
+      - name: Use cached packages
+        id: yarn-cache
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-node-modules
+        with:
+          # npm cache files are stored in `~/.npm` on Linux/macOS
+          path: ./.yarn/cache
+          key: ${{ runner.os }}-yarn-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-${{ env.cache-name }}-
+            ${{ runner.os }}-yarn-
+            ${{ runner.os }}-
+      - if: ${{ steps.yarn-cache.outputs.cache-hit != 'true' }}
+        name: List the state of node modules
+        continue-on-error: true
+        run: yarn info --name-only
       - name: Install dependencies
         run: yarn install && yarn postinstall
       - name: Build the angular app
@@ -113,5 +189,5 @@ jobs:
       - name: Publish the electron app
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: yarn ef:publish
+        run: yarn publish
 

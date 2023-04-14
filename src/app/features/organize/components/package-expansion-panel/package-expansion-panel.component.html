@@ -1,25 +1,28 @@
-<mat-tab-group color="white">
-  <mat-tab [disabled]="true">
-    <ng-template mat-tab-label>
-      <span class="reset-disabled">Ingest Pakete: {{ingestPackages.length}}</span>
-    </ng-template>
+<div class="ingest-package-wrapper">
+  <mat-toolbar class="sub">
+    <p>Ingest Pakete: {{ingestPackages.length}}</p>
+    <span class="fill-remaining-space"></span>
+    <button mat-button [disabled]="ingestPackages.length === 0" (click)="removeAllIngestPackages.emit()">
+      Alle entfernen
+    </button>
+    <button mat-button [disabled]="ingestPackages.length === 0" (click)="exportAllIngestPackages.emit(ingestPackages)">
+      Pakete exportieren
+    </button>
+  </mat-toolbar>
+  <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+
+  <div class="ingest-package-content">
 
     <ng-container *ngIf="ingestPackages.length === 0; else packagePanel">
       <div class="placeholder-message">
         <p>Auf dieser Seite werden die Ingest Pakete zusammengestellt.</p>
-        <p>Sie können eine<strong style="color: green"> automatische Generierung durchführen</strong> oder manuell die
-          Pakete zusammenstellen.</p>
+        <p>Sie können eine <strong>automatische Generierung durchführen</strong> oder manuell die
+          Pakete definieren.</p>
       </div>
     </ng-container>
 
     <ng-template #packagePanel>
-      <div class="package-buttons">
-        <button mat-raised-button color="primary" (click)="removeAllIngestPackages.emit()">Alle Pakete
-          entfernen</button>
-        <button mat-raised-button color="primary" (click)="exportAllIngestPackages.emit(ingestPackages)">Pakete
-          exportieren/speichern</button>
-      </div>
-      <div *ngFor="let ingestPackage of ingestPackages" class="ingest-package-wrapper">
+      <div *ngFor="let ingestPackage of ingestPackages" class="ingest-package-list ">
         <mat-expansion-panel class="ingest-package-panel">
           <mat-expansion-panel-header>
             <mat-panel-title>
@@ -39,5 +42,5 @@
           entfernen</button>
       </div>
     </ng-template>
-  </mat-tab>
-</mat-tab-group>
+  </div>
+</div>

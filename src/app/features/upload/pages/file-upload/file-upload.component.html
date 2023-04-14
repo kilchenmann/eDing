@@ -1,9 +1,16 @@
   <ng-container *ngIf="!currentFile; else uploadedData">
     <div class="dropzone upload">
-      <mat-icon class="fileupload-icon" fontIcon="file_download"></mat-icon>
-      <h3><strong>Wählen Sie ein SIP </strong>oder ziehen Sie es hierher.</h3>
-      <input type="file" id="fileInput" (drop)="resetFileInput($event)" (click)="resetFileInput($event)"
-        (change)="uploadFile($event)" name="fileInput" accept=".zip" />
+      <div *ngIf="!loading; else processData">
+        <mat-icon class="folder-icon" fontIcon="archive"></mat-icon>
+        <h3><strong>Wählen Sie ein SIP </strong>oder ziehen Sie es hierher.</h3>
+        <input type="file" id="fileInput" (drop)="resetFileInput($event)" (click)="resetFileInput($event)"
+          (change)="uploadFile($event)" name="fileInput" accept=".zip" />
+      </div>
+      <ng-template #processData>
+        <mat-icon class="folder-icon" fontIcon="unarchive"></mat-icon>
+        <h3>Das Paket wird überprüft. Dieser Schritt kann je nach Grösse einen Moment dauern.</h3>
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </ng-template>
     </div>
   </ng-container>
 

@@ -16,7 +16,9 @@ import { InfoPageComponent } from './features/info/pages/info/info-page.componen
 import { MaterialModule } from './material-module';
 import { NgModule } from '@angular/core';
 import { OrganizeComponent } from './features/organize/pages/organize/organize.component';
-import { PackageExpansionPanelComponent } from './features/organize/components/package-expansion-panel/package-expansion-panel.component';
+import {
+    PackageExpansionPanelComponent
+} from './features/organize/components/package-expansion-panel/package-expansion-panel.component';
 import { StartComponent } from './features/info/components/start/start.component';
 import { StringifyValuePipe } from './features/organize/pipes/stringify-value.pipe';
 import { SummaryTabComponent } from './features/organize/components/summary-tab/summary-tab.component';

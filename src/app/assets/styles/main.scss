@@ -41,15 +41,18 @@ router-outlet+* {
 
 // tweak angular material design
 
-.mat-toolbar {
+.mat-toolbar.main {
   padding: 0 !important;
 
   // big menu/nav buttons in the header
-  .mat-button {
+  .mat-mdc-button {
     border-radius: 0;
     height: 64px;
-    padding-top: 12px;
     min-width: 96px;
+
+    &.info {
+      padding-bottom: 16px;
+    }
 
     &.active {
       background-color: rgba(0, 0, 0, 0.39);
@@ -58,12 +61,28 @@ router-outlet+* {
 }
 
 // fix position of tab's header
-.mat-tab-header {
+.mat-mdc-tab-header, .mat-toolbar.sub {
   top: 0;
   z-index: 1000;
   position: sticky !important;
   position: -webkit-sticky !important; /* macOS/iOS Safari */
-  background-color: #fff;
+  // background-color: #fff;
+  background-color: whitesmoke;
+  height: 48px !important;
+
+  // big menu/nav buttons in the header
+  .mat-mdc-button {
+    border-radius: 0;
+    height: 48px;
+    min-width: 96px;
+    padding: 0 24px;
+  }
+}
+
+.mat-toolbar.sub {
+  padding: 0 0 0 16px !important;
+  font-size: 14px;
+  color:rgba(0, 0, 0, 0.6)
 }
 
 .mat-dialog-actions {
@@ -113,13 +132,14 @@ router-outlet+* {
 .warning {
   background-color: rgba(255, 0, 60, .39);
 }
-.mat-menu-panel.menu-metadata {
+
+.mat-mdc-menu-panel.menu-metadata {
   width: 480px;
   max-width: 480px !important;
   max-height: 640px;
   overflow: hidden;
 
-  .mat-menu-content {
+  .mat-mdc-menu-content {
     padding: 0 !important;
     height: 640px;
   }
@@ -139,6 +159,7 @@ router-outlet+* {
       .mat-subheading-2 {
         max-width: calc(480px - 48px - 16px);
         height: 24px;
+        margin: 0;
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
@@ -157,17 +178,17 @@ router-outlet+* {
 .as-split-area {
   overflow: hidden !important;
 
-  .mat-tab-label-active {
-    // color:rgba(0, 0, 0, 0.39)
-    opacity: 1;
-  }
-
-  .mat-tab-body-wrapper {
+  .mat-mdc-tab-body-wrapper,
+  .ingest-package-wrapper {
     height: calc(100vh - 64px - 48px);
 
-    .mat-tab-body-content {
+    .mat-mdc-tab-body-content,
+    .ingest-package-content {
       padding-bottom: 60px;
       height: calc(100vh - 64px - 48px - 60px);
+      overflow: auto;
     }
   }
+
+
 }

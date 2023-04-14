@@ -18,6 +18,8 @@ export class FileUploadComponent {
     currentFile?: File;
     fileData = FILE_DATA;
 
+    loading = false;
+
     constructor(
         private dialog: MatDialog,
         private electronService: ElectronService,
@@ -41,7 +43,9 @@ export class FileUploadComponent {
             const fileData = await this.uploadService.validateFileAndCheckFormat(file);
 
             if (fileData) {
+                this.loading = true;
                 const wasSaveSuccessful = await this.uploadService.saveFile(file, await this.electronService.ipcRenderer.invoke('get-temp-path').then((path: string) => path));
+                this.loading = false;
 
 
                 if (wasSaveSuccessful) {
@@ -66,7 +70,8 @@ export class FileUploadComponent {
                     data: {
                         title: 'Fehler im Format',
                         text: 'Bitte laden Sie ein valides ZIP-File entsprechend dem eCH-0160 Standard hoch.'
-                    }, panelClass: 'simple-dialog'
+                    },
+                    panelClass: 'simple-dialog'
                 });
             }
         } else {
